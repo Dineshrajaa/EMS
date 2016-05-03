@@ -1,0 +1,14 @@
+{
+  "name": "YogaSeeds",
+  "xwalk_version": "11.3",
+  "start_url": "index.html",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon2.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "density": "3.0"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Dowells | Login</title>
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script src="js/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="js/jquery.mobile.min.js" type="text/javascript"></script>
+    <script src="js/nativedroid2.js" type="text/javascript"></script>
+    <link href="css/jquery.mobile.min.css" rel="stylesheet" />
+    <link href="css/common.css" rel="stylesheet" />
+    <link href="css/login.css" rel="stylesheet" type="text/css" />
+    <link href="css/themeContainer.css" rel="stylesheet" />
+</head>
+<body>
+    <div data-role="page" class="nd2-no-menu-swipe">
+        <div role="main" class="ui-content wow fadeIn padding" data-inset="false">
+            <form>
+            <div class="logo-login">
+            </div>
+            <div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <h3>
+                        Sign In
+                    </h3>
+                    <input type="email" id="txtUserName" name="txtUserName" class="required" placeholder="Email Address"
+                        required="required" valid-attr="Please enter email address" autocomplete="false" />
+                    <input type="password" name="txtPassword" id="txtPassword" value="" placeholder="PIN"
+                        required="required" maxlength="4" autocomplete="false">
+                    <div class="text-center">
+                        <a href="#" onclick="dologIn();" class="ui-btn ui-btn-raised clr-primary">Sign In</a><br />
+                        <!--<a href="#" onclick="redirect('ForgotPassword.html');" style="color:white !important">Forgot password?</a>-->
+                        <a href="#" onclick="redirect('Registration.html');" style="color: white !important">
+                            New Employee Registration</a>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    <script src="js/common.js?v=1.0" type="text/javascript"></script>
+    <script src="js/login.js?v=1.0" type="text/javascript"></script>
+</body>
+</html>

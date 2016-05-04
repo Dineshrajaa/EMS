@@ -124,8 +124,14 @@ function doLogout() {
 
 function redirect(url) {
     showWait();
+    //$(":mobile-pagecontainer").pagecontainer("change", url);
     window.location.href = url;
     //setTimeout(function () { $.mobile.changePage(url, { transition: "slide" }); }, 1);
+}
+
+function navigatePage(url){
+    // To navigate to the page
+    $(":mobile-pagecontainer").pagecontainer("change", url);
 }
 
 //Job

@@ -5,36 +5,38 @@
 function showSignin() {
     $(".signIn").css("display", "block");
     $(".windowBlck h3").html("Sign In");
-   // $("body").css({ backgroundImage: "url('img/splash.JPG')" });
+    // $("body").css({ backgroundImage: "url('img/splash.JPG')" });
     $(".btnSection").css("display", "none");
 }
+
 function showforgotPwd() {
     $(".signIn").css("display", "block");
     $(".windowBlck h3").html("Forgot Pin");
 }
+
 function hideSignin() {
     $(".signIn").css("display", "none");
-  //  $("body").css({ backgroundImage: "url('img/bgsmall1.JPG')" });
-//    $("body").css("background-image", "url('img/bgsmall1.JPG')");
-    $(".btnSection").css("display", "inline-block");    
+    //  $("body").css({ backgroundImage: "url('img/bgsmall1.JPG')" });
+    //    $("body").css("background-image", "url('img/bgsmall1.JPG')");
+    $(".btnSection").css("display", "inline-block");
 }
-$(document).on('ready', function () {
+$(document).on('ready', function() {
     var currentUserObj = localStorage.getItem('userSession');
     if (currentUserObj && currentUserObj != 'undefined') {
         redirect("Dashboard.html");
-    }
-    else {
+    } else {
         //delete session object
-       // deleteLocalStorage(["userSession"]);
+        // deleteLocalStorage(["userSession"]);
     }
 
-    $('body').on('keypress', 'input', function (args) {
+    $('body').on('keypress', 'input', function(args) {
         if (args.keyCode == 13) {
             dologIn($("#txtUserName").val().trim(), $("#txtPassword").val().trim());
         }
     });
 
 });
+
 function dologIn() {
     logIn($("#txtUserName").val().trim(), $("#txtPassword").val().trim());
     var currentUserObj = localStorage.getItem('userSession');
@@ -43,4 +45,9 @@ function dologIn() {
     }
 }
 
- 
+document.addEventListener("deviceready", function() {
+
+    if (device.platform == "iOS") 
+        StatusBar.overlaysWebView(false); // to avoid overlay of splashscreen over the app
+    StatusBar.backgroundColorByHexString("#0CACEB"); // to change the header color of the app
+}, true);

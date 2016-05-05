@@ -268,14 +268,19 @@
                 <br />
                 <br />
                 <label>Licence/Ticket</label>
-                <select id="ddlLicence"></select>
-                <label>Licence No.</label>
-                <input type="text" id="licenceNo" />
-                <label>Licence Expiry</label>
-                <input type="date" id="licenceDate" />
-                <label>How much experience do you have with this licence/ticket?(example:1y 6m)</label>
-                <input type="text" id="licenceExperience" />
-                <a href="#licencePage" class="ui-btn ui-btn-raised ui-mini clr-primary">Add New</a>
+                <select id="ddlLicence">
+                </select>
+                <div id="dvLicence">
+                    <div class="container" style="display: none;">
+                        <label>Licence No.</label>
+                        <input type="text" id="licenceNo" />
+                        <label>Licence Expiry</label>
+                        <input type="date" id="licenceDate" />
+                        <label>How much experience do you have with this licence/ticket?(example:1y 6m)</label>
+                        <input type="text" id="licenceExperience" />
+                    </div>
+                </div>
+                <a href="#licencePage" class="ui-btn ui-btn-raised ui-mini clr-primary">Add</a>
                 <!--<label>
                     Licence
                 </label>
@@ -312,10 +317,41 @@
                 </div> -->
             </div>
         </div>
+        <script type="text/javascript">
+        $("#addeditLicence").ready(function() {
+            getActiveLicenceType(0); // fetch the list of licence types
+        });
+        </script>
     </div>
     <!-- Add/edit licence page end -->
     <!-- Trade experience start -->
-    <div data-role="page" id=""></div>
+    <div data-role="page" id="addeditTrade" data-theme="a" class="nd2-no-menu-swipe registration">
+        <div data-role="header" data-position="fixed">
+            <h1>
+                Trade Experience
+            </h1>
+            <a data-rel="back" href="#" class="ui-btn ui-btn-left"><i class="zmdi zmdi-arrow-back zmd-fw">
+            </i></a>
+        </div>
+        <div data-role="content">
+            <label>Trade Exp.</label>
+            <select id="tradeType">
+                <option value="">SELECT TRADE</option>
+            </select>
+            <fieldset data-role="controlgroup">
+                <legend>Certification Type</legend>
+                <input type="radio" name="certificationType" id="experiencedCert" value="experienced" checked="checked">
+                <label for="experiencedCert">Experienced</label>
+                <input type="radio" name="certificationType" id="qualifiedCert" value="qualified">
+                <label for="qualifiedCert">Qualified</label>
+            </fieldset>
+            <label>Qualification No.</label>
+            <input type="text" id="tQualificationNo" />
+            <label>How much experience do you have in this trade?(example:1y 6m)</label>
+            <input type="text" id="tExperience">
+            <a href="#experiencePage" class="ui-btn ui-btn-raised ui-mini clr-primary">Add New</a>
+        </div>
+    </div>
     <!-- Trade experience end -->
     <script src="js/common.js" type="text/javascript"></script>
     <!--<script src="js/nd2settings.js" type="text/javascript"></script>-->

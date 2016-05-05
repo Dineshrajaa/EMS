@@ -190,8 +190,9 @@
             <br/>
             <br/>
             <center>
-                <p>Add any licences or tickets you have.</p>
+                <p id="addLicencePara">Add any licences or tickets you have.</p>
             </center>
+            <ul data-role="listview" id="tblLicenceList"></ul>
             <a href="#addeditLicence" class="ui-btn ui-btn-raised ui-mini clr-primary">Add New</a>
             <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary customfixed" onclick="navigatePage('#experiencePage')">Continue</a>
         </div>
@@ -267,21 +268,31 @@
             <div data-role="content">
                 <br />
                 <br />
-                <label>Licence/Ticket</label>
+                <!--                 <label>Licence/Ticket</label>
                 <select id="ddlLicence">
                 </select>
                 <div id="dvLicence">
                     <div class="container" style="display: none;">
-                        <label>Licence No.</label>
-                        <input type="text" id="licenceNo" />
-                        <label>Licence Expiry</label>
-                        <input type="date" id="licenceDate" />
+                        <div class="qualifiedBlock" style="display: none;">
+                            <label>Licence No.</label>
+                            <input type="text" id="licenceNo" />
+                            <label>Licence Expiry</label>
+                            <input type="date" id="licenceDate" />
+                        </div>
+                        <div class="nonQualifiedBlock" style="display: none;">
+                            <fieldset data-role="controlgroup">
+                                <legend>Certification Type</legend>
+                                <input type="radio" name="LicencePosition" id="experiencedCert" value="experienced" checked="checked">
+                                <label for="experiencedCert">Experienced</label>
+                                <input type="radio" name="LicencePosition" id="qualifiedCert" value="qualified">
+                                <label for="qualifiedCert">Qualified</label>
+                            </fieldset>
+                        </div>
                         <label>How much experience do you have with this licence/ticket?(example:1y 6m)</label>
                         <input type="text" id="licenceExperience" />
                     </div>
-                </div>
-                <a href="#licencePage" class="ui-btn ui-btn-raised ui-mini clr-primary">Add</a>
-                <!--<label>
+                </div> -->
+                <label>
                     Licence
                 </label>
                 <select id="ddlLicence">
@@ -302,7 +313,7 @@
                     </div>
                     <div class="exp" style="display: none;">
                         <label>
-                            Experience
+                            How much experience do you have with this licence/ticket?(example:1y6m)
                         </label>
                         <input type="text" id="txtExperience" />
                     </div>
@@ -311,10 +322,13 @@
                             Licence Number
                         </label>
                         <input type="text" id="txtNumberlLicence" />
+                        <label>Licence Expiry</label>
+                        <input type="date" id="txtLicenceExpiry" />
                     </div>
-                    <a href="" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick=" SaveLicence() ">
-                        Save </a>
-                </div> -->
+                    <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick=" SaveLicence()">Add</a>
+                    <!-- <a href="" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick=" SaveLicence() ">
+                        Save </a> -->
+                </div>
             </div>
         </div>
         <script type="text/javascript">

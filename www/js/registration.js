@@ -87,7 +87,7 @@ function validateRegisterFields(fieldClass, nextpageId) {
     });
     if (isValid) {
         // RegisterUser();
-        if(nextpageId!=="lastpage")
+        if (nextpageId !== "lastpage")
             navigatePage(nextpageId);
 
     } else {
@@ -354,17 +354,33 @@ $(document).on("ready", function() {
         $("#dvLicence .exp").show();
         $("#txtExperience").val("");
         $("#txtNumberlLicence").val("");
-        if ($(this).children("input[name=LicencePosition]").val() === "2") {
+        if ($(this).children("input[name=LicencePosition]").val() == "2") {
             $("#dvLicence .num").show();
+            $("#dvLicence .exp").hide();
         } else {
+            $("#dvLicence .exp").show();
             $("#dvLicence .num").hide();
         }
     });
+    $("input[name='LicencePosition']").on("click", function() {
+        $("#dvTrade .exp").show();
+        $("#txtExperience").val("");
+        $("#txtNumberlLicence").val("");
+        console.warn($(this).val());
+        if ($(this).val() == "2") {
+            $("#dvLicence .num").show();
+            $("#dvLicence .exp").show();
+        } else if ($(this).val() == "1") {
+            $("#dvLicence .exp").show();
+            $("#dvLicence .num").hide();
+        }
 
+    });
     $(document).on("click", "#dvTrade .ui-radio", function() {
         $("#dvTrade .exp").show();
         $("#txtExpTrade").val("");
         $("#txtQualTrade").val("");
+        console.log($(this).children("input[name=TradeExpPosition]").val());
         if ($(this).children("input[name=TradeExpPosition]").val() === "2") {
             $("#dvTrade .num").show();
         } else {
@@ -646,7 +662,7 @@ function SaveLicence() {
     obj.Name = $("#ddlLicenceText").val();
     obj.Experience = $("#txtExperience").val();
     obj.LicenceNumber = $("#txtNumberlLicence").val();
-    obj.LicenceExpiry = "";
+    obj.LicenceExpiry = $("#txtLicenceExpiry").val();
     obj.UserCertificationTypeId = $("input[name=LicencePosition]:checked").val(); //radio button value;
     //obj = JSON.stringify(obj);
     AddUserLicenceTicketType(obj);
@@ -704,7 +720,7 @@ function AddUserTradeExp(obj) {
     rebindGrids();
     hideWait();
     $("input[type='text']").val("");
-    $.mobile.pageContainer.pagecontainer("change", "#experience", { transition: "slide" });
+    $.mobile.pageContainer.pagecontainer("change", "#licencePage", { transition: "slide" });
 }
 
 function AddUserLicenceTicketType(obj) {
@@ -715,10 +731,33 @@ function AddUserLicenceTicketType(obj) {
         }
     }
     licenceTicketList.push(obj);
-    rebindGrids();
+    listTickets();
     hideWait();
     $("input[type='text']").val("");
-    $.mobile.pageContainer.pagecontainer("change", "#experience", { transition: "slide" });
+    $.mobile.pageContainer.pagecontainer("change", "#licencePage", { transition: "slide" });
+}
+
+function listTickets() {
+    var licenceHtml = "";
+    $("#addLicencePara").hide();
+    if (licenceTicketList != null) {
+        for (var i = 0; i < licenceTicketList.length; i++) {
+            var exp = (licenceTicketList[i].Experience != null && licenceTicketList[i].Experience != "") ? licenceTicketList[i].Experience : "";
+            var no = (licenceTicketList[i].LicenceNumber != null && licenceTicketList[i].LicenceNumber != "") ? licenceTicketList[i].LicenceNumber : "";
+            var expiryDate = (licenceTicketList[i].LicenceExpiry != null && licenceTicketList[i].LicenceExpiry != "") ? licenceTicketList[i].LicenceExpiry : "";
+            licenceHtml += '<li>' +
+                '<h1>' + licenceTicketList[i].Name + '</h1><br/>' +
+                '<p>Licence No.: ' + no + '<br/>' +
+                'Expiry: ' + expiryDate + '</p>' +
+                'Experience: ' + exp +
+                //'<td>' + licenceTicketList[k].LicenceExpiry + '</td>' +
+                // '<td>' + licenceTicketList[k].UserCertificationTypeId + '</td>' +
+                /*'<td><a onclick="editLicence(' + licenceTicketList[i].Id + ')">Edit</a></td>' +
+                '<td><a onclick="deleteLicence(' + licenceTicketList[i].Id + ',this)">Delete</a></td>' +*/
+                '</li>';
+        }
+        $("#tblLicenceList").html(licenceHtml).listview().listview("refresh");
+    }
 }
 
 function editLicence(id) {

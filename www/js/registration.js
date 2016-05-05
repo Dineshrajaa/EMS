@@ -6,7 +6,7 @@ var options = {
 };
 var placeSearch, autocomplete;
 var componentForm = {
-    txtStreetAddr: 'long_name',
+    street_number: 'long_name',
     route: 'long_name',
     locality: 'long_name',
     administrative_area_level_1: 'long_name',
@@ -34,8 +34,8 @@ function fillInAddress() {
         if (componentForm[addressType]) {
             if (addressType == 'route') {
                 var val = place.address_components[i][componentForm[addressType]];
-                document.getElementById('txtStreetAddr').value += " " + val;
-                document.getElementById('txtStreetAddr').value = document.getElementById('txtStreetAddr').value.trim();
+                document.getElementById('street_number').value += " " + val;
+                document.getElementById('street_number').value = document.getElementById('street_number').value.trim();
                 continue;
             }
             var val = place.address_components[i][componentForm[addressType]];
@@ -190,7 +190,7 @@ function register() {
     var lastName = $("#txtLastName").val();
     var dob = $("#txtDob").val();
     var email = $("#txtEmail").val();
-    var streetAddress = $("#txtStreetAddr").val();
+    var streetAddress = $("#street_number").val();
     var city = $("#locality").val();
     var postCode = $("#postal_code").val();
     var primaryContact = $("#txtContact1").val();

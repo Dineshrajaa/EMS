@@ -130,10 +130,10 @@
                                 <label for="keyword">
                                     Search Address</label>
                                 <input type="text" id="keyword" name="keyword" placeholder="" />
-                                <label for="txtStreetAddr">
+                                <label for="street_number">
                                     Street Address<span class="requiredField">*</span>
                                 </label>
-                                <input type="text" id="txtStreetAddr" name="txtStreetAddr" class="required" placeholder="" required="required" valid-attr="Please enter address" />
+                                <input type="text" id="street_number" name="street_number" class="required" placeholder="" required="required" valid-attr="Please enter address" />
                                 <label for="locality">
                                     City/Suburb/Town<span class="requiredField">*</span>
                                 </label>
@@ -349,8 +349,7 @@
         </div>
         <div data-role="content">
             <label>Trade Exp.</label>
-            <select id="tradeType">
-                <option value="">SELECT TRADE</option>
+            <select id="ddlTradeExp">
             </select>
             <fieldset data-role="controlgroup">
                 <legend>Certification Type</legend>
@@ -365,6 +364,12 @@
             <input type="text" id="tExperience">
             <a href="#experiencePage" class="ui-btn ui-btn-raised ui-mini clr-primary">Add New</a>
         </div>
+        <script type="text/javascript">
+        $("#addeditTrade").ready(function(){
+            getActiveTradeExp(0);
+        });
+            
+        </script>
     </div>
     <!-- Trade experience end -->
     <script src="js/common.js" type="text/javascript"></script>

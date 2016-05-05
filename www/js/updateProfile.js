@@ -1,31 +1,28 @@
-﻿
-var isValid = true;
+﻿var isValid = true;
+
 function validate() {
     isValid = true;
-    $(".required").each(function () {
+    $(".required").each(function() {
         var current = $(this);
         if (current.val() == "") {
             $(current).addClass("error");
             isValid = false;
-        }
-        else {
+        } else {
             $(current).removeClass("error");
         }
     });
     if (isValid) {
         UpdateUser();
 
-    }
-    else {
+    } else {
         return false;
     }
     //validatePassword($("#txtPin"));
     //validateConfirmPassword($("#txtCPin"));
 }
 
-function redirectWithTimeout(url)
-{
-    setTimeout(function () {
+function redirectWithTimeout(url) {
+    setTimeout(function() {
         window.location.href = url;
     }, 5000);
 }
@@ -38,7 +35,7 @@ var options = {
 };
 var placeSearch, autocomplete;
 var componentForm = {
-    txtStreetAddr: 'long_name',
+    street_number: 'long_name',
     route: 'long_name',
     locality: 'long_name',
     administrative_area_level_1: 'long_name',
@@ -66,8 +63,8 @@ function fillInAddress() {
         if (componentForm[addressType]) {
             if (addressType == 'route') {
                 var val = place.address_components[i][componentForm[addressType]];
-                document.getElementById('txtStreetAddr').value += " " + val;
-                document.getElementById('txtStreetAddr').value = document.getElementById('txtStreetAddr').value.trim();
+                document.getElementById('street_number').value += " " + val;
+                document.getElementById('street_number').value = document.getElementById('street_number').value.trim();
                 continue;
             }
             var val = place.address_components[i][componentForm[addressType]];
@@ -80,10 +77,10 @@ function fillInAddress() {
 
 var trannieProfileObj = '';
 var currentUser = '';
-$(document).on("ready", function () {
+$(document).on("ready", function() {
     var currentUserObj = localStorage.getItem('userSession');
     if (currentUserObj && currentUserObj != 'undefined') {
-         currentUser = JSON.parse(currentUserObj);
+        currentUser = JSON.parse(currentUserObj);
         fetchProfileDetail(currentUser.ID);
         GetEmployeeDetails(currentUser.ID);
     }
@@ -91,70 +88,70 @@ $(document).on("ready", function () {
     getActiveLicenceType(0);
     getActiveTradeExp(0);
     getActivePositionHeld(0);
-   
-    $(document).on("change", "#ddlLicence", function () {
+
+    $(document).on("change", "#ddlLicence", function() {
         var val = $(this).val();
         getLicenceTypDetail(val);
     });
 
 
-    $(document).on("change", "#ddlTradeExp", function () {
+    $(document).on("change", "#ddlTradeExp", function() {
         var val = $(this).val();
         getTradeExpDetail(val);
     });
 
-    $(document).on("change", "#ddlPositionHeld", function () {
+    $(document).on("change", "#ddlPositionHeld", function() {
         var val = $(this).val();
         getPositionHeldDetail(val);
     });
 
-//    $(document).on("click", "#expTrade", function () {
-//        $("#dvTrade .exp").show();
-//        $("#dvTrade .num").hide();
+    //    $(document).on("click", "#expTrade", function () {
+    //        $("#dvTrade .exp").show();
+    //        $("#dvTrade .num").hide();
 
-//    });
-//    $(document).on("click", "#qualTrade", function () {
-//        $("#dvTrade .exp").show();
-//        $("#dvTrade .num").show();
-//    });
+    //    });
+    //    $(document).on("click", "#qualTrade", function () {
+    //        $("#dvTrade .exp").show();
+    //        $("#dvTrade .num").show();
+    //    });
 
 
-//    $(document).on("click", "#expLicence", function () {
-//        $("#dvLicence .exp").show();
-//        $("#dvLicence .num").hide();
-//    });
-//    $(document).on("click", "#qualLicence", function () {
-//        $("#dvLicence .exp").show();
-//        $("#dvLicence .num").show();
-//    });
+    //    $(document).on("click", "#expLicence", function () {
+    //        $("#dvLicence .exp").show();
+    //        $("#dvLicence .num").hide();
+    //    });
+    //    $(document).on("click", "#qualLicence", function () {
+    //        $("#dvLicence .exp").show();
+    //        $("#dvLicence .num").show();
+    //    });
 
-//    $(document).on("click", "#expPosition", function () {
-//        $("#dvPosition .exp").show();
-//        $("#dvPosition .num").hide();
-//    });
-//    $(document).on("click", "#qualPosition", function () {
-//        $("#dvPosition .exp").show();
-//        $("#dvPosition .num").show();
-//    });
+    //    $(document).on("click", "#expPosition", function () {
+    //        $("#dvPosition .exp").show();
+    //        $("#dvPosition .num").hide();
+    //    });
+    //    $(document).on("click", "#qualPosition", function () {
+    //        $("#dvPosition .exp").show();
+    //        $("#dvPosition .num").show();
+    //    });
 
-    $(document).on("click", "#btnAddLicence", function () {
+    $(document).on("click", "#btnAddLicence", function() {
         $("#txtExperience").val("");
         $("#txtNumberlLicence").val("");
         //$("#ddlLicence option[value='0']").attr("selected", "selected");
         $.mobile.pageContainer.pagecontainer("change", "#addeditLicence", { transition: "slide" });
     });
-    $(document).on("click", "#btnAddTrade", function () {
+    $(document).on("click", "#btnAddTrade", function() {
         $("#txtExpTrade").val("");
         $("#txtQualTrade").val("");
         $.mobile.pageContainer.pagecontainer("change", "#addeditTrade", { transition: "slide" });
     });
-    $(document).on("click", "#btnAddPosition", function () {
+    $(document).on("click", "#btnAddPosition", function() {
         $("#txtExpPosition").val("");
         $("#txtQualPosition").val("");
         $.mobile.pageContainer.pagecontainer("change", "#addeditPosition", { transition: "slide" });
     });
 
-    $(document).on("click", "#dvLicence .ui-radio", function () {
+    $(document).on("click", "#dvLicence .ui-radio", function() {
         $("#dvLicence .exp").show();
         $("#txtExperience").val("");
         $("#txtNumberlLicence").val("");
@@ -165,7 +162,7 @@ $(document).on("ready", function () {
         }
     });
 
-    $(document).on("click", "#dvTrade .ui-radio", function () {
+    $(document).on("click", "#dvTrade .ui-radio", function() {
         $("#dvTrade .exp").show();
         $("#txtExpTrade").val("");
         $("#txtQualTrade").val("");
@@ -176,7 +173,7 @@ $(document).on("ready", function () {
         }
     });
 
-    $(document).on("click", "#dvPosition .ui-radio", function () {
+    $(document).on("click", "#dvPosition .ui-radio", function() {
         $("#dvPosition .exp").show();
         $("#txtExpPosition").val("");
         $("#txtQualPosition").val("");
@@ -193,14 +190,14 @@ function fetchProfileDetail(userId) {
     var url = serviceUrl + "Account/GetUserById";
     var jsonObj = {};
     jsonObj.userId = userId;
-        $.ajax({
+    $.ajax({
         type: "GET",
         url: url,
         data: jsonObj,
         contentType: "application/json",
         dataType: "json",
         async: false,
-        success: function (result) {
+        success: function(result) {
             if (result && result.IsSuccessful) {
                 var employeeObj = result.Result;
                 $("#hdnUserId").val(employeeObj.ID);
@@ -226,8 +223,8 @@ function fetchProfileDetail(userId) {
                 $("#ddlTitle").val(titleId);
                 $("#ddlTitle").prev().text(employeeObj.Title);
                 $("#txtFirstName").val(employeeObj.FirstName);
-                $("#lblName").html(employeeObj.Title + " " + employeeObj.FirstName +"  " +employeeObj.LastName);
-                
+                $("#lblName").html(employeeObj.Title + " " + employeeObj.FirstName + "  " + employeeObj.LastName);
+
                 $("#txtMiddleName").val(employeeObj.MiddleName);
                 $("#txtLastName").val(employeeObj.LastName);
                 $("#txtDob").val(new Date(employeeObj.DateOfBirth).getFormattedDateInddMMYY());
@@ -253,7 +250,7 @@ function fetchProfileDetail(userId) {
                 }
                 $("#ddlGender").prev().text(gender);
                 $("#lblGender").html(gender);
-                $("#txtStreetAddr").val(employeeObj.StreetAddress);
+                $("#street_number").val(employeeObj.StreetAddress);
                 $("#locality").val(employeeObj.City);
                 $("#lblAddr").html(employeeObj.StreetAddress);
                 $("#lbllocality").html(employeeObj.City);
@@ -270,14 +267,13 @@ function fetchProfileDetail(userId) {
                     $("#chkPaySlipMail").click();
                 }
 
-            }
-            else {
+            } else {
                 toast("Network Error");
             }
 
             hideWait();
         },
-        error: function (result) {
+        error: function(result) {
             hideWait();
             toast('Network Error');
         }
@@ -293,62 +289,62 @@ function doEdit() {
 
 function doUpdate() {
     showWait();
-   
-   //updateProfile(trannieProfileObj);
+
+    //updateProfile(trannieProfileObj);
 }
 
 function UpdateUser() {
-        var id = $("#hdnUserId").val();
-        var titleId = $("#ddlTitle").val();
-        var title = "Mr";
-        switch (titleId) {
-            case "1":
-                title = "Mr";
-                break;
-            case "2":
-                title = "Mrs";
-                break;
-            case "3":
-                title = "Miss";
-                break;
-            case "4":
-                title = "Ms";
-                break;
-            default:
-                break;
-        }
-        var firstName = $("#txtFirstName").val();
-        var middleName = $("#txtMiddleName").val();
-        var lastName = $("#txtLastName").val();
-        var dob = $("#txtDob").val();
-        var streetAddress = $("#txtStreetAddr").val();
-        var city = $("#locality").val();
-        var postCode = $("#postal_code").val();
-        var primaryContact = $("#txtContact1").val();
-        var secondaryContact = $("#txtContact2").val();
-        var gender = $("#ddlGender").val();
-        var state = $("#administrative_area_level_1").val();
-        var isPayslip = $("#chkPaySlipMail").is(":checked") ? true : false;
-        var roleId = $("#hdnRoleId").val();
+    var id = $("#hdnUserId").val();
+    var titleId = $("#ddlTitle").val();
+    var title = "Mr";
+    switch (titleId) {
+        case "1":
+            title = "Mr";
+            break;
+        case "2":
+            title = "Mrs";
+            break;
+        case "3":
+            title = "Miss";
+            break;
+        case "4":
+            title = "Ms";
+            break;
+        default:
+            break;
+    }
+    var firstName = $("#txtFirstName").val();
+    var middleName = $("#txtMiddleName").val();
+    var lastName = $("#txtLastName").val();
+    var dob = $("#txtDob").val();
+    var streetAddress = $("#street_number").val();
+    var city = $("#locality").val();
+    var postCode = $("#postal_code").val();
+    var primaryContact = $("#txtContact1").val();
+    var secondaryContact = $("#txtContact2").val();
+    var gender = $("#ddlGender").val();
+    var state = $("#administrative_area_level_1").val();
+    var isPayslip = $("#chkPaySlipMail").is(":checked") ? true : false;
+    var roleId = $("#hdnRoleId").val();
 
-        var trannieProfileObj = {};
-        trannieProfileObj.ID = id;
-        trannieProfileObj.Title = title;
-        trannieProfileObj.FirstName = firstName;
-        trannieProfileObj.MiddleName = middleName;
-        trannieProfileObj.LastName = lastName;
-        trannieProfileObj.DateOfBirth = dob;
-        trannieProfileObj.StreetAddress = streetAddress;
-        trannieProfileObj.City = city;
-        trannieProfileObj.State = state;
-        trannieProfileObj.Postcode = postCode;
-        trannieProfileObj.ContactNumber = primaryContact;
-        trannieProfileObj.SecondaryContact = secondaryContact;
-        trannieProfileObj.IsPaySlipSent = isPayslip;
-        trannieProfileObj.GenderId = gender;
-        trannieProfileObj.roleId = roleId;
+    var trannieProfileObj = {};
+    trannieProfileObj.ID = id;
+    trannieProfileObj.Title = title;
+    trannieProfileObj.FirstName = firstName;
+    trannieProfileObj.MiddleName = middleName;
+    trannieProfileObj.LastName = lastName;
+    trannieProfileObj.DateOfBirth = dob;
+    trannieProfileObj.StreetAddress = streetAddress;
+    trannieProfileObj.City = city;
+    trannieProfileObj.State = state;
+    trannieProfileObj.Postcode = postCode;
+    trannieProfileObj.ContactNumber = primaryContact;
+    trannieProfileObj.SecondaryContact = secondaryContact;
+    trannieProfileObj.IsPaySlipSent = isPayslip;
+    trannieProfileObj.GenderId = gender;
+    trannieProfileObj.roleId = roleId;
 
-        updateProfile(trannieProfileObj);
+    updateProfile(trannieProfileObj);
 }
 
 function updateProfile(trannieProfileObj) {
@@ -358,26 +354,27 @@ function updateProfile(trannieProfileObj) {
         type: 'POST',
         url: url1,
         data: trannieProfileObj,
-        success: function (response) {
+        success: function(response) {
             hideWait();
-           
+
             var currentUserObj = localStorage.getItem('userSession');
-        
-                var currentUser = JSON.parse(currentUserObj);
-                trannieProfileObj.JobStatusType = currentUser.JobStatusType;
-                var data = JSON.stringify(trannieProfileObj);
+
+            var currentUser = JSON.parse(currentUserObj);
+            trannieProfileObj.JobStatusType = currentUser.JobStatusType;
+            var data = JSON.stringify(trannieProfileObj);
             localStorage.setItem('userSession', data);
             toast('Profile Update Sucessfully');
-           
+
             redirectWithTimeout("UpdateProfile.html");
-        }, error: function () {
+        },
+        error: function() {
             hideWait();
             toast('Network Error');
         }
     });
 }
 
-$(function () {
+$(function() {
     var demo = "date";
     var theme = "android-holo-light";
     var mode = "scroller";
@@ -396,9 +393,9 @@ $(function () {
 function prev() {
 
     $.mobile.pageContainer.pagecontainer("change", "#updateProfile", { transition: "slide" });
-   
 
-   // $("#updateProfile_part2").hide();
+
+    // $("#updateProfile_part2").hide();
     //$("#updateProfile").show();
 }
 
@@ -415,7 +412,7 @@ function getActiveLicenceType(id) {
         type: 'GET',
         url: url,
         data: '',
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
                 $("#ddlLicence").html("");
@@ -431,7 +428,8 @@ function getActiveLicenceType(id) {
                 }
                 $("#ddlLicence").append(options);
             }
-        }, error: function () {
+        },
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -448,7 +446,7 @@ function getLicenceTypDetail(id) {
         type: 'GET',
         url: url,
         data: obj,
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
                 var result = response.Result;
@@ -457,16 +455,16 @@ function getLicenceTypDetail(id) {
                     $("#dvLicence .exp").show();
                     $("#dvLicence .num").show();
                     $("#dvLicence .container").hide();
-                }
-                else {
+                } else {
                     $("#dvLicence .container").show();
                     $("#dvLicence .exp").hide();
                     $("#dvLicence .num").hide();
                 }
-                
-               
+
+
             }
-        }, error: function () {
+        },
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -480,7 +478,7 @@ function getActiveTradeExp(id) {
         type: 'GET',
         url: url,
         data: '',
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
                 $("#ddlTradeExp").html("");
@@ -490,13 +488,14 @@ function getActiveTradeExp(id) {
                     if (result[i].ID === id) {
                         options += '<option value=' + result[i].ID + ' selected="selected">' + result[i].Name + '</option>';
                         $("#ddlTradeExp").prev().text(result[i].Name);
-                    }else {
+                    } else {
                         options += '<option value=' + result[i].ID + '>' + result[i].Name + '</option>';
-                    }                    
+                    }
                 }
                 $("#ddlTradeExp").append(options);
             }
-        }, error: function () {
+        },
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -513,7 +512,7 @@ function getTradeExpDetail(id) {
         type: 'GET',
         url: url,
         data: obj,
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
                 var result = response.Result;
@@ -522,14 +521,14 @@ function getTradeExpDetail(id) {
                     $("#dvTrade .exp").show();
                     $("#dvTrade .num").show();
                     $("#dvTrade .container").hide();
-                }
-                else {
+                } else {
                     $("#dvTrade .container").show();
                     $("#dvTrade .exp").hide();
                     $("#dvTrade .num").hide();
                 }
             }
-        }, error: function () {
+        },
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -543,7 +542,7 @@ function getActivePositionHeld(id) {
         type: 'GET',
         url: url,
         data: '',
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
                 $("#ddlPositionHeld").html("");
@@ -555,11 +554,12 @@ function getActivePositionHeld(id) {
                         $("#ddlPositionHeld").prev().text(result[i].Name);
                     } else {
                         options += '<option value=' + result[i].ID + '>' + result[i].Name + '</option>';
-                    }                    
+                    }
                 }
                 $("#ddlPositionHeld").append(options);
             }
-        }, error: function () {
+        },
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -576,7 +576,7 @@ function getPositionHeldDetail(id) {
         type: 'GET',
         url: url,
         data: obj,
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
                 var result = response.Result;
@@ -585,14 +585,14 @@ function getPositionHeldDetail(id) {
                     $("#dvPosition .exp").show();
                     $("#dvPosition .num").show();
                     $("#dvPosition .container").hide();
-                }
-                else {
+                } else {
                     $("#dvPosition .container").show();
                     $("#dvPosition .exp").hide();
                     $("#dvPosition .num").hide();
                 }
             }
-        }, error: function () {
+        },
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -608,7 +608,7 @@ function GetEmployeeDetails(id) {
         type: 'GET',
         url: url,
         data: obj,
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
                 var result = response.Result;
@@ -619,13 +619,13 @@ function GetEmployeeDetails(id) {
                 var positionHtml = '';
                 var tradeHtml = '';
                 if (result.PositionHeldList != null) {
-                    for (var i = 0 ; i < result.PositionHeldList.length; i++) {
+                    for (var i = 0; i < result.PositionHeldList.length; i++) {
                         var Exp = (result.PositionHeldList[i].Experience != null && result.PositionHeldList[i].Experience != "null") ? result.PositionHeldList[i].Experience : "";
                         var qualNo = (result.PositionHeldList[i].QualificationNumber != null && result.PositionHeldList[i].QualificationNumber != "null") ? result.PositionHeldList[i].QualificationNumber : "";
                         positionHtml += '<tr><td>' + result.PositionHeldList[i].Name + '</td><td>' + Exp + '</td><td>' + qualNo + '</td>' +
                             //'<td>' + positionheldslist[i].UserCertificationTypeId + '</td>' +
-                              '<td><a onclick="editPosition(' + result.PositionHeldList[i].Id + ')">Edit</a></td>' +
-                           '<td><a onclick="deletePosition(' + result.PositionHeldList[i].Id + ',this)">Delete</a></td>' +
+                            '<td><a onclick="editPosition(' + result.PositionHeldList[i].Id + ')">Edit</a></td>' +
+                            '<td><a onclick="deletePosition(' + result.PositionHeldList[i].Id + ',this)">Delete</a></td>' +
                             '</tr>';
 
                     }
@@ -635,13 +635,13 @@ function GetEmployeeDetails(id) {
                         var exp = (tradeExpList[j].Experience != null && tradeExpList[j].Experience != "null") ? tradeExpList[j].Experience : "";
                         var no = (tradeExpList[j].QualificationNumber != null && tradeExpList[j].QualificationNumber != "") ? tradeExpList[j].QualificationNumber : "";
                         tradeHtml += '<tr>' +
-                          '<td>' + tradeExpList[j].Name + '</td>' +
-                          '<td>' + exp + '</td>' +
-                          '<td>' + no + '</td>' +
-                          //'<td>' + tradeExpList[j].UserCertificationTypeId + '</td>' +
-                           '<td><a onclick="editTrade(' + tradeExpList[j].Id + ')">Edit</a></td>' +
-                          '<td><a onclick="deleteTrade(' + tradeExpList[j].Id + ',this)">Delete</a></td>' +
-                          '</tr>';
+                            '<td>' + tradeExpList[j].Name + '</td>' +
+                            '<td>' + exp + '</td>' +
+                            '<td>' + no + '</td>' +
+                            //'<td>' + tradeExpList[j].UserCertificationTypeId + '</td>' +
+                            '<td><a onclick="editTrade(' + tradeExpList[j].Id + ')">Edit</a></td>' +
+                            '<td><a onclick="deleteTrade(' + tradeExpList[j].Id + ',this)">Delete</a></td>' +
+                            '</tr>';
 
                     }
                 }
@@ -650,24 +650,25 @@ function GetEmployeeDetails(id) {
                         var exp = (licencelist[k].Experience != null && licencelist[k].Experience != "") ? licencelist[k].Experience : "";
                         var no = (licencelist[k].LicenceNumber != null && licencelist[k].LicenceNumber != "") ? licencelist[k].LicenceNumber : "";
                         licenceHtml += '<tr>' +
-                        '<td>' + licencelist[k].Name + '</td>' +
-                        '<td>' + exp + '</td>' +
-                        '<td>' + no + '</td>' +
-                        //'<td>' + licencelist[k].LicenceExpiry + '</td>' +
-                        // '<td>' + licencelist[k].UserCertificationTypeId + '</td>' +
-                         '<td><a onclick="editLicence(' + licencelist[k].Id + ')">Edit</a></td>' +
-                         '<td><a onclick="deleteLicence(' + licencelist[k].Id + ',this)">Delete</a></td>' +
-                        '</tr>';
+                            '<td>' + licencelist[k].Name + '</td>' +
+                            '<td>' + exp + '</td>' +
+                            '<td>' + no + '</td>' +
+                            //'<td>' + licencelist[k].LicenceExpiry + '</td>' +
+                            // '<td>' + licencelist[k].UserCertificationTypeId + '</td>' +
+                            '<td><a onclick="editLicence(' + licencelist[k].Id + ')">Edit</a></td>' +
+                            '<td><a onclick="deleteLicence(' + licencelist[k].Id + ',this)">Delete</a></td>' +
+                            '</tr>';
                     }
                 }
-                
+
                 $("#tblLicenceList tbody").html(licenceHtml);
                 $("#tblTradeExpList tbody").html(tradeHtml);
                 $("#tblPositionList tbody").html(positionHtml);
-                
-                
+
+
             }
-        }, error: function () {
+        },
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -675,7 +676,7 @@ function GetEmployeeDetails(id) {
 }
 
 
-function deletePosition(id,el) {
+function deletePosition(id, el) {
     var r = confirm('Are you sure');
     if (r) {
         showWait();
@@ -686,14 +687,15 @@ function deletePosition(id,el) {
             type: 'POST',
             url: url + id,
             data: {},
-            success: function (response) {
+            success: function(response) {
                 hideWait();
                 if (response.IsSuccessful) {
 
                     toast('Position Deleted Successfully');
                     $(el).parent().parent().remove();
                 }
-            }, error: function () {
+            },
+            error: function() {
                 hideWait();
                 toast('Network Error');
             }
@@ -702,7 +704,7 @@ function deletePosition(id,el) {
 }
 
 
-function deleteLicence(id,el) {
+function deleteLicence(id, el) {
     var r = confirm('Are you sure');
     if (r) {
         showWait();
@@ -713,14 +715,15 @@ function deleteLicence(id,el) {
             type: 'POST',
             url: url + id,
             data: {},
-            success: function (response) {
+            success: function(response) {
                 hideWait();
                 if (response.IsSuccessful) {
 
                     toast('Licence Ticket Type Deleted Successfully');
                     $(el).parent().parent().remove();
                 }
-            }, error: function () {
+            },
+            error: function() {
                 hideWait();
                 toast('Network Error');
             }
@@ -728,7 +731,7 @@ function deleteLicence(id,el) {
     }
 }
 
-function deleteTrade(id,el) {
+function deleteTrade(id, el) {
     var r = confirm('Are you sure');
     if (r) {
         showWait();
@@ -739,14 +742,15 @@ function deleteTrade(id,el) {
             type: "POST",
             url: url + id,
             data: {},
-            success: function (response) {
+            success: function(response) {
                 hideWait();
                 if (response.IsSuccessful) {
 
                     toast('Trade Exp Deleted Successfully');
                     $(el).parent().parent().remove();
                 }
-            }, error: function () {
+            },
+            error: function() {
                 hideWait();
                 toast('Network Error');
             }
@@ -770,7 +774,7 @@ function SaveLicence() {
 
 function SaveTrade() {
     var obj = {};
-    obj.Id=$("#hdnTradeId").val();
+    obj.Id = $("#hdnTradeId").val();
     obj.TradeExperienceId = $("#ddlTradeExp").val();
     obj.UserId = currentUser.ID;
     obj.Experience = $("#txtExpTrade").val();
@@ -793,21 +797,22 @@ function SavePosition() {
 }
 
 
-function AddUserPositionHeld(obj){
+function AddUserPositionHeld(obj) {
     showWait();
     var url = serviceUrl + "Account/AddUserPositionHeld";
     $.ajax({
         type: 'POST',
         url: url,
         data: obj,
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
 
                 toast('Position Added Successfully');
                 redirectWithTimeout("UpdateProfile.html");
             }
-        }, error: function () {
+        },
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -822,14 +827,15 @@ function AddUserTradeExp(obj) {
         type: 'POST',
         url: url,
         data: obj,
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
 
                 toast('Trade Added Successfully');
                 redirectWithTimeout("UpdateProfile.html");
             }
-        }, error: function () {
+        },
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -844,7 +850,7 @@ function AddUserLicenceTicketType(obj) {
         type: 'POST',
         url: url,
         data: obj,
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
 
@@ -852,7 +858,8 @@ function AddUserLicenceTicketType(obj) {
                 redirectWithTimeout("UpdateProfile.html");
 
             }
-        }, error: function () {
+        },
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -867,7 +874,7 @@ function editLicence(id) {
         type: 'GET',
         url: url + id,
         data: {},
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
                 $.mobile.pageContainer.pagecontainer("change", "#addeditLicence", { transition: "slide" });
@@ -895,7 +902,8 @@ function editLicence(id) {
                     }
                 }
             }
-        }, error: function () {
+        },
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -909,7 +917,7 @@ function editPosition(id) {
         type: 'GET',
         url: url + id,
         data: {},
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
                 $.mobile.pageContainer.pagecontainer("change", "#addeditPosition", { transition: "slide" });
@@ -936,9 +944,10 @@ function editPosition(id) {
                         $("#dvPosition .num").show();
                     }
                 }
-                
+
             }
-        }, error: function () {
+        },
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -952,7 +961,7 @@ function editTrade(id) {
         type: 'GET',
         url: url + id,
         data: {},
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
                 $.mobile.pageContainer.pagecontainer("change", "#addeditTrade", { transition: "slide" });
@@ -981,7 +990,8 @@ function editTrade(id) {
                     }
                 }
             }
-        }, error: function () {
+        },
+        error: function() {
             hideWait();
             toast('Network Error');
         }

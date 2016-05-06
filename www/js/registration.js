@@ -13,7 +13,7 @@ var componentForm = {
     //country: 'long_name',
     postal_code: 'long_name'
 };
-
+var jsonObj = {};
 var input = document.getElementById("keyword");
 var autocomplete = new google.maps.places.Autocomplete(input, options);
 autocomplete.addListener('place_changed', fillInAddress);
@@ -86,9 +86,10 @@ function validateRegisterFields(fieldClass, nextpageId) {
         }
     });
     if (isValid) {
-        // RegisterUser();
+         
         if (nextpageId !== "lastpage")
-            navigatePage(nextpageId);
+            RegisterUser(nextpageId);
+            //navigatePage(nextpageId);
 
     } else {
         return false;
@@ -153,7 +154,8 @@ function validateConfirmPassword(el) {
 }
 
 
-function checkEmailExistance() {
+    
+function checkEmailExistance(nextpageId) {
     var url = serviceUrl + "Account/IsUserWithSameEmailExist";
     var jsonObj = {};
     jsonObj.email = $("#txtEmail").val().trim();
@@ -167,7 +169,7 @@ function checkEmailExistance() {
                 if (result.Result) {
                     toast('Email already registered');
                 } else {
-                    register();
+                    register(nextpageId);
                 }
 
             } else {
@@ -180,7 +182,7 @@ function checkEmailExistance() {
     });
 }
 
-function register() {
+function register(nextpageId) {
 
 
     var url = serviceUrl + "Account/AddUser";
@@ -199,8 +201,8 @@ function register() {
     var pin = $("#txtPin").val();
     var state = $("#administrative_area_level_1").val();
     var isPayslip = $("#chkPaySlipMail").is(":checked") ? true : false;
-    var profilePicture=$("#profilePicImg").attr("src");
-    var jsonObj = {};
+    var profilePicture = $("#profilePicImg").attr("src");
+    
     var title = "Mr";
     switch (titleId) {
         case "1":
@@ -236,9 +238,10 @@ function register() {
     jsonObj.UserLicenceTicketTypes = licenceTicketList;
     jsonObj.UserTradeExperiences = tradeExpList;
     jsonObj.UserPositionHelds = positionHoldList;
-    jsonObj.ProfilePicture=profilePicture=="img/avtar.png"?"":profilePicture;
+    jsonObj.ProfilePicture = profilePicture == "img/avtar.png" ? "" : profilePicture;
     debugger;
-    $.ajax({
+    navigatePage(nextpageId);
+/*    $.ajax({
         type: "POST",
         url: url,
         data: jsonObj,
@@ -253,10 +256,34 @@ function register() {
         error: function() {
             console.log('Some error occured in registration, please try again');
         }
+    });*/
+}
+
+function submitProfile(){
+    // To submit the profile completely
+    jsonObj.UserLicenceTicketTypes = licenceTicketList;
+    jsonObj.UserTradeExperiences = tradeExpList;
+    jsonObj.UserPositionHelds = positionHoldList;
+    jsonObj.ProfilePicture = profilePicture == "img/avtar.png" ? "" : profilePicture;
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: jsonObj,
+        success: function(result) {
+            if (result.IsSuccessful) {
+                alert("Registration has been successfully done");
+                // window.location.href = "index.html";
+            } else {
+                toast("Network Error");
+            }
+        },
+        error: function() {
+            console.log('Some error occured in registration, please try again');
+        }
     });
 }
 
-function RegisterUser() {
+function RegisterUser(nextpageId) {
 
     $(".required").each(function() {
         var cur = this;
@@ -265,7 +292,7 @@ function RegisterUser() {
         }
 
     });
-    checkEmailExistance();
+    checkEmailExistance(nextpageId);
     //    if ($("#form_RegisterUser").valid()) {
     //        checkEmailExistance();
     //    }
@@ -357,9 +384,13 @@ $(document).on("ready", function() {
         if ($(this).children("input[name=LicencePosition]").val() == "2") {
             $("#dvLicence .num").show();
             $("#dvLicence .exp").hide();
+            // $("#txtNumberlLicence,#txtLicenceExpiry").removeClass("licenceRequired").addClass("licenceRequired");
+            // $("#txtExperience").removeClass("licenceRequired");
         } else {
             $("#dvLicence .exp").show();
             $("#dvLicence .num").hide();
+            // $("#txtNumberlLicence,#txtLicenceExpiry").removeClass("licenceRequired");
+            // $("#txtExperience").addClass("licenceRequired");
         }
     });
     $("input[name='LicencePosition']").on("click", function() {
@@ -513,15 +544,18 @@ function getLicenceTypDetail(id) {
                 var result = response.Result;
                 $("#dvLicence").show();
                 $("#ddlLicenceText").val(result.Name);
+                console.warn(result.LicenceAbbr);
+                $("#licenceTypeh").text("Licence Type: " + result.LicenceAbbr);
                 if (result.IsQualifiedAllowed) {
                     $("#dvLicence .exp").show();
                     $("#dvLicence .num").show();
-                    $("#licenceTypeh").text($("#ddlLicence :selected").text());
+                    // $("#txtNumberlLicence,#txtLicenceExpiry,#txtExperience").removeClass("licenceRequired").addClass("licenceRequired");
                     $("#dvLicence .container").hide();
                 } else {
                     $("#dvLicence .container").show();
                     $("#dvLicence .exp").hide();
                     $("#dvLicence .num").hide();
+                    // $("#txtNumberlLicence,#txtLicenceExpiry,#txtExperience").removeClass("licenceRequired");
                 }
 
 
@@ -721,43 +755,91 @@ function deleteTrade(id, el) {
 
 
 function SaveLicence() {
-    var obj = {};
-    obj.Id = $("#hdnLicenceTypeId").val();
-    obj.LicenceTicketTypeId = $("#ddlLicence").val();
-    //obj.UserId = currentUser.ID;
-    obj.Name = $("#ddlLicenceText").val();
-    obj.Experience = $("#txtExperience").val();
-    obj.LicenceNumber = $("#txtNumberlLicence").val();
-    obj.LicenceExpiry = $("#txtLicenceExpiry").val();
-    obj.UserCertificationTypeId = $("input[name=LicencePosition]:checked").val(); //radio button value;
-    //obj = JSON.stringify(obj);
-    AddUserLicenceTicketType(obj);
+    var isValid = true;
+    $(".licenceRequired").each(function() {
+        console.warn($(this));
+        var current = $(this);
+        if (current.val() == "" && current.is(":visible")) {
+            $(current).addClass("error");
+            isValid = false;
+        } else {
+            $(current).removeClass("error");
+        }
+    });
+    if (isValid) {
+        var obj = {};
+        obj.Id = $("#hdnLicenceTypeId").val();
+        obj.LicenceTicketTypeId = $("#ddlLicence").val();
+        //obj.UserId = currentUser.ID;
+        obj.Name = $("#ddlLicenceText").val();
+        obj.Experience = $("#txtExperience").val();
+        obj.LicenceNumber = $("#txtNumberlLicence").val();
+        obj.LicenceExpiry = $("#txtLicenceExpiry").val();
+        obj.UserCertificationTypeId = $("input[name=LicencePosition]:checked").val(); //radio button value;
+        //obj = JSON.stringify(obj);
+        AddUserLicenceTicketType(obj);
+
+    } else {
+        return false;
+    }
+
 }
 
 function SaveTrade() {
-    var obj = {};
-    obj.Id = $("#hdnTradeId").val();
-    obj.TradeExperienceId = $("#ddlTradeExp").val();
-    //obj.UserId = currentUser.ID;
-    obj.Name = $("#ddlTradeExpText").val();
-    obj.Experience = $("#txtExpTrade").val();
-    obj.QualificationNumber = $("#txtQualTrade").val();
-    obj.UserCertificationTypeId = $("input[name=TradeExpPosition]:checked").val(); //radio button value;
-    //obj = JSON.stringify(obj);
-    AddUserTradeExp(obj);
+    var isValid = true;
+    $(".tradeRequired").each(function() {
+        console.warn($(this));
+        var current = $(this);
+        if (current.val() == "" && current.is(":visible")) {
+            $(current).addClass("error");
+            isValid = false;
+        } else {
+            $(current).removeClass("error");
+        }
+    });
+    if (isValid) {
+        var obj = {};
+        obj.Id = $("#hdnTradeId").val();
+        obj.TradeExperienceId = $("#ddlTradeExp").val();
+        //obj.UserId = currentUser.ID;
+        obj.Name = $("#ddlTradeExpText").val();
+        obj.Experience = $("#txtExpTrade").val();
+        obj.QualificationNumber = $("#txtQualTrade").val();
+        obj.UserCertificationTypeId = $("input[name=TradeExpPosition]:checked").val() ||""; //radio button value;
+        //obj = JSON.stringify(obj);
+        AddUserTradeExp(obj);
+    } else {
+        return false;
+    }
+
 }
 
 function SavePosition() {
-    var obj = {};
-    obj.Id = $("#hdnPositionId").val();
-    obj.PositionHeldId = $("#ddlPositionHeld").val();
-    //obj.UserId = currentUser.ID;
-    obj.Name = $("#ddlPositionHeldText").val();
-    obj.Experience = $("#txtExpPosition").val();
-    obj.QualificationNumber = $("#txtQualPosition").val();
-    obj.UserCertificationTypeId = $("input[name=CertifiedTypePosition]:checked").val(); //radio button value;
-    //obj = JSON.stringify(obj);
-    AddUserPositionHeld(obj);
+    var isValid = true;
+    $(".positionRequired").each(function() {
+        console.warn($(this));
+        var current = $(this);
+        if (current.val() == "" && current.is(":visible")) {
+            $(current).addClass("error");
+            isValid = false;
+        } else {
+            $(current).removeClass("error");
+        }
+    });
+    if (isValid) {
+        var obj = {};
+        obj.Id = $("#hdnPositionId").val();
+        obj.PositionHeldId = $("#ddlPositionHeld").val();
+        //obj.UserId = currentUser.ID;
+        obj.Name = $("#ddlPositionHeldText").val();
+        obj.Experience = $("#txtExpPosition").val();
+        obj.QualificationNumber = $("#txtQualPosition").val();
+        obj.UserCertificationTypeId = $("input[name=CertifiedTypePosition]:checked").val(); //radio button value;
+        //obj = JSON.stringify(obj);
+        AddUserPositionHeld(obj);
+    } else {
+        return false;
+    }
 }
 
 
@@ -770,7 +852,7 @@ function AddUserPositionHeld(obj) {
     }
     positionHoldList.push(obj);
 
-    $("#hdnPositionId").val(parseInt($("#hdnPositionId").val())+1);
+    $("#hdnPositionId").val(parseInt($("#hdnPositionId").val()) + 1);
     listPositions();
     hideWait();
     $("input[type='text']").val("");
@@ -785,10 +867,10 @@ function listPositions() {
             var Exp = (positionHoldList[i].Experience != null && positionHoldList[i].Experience != "null") ? positionHoldList[i].Experience : "";
             var qualNo = (positionHoldList[i].QualificationNumber != null && positionHoldList[i].QualificationNumber != "null") ? positionHoldList[i].QualificationNumber : "";
             positionsHtml += '<li>' +
-                '<h1>' + positionHoldList[j].Name + '</h1>' +
-                '<p>Cert Type: ' + positionHoldList[j].UserCertificationTypeId + '<br/>' +
-                'QualificationNumber: ' + no + '<br/>' +
-                'Experience: ' + exp + '</td>' +
+                '<p>' + positionHoldList[i].Name + '</p>' +
+                '<p>Cert Type: ' + positionHoldList[i].UserCertificationTypeId + '<br/>' +
+                'QualificationNumber: ' + qualNo + '<br/>' +
+                'Experience: ' + Exp +
                 /*'<td><a onclick="editTrade(' + tradeExpList[j].Id + ')">Edit</a></td>' +
                 '<td><a onclick="deleteTrade(' + tradeExpList[j].Id + ',this)">Delete</a></td>' +*/
                 '</li>';
@@ -809,7 +891,7 @@ function AddUserTradeExp(obj) {
         }
     }
     tradeExpList.push(obj);
-    $("#hdnTradeId").val(parseInt($("#hdnTradeId").val())+1);
+    $("#hdnTradeId").val(parseInt($("#hdnTradeId").val()) + 1);
     //rebindGrids();
     listTrade();
     hideWait();
@@ -847,7 +929,7 @@ function AddUserLicenceTicketType(obj) {
         }
     }
     licenceTicketList.push(obj);
-    $("#hdnLicenceTypeId").val(parseInt($("#hdnLicenceTypeId").val())+1);
+    $("#hdnLicenceTypeId").val(parseInt($("#hdnLicenceTypeId").val()) + 1);
     listTickets();
     hideWait();
     $("input[type='text']").val("");
@@ -886,7 +968,6 @@ function editLicence(id) {
         }
     }
     $.mobile.pageContainer.pagecontainer("change", "#addeditLicence", { transition: "slide" });
-    $("#hdnLicenceTypeId").val(licenceTicketList[count].Id);
     getActiveLicenceType(licenceTicketList[count].LicenceTicketTypeId);
     //getLicenceTypDetail(licenceTicketList[count].LicenceTicketTypeId);
     $("#ddlLicence").val(licenceTicketList[count].LicenceTicketTypeId);

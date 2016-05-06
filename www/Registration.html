@@ -145,7 +145,7 @@
                                 <label for="postal_code">
                                     Postcode<span class="requiredField">*</span>
                                 </label>
-                                <input type="text" id="postal_code" name="postal_code" class="required" placeholder="" required="required" valid-attr="Please enter Post code" />
+                                <input type="text" id="postal_code" name="postal_code" class="required" placeholder="" required="required" maxlength="4" valid-attr="Please enter Post code" />
                                 <label for="txtContact1">
                                     Primary Contact No<span class="requiredField">*</span>
                                 </label>
@@ -176,12 +176,30 @@
                 </form>
             </div>
         </div>
+        <script type="text/javascript">
+        $("#updateProfile").ready(function() {
+            $("#txtCPin,#txtPin,#postal_code").keyup(function(e) {
+                var str = $.trim($(this).val());
+                if (str != "") {
+                    var regx = /^[0-9\s]+$/;
+                    if (!regx.test(str)) {
+                        str = str.replace(/[^0-9.\s]+/g, ''); // replace special characters with space
+                        $(this).val(str);
+                        toast("Only alphabets allowed !");
+                    }
+                } else {
+                    //empty value -- do something here
+                    console.log("Only alphabets detected");
+                }
+            });
+        });
+        </script>
     </div>
     <!-- User Profile end -->
     <!-- Licence list page start -->
     <div data-role="page" id="licencePage" data-theme="a" class="nd2-no-menu-swipe registration">
         <div data-role="header" data-position="fixed">
-            <a data-rel="back" href="#" class="ui-btn ui-btn-left"><i class="zmdi zmdi-arrow-back zmd-fw">
+            <a href="#updateProfile" class="ui-btn ui-btn-left"><i class="zmdi zmdi-arrow-back zmd-fw">
             </i></a>
             <h1>Licences & Tickets</h1>
         </div>
@@ -189,13 +207,13 @@
             <br/>
             <br/>
             <br/>
+            <ul data-role="listview" id="tblLicenceList"></ul>
             <center>
                 <p id="addLicencePara">Add any licences or tickets you have.</p>
+                <br/>
+                <br/>
+                <a href="#addeditLicence" class="ui-btn ui-btn-raised ui-mini clr-primary">Add New</a>
             </center>
-            <br/>
-            <br/>
-            <ul data-role="listview" id="tblLicenceList"></ul>
-            <a href="#addeditLicence" class="ui-btn ui-btn-raised ui-mini clr-primary">Add New</a>
             <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary customfixed" onclick="navigatePage('#experiencePage')">Continue</a>
         </div>
     </div>
@@ -203,7 +221,7 @@
     <!-- Experience list page start -->
     <div data-role="page" id="experiencePage" data-theme="a" class="nd2-no-menu-swipe registration">
         <div data-role="header" data-position="fixed">
-            <a data-rel="back" href="#" class="ui-btn ui-btn-left"><i class="zmdi zmdi-arrow-back zmd-fw">
+            <a href="#licencePage" class="ui-btn ui-btn-left"><i class="zmdi zmdi-arrow-back zmd-fw">
             </i></a>
             <h1>Trade Experience</h1>
         </div>
@@ -211,13 +229,13 @@
             <br/>
             <br/>
             <br/>
+            <ul data-role="listview" id="tradeList"></ul>
             <center>
                 <p id="addTradePara">Add any trade experience you have.</p>
+                <br/>
+                <br/>
+                <a href="#addeditTrade" class="ui-btn ui-btn-raised ui-mini clr-primary">Add New</a>
             </center>
-            <br/>
-            <br/>
-            <ul data-role="listview" id="tradeList"></ul>
-            <a href="#addeditTrade" class="ui-btn ui-btn-raised ui-mini clr-primary">Add New</a>
             <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary customfixed" onclick="navigatePage('#positionsPage')">Continue</a>
         </div>
     </div>
@@ -225,7 +243,7 @@
     <!-- Positions list page start -->
     <div data-role="page" id="positionsPage" data-theme="a" class="nd2-no-menu-swipe registration">
         <div data-role="header" data-position="fixed">
-            <a data-rel="back" href="#" class="ui-btn ui-btn-left"><i class="zmdi zmdi-arrow-back zmd-fw">
+            <a href="#experiencePage" class="ui-btn ui-btn-left"><i class="zmdi zmdi-arrow-back zmd-fw">
             </i></a>
             <h1>Positions Held</h1>
         </div>
@@ -233,13 +251,13 @@
             <br/>
             <br/>
             <br/>
+            <ul data-role="listview" id="positionsList"></ul>
             <center>
                 <p id="addPositionsPara">List any positions you have held in past.</p>
+                <br/>
+                <br/>
+                <a href="#addeditPosition" class="ui-btn ui-btn-raised ui-mini clr-primary">Add New</a>
             </center>
-            <br/>
-            <br/>
-            <ul data-role="listview" id="positionsList"></ul>
-            <a href="#addeditPosition" class="ui-btn ui-btn-raised ui-mini clr-primary">Add New</a>
             <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary customfixed" onclick="navigatePage('#avatarPage')">Continue</a>
         </div>
     </div>
@@ -247,7 +265,7 @@
     <!-- Avatar page start -->
     <div data-role="page" id="avatarPage" data-theme="a" class="nd2-no-menu-swipe registration">
         <div data-role="header" data-position="fixed">
-            <a data-rel="back" href="#" class="ui-btn ui-btn-left"><i class="zmdi zmdi-arrow-back zmd-fw">
+            <a href="#positionsPage" class="ui-btn ui-btn-left"><i class="zmdi zmdi-arrow-back zmd-fw">
             </i></a>
             <h1>Profile Photo</h1>
         </div>
@@ -271,8 +289,9 @@
             <center>
                 <p>Add a photo of yourself.</p>
                 <a href="#cameraTypeList"><img id="profilePicImg" src="img/avtar.png" class="profileAvatar"></a>
+                <br/><br/>
+                <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="submitProfile()">Submit</a>
             </center>
-            <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="validate()">Submit</a>
         </div>
     </div>
     <!-- Avatar page end -->
@@ -282,7 +301,7 @@
             <h1>
                 Add/Edit Licence
             </h1>
-            <a data-rel="back" href="#" class="ui-btn ui-btn-left"><i class="zmdi zmdi-arrow-back zmd-fw">
+            <a href="#licencePage" class="ui-btn ui-btn-left"><i class="zmdi zmdi-arrow-back zmd-fw">
             </i></a>
         </div>
         <div role="main">
@@ -332,25 +351,24 @@
                             <input type="radio" name="LicencePosition" id="qualLicence" value="2" /> Qualified
                         </label>
                     </div>
-                    
                     <div class="num" style="display: none;">
-                        <label>
-                            Licence Type:<h1 id="licenceTypeh"></h1>
+                        <label id="licenceTypeh">
                         </label>
                         <label>
                             Licence Number
                         </label>
-                        <input type="text" id="txtNumberlLicence" />
+                        <input type="text" id="txtNumberlLicence" required class="licenceRequired" />
                         <label>Licence Expiry</label>
-                        <input type="text" id="txtLicenceExpiry" />
+                        <input type="text" id="txtLicenceExpiry" required class="licenceRequired" />
                     </div>
                     <div class="exp" style="display: none;">
                         <label>
                             How much experience do you have with this licence/ticket?(example:1y6m)
                         </label>
-                        <input type="text" id="txtExperience" />
+                        <input type="text" id="txtExperience" required class="licenceRequired" />
                     </div>
-                    <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick=" SaveLicence()">Add</a>
+                    <center>
+                        <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick=" SaveLicence()">Add</a></center>
                     <!-- <a href="" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick=" SaveLicence() ">
                         Save </a> -->
                 </div>
@@ -369,7 +387,7 @@
             <h1>
                 Trade Experience
             </h1>
-            <a data-rel="back" href="#" class="ui-btn ui-btn-left"><i class="zmdi zmdi-arrow-back zmd-fw">
+            <a href="#experiencePage" class="ui-btn ui-btn-left"><i class="zmdi zmdi-arrow-back zmd-fw">
             </i></a>
         </div>
         <div data-role="content">
@@ -393,21 +411,21 @@
                         <input type="radio" name="TradeExpPosition" id="qualTrade" value="2" /> Qualified
                     </label>
                 </div>
-                
                 <div class="num" style="display: none;">
                     <label>
                         Qualification Number
                     </label>
-                    <input type="text" id="txtQualTrade" />
+                    <input type="text" id="txtQualTrade" required class="tradeRequired" />
                 </div>
                 <div class="exp" style="display: none;">
                     <label>
                         How much experience do you have in this trade?(example:1y 6m)
                     </label>
-                    <input type="text" id="txtExpTrade" />
+                    <input type="text" id="txtExpTrade" required class="tradeRequired" />
                 </div>
-                <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="SaveTrade()">
-                            Add</a>
+                <center>
+                    <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="SaveTrade()">
+                            Add</a></center>
             </div>
             <!-- <label>Qualification No.</label>
             <input type="text" id="tQualificationNo" />
@@ -428,7 +446,7 @@
             <h1>
                 Add/Edit Position
             </h1>
-            <a data-rel="back" href="#" class="ui-btn ui-btn-left"><i class="zmdi zmdi-arrow-back zmd-fw">
+            <a href="#positionsPage" class="ui-btn ui-btn-left"><i class="zmdi zmdi-arrow-back zmd-fw">
             </i></a>
         </div>
         <div role="main">
@@ -454,21 +472,20 @@
                             <input type="radio" name="CertifiedTypePosition" id="qualPosition" value="2" /> Qualified
                         </label>
                     </div>
-                    
                     <div class="num" style="display: none;">
                         <label>
                             Qualification Number
                         </label>
-                        <input type="text" id="txtQualPosition" />
+                        <input type="text" id="txtQualPosition" required class="positionRequired" />
                     </div>
                     <div class="exp" style="display: none;">
                         <label>
-                            Experience
+                            How much experience do you have in this trade?(example:1y 6m)
                         </label>
-                        <input type="text" id="txtExpPosition" />
+                        <input type="text" id="txtExpPosition" required class="positionRequired" />
                     </div>
-                    <a href="" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick=" SavePosition() ">
-                        Save </a>
+                    <center><a href="" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick=" SavePosition() ">
+                        Save </a></center>
                 </div>
             </div>
         </div>

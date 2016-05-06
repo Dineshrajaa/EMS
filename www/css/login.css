@@ -1,16 +1,24 @@
-﻿::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+﻿::-webkit-input-placeholder
+{
+    /* WebKit, Blink, Edge */
     color: #ffffff;
 }
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color:    #ffffff;
-   opacity:  1;
+:-moz-placeholder
+{
+    /* Mozilla Firefox 4 to 18 */
+    color: #ffffff;
+    opacity: 1;
 }
-::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color:    #ffffff;
-   opacity:  1;
+::-moz-placeholder
+{
+    /* Mozilla Firefox 19+ */
+    color: #ffffff;
+    opacity: 1;
 }
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color:    #ffffff;
+:-ms-input-placeholder
+{
+    /* Internet Explorer 10-11 */
+    color: #ffffff;
 }
 
 body
@@ -75,18 +83,16 @@ body
     background-repeat: no-repeat;
 }
 
-.ui-page-theme-a .ui-btn.ui-btn-raised.clr-primary
-{
+.ui-page-theme-a .ui-btn.ui-btn-raised.clr-primary-login {
+    background-color: #0569A3;
     border: 1px solid white;
-    background-color: #177bbb;
+    box-shadow: none;
     color: #ffffff;
     color: rgba(255, 255, 255, 1);
-    font-size: 15px;
-    font-weight: 400;
-    box-shadow: none;
+    font-size: 15px !important;
+    font-weight: 700;
+    padding: 10px 35px;
     text-transform: uppercase;
-    border-radius: 0;
-    padding: 10px 35px !important;
 }
 
 .signUp
@@ -165,7 +171,7 @@ body
 
 .ui-input-text input, .ui-input-search input, textarea.ui-input-text.ui-textinput-autogrow
 {
-     display: block;
+    display: block;
     text-align: center;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -174,10 +180,11 @@ body
     border-bottom: 0.5px solid #ffffff !important;
     font-size: 1em !important;
     background-color: transparent;
-    color: #fff; 
+    color: #fff;
 }
-.ui-input-text:after, .ui-input-search:after {
+.ui-input-text:after, .ui-input-search:after
+{
     content: "";
     position: absolute;
-    width: 0 !important;   
+    width: 0 !important;
 }

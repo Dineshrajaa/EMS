@@ -4,7 +4,13 @@
     background-image: none;
     color: rgb(0, 0, 0);
 }
-[data-role=header]{top:0; position:fixed !important; bottom: auto !important; text-align :center;}
+[data-role=header]
+{
+    top: 0;
+    position: fixed !important;
+    bottom: auto !important;
+    text-align: center;
+}
 .noDecoration
 {
     text-decoration: none !important;
@@ -68,9 +74,11 @@ span.middle-md.middle-sm.middle-xs
 }
 .dateCard, .nameCard
 {
+    background-color: #000000;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 3px;
 }
+
 .errorIcon
 {
     font-size: 2em;
@@ -186,14 +194,15 @@ span.middle-md.middle-sm.middle-xs
 .ui-panel-inner
 {
     position: absolute;
-    top: 0px;
-    bottom: 0px;
+    top: 0;
+    bottom: 0;
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
+    width: 100%;
 }
 ::-webkit-scrollbar
 {
-    width: 0px;
+    width: 0;
 }
 
 body
@@ -235,7 +244,7 @@ div[data-role="content"]
 /* iOS specific fix, don't use it on Android devices */
 .scrollable > *
 {
-    -webkit-transform: translateZ(0px);
+    -webkit-transform: translateZ(0);
 }
 
 .available
@@ -257,4 +266,7 @@ div[data-role="content"]
 .error
 {
     border-bottom: 1px solid #E41313 !important;
+}
+.text-white {
+    color: #ffffff !important;
 }

@@ -363,7 +363,7 @@ $(document).on("ready", function() {
         }
     });
     $("input[name='LicencePosition']").on("click", function() {
-        $("#dvTrade .exp").show();
+        $("#dvLicence .exp").show();
         $("#txtExperience").val("");
         $("#txtNumberlLicence").val("");
         console.warn($(this).val());
@@ -373,6 +373,20 @@ $(document).on("ready", function() {
         } else if ($(this).val() == "1") {
             $("#dvLicence .exp").show();
             $("#dvLicence .num").hide();
+        }
+
+    });
+    $("input[name='TradeExpPosition']").on("click", function() {
+        $("#dvTrade .exp").show();
+        $("#txtExpTrade").val("");
+        $("#txtNumberlLicence").val("");
+        console.warn($(this).val());
+        if ($(this).val() == "2") {
+            $("#dvTrade .num").show();
+            $("#dvTrade .exp").show();
+        } else if ($(this).val() == "1") {
+            $("#dvTrade .exp").show();
+            $("#dvTrade .num").hide();
         }
 
     });
@@ -397,6 +411,20 @@ $(document).on("ready", function() {
         } else {
             $("#dvPosition .num").hide();
         }
+    });
+    $("input[name='CertifiedTypePosition']").on("click", function() {
+        $("#dvPosition .exp").show();
+        $("#txtExpPosition").val("");
+        $("#txtQualPosition").val("");
+        console.warn($(this).val());
+        if ($(this).val() == "2") {
+            $("#dvPosition .num").show();
+            $("#dvTrade .exp").show();
+        } else if ($(this).val() == "1") {
+            $("#dvPosition .exp").show();
+            $("#dvPosition .num").hide();
+        }
+
     });
 
 });
@@ -703,11 +731,35 @@ function AddUserPositionHeld(obj) {
         }
     }
     positionHoldList.push(obj);
-    rebindGrids();
+    listPositions();
     hideWait();
     $("input[type='text']").val("");
-    $.mobile.pageContainer.pagecontainer("change", "#experience", { transition: "slide" });
+    $.mobile.pageContainer.pagecontainer("change", "#positionsPage", { transition: "slide" });
 }
+
+function listPositions() {
+    // To list the positions which has been added
+    var positionsHtml = "";
+    if (positionHoldList != null) {
+        for (var i = 0; i < positionHoldList.length; i++) {
+            var Exp = (positionHoldList[i].Experience != null && positionHoldList[i].Experience != "null") ? positionHoldList[i].Experience : "";
+            var qualNo = (positionHoldList[i].QualificationNumber != null && positionHoldList[i].QualificationNumber != "null") ? positionHoldList[i].QualificationNumber : "";
+            positionsHtml += '<li>' +
+                '<h1>' + positionHoldList[j].Name + '</h1>' +
+                '<p>Cert Type: ' + positionHoldList[j].UserCertificationTypeId + '<br/>' +
+                'QualificationNumber: ' + no + '<br/>' +
+                'Experience: ' + exp + '</td>' +
+                /*'<td><a onclick="editTrade(' + tradeExpList[j].Id + ')">Edit</a></td>' +
+                '<td><a onclick="deleteTrade(' + tradeExpList[j].Id + ',this)">Delete</a></td>' +*/
+                '</li>';
+
+        }
+        $("#addPositionsPara").hide();
+        $("#positionsList").html(positionsHtml).listview().listview("refresh");
+    }
+
+}
+
 
 function AddUserTradeExp(obj) {
     showWait();
@@ -717,10 +769,33 @@ function AddUserTradeExp(obj) {
         }
     }
     tradeExpList.push(obj);
-    rebindGrids();
+    //rebindGrids();
+    listTrade();
     hideWait();
     $("input[type='text']").val("");
-    $.mobile.pageContainer.pagecontainer("change", "#licencePage", { transition: "slide" });
+    $.mobile.pageContainer.pagecontainer("change", "#experiencePage", { transition: "slide" });
+}
+
+function listTrade() {
+    // To list the trade which has been added
+    var tradeHtml = "";
+    if (tradeExpList != null) {
+        for (var j = 0; j < tradeExpList.length; j++) {
+            var exp = (tradeExpList[j].Experience != null && tradeExpList[j].Experience != "null") ? tradeExpList[j].Experience : "";
+            var no = (tradeExpList[j].QualificationNumber != null && tradeExpList[j].QualificationNumber != "") ? tradeExpList[j].QualificationNumber : "";
+            tradeHtml += '<li>' +
+                '<h1>' + tradeExpList[j].Name + '</h1>' +
+                '<p>Cert Type: ' + tradeExpList[j].UserCertificationTypeId + '<br/>' +
+                'QualificationNumber: ' + no + '<br/>' +
+                'Experience: ' + exp + '</td>' +
+                /*'<td><a onclick="editTrade(' + tradeExpList[j].Id + ')">Edit</a></td>' +
+                '<td><a onclick="deleteTrade(' + tradeExpList[j].Id + ',this)">Delete</a></td>' +*/
+                '</li>';
+
+        }
+        $("#addTradePara").hide();
+        $("#tradeList").html(tradeHtml).listview().listview("refresh");
+    }
 }
 
 function AddUserLicenceTicketType(obj) {

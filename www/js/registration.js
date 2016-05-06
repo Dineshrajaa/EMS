@@ -199,7 +199,7 @@ function register() {
     var pin = $("#txtPin").val();
     var state = $("#administrative_area_level_1").val();
     var isPayslip = $("#chkPaySlipMail").is(":checked") ? true : false;
-
+    var profilePicture=$("#profilePicImg").attr("src");
     var jsonObj = {};
     var title = "Mr";
     switch (titleId) {
@@ -236,7 +236,7 @@ function register() {
     jsonObj.UserLicenceTicketTypes = licenceTicketList;
     jsonObj.UserTradeExperiences = tradeExpList;
     jsonObj.UserPositionHelds = positionHoldList;
-
+    jsonObj.ProfilePicture=profilePicture=="img/avtar.png"?"":profilePicture;
     debugger;
     $.ajax({
         type: "POST",
@@ -279,7 +279,7 @@ $(function() {
     var mode = "scroller";
     var display = "bubble";
     var lang = "en";
-    $('#txtDob').mobiscroll().date({
+    $('#txtDob,#txtLicenceExpiry').mobiscroll().date({
         theme: theme,
         mode: mode,
         display: display,
@@ -516,6 +516,7 @@ function getLicenceTypDetail(id) {
                 if (result.IsQualifiedAllowed) {
                     $("#dvLicence .exp").show();
                     $("#dvLicence .num").show();
+                    $("#licenceTypeh").text($("#ddlLicence :selected").text());
                     $("#dvLicence .container").hide();
                 } else {
                     $("#dvLicence .container").show();
@@ -768,6 +769,8 @@ function AddUserPositionHeld(obj) {
         }
     }
     positionHoldList.push(obj);
+
+    $("#hdnPositionId").val(parseInt($("#hdnPositionId").val())+1);
     listPositions();
     hideWait();
     $("input[type='text']").val("");
@@ -806,6 +809,7 @@ function AddUserTradeExp(obj) {
         }
     }
     tradeExpList.push(obj);
+    $("#hdnTradeId").val(parseInt($("#hdnTradeId").val())+1);
     //rebindGrids();
     listTrade();
     hideWait();
@@ -843,6 +847,7 @@ function AddUserLicenceTicketType(obj) {
         }
     }
     licenceTicketList.push(obj);
+    $("#hdnLicenceTypeId").val(parseInt($("#hdnLicenceTypeId").val())+1);
     listTickets();
     hideWait();
     $("input[type='text']").val("");

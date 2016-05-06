@@ -4,7 +4,7 @@
     background-image: none;
     color: rgb(0, 0, 0);
 }
-[data-role=header]{top:0; position:fixed !important; bottom: auto !important;}
+[data-role=header]{top:0; position:fixed !important; bottom: auto !important; text-align :center;}
 .noDecoration
 {
     text-decoration: none !important;

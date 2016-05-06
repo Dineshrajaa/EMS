@@ -429,6 +429,43 @@ $(document).on("ready", function() {
 
 });
 
+function setOptions(srcType) {
+    var options = {
+        // Some common settings are 20, 50, and 100
+        quality: 50,
+        destinationType: Camera.DestinationType.DATA_URL,
+        // In this app, dynamically set the picture source, Camera or photo gallery
+        sourceType: srcType,
+        allowEdit: true,
+        correctOrientation: true //Corrects Android orientation quirks
+    }
+    return options;
+}
+
+function openCameraOrGallery(sourceType) {
+    // To open gallery or camera
+    /*  var cameraOptions={
+          sourceType: sourceType,
+          allowEdit: true,
+          destinationType:Camera.DestinationType.DATA_URL
+      };*/
+    if (sourceType == "Camera.PictureSourceType.CAMERA")
+        sourceType = Camera.PictureSourceType.CAMERA;
+    else if (sourceType == "Camera.PictureSourceType.PHOTOLIBRARY")
+        sourceType = Camera.PictureSourceType.PHOTOLIBRARY;
+    var cameraOptions = setOptions(sourceType);
+    console.warn("sourceType:" + sourceType + "cameraOptions:" + JSON.stringify(cameraOptions));
+    navigator.camera.getPicture(cameraSuccess, cameraError, cameraOptions);
+}
+
+function cameraSuccess(imageData) {
+    $("#profilePicImg").attr("src", "data:image/jpeg;base64," + imageData);
+}
+
+function cameraError(err) {
+    console.log("Camera error:" + err);
+}
+
 function getActiveLicenceType(id) {
     showWait();
     var url = serviceUrl + "Account/GetActiveLicenceTicketTypes";

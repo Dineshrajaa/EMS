@@ -1,27 +1,28 @@
-﻿input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill
-{
+﻿input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
     background-color: transparent;
     background-image: none;
     color: rgb(0, 0, 0);
 }
-[data-role=header]
-{
+
+[data-role=header] {
     top: 0;
     position: fixed !important;
     bottom: auto !important;
     text-align: center;
 }
-.noDecoration
-{
+
+.noDecoration {
     text-decoration: none !important;
 }
-.nd2-toast
-{
+
+.nd2-toast {
     margin-bottom: 1em !important;
     border-radius: 5em;
 }
-.ui-loader-verbose
-{
+
+.ui-loader-verbose {
     box-shadow: none !important;
     height: 45px !important;
     margin-left: -6.875em;
@@ -30,18 +31,22 @@
     padding: 0.625em;
     width: 12.5em;
 }
-span.middle-md.middle-sm.middle-xs
-{
+
+span.middle-md.middle-sm.middle-xs {
     color: #333333;
 }
-.ui-body-b, .ui-page-theme-b .ui-body-inherit, html .ui-bar-b .ui-body-inherit, html .ui-body-b .ui-body-inherit, html body .ui-group-theme-b .ui-body-inherit, html .ui-panel-page-container-b
-{
+
+.ui-body-b,
+.ui-page-theme-b .ui-body-inherit,
+html .ui-bar-b .ui-body-inherit,
+html .ui-body-b .ui-body-inherit,
+html body .ui-group-theme-b .ui-body-inherit,
+html .ui-panel-page-container-b {
     background-color: #000000 !important;
     background-color: rgba(0, 0, 0, 1) !important;
 }
 
-.ui-loader .ui-icon-loading
-{
+.ui-loader .ui-icon-loading {
     background-color: #000000;
     background-color: rgba(0, 0, 0, 0.6);
     border-radius: 2.25em;
@@ -52,80 +57,80 @@ span.middle-md.middle-sm.middle-xs
     width: 2.75em;
 }
 
-.ui-loader-verbose h1
-{
+.ui-loader-verbose h1 {
     font-size: 1em !important;
     margin: -34px;
     position: relative !important;
     text-align: center;
     font-weight: 100;
 }
-.ui-content
-{
+
+.ui-content {
     padding: 0 1em !important;
 }
+
+
 /*---Dashboard Card-----*/
-.timerCard
-{
+
+.timerCard {
     color: white;
     position: relative;
     top: 5px;
     float: right;
 }
-.dateCard, .nameCard
-{
+
+.dateCard,
+.nameCard {
     background-color: #000000;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 3px;
 }
 
-.errorIcon
-{
+.errorIcon {
     font-size: 2em;
 }
-.img_circle
-{
+
+.img_circle {
     border-radius: 50%;
 }
-.cstmAction
-{
+
+.cstmAction {
     background-color: #17b293 !important;
     color: white !important;
 }
-.cstmactionInfo
-{
+
+.cstmactionInfo {
     color: white !important;
     font-size: 14px !important;
 }
-.cstmcardprimarytitle
-{
+
+.cstmcardprimarytitle {
     margin-right: 120px !important;
 }
-.floatright
-{
+
+.floatright {
     float: right;
 }
-.floatleft
-{
+
+.floatleft {
     float: left;
 }
-.ui-icon-carat-r::after
-{
+
+.ui-icon-carat-r::after {
     background-image: none !important;
 }
-.ui-panel .ui-listview .ui-btn
-{
+
+.ui-panel .ui-listview .ui-btn {
     font-size: 15px !important;
     font-weight: 100 !important;
     color: #177bbb !important;
 }
-.ui-panel-inner hr.inset
-{
+
+.ui-panel-inner hr.inset {
     margin: 1em -1em 0 0 !important;
 }
 
-.ui-panel-inner > .ui-listview > .ui-li-divider
-{
+.ui-panel-inner > .ui-listview > .ui-li-divider {
     background-color: transparent;
     color: #1ab394 !important;
     font-size: 12px !important;
@@ -134,41 +139,41 @@ span.middle-md.middle-sm.middle-xs
     line-height: 1.4em;
     text-transform: uppercase;
 }
+
+
 /*FIX#1 0.85em 0.5em 0.5em*/
 
-.ui-header .zmdi
-{
+.ui-header .zmdi {
     line-height: unset !important;
 }
-.price
-{
+
+.price {
     color: #17b293 !important;
     font-size: 1.7em !important;
     font-weight: 100 !important;
 }
 
-.text-center
-{
+.text-center {
     text-align: center;
 }
-.nopaddingBotTop
-{
+
+.nopaddingBotTop {
     margin-bottom: 0;
     margin-top: 0;
 }
-.orderId
-{
+
+.orderId {
     color: #1ab394 !important;
     font-size: 1.2em !important;
     margin-bottom: 12px !important;
 }
-.orderh2
-{
+
+.orderh2 {
     font-size: 15px !important;
     font-weight: 500 !important;
 }
-.txt
-{
+
+.txt {
     background-color: #2F4050 !important;
     font-size: x-small;
     position: absolute;
@@ -177,22 +182,24 @@ span.middle-md.middle-sm.middle-xs
     padding: 0 3px;
     border-radius: 10px;
 }
-.filledIcon
-{
+
+.filledIcon {
     color: red !important;
 }
-.ui-lg
-{
+
+.ui-lg {
     font-size: 18px !important;
     padding: 14px 0;
 }
+
+
 /*css for panel scrolling*/
-.ui-panel.ui-panel-open
-{
+
+.ui-panel.ui-panel-open {
     position: fixed;
 }
-.ui-panel-inner
-{
+
+.ui-panel-inner {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -200,34 +207,30 @@ span.middle-md.middle-sm.middle-xs
     -webkit-overflow-scrolling: touch;
     width: 100%;
 }
-::-webkit-scrollbar
-{
+
+::-webkit-scrollbar {
     width: 0;
 }
 
-body
-{
+body {
     margin: 0;
 }
 
-div#container
-{
+div#container {
     position: absolute;
     width: 100%;
     top: 0;
     bottom: 0;
 }
 
-div[data-role="header"]
-{
+div[data-role="header"] {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
 }
 
-div[data-role="content"]
-{
+div[data-role="content"] {
     position: absolute;
     top: 41px;
     bottom: 0;
@@ -235,38 +238,83 @@ div[data-role="content"]
     right: 0;
 }
 
-.scrollable
-{
+.scrollable {
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
 }
 
+
 /* iOS specific fix, don't use it on Android devices */
-.scrollable > *
-{
+
+.scrollable > * {
     -webkit-transform: translateZ(0);
 }
 
-.available
-{
+.available {
     color: #1aae88;
 }
-.notAvailable
-{
+
+.notAvailable {
     color: #ff6666;
 }
-.working
-{
+
+.working {
     color: #fcc633;
 }
-.input-validation-error
-{
+
+.input-validation-error {
     border-bottom: 1px solid #E41313 !important;
 }
-.error
-{
+
+.error {
     border-bottom: 1px solid #E41313 !important;
 }
+
 .text-white {
     color: #ffffff !important;
 }
+
+
+/*By Dinesh start*/
+
+.behind {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.behind a.ui-btn {
+    width: 68px;
+    margin: 0px;
+    float: right;
+    border: none;
+}
+
+.behind a.delete-btn,
+.behind a.delete-btn:active,
+.behind a.delete-btn:visited,
+.behind a.delete-btn:focus,
+.behind a.delete-btn:hover {
+    color: white;
+    background-color: red;
+    text-shadow: none;
+}
+
+.behind a.ui-btn.pull-left {
+    float: left;
+}
+
+.behind a.edit-btn,
+.behind a.edit-btn:active,
+.behind a.edit-btn:visited,
+.behind a.edit-btn:focus,
+.behind a.edit-btn:hover {
+    color: white;
+    background-color: orange;
+    text-shadow: none;
+}
+
+
+/*By Dinesh End*/

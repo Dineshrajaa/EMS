@@ -86,10 +86,10 @@ function validateRegisterFields(fieldClass, nextpageId) {
         }
     });
     if (isValid) {
-         
+
         if (nextpageId !== "lastpage")
             RegisterUser(nextpageId);
-            //navigatePage(nextpageId);
+        //navigatePage(nextpageId);
 
     } else {
         return false;
@@ -154,7 +154,7 @@ function validateConfirmPassword(el) {
 }
 
 
-    
+
 function checkEmailExistance(nextpageId) {
     var url = serviceUrl + "Account/IsUserWithSameEmailExist";
     var jsonObj = {};
@@ -202,7 +202,7 @@ function register(nextpageId) {
     var state = $("#administrative_area_level_1").val();
     var isPayslip = $("#chkPaySlipMail").is(":checked") ? true : false;
     var profilePicture = $("#profilePicImg").attr("src");
-    
+
     var title = "Mr";
     switch (titleId) {
         case "1":
@@ -241,25 +241,25 @@ function register(nextpageId) {
     jsonObj.ProfilePicture = profilePicture == "img/avtar.png" ? "" : profilePicture;
     debugger;
     navigatePage(nextpageId);
-/*    $.ajax({
-        type: "POST",
-        url: url,
-        data: jsonObj,
-        success: function(result) {
-            if (result.IsSuccessful) {
-                alert("Registration has successfully done");
-                // window.location.href = "index.html";
-            } else {
-                toast("Network Error");
+    /*    $.ajax({
+            type: "POST",
+            url: url,
+            data: jsonObj,
+            success: function(result) {
+                if (result.IsSuccessful) {
+                    alert("Registration has successfully done");
+                    // window.location.href = "index.html";
+                } else {
+                    toast("Network Error");
+                }
+            },
+            error: function() {
+                console.log('Some error occured in registration, please try again');
             }
-        },
-        error: function() {
-            console.log('Some error occured in registration, please try again');
-        }
-    });*/
+        });*/
 }
 
-function submitProfile(){
+function submitProfile() {
     // To submit the profile completely
     jsonObj.UserLicenceTicketTypes = licenceTicketList;
     jsonObj.UserTradeExperiences = tradeExpList;
@@ -317,6 +317,7 @@ $(function() {
 });
 
 $(document).on("ready", function() {
+    
     $(".required").on("change", function() {
         var cur = this;
         $(cur).removeClass("error");
@@ -805,7 +806,7 @@ function SaveTrade() {
         obj.Name = $("#ddlTradeExpText").val();
         obj.Experience = $("#txtExpTrade").val();
         obj.QualificationNumber = $("#txtQualTrade").val();
-        obj.UserCertificationTypeId = $("input[name=TradeExpPosition]:checked").val() ||""; //radio button value;
+        obj.UserCertificationTypeId = $("input[name=TradeExpPosition]:checked").val() || ""; //radio button value;
         //obj = JSON.stringify(obj);
         AddUserTradeExp(obj);
     } else {
@@ -873,7 +874,7 @@ function listPositions() {
                 'Experience: ' + Exp +
                 /*'<td><a onclick="editTrade(' + tradeExpList[j].Id + ')">Edit</a></td>' +
                 '<td><a onclick="deleteTrade(' + tradeExpList[j].Id + ',this)">Delete</a></td>' +*/
-                '</li>';
+                '</p></li>';
 
         }
         $("#addPositionsPara").hide();
@@ -910,7 +911,7 @@ function listTrade() {
                 '<h1>' + tradeExpList[j].Name + '</h1>' +
                 '<p>Cert Type: ' + tradeExpList[j].UserCertificationTypeId + '<br/>' +
                 'QualificationNumber: ' + no + '<br/>' +
-                'Experience: ' + exp + '</td>' +
+                'Experience: ' + exp + '</p>' +
                 /*'<td><a onclick="editTrade(' + tradeExpList[j].Id + ')">Edit</a></td>' +
                 '<td><a onclick="deleteTrade(' + tradeExpList[j].Id + ',this)">Delete</a></td>' +*/
                 '</li>';
@@ -944,18 +945,19 @@ function listTickets() {
             var exp = (licenceTicketList[i].Experience != null && licenceTicketList[i].Experience != "") ? licenceTicketList[i].Experience : "";
             var no = (licenceTicketList[i].LicenceNumber != null && licenceTicketList[i].LicenceNumber != "") ? licenceTicketList[i].LicenceNumber : "";
             var expiryDate = (licenceTicketList[i].LicenceExpiry != null && licenceTicketList[i].LicenceExpiry != "") ? licenceTicketList[i].LicenceExpiry : "";
-            licenceHtml += '<li>' +
-                '<h1>' + licenceTicketList[i].Name + '</h1><br/>' +
+            licenceHtml += '<li><h1>' + licenceTicketList[i].Name + '</h1><br/>' +
                 '<p>Licence No.: ' + no + '<br/>' +
-                'Expiry: ' + expiryDate + '</p>' +
-                'Experience: ' + exp +
+                'Expiry: ' + expiryDate + 
+                'Experience: ' + exp +'</p>' +
+                /*<div class="behind"><a href="#" class="ui-btn delete-btn">Delete</a><a href="#" class="ui-btn edit-btn pull-left">Edit</a></div>' +
+                '<a href="#"></a>*/
                 //'<td>' + licenceTicketList[k].LicenceExpiry + '</td>' +
                 // '<td>' + licenceTicketList[k].UserCertificationTypeId + '</td>' +
                 /*'<td><a onclick="editLicence(' + licenceTicketList[i].Id + ')">Edit</a></td>' +
                 '<td><a onclick="deleteLicence(' + licenceTicketList[i].Id + ',this)">Delete</a></td>' +*/
                 '</li>';
         }
-        $("#tblLicenceList").html(licenceHtml).listview().listview("refresh");
+        $("#tblLicenceList").html(licenceHtml).trigger("create").listview().listview("refresh");
     }
 }
 

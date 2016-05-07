@@ -207,7 +207,7 @@
             <br/>
             <br/>
             <br/>
-            <ul data-role="listview" id="tblLicenceList"></ul>
+            <ul data-role="listview" id="tblLicenceList" class="swipe-delete"></ul>
             <center>
                 <p id="addLicencePara">Add any licences or tickets you have.</p>
                 <br/>
@@ -229,7 +229,7 @@
             <br/>
             <br/>
             <br/>
-            <ul data-role="listview" id="tradeList"></ul>
+            <ul data-role="listview" id="tradeList" class="swipe-delete"></ul>
             <center>
                 <p id="addTradePara">Add any trade experience you have.</p>
                 <br/>
@@ -251,7 +251,7 @@
             <br/>
             <br/>
             <br/>
-            <ul data-role="listview" id="positionsList"></ul>
+            <ul data-role="listview" id="positionsList" class="swipe-delete"></ul>
             <center>
                 <p id="addPositionsPara">List any positions you have held in past.</p>
                 <br/>
@@ -289,7 +289,8 @@
             <center>
                 <p>Add a photo of yourself.</p>
                 <a href="#cameraTypeList"><img id="profilePicImg" src="img/avtar.png" class="profileAvatar"></a>
-                <br/><br/>
+                <br/>
+                <br/>
                 <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="submitProfile()">Submit</a>
             </center>
         </div>
@@ -515,6 +516,66 @@
     <script src="js/mobiscroll.android-holo-light.js" type="text/javascript"></script>
     <!--   Date Picker and Time picker files End-->
     <script src="js/registration.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    $(function() {
+
+        function prevent_default(e) {
+            e.preventDefault();
+        }
+
+        function disable_scroll() {
+            $(document).on('touchmove', prevent_default);
+        }
+
+        function enable_scroll() {
+            $(document).unbind('touchmove', prevent_default)
+        }
+
+        var x;
+        $('.swipe-delete li > a')
+            .on('touchstart', function(e) {
+                console.log(e.originalEvent.pageX)
+                $('.swipe-delete li > a').css('left', '0px') // close em all
+                $(e.currentTarget).addClass('open')
+                x = e.originalEvent.targetTouches[0].pageX // anchor point
+            })
+            .on('touchmove', function(e) {
+                var change = e.originalEvent.targetTouches[0].pageX - x
+                change = Math.min(Math.max(-100, change), 100) // restrict to -100px left, 0px right
+                e.currentTarget.style.left = change + 'px'
+                if (change < -10) disable_scroll() // disable scroll once we hit 10px horizontal slide
+            })
+            .on('touchend', function(e) {
+                var left = parseInt(e.currentTarget.style.left)
+                var new_left;
+                if (left < -35) {
+                    new_left = '-100px'
+                } else if (left > 35) {
+                    new_left = '100px'
+                } else {
+                    new_left = '0px'
+                }
+                // e.currentTarget.style.left = new_left
+                $(e.currentTarget).animate({
+                    left: new_left
+                }, 200)
+                enable_scroll()
+            });
+
+        $('li .delete-btn').on('touchend', function(e) {
+            e.preventDefault()
+            $(this).parents('li').slideUp('fast', function() {
+                $(this).remove()
+            })
+        })
+
+        $('li .edit-btn').on('touchend', function(e) {
+            e.preventDefault()
+            $(this).parents('li').children('a').html('edited')
+        })
+
+    });
+    </script>
 </body>
 
 </html>

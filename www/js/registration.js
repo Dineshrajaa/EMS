@@ -306,6 +306,7 @@ $(function() {
     var mode = "scroller";
     var display = "bubble";
     var lang = "en";
+    $("#txtDob").val("01/01/1997")
     $('#txtDob,#txtLicenceExpiry').mobiscroll().date({
         theme: theme,
         mode: mode,
@@ -984,6 +985,8 @@ function listTickets() {
 
 function makeEditFalse(flagname) {
     // To intimate the code that it's an add not edit
+    var manipulatedExpiryDate=new Date().getDate()+"/"+(new Date().getMonth()+1)+"/"+(new Date().getFullYear()+1);
+    $("#txtLicenceExpiry").val(manipulatedExpiryDate); // fill the manipulated date
     if (flagname == "editLicenceFlag") {
         localStorage.editLicenceFlag = "false";
         $("#delLicBtn").hide(); // hide the delete button

@@ -62,7 +62,7 @@
     .customfixed {
         position: fixed;
         bottom: 0;
-        left: 40%;
+        left: 75%;
         margin-bottom: 0;
         z-index: 9999;
     }
@@ -80,7 +80,7 @@
             <h1>
                 Create Your Profile
             </h1>
-            <a data-rel="back" href="#" class="ui-btn ui-btn-left"><i class="zmdi zmdi-arrow-back zmd-fw">
+            <a href="#" class="ui-btn ui-btn-left" onclick="redirect('index.html')"><i class="zmdi zmdi-arrow-back zmd-fw">
             </i></a>
         </div>
         <div role="main" class="ui-content" data-inset="false">
@@ -114,11 +114,11 @@
                                 <label for="txtDob">
                                     DOB<span class="requiredField">*</span>
                                 </label>
-                                <input type="text" id="txtDob" name="txtDob" class="required" placeholder="required" required="required" valid-attr="Please enter dob" />
+                                <input type="text" id="txtDob" name="txtDob" class="required" required="required" valid-attr="Please enter dob" />
                                 <label for="ddlGender">
                                     Gender
                                 </label>
-                                <select id="ddlGender" required="required" valid_attr="Please select gender">
+                                <select id="ddlGender" required="required" valid-attr="Please select gender">
                                     <option value="1">Please Select</option>
                                     <option value="2">Male</option>
                                     <option value="3">Female</option>
@@ -171,7 +171,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary customfixed" onclick="validateRegisterFields('required','#licencePage')">Continue</a>
+                    <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary customfixed" onclick="validateRegisterFields('required','#licencePage')" style="left:40%">Continue</a>
                     <!-- "validateRegisterFields('required','#licencePage')" navigatePage('#licencePage')-->
                 </form>
             </div>
@@ -236,7 +236,10 @@
                 <br/>
                 <a href="#addeditTrade" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="makeEditFalse('editTradeFlag')">Add New</a>
             </center>
-            <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary customfixed" onclick="navigatePage('#positionsPage')">Continue</a>
+            
+                <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary customfixed" onclick="navigatePage('#positionsPage')">Continue</a>
+            
+            <!-- customfixed -->
         </div>
     </div>
     <!-- Experience list page end -->

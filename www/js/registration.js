@@ -261,10 +261,11 @@ function register(nextpageId) {
 
 function submitProfile() {
     // To submit the profile completely
+    var url = serviceUrl + "Account/AddUser";
     jsonObj.UserLicenceTicketTypes = licenceTicketList;
     jsonObj.UserTradeExperiences = tradeExpList;
     jsonObj.UserPositionHelds = positionHoldList;
-    jsonObj.ProfilePicture = profilePicture == "img/avtar.png" ? "" : profilePicture;
+    jsonObj.ProfilePicture = jsonObj.profilePicture == "img/avtar.png" ? "" : jsonObj.profilePicture;
     $.ajax({
         type: "POST",
         url: url,
@@ -420,28 +421,28 @@ $(document).on("ready", function() {
         }
 
     });
-/*    $(document).on("click", "#dvTrade .ui-radio", function() {
-        $("#dvTrade .exp").show();
-        $("#txtExpTrade").val("");
-        $("#txtQualTrade").val("");
-        console.log($(this).children("input[name=TradeExpPosition]").val());
-        if ($(this).children("input[name=TradeExpPosition]").val() === "2") {
-            $("#dvTrade .num").show();
-        } else {
-            $("#dvTrade .num").hide();
-        }
-    });
+    /*    $(document).on("click", "#dvTrade .ui-radio", function() {
+            $("#dvTrade .exp").show();
+            $("#txtExpTrade").val("");
+            $("#txtQualTrade").val("");
+            console.log($(this).children("input[name=TradeExpPosition]").val());
+            if ($(this).children("input[name=TradeExpPosition]").val() === "2") {
+                $("#dvTrade .num").show();
+            } else {
+                $("#dvTrade .num").hide();
+            }
+        });
 
-    $(document).on("click", "#dvPosition .ui-radio", function() {
-        $("#dvPosition .exp").show();
-        $("#txtExpPosition").val("");
-        $("#txtQualPosition").val("");
-        if ($(this).children("input[name=CertifiedTypePosition]").val() === "2") {
-            $("#dvPosition .num").show();
-        } else {
-            $("#dvPosition .num").hide();
-        }
-    });*/
+        $(document).on("click", "#dvPosition .ui-radio", function() {
+            $("#dvPosition .exp").show();
+            $("#txtExpPosition").val("");
+            $("#txtQualPosition").val("");
+            if ($(this).children("input[name=CertifiedTypePosition]").val() === "2") {
+                $("#dvPosition .num").show();
+            } else {
+                $("#dvPosition .num").hide();
+            }
+        });*/
     $("input[name='CertifiedTypePosition']").on("click", function() {
         $("#dvPosition .exp").show();
         $("#txtExpPosition").val("");
@@ -1019,10 +1020,34 @@ function listTickets() {
     $.mobile.pageContainer.pagecontainer("change", "#licencePage", { transition: "slide" });
 }
 
+function resetTheHiddenID(moduleName) {
+    // To reset the hidden value to avoid confusion
+    if (moduleName == "licencePage") {
+        if (localStorage.editLicenceFlag == "true") {
+            $("#hdnLicenceTypeId").val(parseInt(localStorage.licenceIDSaved));
+            localStorage.editLicenceFlag = false;
+        }
+
+    }
+   else if (moduleName == "positionsPage") {
+        if (localStorage.editPositionFlag == "true") {
+            $("#hdnPositionId").val(parseInt(localStorage.positionIDSaved));
+            localStorage.editPositionFlag = "false";
+        }
+    }
+    else if (moduleName == "tradePage") {
+        if (localStorage.editTradeFlag == "true") {
+            $("#hdnTradeId").val(parseInt(localStorage.tradeIDSaved));
+            localStorage.editPositionFlag = "false";
+        }
+
+    }
+}
+
 function makeEditFalse(flagname) {
     // To intimate the code that it's an add not edit
     var manipulatedExpiryDate = new Date().getDate() + "/" + (new Date().getMonth() + 1) + "/" + (new Date().getFullYear() + 1);
-    
+
     if (flagname == "editLicenceFlag") {
         localStorage.editLicenceFlag = "false";
         $("#txtNumberlLicence,#txtLicenceExpiry,#txtExperience").val(""); // clear input fields
@@ -1030,7 +1055,7 @@ function makeEditFalse(flagname) {
         $("#delLicBtn").hide(); // hide the delete button
         $("#addLicenceBtn").text("Add"); // change the button text to add
         $("#ddlLicence").val("0").change(); // make the select value 0
-        $("#expLicence,#qualLicence").attr("checked", false).checkboxradio( "refresh" ); // uncheck the previously selected values
+        $("#expLicence,#qualLicence").attr("checked", false).checkboxradio("refresh"); // uncheck the previously selected values
         $("#dvLicence").hide();
         $("#dvLicence .num").hide();
         $("#dvLicence .exp").hide();
@@ -1040,17 +1065,17 @@ function makeEditFalse(flagname) {
         $("#addTradeBtn").text("Add"); // change the button text to add
         $("#delTradeBtn").hide(); // hide the delete button
         $("#ddlTradeExp").val("0").change(); // make the select value 0
-        $("#expTrade,#qualTrade").attr("checked", false).checkboxradio( "refresh" ); // uncheck the previously selected values
+        $("#expTrade,#qualTrade").attr("checked", false).checkboxradio("refresh"); // uncheck the previously selected values
         $("#dvTrade").hide();
         $("#dvTrade .num").hide();
         $("#dvTrade .exp").hide();
     } else if (flagname == "editPositionFlag") {
         localStorage.editPositionFlag = "false";
-         $("#txtQualPosition,#txtExpPosition").val("");
+        $("#txtQualPosition,#txtExpPosition").val("");
         $("#addPosBtn").text("Add"); // change the button text to add
         $("#delPosBtn").hide(); // hide the delete button
         $("#ddlPositionHeld").val("0").change(); // make the select value 0
-        $("#expPosition,#qualPosition").attr("checked", false).checkboxradio( "refresh" ); // uncheck the previously selected values
+        $("#expPosition,#qualPosition").attr("checked", false).checkboxradio("refresh"); // uncheck the previously selected values
         $("#dvPosition").hide();
         $("#dvPosition .num").hide();
         $("#dvPosition .exp").hide();
@@ -1080,14 +1105,14 @@ function editLicence(id) {
     $("#dvLicence").show();
     $("#dvLicence .container").show();
     $("#dvLicence .exp").show();
-    $("#expLicence,#qualLicence").attr("checked", false).checkboxradio( "refresh" ); // uncheck the previously selected values
+    $("#expLicence,#qualLicence").attr("checked", false).checkboxradio("refresh"); // uncheck the previously selected values
     if (licenceTicketList[count].UserCertificationTypeId == "1") {
-        $("#expLicence").attr("checked", true).checkboxradio( "refresh" );
+        $("#expLicence").attr("checked", true).checkboxradio("refresh");
         $("#expLicence").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
         $("#dvLicence .num").hide();
     } else {
         if (licenceTicketList[count].UserCertificationTypeId == "2") {
-            $("#qualLicence").attr("checked", true).checkboxradio( "refresh" );
+            $("#qualLicence").attr("checked", true).checkboxradio("refresh");
             $("#qualLicence").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
             $("#dvLicence .num").show();
         } else {
@@ -1107,7 +1132,7 @@ function editPosition(id) {
             count = i;
         }
     }
-    
+
     $.mobile.pageContainer.pagecontainer("change", "#addeditPosition", { transition: "slide" });
     $("#addPosBtn").text("Update"); // change the button text to edit
     $("#delPosBtn").show(); // show the delete button
@@ -1121,14 +1146,14 @@ function editPosition(id) {
     $("#dvPosition").show();
     $("#dvPosition .container").show();
     $("#dvPosition .exp").show();
-    $("#expPosition,#qualPosition").attr("checked",false).checkboxradio( "refresh" );
+    $("#expPosition,#qualPosition").attr("checked", false).checkboxradio("refresh");
     if (positionHoldList[count].UserCertificationTypeId == "1") {
-        $("#expPosition").attr("checked", true).checkboxradio( "refresh" );
+        $("#expPosition").attr("checked", true).checkboxradio("refresh");
         $("#expPosition").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
         $("#dvPosition .num").hide();
     } else {
         if (positionHoldList[count].UserCertificationTypeId == "2") {
-            $("#qualPosition").attr("checked", true).checkboxradio( "refresh" );
+            $("#qualPosition").attr("checked", true).checkboxradio("refresh");
             $("#qualPosition").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
             $("#dvPosition .num").show();
         } else {
@@ -1161,17 +1186,17 @@ function editTrade(id) {
     $("#dvTrade").show();
     $("#dvTrade .container").show();
     $("#dvTrade .exp").show();
-    $("#expTrade,#qualTrade").attr("checked", false).checkboxradio( "refresh" );
+    $("#expTrade,#qualTrade").attr("checked", false).checkboxradio("refresh");
     if (tradeExpList[count].UserCertificationTypeId == "1") {
         console.warn("Experienced profile");
-        $("#expTrade").attr("checked", true).checkboxradio( "refresh" );
+        $("#expTrade").attr("checked", true).checkboxradio("refresh");
         $("#expTrade").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
         $("#dvTrade .num").hide();
     } else {
 
         if (tradeExpList[count].UserCertificationTypeId == "2") {
             console.warn("Qualified profile");
-            $("#qualTrade").attr("checked", true).checkboxradio( "refresh" );
+            $("#qualTrade").attr("checked", true).checkboxradio("refresh");
             $("#qualTrade").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
             $("#dvTrade .num").show();
         } else {

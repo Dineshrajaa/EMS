@@ -856,7 +856,7 @@ function listPositions() {
             positionsHtml += '<table><tbody>';
             positionsHtml += '<tr><td>' + positionHoldList[i].Name + '</td></tr>';
             positionsHtml += '<tr><td>Cert Type</td><td>' + positionHoldList[i].UserCertificationTypeName + '</td></tr>';
-            positionsHtml += '<tr style="display:' + showQualifiedDetails + '"><td>QualificationNumber</td><td>' + qualNo + '</td></tr>';
+            positionsHtml += '<tr style="display:' + showQualifiedDetails + '"><td>Qualification No.</td><td>' + qualNo + '</td></tr>';
             positionsHtml += '<tr><td>Experience</td><td>' + Exp + '</td></tr>';
             positionsHtml += '</tbody>';
             positionsHtml += '</table></li><hr>';
@@ -910,7 +910,7 @@ function listTrade() {
             tradeHtml += '<table><tbody>';
             tradeHtml += '<tr><td>' + tradeExpList[j].Name + '</td></tr>';
             tradeHtml += '<tr><td>Cert Type</td><td>' + tradeExpList[j].UserCertificationTypeName + '</td></tr>';
-            tradeHtml += '<tr style="display:' + showQualifiedDetails + '"><td>QualificationNumber</td><td>' + no + '</td></tr>';
+            tradeHtml += '<tr style="display:' + showQualifiedDetails + '"><td>Qualification No.</td><td>' + no + '</td></tr>';
             tradeHtml += '<tr><td>Experience</td><td> ' + exp + '</td></tr>';
             tradeHtml += '</tbody></table>';
             tradeHtml += '</li><hr>';
@@ -998,7 +998,7 @@ function listTickets() {
             licenceHtml += '<li onclick="editLicence(' + i + ')">';
             licenceHtml += '<table style="display: inline-table"><tbody>';
             licenceHtml += '<tr><td>' + licenceTicketList[i].Name + '</td></tr>';
-            licenceHtml += '<tr><td>' + licenceTicketList[i].LicenceType + '</td></tr>';
+            licenceHtml += '<tr><td>Licence Type</td><td>' + licenceTicketList[i].LicenceType + '</td></tr>';
             licenceHtml += '<tr style="display:' + showQualifiedDetails + '"><td>Licence No.</td><td>' + no + '</td></tr>';
             licenceHtml += '<tr style="display:' + showQualifiedDetails + '"><td>Expiry</td><td>' + expiryDate + '</td></tr>';
             licenceHtml += '<tr><td>Experience</td><td>' + exp + '</td></tr>';
@@ -1017,28 +1017,43 @@ function listTickets() {
     if (licenceTicketList.length == 0)
         $("#addLicencePara").show(); // show the text for adding licence
     $.mobile.pageContainer.pagecontainer("change", "#licencePage", { transition: "slide" });
-
 }
 
 function makeEditFalse(flagname) {
     // To intimate the code that it's an add not edit
     var manipulatedExpiryDate = new Date().getDate() + "/" + (new Date().getMonth() + 1) + "/" + (new Date().getFullYear() + 1);
-    $("#txtLicenceExpiry").val(manipulatedExpiryDate); // fill the manipulated date
+    
     if (flagname == "editLicenceFlag") {
         localStorage.editLicenceFlag = "false";
         $("#txtNumberlLicence,#txtLicenceExpiry,#txtExperience").val(""); // clear input fields
+        $("#txtLicenceExpiry").val(manipulatedExpiryDate); // fill the manipulated date
         $("#delLicBtn").hide(); // hide the delete button
         $("#addLicenceBtn").text("Add"); // change the button text to add
+        $("#ddlLicence").val("0").change(); // make the select value 0
+        $("#expLicence,#qualLicence").attr("checked", false).checkboxradio( "refresh" ); // uncheck the previously selected values
+        $("#dvLicence").hide();
+        $("#dvLicence .num").hide();
+        $("#dvLicence .exp").hide();
     } else if (flagname == "editTradeFlag") {
         localStorage.editTradeFlag = "false";
         $("#txtQualTrade,#txtExpTrade").val("");
         $("#addTradeBtn").text("Add"); // change the button text to add
         $("#delTradeBtn").hide(); // hide the delete button
+        $("#ddlTradeExp").val("0").change(); // make the select value 0
+        $("#expTrade,#qualTrade").attr("checked", false).checkboxradio( "refresh" ); // uncheck the previously selected values
+        $("#dvTrade").hide();
+        $("#dvTrade .num").hide();
+        $("#dvTrade .exp").hide();
     } else if (flagname == "editPositionFlag") {
         localStorage.editPositionFlag = "false";
          $("#txtQualPosition,#txtExpPosition").val("");
         $("#addPosBtn").text("Add"); // change the button text to add
         $("#delPosBtn").hide(); // hide the delete button
+        $("#ddlPositionHeld").val("0").change(); // make the select value 0
+        $("#expPosition,#qualPosition").attr("checked", false).checkboxradio( "refresh" ); // uncheck the previously selected values
+        $("#dvPosition").hide();
+        $("#dvPosition .num").hide();
+        $("#dvPosition .exp").hide();
     }
 }
 
@@ -1058,20 +1073,21 @@ function editLicence(id) {
     //getLicenceTypDetail(licenceTicketList[count].LicenceTicketTypeId);
     localStorage.licenceIDSaved = $("#hdnLicenceTypeId").val();
     $("#hdnLicenceTypeId").val(licenceTicketList[count].Id);
-    $("#ddlLicence").val(licenceTicketList[count].LicenceTicketTypeId);
+    $("#ddlLicence").val(licenceTicketList[count].LicenceTicketTypeId).selectmenu("refresh");
     $("#txtExperience").val(licenceTicketList[count].Experience);
     $("#txtNumberlLicence").val(licenceTicketList[count].LicenceNumber);
     $("#txtLicenceExpiry").val(licenceTicketList[count].LicenceExpiry); // show licence expiry date
     $("#dvLicence").show();
     $("#dvLicence .container").show();
     $("#dvLicence .exp").show();
+    $("#expLicence,#qualLicence").attr("checked", false).checkboxradio( "refresh" ); // uncheck the previously selected values
     if (licenceTicketList[count].UserCertificationTypeId == "1") {
-        $("#expLicence").attr("checked", true);
+        $("#expLicence").attr("checked", true).checkboxradio( "refresh" );
         $("#expLicence").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
         $("#dvLicence .num").hide();
     } else {
         if (licenceTicketList[count].UserCertificationTypeId == "2") {
-            $("#qualLicence").attr("checked", true);
+            $("#qualLicence").attr("checked", true).checkboxradio( "refresh" );
             $("#qualLicence").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
             $("#dvLicence .num").show();
         } else {
@@ -1091,7 +1107,7 @@ function editPosition(id) {
             count = i;
         }
     }
-    debugger;
+    
     $.mobile.pageContainer.pagecontainer("change", "#addeditPosition", { transition: "slide" });
     $("#addPosBtn").text("Update"); // change the button text to edit
     $("#delPosBtn").show(); // show the delete button
@@ -1105,13 +1121,14 @@ function editPosition(id) {
     $("#dvPosition").show();
     $("#dvPosition .container").show();
     $("#dvPosition .exp").show();
+    $("#expPosition,#qualPosition").attr("checked",false).checkboxradio( "refresh" );
     if (positionHoldList[count].UserCertificationTypeId == "1") {
-        $("#expPosition").attr("checked", true);
+        $("#expPosition").attr("checked", true).checkboxradio( "refresh" );
         $("#expPosition").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
         $("#dvPosition .num").hide();
     } else {
         if (positionHoldList[count].UserCertificationTypeId == "2") {
-            $("#qualPosition").attr("checked", true);
+            $("#qualPosition").attr("checked", true).checkboxradio( "refresh" );
             $("#qualPosition").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
             $("#dvPosition .num").show();
         } else {
@@ -1144,16 +1161,17 @@ function editTrade(id) {
     $("#dvTrade").show();
     $("#dvTrade .container").show();
     $("#dvTrade .exp").show();
+    $("#expTrade,#qualTrade").attr("checked", false).checkboxradio( "refresh" );
     if (tradeExpList[count].UserCertificationTypeId == "1") {
         console.warn("Experienced profile");
-        $("#expTrade").attr("checked", true);
+        $("#expTrade").attr("checked", true).checkboxradio( "refresh" );
         $("#expTrade").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
         $("#dvTrade .num").hide();
     } else {
 
         if (tradeExpList[count].UserCertificationTypeId == "2") {
             console.warn("Qualified profile");
-            $("#qualTrade").attr("checked", true);
+            $("#qualTrade").attr("checked", true).checkboxradio( "refresh" );
             $("#qualTrade").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
             $("#dvTrade .num").show();
         } else {

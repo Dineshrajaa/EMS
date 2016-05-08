@@ -411,18 +411,16 @@ $(document).on("ready", function() {
     $("input[name='TradeExpPosition']").on("click", function() {
         $("#dvTrade .exp").show();
         $("#txtExpTrade").val("");
-        $("#txtNumberlLicence").val("");
+        $("#txtQualTrade").val("");
         console.warn($(this).val());
         if ($(this).val() == "2") {
             $("#dvTrade .num").show();
-            $("#dvTrade .exp").show();
         } else if ($(this).val() == "1") {
-            $("#dvTrade .exp").show();
             $("#dvTrade .num").hide();
         }
 
     });
-    $(document).on("click", "#dvTrade .ui-radio", function() {
+/*    $(document).on("click", "#dvTrade .ui-radio", function() {
         $("#dvTrade .exp").show();
         $("#txtExpTrade").val("");
         $("#txtQualTrade").val("");
@@ -443,7 +441,7 @@ $(document).on("ready", function() {
         } else {
             $("#dvPosition .num").hide();
         }
-    });
+    });*/
     $("input[name='CertifiedTypePosition']").on("click", function() {
         $("#dvPosition .exp").show();
         $("#txtExpPosition").val("");
@@ -451,9 +449,7 @@ $(document).on("ready", function() {
         console.warn($(this).val());
         if ($(this).val() == "2") {
             $("#dvPosition .num").show();
-            $("#dvTrade .exp").show();
         } else if ($(this).val() == "1") {
-            $("#dvPosition .exp").show();
             $("#dvPosition .num").hide();
         }
 
@@ -546,7 +542,7 @@ function getLicenceTypDetail(id) {
                 $("#dvLicence").show();
                 $("#ddlLicenceText").val(result.Name);
                 console.warn(result.LicenceAbbr);
-                $("#licenceTypeh").text("Licence Type: " + result.LicenceAbbr);
+                $("#licenceTypeh").text(result.LicenceAbbr);
                 if (result.IsQualifiedAllowed) {
                     $("#dvLicence .exp").show();
                     $("#dvLicence .num").show();
@@ -622,7 +618,7 @@ function getTradeExpDetail(id) {
                     $("#dvTrade .container").hide();
                 } else {
                     $("#dvTrade .container").show();
-                    $("#dvTrade .exp").hide();
+                    // $("#dvTrade .exp").hide();
                     $("#dvTrade .num").hide();
                 }
             }
@@ -700,7 +696,7 @@ function getPositionHeldDetail(id) {
 }
 
 function deletePosition(id, el) {
-    var r = confirm('Are you sure');
+    var r = confirm('Are you sure?');
     if (r) {
         showWait();
         var obj = {};
@@ -720,7 +716,7 @@ function deletePosition(id, el) {
 
 
 function deleteLicence(id, el) {
-    var r = confirm('Are you sure');
+    var r = confirm('Are you sure?');
     if (r) {
         showWait();
         var obj = {};
@@ -739,7 +735,7 @@ function deleteLicence(id, el) {
 }
 
 function deleteTrade(id, el) {
-    var r = confirm('Are you sure');
+    var r = confirm('Are you sure?');
     if (r) {
         showWait();
 
@@ -780,6 +776,11 @@ function SaveTrade() {
         obj.Experience = $("#txtExpTrade").val();
         obj.QualificationNumber = $("#txtQualTrade").val();
         obj.UserCertificationTypeId = $("input[name=TradeExpPosition]:checked").val() || ""; //radio button value;
+        if (obj.UserCertificationTypeId == "1")
+            obj.UserCertificationTypeName = "Experienced"; // Experienced
+        else if (obj.UserCertificationTypeId == "2")
+            obj.UserCertificationTypeName = "Qualified"; // Qualified
+        else obj.UserCertificationTypeName = "Qualified"; // not experienced or qualified
         //obj = JSON.stringify(obj);
         AddUserTradeExp(obj);
     } else {
@@ -809,6 +810,11 @@ function SavePosition() {
         obj.Experience = $("#txtExpPosition").val();
         obj.QualificationNumber = $("#txtQualPosition").val();
         obj.UserCertificationTypeId = $("input[name=CertifiedTypePosition]:checked").val(); //radio button value;
+        if (obj.UserCertificationTypeId == "1")
+            obj.UserCertificationTypeName = "Experienced"; // Experienced
+        else if (obj.UserCertificationTypeId == "2")
+            obj.UserCertificationTypeName = "Qualified"; // Qualified
+        else obj.UserCertificationTypeName = "Qualified"; // not experienced or qualified
         //obj = JSON.stringify(obj);
         AddUserPositionHeld(obj);
     } else {
@@ -841,16 +847,25 @@ function listPositions() {
     var positionsHtml = "";
     if (positionHoldList != null) {
         for (var i = 0; i < positionHoldList.length; i++) {
+            var showQualifiedDetails = "block";
             var Exp = (positionHoldList[i].Experience != null && positionHoldList[i].Experience != "null") ? positionHoldList[i].Experience : "";
             var qualNo = (positionHoldList[i].QualificationNumber != null && positionHoldList[i].QualificationNumber != "null") ? positionHoldList[i].QualificationNumber : "";
-            positionsHtml += '<li onclick="editPosition(' + i + ')">' +
-                '<p>' + positionHoldList[i].Name + '</p>' +
-                '<p>Cert Type: ' + positionHoldList[i].UserCertificationTypeId + '<br/>' +
-                'QualificationNumber: ' + qualNo + '<br/>' +
-                'Experience: ' + Exp +
-                /*'<td><a onclick="editTrade(' + tradeExpList[j].Id + ')">Edit</a></td>' +
-                '<td><a onclick="deleteTrade(' + tradeExpList[j].Id + ',this)">Delete</a></td>' +*/
-                '</li>';
+            if (qualNo == "")
+                showQualifiedDetails = "none";
+            positionsHtml += '<li onclick="editPosition(' + i + ')">';
+            positionsHtml += '<table><tbody>';
+            positionsHtml += '<tr><td>' + positionHoldList[i].Name + '</td></tr>';
+            positionsHtml += '<tr><td>Cert Type</td><td>' + positionHoldList[i].UserCertificationTypeName + '</td></tr>';
+            positionsHtml += '<tr style="display:' + showQualifiedDetails + '"><td>QualificationNumber</td><td>' + qualNo + '</td></tr>';
+            positionsHtml += '<tr><td>Experience</td><td>' + Exp + '</td></tr>';
+            positionsHtml += '</tbody>';
+            positionsHtml += '</table></li><hr>';
+            /*positionsHtml += '<li onclick="editPosition(' + i + ')">' +
+                '<p>' + positionHoldList[i].Name +
+                '<br/>Cert Type: ' + positionHoldList[i].UserCertificationTypeName + '<br/>' +
+                '<br/>QualificationNumber: ' + qualNo + '<br/>' +
+                '<br/>Experience: ' + Exp +
+                '</p></li><hr>';*/
 
         }
         $("#addPositionsPara").hide();
@@ -886,16 +901,25 @@ function listTrade() {
     var tradeHtml = "";
     if (tradeExpList != null) {
         for (var j = 0; j < tradeExpList.length; j++) {
+            var showQualifiedDetails = "block";
             var exp = (tradeExpList[j].Experience != null && tradeExpList[j].Experience != "null") ? tradeExpList[j].Experience : "";
             var no = (tradeExpList[j].QualificationNumber != null && tradeExpList[j].QualificationNumber != "") ? tradeExpList[j].QualificationNumber : "";
-            tradeHtml += '<li onclick="editTrade(' + j + ')">' +
-                '<h1>' + tradeExpList[j].Name + '</h1>' +
-                '<p>Cert Type: ' + tradeExpList[j].UserCertificationTypeId + '<br/>' +
-                'QualificationNumber: ' + no + '<br/>' +
-                'Experience: ' + exp + '</td>' +
-                /*'<td><a onclick="editTrade(' + tradeExpList[j].Id + ')">Edit</a></td>' +
-                '<td><a onclick="deleteTrade(' + tradeExpList[j].Id + ',this)">Delete</a></td>' +*/
-                '</li>';
+            if (no == "")
+                showQualifiedDetails = "none";
+            tradeHtml += '<li onclick="editTrade(' + j + ')">';
+            tradeHtml += '<table><tbody>';
+            tradeHtml += '<tr><td>' + tradeExpList[j].Name + '</td></tr>';
+            tradeHtml += '<tr><td>Cert Type</td><td>' + tradeExpList[j].UserCertificationTypeName + '</td></tr>';
+            tradeHtml += '<tr style="display:' + showQualifiedDetails + '"><td>QualificationNumber</td><td>' + no + '</td></tr>';
+            tradeHtml += '<tr><td>Experience</td><td> ' + exp + '</td></tr>';
+            tradeHtml += '</tbody></table>';
+            tradeHtml += '</li><hr>';
+            /*       tradeHtml += '<li onclick="editTrade(' + j + ')">' +
+                       '<p>' + tradeExpList[j].Name + 
+                       '<br/>Cert Type: ' + tradeExpList[j].UserCertificationTypeName +
+                       '<br/>QualificationNumber: ' + no + 
+                       '<br/>Experience: ' + exp + '</p>' +                
+                       '</li><hr>';*/
 
         }
         $("#addTradePara").hide();
@@ -928,6 +952,7 @@ function SaveLicence() {
         obj.Experience = $("#txtExperience").val();
         obj.LicenceNumber = $("#txtNumberlLicence").val();
         obj.LicenceExpiry = $("#txtLicenceExpiry").val();
+        obj.LicenceType = $("#licenceTypeh").text(); // Licence type
         obj.UserCertificationTypeId = $("input[name=LicencePosition]:checked").val(); //radio button value;
         //obj = JSON.stringify(obj);
         AddUserLicenceTicketType(obj);
@@ -961,19 +986,31 @@ function listTickets() {
     $("#addLicencePara").hide();
     if (licenceTicketList != null) {
         for (var i = 0; i < licenceTicketList.length; i++) {
+            var showQualifiedDetails = "block";
             var exp = (licenceTicketList[i].Experience != null && licenceTicketList[i].Experience != "") ? licenceTicketList[i].Experience : "";
             var no = (licenceTicketList[i].LicenceNumber != null && licenceTicketList[i].LicenceNumber != "") ? licenceTicketList[i].LicenceNumber : "";
             var expiryDate = (licenceTicketList[i].LicenceExpiry != null && licenceTicketList[i].LicenceExpiry != "") ? licenceTicketList[i].LicenceExpiry : "";
-            licenceHtml += '<li onclick="editLicence(' + i + ')">' +
-                '<h1>' + licenceTicketList[i].Name + '</h1><br/>' +
-                '<p>Licence No.: ' + no + '<br/>' +
-                'Expiry: ' + expiryDate + '</p>' +
-                'Experience: ' + exp +
-                //'<td>' + licenceTicketList[k].LicenceExpiry + '</td>' +
-                // '<td>' + licenceTicketList[k].UserCertificationTypeId + '</td>' +
-                /*'<td><a onclick="editLicence(' + licenceTicketList[i].Id + ')">Edit</a></td>' +
-                '<td><a onclick="deleteLicence(' + licenceTicketList[i].Id + ',this)">Delete</a></td>' +*/
-                '</li>';
+            if (no == "") {
+                // No licence number
+                expiryDate = ""; // clear the expiry date
+                showQualifiedDetails = "none"; // hide the qualification oriented things
+            }
+            licenceHtml += '<li onclick="editLicence(' + i + ')">';
+            licenceHtml += '<table style="display: inline-table"><tbody>';
+            licenceHtml += '<tr><td>' + licenceTicketList[i].Name + '</td></tr>';
+            licenceHtml += '<tr><td>' + licenceTicketList[i].LicenceType + '</td></tr>';
+            licenceHtml += '<tr style="display:' + showQualifiedDetails + '"><td>Licence No.</td><td>' + no + '</td></tr>';
+            licenceHtml += '<tr style="display:' + showQualifiedDetails + '"><td>Expiry</td><td>' + expiryDate + '</td></tr>';
+            licenceHtml += '<tr><td>Experience</td><td>' + exp + '</td></tr>';
+            licenceHtml += '</tbody></table>';
+            licenceHtml += '</li><hr>';
+            /*licenceHtml += '<li onclick="editLicence(' + i + ')">' +
+                '<p>' + licenceTicketList[i].Name + 
+                '<br/>' + licenceTicketList[i].LicenceType +
+                '<br/>Licence No.: ' + no +
+                '<br/>Expiry: ' + expiryDate +
+                '<br/>Experience: ' + exp + '</p>' +                
+                '</li><hr>';*/
         }
         $("#tblLicenceList").html(licenceHtml).listview().listview("refresh");
     }
@@ -985,7 +1022,7 @@ function listTickets() {
 
 function makeEditFalse(flagname) {
     // To intimate the code that it's an add not edit
-    var manipulatedExpiryDate=new Date().getDate()+"/"+(new Date().getMonth()+1)+"/"+(new Date().getFullYear()+1);
+    var manipulatedExpiryDate = new Date().getDate() + "/" + (new Date().getMonth() + 1) + "/" + (new Date().getFullYear() + 1);
     $("#txtLicenceExpiry").val(manipulatedExpiryDate); // fill the manipulated date
     if (flagname == "editLicenceFlag") {
         localStorage.editLicenceFlag = "false";
@@ -1009,6 +1046,7 @@ function editLicence(id) {
         }
     }
     $.mobile.pageContainer.pagecontainer("change", "#addeditLicence", { transition: "slide" });
+    $("#addLicenceBtn").text("Update");
     $("#delLicBtn").show(); // show delete licence button
     getActiveLicenceType(licenceTicketList[count].LicenceTicketTypeId);
     //getLicenceTypDetail(licenceTicketList[count].LicenceTicketTypeId);
@@ -1017,6 +1055,7 @@ function editLicence(id) {
     $("#ddlLicence").val(licenceTicketList[count].LicenceTicketTypeId);
     $("#txtExperience").val(licenceTicketList[count].Experience);
     $("#txtNumberlLicence").val(licenceTicketList[count].LicenceNumber);
+    $("#txtLicenceExpiry").val(licenceTicketList[count].LicenceExpiry); // show licence expiry date
     $("#dvLicence").show();
     $("#dvLicence .container").show();
     $("#dvLicence .exp").show();
@@ -1048,6 +1087,7 @@ function editPosition(id) {
     }
     debugger;
     $.mobile.pageContainer.pagecontainer("change", "#addeditPosition", { transition: "slide" });
+    $("#addPosBtn").text("Update"); // change the button text to edit
     $("#delPosBtn").show(); // show the delete button
     localStorage.positionIDSaved = $("#hdnPositionId").val();
     $("#hdnPositionId").val(positionHoldList[count].Id);
@@ -1086,6 +1126,7 @@ function editTrade(id) {
         }
     }
     $.mobile.pageContainer.pagecontainer("change", "#addeditTrade", { transition: "slide" });
+    $("#addTradeBtn").text("Update"); // change the button text to Edit
     $("#delTradeBtn").show(); // show the delete trade button    
     localStorage.tradeIDSaved = $("#hdnTradeId").val();
     $("#hdnTradeId").val(tradeExpList[count].Id);
@@ -1098,12 +1139,14 @@ function editTrade(id) {
     $("#dvTrade .container").show();
     $("#dvTrade .exp").show();
     if (tradeExpList[count].UserCertificationTypeId == "1") {
+        console.warn("Experienced profile");
         $("#expTrade").attr("checked", true);
         $("#expTrade").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
         $("#dvTrade .num").hide();
-
     } else {
+
         if (tradeExpList[count].UserCertificationTypeId == "2") {
+            console.warn("Qualified profile");
             $("#qualTrade").attr("checked", true);
             $("#qualTrade").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
             $("#dvTrade .num").show();

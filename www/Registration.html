@@ -145,7 +145,7 @@
                                 <label for="postal_code">
                                     Postcode<span class="requiredField">*</span>
                                 </label>
-                                <input type="text" id="postal_code" name="postal_code" class="required" placeholder="" required="required" maxlength="4" valid-attr="Please enter Post code" />
+                                <input type="number" id="postal_code" name="postal_code" class="required" placeholder="" required="required" maxlength="4" valid-attr="Please enter Post code" />
                                 <label for="txtContact1">
                                     Primary Contact No<span class="requiredField">*</span>
                                 </label>
@@ -171,7 +171,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary customfixed" onclick="validateRegisterFields('required','#licencePage')" style="left:40%">Continue</a>
+                    <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary customfixed" onclick="navigatePage('#licencePage')" style="left:40%">Continue</a>
                     <!-- "validateRegisterFields('required','#licencePage')" navigatePage('#licencePage')-->
                 </form>
             </div>
@@ -356,8 +356,9 @@
                         </label>
                     </div>
                     <div class="num" style="display: none;">
-                        <label id="licenceTypeh">
-                        </label>
+                        <label>Licence Type:<span id="licenceTypeh">
+                        </span></label>
+                        
                         <label>
                             Licence Number
                         </label>
@@ -372,7 +373,7 @@
                         <input type="text" id="txtExperience" required class="licenceRequired" />
                     </div>
                     <center>
-                        <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick=" SaveLicence()">Add</a>
+                        <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick=" SaveLicence()" id="addLicenceBtn">Add</a>
                         <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="deleteLicence()" style="left:5px;display: none;" id="delLicBtn">Delete</a>
                     </center>
                     <!-- <a href="" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick=" SaveLicence() ">
@@ -430,7 +431,7 @@
                     <input type="text" id="txtExpTrade" required class="tradeRequired" />
                 </div>
                 <center>
-                    <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="SaveTrade()">
+                    <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" id="addTradeBtn" onclick="SaveTrade()">
                             Add</a>
                     <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="deleteTrade()" style="left:5px;display: none;" id="delTradeBtn">Delete</a></center>
             </div>
@@ -491,7 +492,7 @@
                         </label>
                         <input type="text" id="txtExpPosition" required class="positionRequired" />
                     </div>
-                    <center><a href="" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick=" SavePosition() ">
+                    <center><a href="" class="ui-btn ui-btn-raised ui-mini clr-primary" id="addPosBtn" onclick=" SavePosition() ">
                         Save </a>
                         <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="deletePosition()" style="left:5px;display: none;" id="delPosBtn">Delete</a></center>
                 </div>

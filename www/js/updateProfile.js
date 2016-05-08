@@ -1,10 +1,72 @@
 ﻿var isValid = true;
 
+function setOptions(srcType) {
+    var options = {
+        // Some common settings are 20, 50, and 100
+        quality: 50,
+        destinationType: Camera.DestinationType.DATA_URL,
+        // In this app, dynamically set the picture source, Camera or photo gallery
+        sourceType: srcType,
+        allowEdit: true,
+        correctOrientation: true //Corrects Android orientation quirks
+    }
+    return options;
+}
+
+function openCameraOrGallery(sourceType) {
+    // To open gallery or camera
+    /*  var cameraOptions={
+    sourceType: sourceType,
+    allowEdit: true,
+    destinationType:Camera.DestinationType.DATA_URL
+    };*/
+    if (sourceType == "Camera.PictureSourceType.CAMERA")
+        sourceType = Camera.PictureSourceType.CAMERA;
+    else if (sourceType == "Camera.PictureSourceType.PHOTOLIBRARY")
+        sourceType = Camera.PictureSourceType.PHOTOLIBRARY;
+    var cameraOptions = setOptions(sourceType);
+    console.warn("sourceType:" + sourceType + "cameraOptions:" + JSON.stringify(cameraOptions));
+    navigator.camera.getPicture(cameraSuccess, cameraError, cameraOptions);
+}
+
+function cameraSuccess(imageData) {
+    $("#profilePicImg").attr("src", "data:image/jpeg;base64," + imageData);
+    updateProfilePicture(); // now send the picture to sevice    
+}
+
+function updateProfilePicture() {
+    // To update profile picture of the user
+    var url = serviceUrl + "Account/UpdateProfilePicture";
+    var jsonObj = {};
+    jsonObj.userId = $("#hdnUserId").val();
+    jsonObj.pic = $("#profilePicImg").attr("src");
+    showWait();
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: jsonObj,
+        contentType: "application/json",
+        dataType: "json",
+        async: false,
+        success: function(result) {
+            hideWait();
+            toast("Profile Picture updated Successfully");
+        },
+        error: function(error) {
+            hideWait();
+        }
+    });
+}
+
+function cameraError(err) {
+    console.log("Camera error:" + err);
+}
+
 function validate() {
     isValid = true;
     $(".required").each(function() {
         var current = $(this);
-        if (current.val() == "") {
+        if (current.val() == "" && current.is(":visible")) {
             $(current).addClass("error");
             isValid = false;
         } else {
@@ -229,7 +291,10 @@ function fetchProfileDetail(userId) {
                 $("#txtLastName").val(employeeObj.LastName);
                 $("#txtDob").val(new Date(employeeObj.DateOfBirth).getFormattedDateInddMMYY());
                 $("#lblDob").html(new Date(employeeObj.DateOfBirth).getFormattedDateInddMMYY());
-
+                if (employeeObj.IsPaySlipSent)
+                    $("#lblElePayslips").text("Yes");
+                else
+                    $("#lblElePayslips").text("No");
 
 
                 $("#ddlGender").val(employeeObj.GenderId);
@@ -258,13 +323,13 @@ function fetchProfileDetail(userId) {
                 $("#lblpostal_code").html(employeeObj.Postcode);
                 $("#lbladministrative_area_level_1").html(employeeObj.State);
                 $("#administrative_area_level_1").val(employeeObj.State);
+                $("#lblEmail").text(employeeObj.Email);
                 $("#lblContact1").html(employeeObj.ContactNumber);
                 $("#lblContact2").html(employeeObj.SecondaryContact);
                 $("#txtContact1").val(employeeObj.ContactNumber);
                 $("#txtContact2").val(employeeObj.SecondaryContact);
                 if (employeeObj.IsPaySlipSent) {
-                    $("#chkPaySlipMail").attr("checked", "checked");
-                    $("#chkPaySlipMail").click();
+                    $("#chkPaySlipMail").attr("checked", true).checkboxradio("refresh");
                 }
 
             } else {
@@ -281,10 +346,11 @@ function fetchProfileDetail(userId) {
 }
 
 function doEdit() {
+    /*
+        $(".editProfile").show();
 
-    $(".editProfile").show();
-
-    $(".viewProfile").hide();
+        $(".viewProfile").hide();*/
+    navigatePage("#editProfilePage");
 }
 
 function doUpdate() {

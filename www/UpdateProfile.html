@@ -69,6 +69,10 @@
     .ui-table td {
         vertical-align: middle;
     }
+    
+    #profileDetailsList.ui-listview>.ui-li-static {
+        padding-top: 0;
+    }
     </style>
 </head>
 
@@ -83,12 +87,185 @@
             <a href="#leftpanel" class="ui-btn ui-btn-left"><i class="zmdi zmdi-menu"></i></a>
         </div>
         <div data-role="content">
-        <br/><br/>
-                <a href="#" class="ui-btn ui-btn-inline ui-btn-raised" style="width:85%"><i class="clr-primary zmdi zmdi-account ui-pull-left"></i>Personal Details</a>
-                <a href="#" class="ui-btn ui-btn-inline ui-btn-raised" style="width:85%"><i class="clr-primary zmdi zmdi-flower ui-pull-left"></i>Licences & Experience</a>
+            <br/>
+            <br/>
+            <br/>
+            <ul data-role="listview" data-inset="true">
+                <li><a href="#profileDetailsPage" class="ui-btn ui-btn-inline ui-btn-raised"><span><i class="clr-primary zmdi zmdi-account ui-pull-left"></i></span>Personal Details</a></li>
+                <li><a href="#" class="ui-btn ui-btn-inline ui-btn-raised"><span><i class="clr-primary zmdi zmdi-flower ui-pull-left"></i></span>Licences & Experience</a></li>
+            </ul>
+            <!-- <a href="#" class="ui-btn ui-btn-inline ui-btn-raised" style="width:85%"><span><i class="clr-primary zmdi zmdi-account ui-pull-left"></i></span>Personal Details</a>
+                <a href="#" class="ui-btn ui-btn-inline ui-btn-raised" style="width:85%"><span><i class="clr-primary zmdi zmdi-flower ui-pull-left"></i></span>Licences & Experience</a> -->
         </div>
     </div>
     <!-- Profile options page end -->
+    <div data-role="page" data-theme="a" class="nd2-no-menu-swipe registration" id="profileDetailsPage">
+        <div data-role="panel" id="cameraTypeList" class="ui-bottom-sheet ui-bottom-sheet-list" data-animate="false" data-position='bottom' data-display="overlay" style="min-height: 30%">
+            <div class='row around-xs'>
+                <div class='col-xs-auto'>
+                    <a href='#' class='ui-bottom-sheet-link ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button' data-ajax='false' onclick="openCameraOrGallery('Camera.PictureSourceType.CAMERA')"><i class='zmdi zmdi-camera-front zmd-2x'></i><strong>Take Photo</strong></a>
+                </div>
+                <div class='col-xs-auto'>
+                    <a href='#' class='ui-bottom-sheet-link ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button' data-ajax='false' onclick="openCameraOrGallery('Camera.PictureSourceType.PHOTOLIBRARY')"><i class='zmdi zmdi-file zmd-2x'></i><strong>Use Existing Photo</strong></a>
+                </div>
+                <div class='col-xs-auto'>
+                    <a href='#' class='ui-bottom-sheet-link ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button' data-ajax='false'><i class='zmdi zmdi-close-circle zmd-2x'></i><strong>Cancel</strong></a>
+                </div>
+            </div>
+        </div>
+        <div data-role="header" data-position="fixed">
+            <h1>
+                Personal Details
+            </h1>
+            <a href="#profileOptionsPage" class="ui-btn ui-btn-left"><i class="zmdi zmdi-arrow-back zmd-fw">
+            </i></a>
+        </div>
+        <div data-role="content">
+            <br/>
+            <br/>
+            <br/>
+            <div>
+                <center>
+                    <a href="#cameraTypeList"><img id="profilePicImg" src="img/avtar.png" style="width:30%"></a>
+                </center>
+                <br/>
+                <ul data-role="listview" id="profileDetailsList">
+                    <li>
+                        <h1>Full Name</h1>
+                        <p id="lblName"></p>
+                        <hr>
+                    </li>
+                    <li>
+                        <h1>DOB</h1>
+                        <p id="lblDob"></p>
+                        <hr>
+                    </li>
+                    <li>
+                        <h1>Gender</h1>
+                        <p id="lblGender"></p>
+                        <hr>
+                    </li>
+                    <li>
+                        <h1>Primary Contact</h1>
+                        <p id="lblContact1"></p>
+                        <hr>
+                    </li>
+                    <li>
+                        <h1>Secondary Contact</h1>
+                        <p id="lblContact2"></p>
+                        <hr>
+                    </li>
+                    <li>
+                        <h1>Address</h1>
+                        <p id="lblAddr"></p>
+                        <hr>
+                    </li>
+                    <li>
+                        <h1>Email Address</h1>
+                        <p id="lblEmail"></p>
+                        <hr>
+                    </li>
+                    <li>
+                        <h1>Electronic Payslips</h1>
+                        <p id="lblElePayslips"></p>
+                        <hr>
+                    </li>
+                </ul>
+                <a href="#" onclick="doEdit()" class="ui-btn ui-btn-raised ui-mini clr-primary" style="width:95%">EDIT PROFILE</a>
+            </div>
+        </div>
+    </div>
+    <!-- Edit profile page start -->
+    <div data-role="page" data-theme="a" class="nd2-no-menu-swipe registration" id="editProfilePage">
+        <div data-role="header" data-position="fixed">
+            <h1>
+                Personal Details
+            </h1>
+            <a href="#profileOptionsPage" class="ui-btn ui-btn-left"><i class="zmdi zmdi-arrow-back zmd-fw">
+            </i></a>
+        </div>
+        <div data-role="content">
+            <br/>
+            <br/>
+            <br/>
+            <input type="hidden" id="hdnUserId" />
+            <input type="hidden" id="hdnRoleId" />
+            <br />
+            <label>
+                Title</label>
+            <select class="ui-selectmenu-list" id="ddlTitle">
+                <option value="1">Mr</option>
+                <option value="2">Mrs</option>
+                <option value="3">Miss</option>
+                <option value="3">Ms</option>
+            </select>
+            <label for="txtFirstName">
+                First Name
+            </label>
+            <input type="text" id="txtFirstName" name="txtFirstName" class="required" placeholder="" required="required" valid-attr="Please enter first name" />
+            <label for="txtMiddleName">
+                Middle Name
+            </label>
+            <input type="text" id="txtMiddleName" name="txtMiddleName" class="" placeholder="" />
+            <label for="txtLastName">
+                Last Name
+            </label>
+            <input type="text" id="txtLastName" name="txtLastName" class="required" placeholder="" required="required" valid-attr="Please enter last name" />
+            <label for="txtDob">
+                Dob
+            </label>
+            <input type="text" id="txtDob" name="txtDob" class="required" placeholder="required" required="required" valid-attr="Please enter dob" />
+            <label for="ddlGender">
+                Gender
+            </label>
+            <select id="ddlGender" required="required" valid_attr="Please select gender">
+                <option value="1">Not Specified</option>
+                <option value="2">Male</option>
+                <option value="3">Female</option>
+            </select>
+            <label for="keyword">
+                Search Address
+            </label>
+            <input type="text" id="keyword" name="keyword" placeholder="" />
+            <label for="street_number">
+                Street Address
+            </label>
+            <input type="text" id="street_number" name="street_number" class="required" placeholder="" required="required" valid-attr="Please enter address" />
+            <label for="locality">
+                City/Suburb/Town*
+            </label>
+            <input type="text" id="locality" name="locality" class="required" placeholder="" required="required" valid-attr="Please enter city" />
+            <label for="administrative_area_level_1">
+                State
+            </label>
+            <input type="text" id="administrative_area_level_1" name="administrative_area_level_1" class="required" placeholder="" required="required" valid-attr="Please enter state" />
+            <label for="postal_code">
+                Postcode
+            </label>
+            <input type="text" id="postal_code" name="postal_code" class="required" placeholder="" required="required" valid-attr="Please enter Post code" />
+            <label for="txtContact1">
+                Primary Contact No
+            </label>
+            <input type="tel" id="txtContact1" name="txtContact1" class="required" placeholder="" required="required" valid-attr="Please enter mobile no" />
+            <label for="txtContact2">
+                Secondary Contact No
+            </label>
+            <input type="tel" id="txtContact2" name="txtContact2" class="" placeholder="" />
+            <label for="chkPaySlipMail">
+                <input type="checkbox" id="chkPaySlipMail" name="chkPaySlipMail" class="" placeholder="" /> Would you like payslips sent to your email?
+            </label>
+            <label style="color: red" id="spnError">
+            </label>
+            <!--<a href="" onclick="next()"  class="ui-btn ui-btn-raised ui-mini clr-primary">
+                            Next
+                        </a>-->
+            <a href="#" onclick="validate();" class="ui-btn ui-btn-raised ui-mini clr-primary" style="width:95%">Update
+                            </a>
+            <br />
+            <br />
+        </div>
+    </div>
+    <!-- Edit profile page end -->
     <div data-role="page" id="updateProfile" data-theme="a" class="nd2-no-menu-swipe registration">
         <nd2-include data-src="Menu.html"></nd2-include>
         <div data-role="header" data-position="fixed">

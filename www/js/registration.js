@@ -1026,12 +1026,18 @@ function makeEditFalse(flagname) {
     $("#txtLicenceExpiry").val(manipulatedExpiryDate); // fill the manipulated date
     if (flagname == "editLicenceFlag") {
         localStorage.editLicenceFlag = "false";
+        $("#txtNumberlLicence,#txtLicenceExpiry,#txtExperience").val(""); // clear input fields
         $("#delLicBtn").hide(); // hide the delete button
+        $("#addLicenceBtn").text("Add"); // change the button text to add
     } else if (flagname == "editTradeFlag") {
         localStorage.editTradeFlag = "false";
+        $("#txtQualTrade,#txtExpTrade").val("");
+        $("#addTradeBtn").text("Add"); // change the button text to add
         $("#delTradeBtn").hide(); // hide the delete button
     } else if (flagname == "editPositionFlag") {
         localStorage.editPositionFlag = "false";
+         $("#txtQualPosition,#txtExpPosition").val("");
+        $("#addPosBtn").text("Add"); // change the button text to add
         $("#delPosBtn").hide(); // hide the delete button
     }
 }

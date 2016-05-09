@@ -180,6 +180,30 @@ function checkEmailExistance(nextpageId) {
     });
 }
 
+function restoreTheRegFields(){
+    // To restore the details in the registration page
+    if(jsonObj!=null){
+        // Profile is not complete yet
+        $("#ddlTitle").val(jsonObj.titleId).change(); // change the title
+        $("#txtFirstName").val(jsonObj.FirstName); // restore first name
+        $("#txtMiddleName").val(jsonObj.MiddleName || ""); // restore middle name
+        $("#txtLastName").val(jsonObj.LastName); // restore middle name
+        $("#txtDob").val(jsonObj.DateOfBirth); // restore DOB
+        $("#txtEmail").val(jsonObj.Email); // restore email
+        $("#street_number").val(jsonObj.StreetAddress); // restore street address
+        $("#locality").val(jsonObj.City); // restore location
+        $("#postal_code").val(jsonObj.Postcode); // restore postal code
+        $("#txtContact1").val(jsonObj.ContactNumber); // restore primary contact number
+        $("#txtContact2").val(jsonObj.SecondaryContact || ""); // restore secondary contact number
+        $("#ddlGender").val(jsonObj.GenderId); // restore gender id
+        $("#txtPin,#txtCPin").val(jsonObj.Password); // restore pin
+        $("#administrative_area_level_1").val(jsonObj.State); // restore state
+        if(jsonObj.IsPaySlipSent)
+            $("#chkPaySlipMail").attr("checked",true).checkboxradio("refresh");
+        else
+            $("#chkPaySlipMail").attr("checked",false).checkboxradio("refresh");
+    }
+}
 function register(nextpageId) {
     var url = serviceUrl + "Account/AddUser";
     var titleId = $("#ddlTitle").val();
@@ -216,13 +240,15 @@ function register(nextpageId) {
         default:
             break;
     }
+    jsonObj.titleId=titleId;
     jsonObj.Title = title;
     jsonObj.FirstName = firstName;
     jsonObj.MiddleName = middleName;
     jsonObj.LastName = lastName;
     jsonObj.DateOfBirth = dob;
     jsonObj.Email = email;
-    jsonObj.StreetAddress = streetAddress;
+    jsonObj.StreetAddress= streetAddress;
+
     jsonObj.City = city;
     jsonObj.State = state;
     jsonObj.Postcode = postCode;
@@ -299,14 +325,14 @@ function RegisterUser(nextpageId) {
     //    }
 }
 $(function () {
-    $("#txtDob").val("01/01/1997");
+    $("#txtDob").val("01/01/1990");
     $('#txtDob,#txtLicenceExpiry').mobiscroll().date({
         lang: 'en',
         theme: 'android-holo-light',
         display: 'bubble',
         display: 'bottom',
         dateOrder: 'ddMMyy',
-        dateFormat: 'DD MM yy',
+        dateFormat: 'dd/mm/yyyy',
         mode: 'scroller'
         //        dateOrder: 'ddmmyyyy',
         //        dateFormat: 'dd/mm/yyyy'
@@ -496,7 +522,7 @@ function getActiveLicenceType(id) {
             hideWait();
             if (response.IsSuccessful) {
                 $("#ddlLicence").html("");
-                var options = '<option value="0">--select--</option>';
+                var options = '<option value="0">SELECT LICENCE</option>';
                 var result = response.Result;
                 for (var i = 0; i < result.length; i++) {
                     if (result[i].ID === id) {
@@ -567,7 +593,7 @@ function getActiveTradeExp(id) {
             hideWait();
             if (response.IsSuccessful) {
                 $("#ddlTradeExp").html("");
-                var options = '<option value="0">--select--</option>';
+                var options = '<option value="0">SELECT TRADE</option>';
                 var result = response.Result;
                 for (var i = 0; i < result.length; i++) {
                     if (result[i].ID === id) {
@@ -632,7 +658,7 @@ function getActivePositionHeld(id) {
             hideWait();
             if (response.IsSuccessful) {
                 $("#ddlPositionHeld").html("");
-                var options = '<option value="0">--select--</option>';
+                var options = '<option value="0">SELECT POSITION</option>';
                 var result = response.Result;
                 for (var i = 0; i < result.length; i++) {
                     if (result[i].ID == id) {
@@ -843,7 +869,7 @@ function listPositions() {
             if (qualNo == "")
                 showQualifiedDetails = "none";
             positionsHtml += '<li onclick="editPosition(' + i + ')">';
-            positionsHtml += '<table><tbody>';
+            positionsHtml += '<table data-role="table" data-mode="" class="ui-responsive table-stroke"><tbody>';
             positionsHtml += '<tr><td>' + positionHoldList[i].Name + '</td></tr>';
             positionsHtml += '<tr><td>Cert Type</td><td>' + positionHoldList[i].UserCertificationTypeName + '</td></tr>';
             positionsHtml += '<tr style="display:' + showQualifiedDetails + '"><td>Qualification No.</td><td>' + qualNo + '</td></tr>';
@@ -897,7 +923,7 @@ function listTrade() {
             if (no == "")
                 showQualifiedDetails = "none";
             tradeHtml += '<li onclick="editTrade(' + j + ')">';
-            tradeHtml += '<table><tbody>';
+            tradeHtml += '<table data-role="table" data-mode="" class="ui-responsive table-stroke"><tbody>';
             tradeHtml += '<tr><td>' + tradeExpList[j].Name + '</td></tr>';
             tradeHtml += '<tr><td>Cert Type</td><td>' + tradeExpList[j].UserCertificationTypeName + '</td></tr>';
             tradeHtml += '<tr style="display:' + showQualifiedDetails + '"><td>Qualification No.</td><td>' + no + '</td></tr>';
@@ -986,9 +1012,9 @@ function listTickets() {
                 showQualifiedDetails = "none"; // hide the qualification oriented things
             }
             licenceHtml += '<li onclick="editLicence(' + i + ')">';
-            licenceHtml += '<table style="display: inline-table"><tbody>';
+            licenceHtml += '<table data-role="table" data-mode="" class="ui-responsive table-stroke"><tbody>';
             licenceHtml += '<tr><td>' + licenceTicketList[i].Name + '</td></tr>';
-            licenceHtml += '<tr><td>Licence Type</td><td>' + licenceTicketList[i].LicenceType + '</td></tr>';
+            licenceHtml += '<tr><td>Licence Type </td><td>' + licenceTicketList[i].LicenceType + '</td></tr>';
             licenceHtml += '<tr style="display:' + showQualifiedDetails + '"><td>Licence No.</td><td>' + no + '</td></tr>';
             licenceHtml += '<tr style="display:' + showQualifiedDetails + '"><td>Expiry</td><td>' + expiryDate + '</td></tr>';
             licenceHtml += '<tr><td>Experience</td><td>' + exp + '</td></tr>';
@@ -1040,7 +1066,7 @@ function makeEditFalse(flagname) {
     if (flagname == "editLicenceFlag") {
         localStorage.editLicenceFlag = "false";
         $("#txtNumberlLicence,#txtLicenceExpiry,#txtExperience").val(""); // clear input fields
-        $("#txtLicenceExpiry").val(manipulatedExpiryDate); // fill the manipulated date
+        // $("#txtLicenceExpiry").val(manipulatedExpiryDate); // fill the manipulated date
         $("#delLicBtn").hide(); // hide the delete button
         $("#addLicenceBtn").text("Add"); // change the button text to add
         $("#ddlLicence").val("0").change(); // make the select value 0

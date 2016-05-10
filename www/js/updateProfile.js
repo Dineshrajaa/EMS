@@ -31,8 +31,8 @@ function openCameraOrGallery(sourceType) {
 
 function cameraSuccess(imageData) {
     // $("#profilePicImg").attr("src", "data:image/jpeg;base64," + imageData);
-    var imageData="data:image/jpeg;base64," + imageData;
-    $(".profileCircle").css("background-image","url("+imageData+")");
+    var imageData = "data:image/jpeg;base64," + imageData;
+    $(".profileCircle").css("background-image", "url(" + imageData + ")");
     updateProfilePicture(); // now send the picture to sevice    
 }
 
@@ -138,10 +138,10 @@ function fillInAddress() {
 }
 
 
-function blockIT(){
+function blockIT() {
     // To block the ui
     $("#cameraTypeList").panel("open");
-    $('#profileDetailsPage').block({ message: null }); 
+    $('#profileDetailsPage').block({ message: null });
 }
 var trannieProfileObj = '';
 var currentUser = '';
@@ -527,6 +527,7 @@ function getLicenceTypDetail(id) {
             if (response.IsSuccessful) {
                 var result = response.Result;
                 $("#dvLicence").show();
+                $("#licenceTypeh").text(response.LicenceAbbr);
                 if (result.IsQualifiedAllowed) {
                     $("#dvLicence .exp").show();
                     $("#dvLicence .num").show();
@@ -701,7 +702,7 @@ function GetEmployeeDetails(id) {
                         var qualNo = (result.PositionHeldList[i].QualificationNumber != null && result.PositionHeldList[i].QualificationNumber != "null") ? result.PositionHeldList[i].QualificationNumber : "";
                         if (qualNo == "")
                             showQualifiedDetails = "display:none";
-                        positionsHtml += '<li onclick="editPosition(' + i + ')">';
+                        positionsHtml += '<li onclick="editPosition(' + result.PositionHeldList[i].Id + ')">';
                         positionsHtml += '<table data-role="table" data-mode="" class="ui-responsive table-stroke"><tbody>';
                         positionsHtml += '<tr><td>' + result.PositionHeldList[i].Name + '</td></tr>';
                         positionsHtml += '<tr><td>Certification Type</td><td>' + result.PositionHeldList[i].UserCertificationType + '</td></tr>';
@@ -724,7 +725,7 @@ function GetEmployeeDetails(id) {
                         var no = (tradeExpList[j].QualificationNumber != null && tradeExpList[j].QualificationNumber != "") ? tradeExpList[j].QualificationNumber : "";
                         if (no == "")
                             showQualifiedDetails = "display:none";
-                        tradeHtml += '<li onclick="editTrade(' + j + ')">';
+                        tradeHtml += '<li onclick="editTrade(' + tradeExpList[j].Id + ')">';
                         tradeHtml += '<table data-role="table" data-mode="" class="ui-responsive table-stroke"><tbody>';
                         tradeHtml += '<tr><td>' + tradeExpList[j].Name + '</td></tr>';
                         tradeHtml += '<tr><td>Certification Type</td><td>' + tradeExpList[j].UserCertificationTypeName + '</td></tr>';
@@ -748,16 +749,16 @@ function GetEmployeeDetails(id) {
                         var showQualifiedDetails = "";
                         var exp = (licencelist[k].Experience != null && licencelist[k].Experience != "") ? licencelist[k].Experience : "";
                         var no = (licencelist[k].LicenceNumber != null && licencelist[k].LicenceNumber != "") ? licencelist[k].LicenceNumber : "";
-                        var expiryDate=(licencelist[k].LicenceExpiry != null && licencelist[k].LicenceExpiry != "") ? licencelist[k].LicenceExpiry : "";
+                        var expiryDate = (licencelist[k].LicenceExpiry != null && licencelist[k].LicenceExpiry != "") ? licencelist[k].LicenceExpiry : "";
                         if (no == "") {
                             // No licence number
                             expiryDate = ""; // clear the expiry date
                             showQualifiedDetails = "display:none"; // hide the qualification oriented things
                         }
-                        licenceHtml += '<li onclick="editLicence(' + i + ')">';
+                        licenceHtml += '<li onclick="editLicence(' + licencelist[k].Id + ')">';
                         licenceHtml += '<table data-role="table" data-mode="" class="ui-responsive table-stroke"><tbody>';
                         licenceHtml += '<tr><td>' + licencelist[k].Name + '</td></tr>';
-                        licenceHtml += '<tr><td>Licence Type </td><td>' + licencelist[k].UserCertificationType||"" + '</td></tr>';
+                        licenceHtml += '<tr><td>Licence Type </td><td>' + licencelist[k].UserCertificationType || "" + '</td></tr>';
                         licenceHtml += '<tr style="' + showQualifiedDetails + '"><td>Licence No.</td><td>' + no + '</td></tr>';
                         licenceHtml += '<tr style="' + showQualifiedDetails + '"><td>Expiry</td><td>' + expiryDate + '</td></tr>';
                         licenceHtml += '<tr><td>Experience</td><td>' + exp + '</td></tr>';
@@ -790,7 +791,7 @@ function GetEmployeeDetails(id) {
 }
 
 
-function deletePosition(id, el) {
+function deletePosition(id) {
     var r = confirm('Are you sure');
     if (r) {
         showWait();
@@ -806,7 +807,7 @@ function deletePosition(id, el) {
                 if (response.IsSuccessful) {
 
                     toast('Position Deleted Successfully');
-                    $(el).parent().parent().remove();
+                    triggerEmployeedetails();
                 }
             },
             error: function() {
@@ -817,8 +818,17 @@ function deletePosition(id, el) {
     }
 }
 
+function triggerEmployeedetails() {
+    var currentUserObj = localStorage.getItem('userSession');
+    if (currentUserObj && currentUserObj != 'undefined') {
+        currentUser = JSON.parse(currentUserObj);
+        fetchProfileDetail(currentUser.ID);
+        GetEmployeeDetails(currentUser.ID);
+    }
+}
 
-function deleteLicence(id, el) {
+
+function deleteLicence(id) {
     var r = confirm('Are you sure');
     if (r) {
         showWait();
@@ -832,9 +842,8 @@ function deleteLicence(id, el) {
             success: function(response) {
                 hideWait();
                 if (response.IsSuccessful) {
-
                     toast('Licence Ticket Type Deleted Successfully');
-                    $(el).parent().parent().remove();
+                    triggerEmployeedetails();
                 }
             },
             error: function() {
@@ -843,9 +852,10 @@ function deleteLicence(id, el) {
             }
         });
     }
+
 }
 
-function deleteTrade(id, el) {
+function deleteTrade(id) {
     var r = confirm('Are you sure');
     if (r) {
         showWait();
@@ -861,7 +871,7 @@ function deleteTrade(id, el) {
                 if (response.IsSuccessful) {
 
                     toast('Trade Exp Deleted Successfully');
-                    $(el).parent().parent().remove();
+                    triggerEmployeedetails();
                 }
             },
             error: function() {
@@ -872,18 +882,61 @@ function deleteTrade(id, el) {
     }
 }
 
+$("input[name='LicencePosition']").on("click", function() {
+    $("#dvLicence .exp").show();
+    $("#txtExperience").val("");
+    $("#txtNumberlLicence").val("");
+    console.warn($(this).val());
+    if ($(this).val() == "2") {
+        $("#dvLicence .num").show();
+        $("#dvLicence .exp").show();
+    } else if ($(this).val() == "1") {
+        $("#dvLicence .exp").show();
+        $("#dvLicence .num").hide();
+    }
+
+});
 
 function SaveLicence() {
-    var obj = {};
-    obj.Id = $("#hdnLicenceTypeId").val();
-    obj.LicenceTicketTypeId = $("#ddlLicence").val();
-    obj.UserId = currentUser.ID;
-    obj.Experience = $("#txtExperience").val();
-    obj.LicenceNumber = $("#txtNumberlLicence").val();
-    obj.LicenceExpiry = "";
-    obj.UserCertificationTypeId = $("input[name=LicencePosition]:checked").val(); //radio button value;
-    //obj = JSON.stringify(obj);
-    AddUserLicenceTicketType(obj);
+    /* var obj = {};
+     obj.Id = $("#hdnLicenceTypeId").val();
+     obj.LicenceTicketTypeId = $("#ddlLicence").val();
+     obj.UserId = currentUser.ID;
+     obj.Experience = $("#txtExperience").val();
+     obj.LicenceNumber = $("#txtNumberlLicence").val();
+     obj.LicenceExpiry = "";
+     obj.UserCertificationTypeId = $("input[name=LicencePosition]:checked").val(); //radio button value;
+     //obj = JSON.stringify(obj);
+     AddUserLicenceTicketType(obj);*/
+    var isValid = true;
+    $(".licenceRequired").each(function() {
+        console.warn($(this));
+        var current = $(this);
+        if (current.val() == "" && current.is(":visible")) {
+            $(current).addClass("error");
+            isValid = false;
+        } else {
+            $(current).removeClass("error");
+        }
+    });
+    if (isValid) {
+        var obj = {};
+        obj.Id = $("#hdnLicenceTypeId").val();
+        obj.LicenceTicketTypeId = $("#ddlLicence").val();
+        //obj.UserId = currentUser.ID;
+        obj.Name = $("#ddlLicenceText").val();
+        obj.Experience = $("#txtExperience").val();
+        obj.LicenceNumber = $("#txtNumberlLicence").val();
+        obj.LicenceExpiry = $("#txtLicenceExpiry").val();
+        obj.LicenceType = $("#licenceTypeh").text(); // Licence type
+        obj.UserCertificationTypeId = $("input[name=LicencePosition]:checked").val(); //radio button value;
+        //obj = JSON.stringify(obj);
+        AddUserLicenceTicketType(obj);
+
+    } else {
+        return false;
+    }
+
 }
 
 function SaveTrade() {
@@ -967,7 +1020,10 @@ function AddUserLicenceTicketType(obj) {
         success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
-
+                if (localStorage.ueditLicenceFlag == "true") {
+                    $("#hdnLicenceTypeId").val(parseInt(localStorage.ulicenceIDSaved) + 1);
+                } else
+                    $("#hdnLicenceTypeId").val(parseInt($("#hdnLicenceTypeId").val()) + 1);
                 toast('Licence Added Successfully');
                 redirectWithTimeout("UpdateProfile.html");
 
@@ -978,10 +1034,12 @@ function AddUserLicenceTicketType(obj) {
             toast('Network Error');
         }
     });
-
 }
 
+
+
 function editLicence(id) {
+    localStorage.ueditLicenceFlag = "true"; // make the edit licence true
     showWait();
     var url = serviceUrl + "Account/GetUserLicenceTicketType/";
     $.ajax({
@@ -991,7 +1049,7 @@ function editLicence(id) {
         success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
-                $.mobile.pageContainer.pagecontainer("change", "#addeditLicence", { transition: "slide" });
+                /*$.mobile.pageContainer.pagecontainer("change", "#addeditLicence", { transition: "slide" });
                 $("#hdnLicenceTypeId").val(response.Result.Id);
                 getActiveLicenceType(response.Result.LicenceTicketTypeId);
                 //getLicenceTypDetail(response.Result.LicenceTicketTypeId);
@@ -1008,6 +1066,35 @@ function editLicence(id) {
                 } else {
                     if (response.Result.UserCertificationTypeId === 2) {
                         $("#qualLicence").attr("checked", true);
+                        $("#qualLicence").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
+                        $("#dvLicence .num").show();
+                    } else {
+                        $("#dvLicence .container").hide();
+                        $("#dvLicence .num").show();
+                    }
+                }*/
+                $.mobile.pageContainer.pagecontainer("change", "#addeditLicence", { transition: "slide" });
+                $("#addLicenceBtn").text("Update");
+                $("#delLicBtn").show(); // show delete licence button
+                getActiveLicenceType(response.Result.LicenceTicketTypeId);
+                //getLicenceTypDetail(licenceTicketList[count].LicenceTicketTypeId);
+                localStorage.ulicenceIDSaved = $("#hdnLicenceTypeId").val();
+                $("#hdnLicenceTypeId").val(response.Result.Id);
+                $("#ddlLicence").val(response.Result.LicenceTicketTypeId).selectmenu("refresh").change();
+                $("#txtExperience").val(response.Result.Experience);
+                $("#txtNumberlLicence").val(response.Result.LicenceNumber);
+                $("#txtLicenceExpiry").val(response.Result.LicenceExpiry); // show licence expiry date
+                $("#dvLicence").show();
+                $("#dvLicence .container").show();
+                $("#dvLicence .exp").show();
+                $("#expLicence,#qualLicence").attr("checked", false).checkboxradio("refresh"); // uncheck the previously selected values
+                if (response.Result.LicenceTicketTypeId == "1") {
+                    $("#expLicence").attr("checked", true).checkboxradio("refresh");
+                    $("#expLicence").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
+                    $("#dvLicence .num").hide();
+                } else {
+                    if (response.Result.LicenceTicketTypeId == "2") {
+                        $("#qualLicence").attr("checked", true).checkboxradio("refresh");
                         $("#qualLicence").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
                         $("#dvLicence .num").show();
                     } else {
@@ -1110,4 +1197,68 @@ function editTrade(id) {
             toast('Network Error');
         }
     });
+}
+
+
+function makeEditFalse(flagname) {
+    // To intimate the code that it's an add not edit
+    var manipulatedExpiryDate = new Date().getDate() + "/" + (new Date().getMonth() + 1) + "/" + (new Date().getFullYear() + 1);
+
+    if (flagname == "editLicenceFlag") {
+        localStorage.ueditLicenceFlag = "false";
+        $("#txtNumberlLicence,#txtLicenceExpiry,#txtExperience").val(""); // clear input fields
+        // $("#txtLicenceExpiry").val(manipulatedExpiryDate); // fill the manipulated date
+        $("#delLicBtn").hide(); // hide the delete button
+        $("#addLicenceBtn").text("Add"); // change the button text to add
+        $("#ddlLicence").val("0").change(); // make the select value 0
+        $("#expLicence,#qualLicence").attr("checked", false).checkboxradio("refresh"); // uncheck the previously selected values
+        $("#dvLicence").hide();
+        $("#dvLicence .num").hide();
+        $("#dvLicence .exp").hide();
+    } else if (flagname == "editTradeFlag") {
+        localStorage.ueditTradeFlag = "false";
+        $("#txtQualTrade,#txtExpTrade").val("");
+        $("#addTradeBtn").text("Add"); // change the button text to add
+        $("#delTradeBtn").hide(); // hide the delete button
+        $("#ddlTradeExp").val("0").change(); // make the select value 0
+        $("#expTrade,#qualTrade").attr("checked", false).checkboxradio("refresh"); // uncheck the previously selected values
+        $("#dvTrade").hide();
+        $("#dvTrade .num").hide();
+        $("#dvTrade .exp").hide();
+    } else if (flagname == "editPositionFlag") {
+        localStorage.ueditPositionFlag = "false";
+        $("#txtQualPosition,#txtExpPosition").val("");
+        $("#addPosBtn").text("Add"); // change the button text to add
+        $("#delPosBtn").hide(); // hide the delete button
+        $("#ddlPositionHeld").val("0").change(); // make the select value 0
+        $("#expPosition,#qualPosition").attr("checked", false).checkboxradio("refresh"); // uncheck the previously selected values
+        $("#dvPosition").hide();
+        $("#dvPosition .num").hide();
+        $("#dvPosition .exp").hide();
+    }
+}
+
+
+function resetTheHiddenID(moduleName) {
+    // To reset the hidden value to avoid confusion
+    if (moduleName == "licencePage") {
+        if (localStorage.ueditLicenceFlag == "true") {
+            $("#hdnLicenceTypeId").val(parseInt(localStorage.ulicenceIDSaved));
+            localStorage.ueditLicenceFlag = false;
+        }
+
+    }
+    else if (moduleName == "positionsPage") {
+        if (localStorage.ueditPositionFlag == "true") {
+            $("#hdnPositionId").val(parseInt(localStorage.upositionIDSaved));
+            localStorage.ueditPositionFlag = "false";
+        }
+    }
+    else if (moduleName == "tradePage") {
+        if (localStorage.ueditTradeFlag == "true") {
+            $("#hdnTradeId").val(parseInt(localStorage.utradeIDSaved));
+            localStorage.ueditPositionFlag = "false";
+        }
+
+    }
 }

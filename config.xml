@@ -66,6 +66,7 @@
         <splash height="1242" src="res/screen/ios/Default-Landscape-736h.png" width="2208" />
     </platform>
     <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="DisallowOverscroll" value="true" />
     <preference name="FadeSplashScreen" value="true" />
     <preference name="FadeSplashScreenDuration" value="5000" />
     <plugin name="cordova-plugin-splashscreen" spec="~3.2.2" />

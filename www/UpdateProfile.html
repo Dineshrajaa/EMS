@@ -26,8 +26,6 @@
         width: 90% !important;
     }
     
-    
-    
     ​ .registration {
         background-color: #ffffff;
         /*padding-top: 90px !important;*/
@@ -142,7 +140,6 @@
                     </div>
                 </center>
                 <br/>
-                
                 <ul data-role="listview" id="profileDetailsList">
                     <li>
                         <h1>Full Name</h1>
@@ -578,7 +575,7 @@
                 <hr>
                 <ul id="licenceList" data-role="listview"></ul>
                 <center>
-                    <a href="#addeditLicence" class="ui-btn ui-btn-raised ui-mini clr-primary">
+                    <a href="#addeditLicence" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="makeEditFalse('editLicenceFlag')">
                         Add New </a>
                 </center>
             </div>
@@ -612,14 +609,14 @@
             <h1>
                 Add/Edit Licence
             </h1>
-            <a data-rel="back" href="#" class="ui-btn ui-btn-left"><i class="zmdi zmdi-arrow-back zmd-fw">
+            <a href="#profileOptionsPage" class="ui-btn ui-btn-left" onclick="resetTheHiddenID('licencePage')"><i class="zmdi zmdi-arrow-back zmd-fw">
             </i></a>
         </div>
         <div role="main">
             <div data-role="content">
                 <br />
                 <br />
-                <label>
+                <!-- <label>
                     Licence
                 </label>
                 <select id="ddlLicence">
@@ -651,6 +648,46 @@
                     </div>
                     <a href="" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="SaveLicence()">
                         Save </a>
+                </div> -->
+                <label>
+                    Licence / Ticket
+                </label>
+                <select id="ddlLicence">
+                </select>
+                <input type="hidden" id="ddlLicenceText" value="" />
+                <input type="hidden" id="hdnLicenceTypeId" value="0" />
+                <div id="dvLicence" style="display: none; padding: 15px; border: 2px solid gray">
+                    <div class="container" style="display: none;">
+                        <label>
+                            Certification Type
+                        </label>
+                        <label>
+                            <input type="radio" name="LicencePosition" id="expLicence" value="1" /> Experienced
+                        </label>
+                        <label>
+                            <input type="radio" name="LicencePosition" id="qualLicence" value="2" /> Qualified
+                        </label>
+                    </div>
+                    <div class="num" style="display: none;">
+                        <label style="margin-bottom: 5px;">Licence Type: <span id="licenceTypeh">
+                        </span></label>
+                        <label>
+                            Licence Number
+                        </label>
+                        <input type="text" id="txtNumberlLicence" required class="licenceRequired" />
+                        <label>Licence Expiry</label>
+                        <input type="text" id="txtLicenceExpiry" required class="licenceRequired" />
+                    </div>
+                    <div class="exp" style="display: none;">
+                        <label>
+                            How much experience do you have with this licence/ticket? (example:1y6m)
+                        </label>
+                        <input type="text" id="txtExperience" required class="licenceRequired" />
+                    </div>
+                    <center>
+                        <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick=" SaveLicence()" id="addLicenceBtn">Add</a>
+                        <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="deleteLicence()" style="left:5px;display: none;" id="delLicBtn">Delete</a>
+                    </center>
                 </div>
             </div>
         </div>

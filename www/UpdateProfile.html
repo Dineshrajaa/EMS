@@ -69,6 +69,10 @@
     .ui-table td {
         vertical-align: middle;
     }
+
+    .table-stroke tbody th, .table-stroke tbody td{
+        border-bottom:0;
+    }
     
     #profileDetailsList.ui-listview>.ui-li-static {
         padding-top: 0;
@@ -559,10 +563,34 @@
         <div data-role="content">
             <div id="licenceBlock">
                 <center>
-                    <h5>Licences & Tickets</h5>
+                    <h4>Licences & Tickets</h4>
                 </center>
                 <hr>
                 <ul id="licenceList" data-role="listview"></ul>
+                <hr>
+                <center>
+                    <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary">
+                        Add New </a>
+                </center>
+            </div>
+            <div id="tradeBlock">
+                <center>
+                    <h4>Trade Experience</h4>
+                </center>
+                <hr>
+                <ul id="tradeList" data-role="listview"></ul>
+                <hr>
+                <center>
+                    <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary">
+                        Add New </a>
+                </center>
+            </div>
+                        <div id="tradeBlock">
+                <center>
+                    <h4>Positions held</h4>
+                </center>
+                <hr>
+                <ul id="positionList" data-role="listview"></ul>
                 <hr>
                 <center>
                     <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary">

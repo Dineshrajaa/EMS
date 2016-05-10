@@ -471,6 +471,37 @@ function next() {
     //$("#updateProfile").hide();
 }
 
+function printListOfTickets(id) {
+    showWait();
+    var url = serviceUrl + "Account/GetActiveLicenceTicketTypes";
+    $.ajax({
+        type: 'GET',
+        url: url,
+        data: '',
+        success: function(response) {
+            hideWait();
+            if (response.IsSuccessful) {
+                $("#licenceList").html("");
+                var options = '<option value="0">--select--</option>';
+                var result = response.Result;
+                for (var i = 0; i < result.length; i++) {
+                    if (result[i].ID === id) {
+                        options += '<option value=' + result[i].ID + ' selected="selected">' + result[i].Name + '</option>';
+                        $("#ddlLicence").prev().text(result[i].Name);
+                    } else {
+                        options += '<option value=' + result[i].ID + '>' + result[i].Name + '</option>';
+                    }
+                }
+                $("#licenceList").append(options);
+            }
+        },
+        error: function() {
+            hideWait();
+            toast('Network Error');
+        }
+    });
+}
+
 function getActiveLicenceType(id) {
     showWait();
     var url = serviceUrl + "Account/GetActiveLicenceTicketTypes";
@@ -682,54 +713,92 @@ function GetEmployeeDetails(id) {
                 var tradeExpList = result.TradeExpList;
                 var licencelist = result.LicenceTicketTypeList;
                 var licenceHtml = '';
-                var positionHtml = '';
+                var positionsHtml = '';
                 var tradeHtml = '';
                 if (result.PositionHeldList != null) {
                     for (var i = 0; i < result.PositionHeldList.length; i++) {
+                        var showQualifiedDetails = "block";
                         var Exp = (result.PositionHeldList[i].Experience != null && result.PositionHeldList[i].Experience != "null") ? result.PositionHeldList[i].Experience : "";
                         var qualNo = (result.PositionHeldList[i].QualificationNumber != null && result.PositionHeldList[i].QualificationNumber != "null") ? result.PositionHeldList[i].QualificationNumber : "";
-                        positionHtml += '<tr><td>' + result.PositionHeldList[i].Name + '</td><td>' + Exp + '</td><td>' + qualNo + '</td>' +
+                        if (qualNo == "")
+                            showQualifiedDetails = "display:none";
+                        positionsHtml += '<li onclick="editPosition(' + i + ')">';
+                        positionsHtml += '<table data-role="table" data-mode="" class="ui-responsive table-stroke"><tbody>';
+                        positionsHtml += '<tr><td>' + result.PositionHeldList[i].Name + '</td></tr>';
+                        positionsHtml += '<tr><td>Certification Type</td><td>' + result.PositionHeldList[i].UserCertificationTypeName + '</td></tr>';
+                        positionsHtml += '<tr style="' + showQualifiedDetails + '"><td>Qualification No.</td><td>' + qualNo + '</td></tr>';
+                        positionsHtml += '<tr><td>Experience</td><td>' + Exp + '</td></tr>';
+                        positionsHtml += '</tbody>';
+                        positionsHtml += '</table></li><hr>';
+                        /*positionHtml += '<tr><td>' + result.PositionHeldList[i].Name + '</td><td>' + Exp + '</td><td>' + qualNo + '</td>' +
                             //'<td>' + positionheldslist[i].UserCertificationTypeId + '</td>' +
                             '<td><a onclick="editPosition(' + result.PositionHeldList[i].Id + ')">Edit</a></td>' +
                             '<td><a onclick="deletePosition(' + result.PositionHeldList[i].Id + ',this)">Delete</a></td>' +
-                            '</tr>';
+                            '</tr>';*/
 
                     }
                 }
                 if (tradeExpList != null) {
                     for (var j = 0; j < tradeExpList.length; j++) {
+                        var showQualifiedDetails = "";
                         var exp = (tradeExpList[j].Experience != null && tradeExpList[j].Experience != "null") ? tradeExpList[j].Experience : "";
                         var no = (tradeExpList[j].QualificationNumber != null && tradeExpList[j].QualificationNumber != "") ? tradeExpList[j].QualificationNumber : "";
-                        tradeHtml += '<tr>' +
-                            '<td>' + tradeExpList[j].Name + '</td>' +
-                            '<td>' + exp + '</td>' +
-                            '<td>' + no + '</td>' +
-                            //'<td>' + tradeExpList[j].UserCertificationTypeId + '</td>' +
-                            '<td><a onclick="editTrade(' + tradeExpList[j].Id + ')">Edit</a></td>' +
-                            '<td><a onclick="deleteTrade(' + tradeExpList[j].Id + ',this)">Delete</a></td>' +
-                            '</tr>';
+                        if (no == "")
+                            showQualifiedDetails = "display:none";
+                        tradeHtml += '<li onclick="editTrade(' + j + ')">';
+                        tradeHtml += '<table data-role="table" data-mode="" class="ui-responsive table-stroke"><tbody>';
+                        tradeHtml += '<tr><td>' + tradeExpList[j].Name + '</td></tr>';
+                        tradeHtml += '<tr><td>Certification Type</td><td>' + tradeExpList[j].UserCertificationTypeName + '</td></tr>';
+                        tradeHtml += '<tr style="' + showQualifiedDetails + '"><td>Qualification No.</td><td>' + no + '</td></tr>';
+                        tradeHtml += '<tr><td>Experience</td><td> ' + exp + '</td></tr>';
+                        tradeHtml += '</tbody></table>';
+                        tradeHtml += '</li><hr>';
+                        /*                        tradeHtml += '<tr>' +
+                                                    '<td>' + tradeExpList[j].Name + '</td>' +
+                                                    '<td>' + exp + '</td>' +
+                                                    '<td>' + no + '</td>' +
+                                                    //'<td>' + tradeExpList[j].UserCertificationTypeId + '</td>' +
+                                                    '<td><a onclick="editTrade(' + tradeExpList[j].Id + ')">Edit</a></td>' +
+                                                    '<td><a onclick="deleteTrade(' + tradeExpList[j].Id + ',this)">Delete</a></td>' +
+                                                    '</tr>';*/
 
                     }
                 }
                 if (licencelist != null) {
                     for (var k = 0; k < licencelist.length; k++) {
+                        var showQualifiedDetails = "";
                         var exp = (licencelist[k].Experience != null && licencelist[k].Experience != "") ? licencelist[k].Experience : "";
                         var no = (licencelist[k].LicenceNumber != null && licencelist[k].LicenceNumber != "") ? licencelist[k].LicenceNumber : "";
-                        licenceHtml += '<tr>' +
-                            '<td>' + licencelist[k].Name + '</td>' +
-                            '<td>' + exp + '</td>' +
-                            '<td>' + no + '</td>' +
-                            //'<td>' + licencelist[k].LicenceExpiry + '</td>' +
-                            // '<td>' + licencelist[k].UserCertificationTypeId + '</td>' +
-                            '<td><a onclick="editLicence(' + licencelist[k].Id + ')">Edit</a></td>' +
-                            '<td><a onclick="deleteLicence(' + licencelist[k].Id + ',this)">Delete</a></td>' +
-                            '</tr>';
+                        var expiryDate=(licencelist[k].LicenceExpiry != null && licencelist[k].LicenceExpiry != "") ? licencelist[k].LicenceExpiry : "";
+                        if (no == "") {
+                            // No licence number
+                            expiryDate = ""; // clear the expiry date
+                            showQualifiedDetails = "display:none"; // hide the qualification oriented things
+                        }
+                        licenceHtml += '<li onclick="editLicence(' + i + ')">';
+                        licenceHtml += '<table data-role="table" data-mode="" class="ui-responsive table-stroke"><tbody>';
+                        licenceHtml += '<tr><td>' + licencelist[k].Name + '</td></tr>';
+                        licenceHtml += '<tr><td>Licence Type </td><td>' + licencelist[k].LicenceType||"" + '</td></tr>';
+                        licenceHtml += '<tr style="' + showQualifiedDetails + '"><td>Licence No.</td><td>' + no + '</td></tr>';
+                        licenceHtml += '<tr style="' + showQualifiedDetails + '"><td>Expiry</td><td>' + expiryDate + '</td></tr>';
+                        licenceHtml += '<tr><td>Experience</td><td>' + exp + '</td></tr>';
+                        licenceHtml += '</tbody></table>';
+                        licenceHtml += '</li><hr>';
+                        /*                        licenceHtml += '<tr>' +
+                                                    '<td>' + licencelist[k].Name + '</td>' +
+                                                    '<td>' + exp + '</td>' +
+                                                    '<td>' + no + '</td>' +
+                                                    //'<td>' + licencelist[k].LicenceExpiry + '</td>' +
+                                                    // '<td>' + licencelist[k].UserCertificationTypeId + '</td>' +
+                                                    '<td><a onclick="editLicence(' + licencelist[k].Id + ')">Edit</a></td>' +
+                                                    '<td><a onclick="deleteLicence(' + licencelist[k].Id + ',this)">Delete</a></td>' +
+                                                    '</tr>';*/
                     }
                 }
 
-                $("#tblLicenceList tbody").html(licenceHtml);
-                $("#tblTradeExpList tbody").html(tradeHtml);
-                $("#tblPositionList tbody").html(positionHtml);
+                $("#licenceList").html(licenceHtml);
+                $("#tradeList").html(tradeHtml);
+                $("#positionList").html(positionsHtml);
 
 
             }

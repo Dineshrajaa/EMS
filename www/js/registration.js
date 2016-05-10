@@ -863,16 +863,16 @@ function listPositions() {
     var positionsHtml = "";
     if (positionHoldList != null) {
         for (var i = 0; i < positionHoldList.length; i++) {
-            var showQualifiedDetails = "block";
+            var showQualifiedDetails = "";
             var Exp = (positionHoldList[i].Experience != null && positionHoldList[i].Experience != "null") ? positionHoldList[i].Experience : "";
             var qualNo = (positionHoldList[i].QualificationNumber != null && positionHoldList[i].QualificationNumber != "null") ? positionHoldList[i].QualificationNumber : "";
             if (qualNo == "")
-                showQualifiedDetails = "none";
+                showQualifiedDetails = "display:none";
             positionsHtml += '<li onclick="editPosition(' + i + ')">';
             positionsHtml += '<table data-role="table" data-mode="" class="ui-responsive table-stroke"><tbody>';
             positionsHtml += '<tr><td>' + positionHoldList[i].Name + '</td></tr>';
-            positionsHtml += '<tr><td>Cert Type</td><td>' + positionHoldList[i].UserCertificationTypeName + '</td></tr>';
-            positionsHtml += '<tr style="display:' + showQualifiedDetails + '"><td>Qualification No.</td><td>' + qualNo + '</td></tr>';
+            positionsHtml += '<tr><td>Certification Type</td><td>' + positionHoldList[i].UserCertificationTypeName + '</td></tr>';
+            positionsHtml += '<tr style="' + showQualifiedDetails + '"><td>Qualification No.</td><td>' + qualNo + '</td></tr>';
             positionsHtml += '<tr><td>Experience</td><td>' + Exp + '</td></tr>';
             positionsHtml += '</tbody>';
             positionsHtml += '</table></li><hr>';
@@ -917,16 +917,16 @@ function listTrade() {
     var tradeHtml = "";
     if (tradeExpList != null) {
         for (var j = 0; j < tradeExpList.length; j++) {
-            var showQualifiedDetails = "block";
+            var showQualifiedDetails = "";
             var exp = (tradeExpList[j].Experience != null && tradeExpList[j].Experience != "null") ? tradeExpList[j].Experience : "";
             var no = (tradeExpList[j].QualificationNumber != null && tradeExpList[j].QualificationNumber != "") ? tradeExpList[j].QualificationNumber : "";
             if (no == "")
-                showQualifiedDetails = "none";
+                showQualifiedDetails = "display:none";
             tradeHtml += '<li onclick="editTrade(' + j + ')">';
             tradeHtml += '<table data-role="table" data-mode="" class="ui-responsive table-stroke"><tbody>';
             tradeHtml += '<tr><td>' + tradeExpList[j].Name + '</td></tr>';
-            tradeHtml += '<tr><td>Cert Type</td><td>' + tradeExpList[j].UserCertificationTypeName + '</td></tr>';
-            tradeHtml += '<tr style="display:' + showQualifiedDetails + '"><td>Qualification No.</td><td>' + no + '</td></tr>';
+            tradeHtml += '<tr><td>Certification Type</td><td>' + tradeExpList[j].UserCertificationTypeName + '</td></tr>';
+            tradeHtml += '<tr style="' + showQualifiedDetails + '"><td>Qualification No.</td><td>' + no + '</td></tr>';
             tradeHtml += '<tr><td>Experience</td><td> ' + exp + '</td></tr>';
             tradeHtml += '</tbody></table>';
             tradeHtml += '</li><hr>';
@@ -1002,21 +1002,21 @@ function listTickets() {
     $("#addLicencePara").hide();
     if (licenceTicketList != null) {
         for (var i = 0; i < licenceTicketList.length; i++) {
-            var showQualifiedDetails = "block";
+            var showQualifiedDetails = "";
             var exp = (licenceTicketList[i].Experience != null && licenceTicketList[i].Experience != "") ? licenceTicketList[i].Experience : "";
             var no = (licenceTicketList[i].LicenceNumber != null && licenceTicketList[i].LicenceNumber != "") ? licenceTicketList[i].LicenceNumber : "";
             var expiryDate = (licenceTicketList[i].LicenceExpiry != null && licenceTicketList[i].LicenceExpiry != "") ? licenceTicketList[i].LicenceExpiry : "";
             if (no == "") {
                 // No licence number
                 expiryDate = ""; // clear the expiry date
-                showQualifiedDetails = "none"; // hide the qualification oriented things
+                showQualifiedDetails = "display:none"; // hide the qualification oriented things
             }
             licenceHtml += '<li onclick="editLicence(' + i + ')">';
             licenceHtml += '<table data-role="table" data-mode="" class="ui-responsive table-stroke"><tbody>';
             licenceHtml += '<tr><td>' + licenceTicketList[i].Name + '</td></tr>';
             licenceHtml += '<tr><td>Licence Type </td><td>' + licenceTicketList[i].LicenceType + '</td></tr>';
-            licenceHtml += '<tr style="display:' + showQualifiedDetails + '"><td>Licence No.</td><td>' + no + '</td></tr>';
-            licenceHtml += '<tr style="display:' + showQualifiedDetails + '"><td>Expiry</td><td>' + expiryDate + '</td></tr>';
+            licenceHtml += '<tr style="' + showQualifiedDetails + '"><td>Licence No.</td><td>' + no + '</td></tr>';
+            licenceHtml += '<tr style="' + showQualifiedDetails + '"><td>Expiry</td><td>' + expiryDate + '</td></tr>';
             licenceHtml += '<tr><td>Experience</td><td>' + exp + '</td></tr>';
             licenceHtml += '</tbody></table>';
             licenceHtml += '</li><hr>';

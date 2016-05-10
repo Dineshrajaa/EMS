@@ -24,7 +24,7 @@ function showWait() {
 }
 
     $(".panelBtn").on("click",function(){
-        $('#profileDetailsPage').unblock();
+        $('#profileDetailsPage,#avatarPage').unblock();
     });
 
 $(document).bind("mobileinit", function () {

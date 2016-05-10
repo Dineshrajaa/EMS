@@ -277,13 +277,13 @@
         <div data-role="panel" id="cameraTypeList" class="ui-bottom-sheet ui-bottom-sheet-list" data-animate="false" data-position='bottom' data-display="overlay" style="min-height: 30%">
             <div class='row around-xs'>
                 <div class='col-xs-auto'>
-                    <a href='#' class='ui-bottom-sheet-link ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button' data-ajax='false' onclick="openCameraOrGallery('Camera.PictureSourceType.CAMERA')"><i class='zmdi zmdi-camera-front zmd-2x'></i><strong>Take Photo</strong></a>
+                    <a href='#' class='panelBtn ui-bottom-sheet-link ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button' data-ajax='false' onclick="openCameraOrGallery('Camera.PictureSourceType.CAMERA')"><i class='zmdi zmdi-camera-front zmd-2x'></i><strong>Take Photo</strong></a>
                 </div>
                 <div class='col-xs-auto'>
-                    <a href='#' class='ui-bottom-sheet-link ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button' data-ajax='false' onclick="openCameraOrGallery('Camera.PictureSourceType.PHOTOLIBRARY')"><i class='zmdi zmdi-file zmd-2x'></i><strong>Use Existing Photo</strong></a>
+                    <a href='#' class='panelBtn ui-bottom-sheet-link ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button' data-ajax='false' onclick="openCameraOrGallery('Camera.PictureSourceType.PHOTOLIBRARY')"><i class='zmdi zmdi-file zmd-2x'></i><strong>Use Existing Photo</strong></a>
                 </div>
                 <div class='col-xs-auto'>
-                    <a href='#' class='ui-bottom-sheet-link ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button' data-ajax='false'><i class='zmdi zmdi-close-circle zmd-2x'></i><strong>Cancel</strong></a>
+                    <a href='#' class='panelBtn ui-bottom-sheet-link ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button' data-ajax='false'><i class='zmdi zmdi-close-circle zmd-2x'></i><strong>Cancel</strong></a>
                 </div>
             </div>
         </div>
@@ -293,7 +293,7 @@
             <br/>
             <center>
                 <p>Add a photo of yourself.</p>
-                <a href="#cameraTypeList"><img id="profilePicImg" src="img/avtar.png" class="profileAvatar"></a>
+                <a href="#cameraTypeList" onclick="blockIt()"><img id="profilePicImg" src="img/avtar.png" class="profileAvatar"></a>
                 <br/>
                 <br/>
                 <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="submitProfile()">Submit</a>
@@ -515,7 +515,8 @@
             <br/>
             <br/>
             <br/>
-            <p>Your application has successfully been submitted. <br/>Please allow 24hours for your application to be reviewed. Upon approval, you will be granted access to this app. You will be notified when this has taken place.</p>
+            <center>
+            <p style="font-size:14px;">Your application has successfully been submitted. <br/>Please allow 24hours for your application to be reviewed. Upon approval, you will be granted access to this app. You will be notified when this has taken place.</p></center>
             <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary customfixed" onclick="redirect('index.html')" style="left:40%">Continue</a>
         </div>
     </div>

@@ -18,6 +18,11 @@ var input = document.getElementById("keyword");
 var autocomplete = new google.maps.places.Autocomplete(input, options);
 autocomplete.addListener('place_changed', fillInAddress);
 
+function blockIt(){
+    // To block the ui while showing panel
+    $('#avatarPage').block({ message: null });
+}
+
 function fillInAddress() {
     // Get the place details from the autocomplete object.
     var place = autocomplete.getPlace();

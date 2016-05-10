@@ -30,7 +30,9 @@ function openCameraOrGallery(sourceType) {
 }
 
 function cameraSuccess(imageData) {
-    $("#profilePicImg").attr("src", "data:image/jpeg;base64," + imageData);
+    // $("#profilePicImg").attr("src", "data:image/jpeg;base64," + imageData);
+    var imageData="data:image/jpeg;base64," + imageData;
+    $(".profileCircle").css("background-image","url("+imageData+")");
     updateProfilePicture(); // now send the picture to sevice    
 }
 
@@ -136,7 +138,11 @@ function fillInAddress() {
 }
 
 
-
+function blockIT(){
+    // To block the ui
+    $("#cameraTypeList").panel("open");
+    $('#profileDetailsPage').block({ message: null }); 
+}
 var trannieProfileObj = '';
 var currentUser = '';
 $(document).on("ready", function() {
@@ -146,6 +152,8 @@ $(document).on("ready", function() {
         fetchProfileDetail(currentUser.ID);
         GetEmployeeDetails(currentUser.ID);
     }
+
+
 
     getActiveLicenceType(0);
     getActiveTradeExp(0);

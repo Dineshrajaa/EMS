@@ -23,6 +23,9 @@ function showWait() {
     });
 }
 
+    $(".panelBtn").on("click",function(){
+        $('#profileDetailsPage').unblock();
+    });
 
 $(document).bind("mobileinit", function () {
     $.extend($.mobile, {

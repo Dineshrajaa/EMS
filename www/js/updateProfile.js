@@ -471,36 +471,7 @@ function next() {
     //$("#updateProfile").hide();
 }
 
-function printListOfTickets(id) {
-    showWait();
-    var url = serviceUrl + "Account/GetActiveLicenceTicketTypes";
-    $.ajax({
-        type: 'GET',
-        url: url,
-        data: '',
-        success: function(response) {
-            hideWait();
-            if (response.IsSuccessful) {
-                $("#licenceList").html("");
-                var options = '<option value="0">--select--</option>';
-                var result = response.Result;
-                for (var i = 0; i < result.length; i++) {
-                    if (result[i].ID === id) {
-                        options += '<option value=' + result[i].ID + ' selected="selected">' + result[i].Name + '</option>';
-                        $("#ddlLicence").prev().text(result[i].Name);
-                    } else {
-                        options += '<option value=' + result[i].ID + '>' + result[i].Name + '</option>';
-                    }
-                }
-                $("#licenceList").append(options);
-            }
-        },
-        error: function() {
-            hideWait();
-            toast('Network Error');
-        }
-    });
-}
+
 
 function getActiveLicenceType(id) {
     showWait();
@@ -513,7 +484,7 @@ function getActiveLicenceType(id) {
             hideWait();
             if (response.IsSuccessful) {
                 $("#ddlLicence").html("");
-                var options = '<option value="0">--select--</option>';
+                var options = '<option value="0">SELECT LICENCE</option>';
                 var result = response.Result;
                 for (var i = 0; i < result.length; i++) {
                     if (result[i].ID === id) {
@@ -579,7 +550,7 @@ function getActiveTradeExp(id) {
             hideWait();
             if (response.IsSuccessful) {
                 $("#ddlTradeExp").html("");
-                var options = '<option value="0">--select--</option>';
+                var options = '<option value="0">SELECT TRADE</option>';
                 var result = response.Result;
                 for (var i = 0; i < result.length; i++) {
                     if (result[i].ID === id) {
@@ -643,7 +614,7 @@ function getActivePositionHeld(id) {
             hideWait();
             if (response.IsSuccessful) {
                 $("#ddlPositionHeld").html("");
-                var options = '<option value="0">--select--</option>';
+                var options = '<option value="0">SELECT POSITION</option>';
                 var result = response.Result;
                 for (var i = 0; i < result.length; i++) {
                     if (result[i].ID === id) {
@@ -725,7 +696,7 @@ function GetEmployeeDetails(id) {
                         positionsHtml += '<li onclick="editPosition(' + i + ')">';
                         positionsHtml += '<table data-role="table" data-mode="" class="ui-responsive table-stroke"><tbody>';
                         positionsHtml += '<tr><td>' + result.PositionHeldList[i].Name + '</td></tr>';
-                        positionsHtml += '<tr><td>Certification Type</td><td>' + result.PositionHeldList[i].UserCertificationTypeName + '</td></tr>';
+                        positionsHtml += '<tr><td>Certification Type</td><td>' + result.PositionHeldList[i].UserCertificationType + '</td></tr>';
                         positionsHtml += '<tr style="' + showQualifiedDetails + '"><td>Qualification No.</td><td>' + qualNo + '</td></tr>';
                         positionsHtml += '<tr><td>Experience</td><td>' + Exp + '</td></tr>';
                         positionsHtml += '</tbody>';
@@ -778,7 +749,7 @@ function GetEmployeeDetails(id) {
                         licenceHtml += '<li onclick="editLicence(' + i + ')">';
                         licenceHtml += '<table data-role="table" data-mode="" class="ui-responsive table-stroke"><tbody>';
                         licenceHtml += '<tr><td>' + licencelist[k].Name + '</td></tr>';
-                        licenceHtml += '<tr><td>Licence Type </td><td>' + licencelist[k].LicenceType||"" + '</td></tr>';
+                        licenceHtml += '<tr><td>Licence Type </td><td>' + licencelist[k].UserCertificationType||"" + '</td></tr>';
                         licenceHtml += '<tr style="' + showQualifiedDetails + '"><td>Licence No.</td><td>' + no + '</td></tr>';
                         licenceHtml += '<tr style="' + showQualifiedDetails + '"><td>Expiry</td><td>' + expiryDate + '</td></tr>';
                         licenceHtml += '<tr><td>Experience</td><td>' + exp + '</td></tr>';

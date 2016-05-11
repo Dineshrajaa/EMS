@@ -242,7 +242,30 @@ $(document).on("ready", function() {
             $("#dvTrade .num").hide();
         }
     });
+    $("input[name='TradeExpPosition']").on("click", function() {
+        $("#dvTrade .exp").show();
+        $("#txtExpTrade").val("");
+        $("#txtQualTrade").val("");
+        console.warn($(this).val());
+        if ($(this).val() == "2") {
+            $("#dvTrade .num").show();
+        } else if ($(this).val() == "1") {
+            $("#dvTrade .num").hide();
+        }
 
+    });
+    $("input[name='CertifiedTypePosition']").on("click", function() {
+        $("#dvPosition .exp").show();
+        $("#txtExpPosition").val("");
+        $("#txtQualPosition").val("");
+        console.warn($(this).val());
+        if ($(this).val() == "2") {
+            $("#dvPosition .num").show();
+        } else if ($(this).val() == "1") {
+            $("#dvPosition .num").hide();
+        }
+
+    });
     $(document).on("click", "#dvPosition .ui-radio", function() {
         $("#dvPosition .exp").show();
         $("#txtExpPosition").val("");
@@ -454,13 +477,14 @@ $(function() {
     var mode = "scroller";
     var display = "bubble";
     var lang = "en";
-    $('#txtDob').mobiscroll().date({
-        theme: theme,
-        mode: mode,
-        display: display,
-        lang: lang,
-        dateOrder: 'ddmmyyyy',
-        dateFormat: 'dd/mm/yyyy'
+    $('#txtDob,#txtLicenceExpiry').mobiscroll().date({
+        lang: 'en',
+        theme: 'android-holo-light',
+        display: 'bubble',
+        display: 'bottom',
+        dateOrder: 'ddMMyy',
+        dateFormat: 'dd/mm/yyyy',
+        mode: 'scroller'
     });
 });
 
@@ -758,7 +782,7 @@ function GetEmployeeDetails(id) {
                         licenceHtml += '<li onclick="editLicence(' + licencelist[k].Id + ')">';
                         licenceHtml += '<table data-role="table" data-mode="" class="ui-responsive table-stroke"><tbody>';
                         licenceHtml += '<tr><td>' + licencelist[k].Name + '</td></tr>';
-                        licenceHtml += '<tr><td>Licence Type </td><td>' + licencelist[k].UserCertificationType || "" + '</td></tr>';
+                        licenceHtml += '<tr><td>Licence Type </td><td>' + licencelist[k].LicenceType || "" + '</td></tr>';
                         licenceHtml += '<tr style="' + showQualifiedDetails + '"><td>Licence No.</td><td>' + no + '</td></tr>';
                         licenceHtml += '<tr style="' + showQualifiedDetails + '"><td>Expiry</td><td>' + expiryDate + '</td></tr>';
                         licenceHtml += '<tr><td>Experience</td><td>' + exp + '</td></tr>';
@@ -795,8 +819,9 @@ function deletePosition(id) {
     var r = confirm('Are you sure');
     if (r) {
         showWait();
-        var obj = {};
-        obj.id = parseInt(id);
+        /*var obj = {};
+        obj.id = parseInt(id);*/
+        var id=parseInt(localStorage.selectedPosition);
         var url = serviceUrl + "Account/DeleteUserPositionHeld/";
         $.ajax({
             type: 'POST',
@@ -832,8 +857,9 @@ function deleteLicence(id) {
     var r = confirm('Are you sure');
     if (r) {
         showWait();
-        var obj = {};
-        obj.id = parseInt(id);
+        /* var obj = {};
+         obj.id = parseInt(id);*/
+        var id = parseInt(localStorage.selectedTicket);
         var url = serviceUrl + "Account/DeleteUserLicenceTicketType/";
         $.ajax({
             type: 'POST',
@@ -859,8 +885,9 @@ function deleteTrade(id) {
     var r = confirm('Are you sure');
     if (r) {
         showWait();
-        var obj = {};
-        obj.id = parseInt(id);
+        /*var obj = {};
+        obj.id = parseInt(id);*/
+        var id = parseInt(localStorage.selectedTradeID);
         var url = serviceUrl + "Account/DeleteUserTradeExp/";
         $.ajax({
             type: "POST",
@@ -940,27 +967,87 @@ function SaveLicence() {
 }
 
 function SaveTrade() {
-    var obj = {};
-    obj.Id = $("#hdnTradeId").val();
-    obj.TradeExperienceId = $("#ddlTradeExp").val();
-    obj.UserId = currentUser.ID;
-    obj.Experience = $("#txtExpTrade").val();
-    obj.QualificationNumber = $("#txtQualTrade").val();
-    obj.UserCertificationTypeId = $("input[name=TradeExpPosition]:checked").val(); //radio button value;
-    //obj = JSON.stringify(obj);
-    AddUserTradeExp(obj);
+    /*    var obj = {};
+        obj.Id = $("#hdnTradeId").val();
+        obj.TradeExperienceId = $("#ddlTradeExp").val();
+        obj.UserId = currentUser.ID;
+        obj.Experience = $("#txtExpTrade").val();
+        obj.QualificationNumber = $("#txtQualTrade").val();
+        obj.UserCertificationTypeId = $("input[name=TradeExpPosition]:checked").val(); //radio button value;
+        //obj = JSON.stringify(obj);
+        AddUserTradeExp(obj);*/
+    var isValid = true;
+    $(".tradeRequired").each(function() {
+        console.warn($(this));
+        var current = $(this);
+        if (current.val() == "" && current.is(":visible")) {
+            $(current).addClass("error");
+            isValid = false;
+        } else {
+            $(current).removeClass("error");
+        }
+    });
+    if (isValid) {
+        var obj = {};
+        obj.Id = $("#hdnTradeId").val();
+        obj.TradeExperienceId = $("#ddlTradeExp").val();
+        //obj.UserId = currentUser.ID;
+        obj.Name = $("#ddlTradeExpText").val();
+        obj.Experience = $("#txtExpTrade").val();
+        obj.QualificationNumber = $("#txtQualTrade").val();
+        obj.UserCertificationTypeId = $("input[name=TradeExpPosition]:checked").val() || ""; //radio button value;
+        if (obj.UserCertificationTypeId == "1")
+            obj.UserCertificationTypeName = "Experienced"; // Experienced
+        else if (obj.UserCertificationTypeId == "2")
+            obj.UserCertificationTypeName = "Qualified"; // Qualified
+        else obj.UserCertificationTypeName = "Qualified"; // not experienced or qualified
+        //obj = JSON.stringify(obj);
+        AddUserTradeExp(obj);
+    } else {
+        return false;
+    }
 }
 
 function SavePosition() {
-    var obj = {};
-    obj.Id = $("#hdnPositionId").val();
-    obj.PositionHeldId = $("#ddlPositionHeld").val();
-    obj.UserId = currentUser.ID;
-    obj.Experience = $("#txtExpPosition").val();
-    obj.QualificationNumber = $("#txtQualPosition").val();
-    obj.UserCertificationTypeId = $("input[name=CertifiedTypePosition]:checked").val(); //radio button value;
-    //obj = JSON.stringify(obj);
-    AddUserPositionHeld(obj);
+    /*    var obj = {};
+        obj.Id = $("#hdnPositionId").val();
+        obj.PositionHeldId = $("#ddlPositionHeld").val();
+        obj.UserId = currentUser.ID;
+        obj.Experience = $("#txtExpPosition").val();
+        obj.QualificationNumber = $("#txtQualPosition").val();
+        obj.UserCertificationTypeId = $("input[name=CertifiedTypePosition]:checked").val(); //radio button value;
+        //obj = JSON.stringify(obj);
+        AddUserPositionHeld(obj);*/
+    var isValid = true;
+    $(".positionRequired").each(function() {
+        console.warn($(this));
+        var current = $(this);
+        if (current.val() == "" && current.is(":visible")) {
+            $(current).addClass("error");
+            isValid = false;
+        } else {
+            $(current).removeClass("error");
+        }
+    });
+    if (isValid) {
+        var obj = {};
+        obj.Id = $("#hdnPositionId").val();
+        obj.PositionHeldId = $("#ddlPositionHeld").val();
+        //obj.UserId = currentUser.ID;
+        obj.Name = $("#ddlPositionHeldText").val();
+        obj.Experience = $("#txtExpPosition").val();
+        obj.QualificationNumber = $("#txtQualPosition").val();
+        obj.UserCertificationTypeId = $("input[name=CertifiedTypePosition]:checked").val(); //radio button value;
+        if (obj.UserCertificationTypeId == "1")
+            obj.UserCertificationTypeName = "Experienced"; // Experienced
+        else if (obj.UserCertificationTypeId == "2")
+            obj.UserCertificationTypeName = "Qualified"; // Qualified
+        else obj.UserCertificationTypeName = "Qualified"; // not experienced or qualified
+        //obj = JSON.stringify(obj);
+        AddUserPositionHeld(obj);
+    } else {
+        return false;
+    }
 }
 
 
@@ -997,7 +1084,10 @@ function AddUserTradeExp(obj) {
         success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
-
+                if (localStorage.ueditTradeFlag == "true") {
+                    $("#hdnTradeId").val(parseInt(localStorage.utradeIDSaved) + 1);
+                } else
+                    $("#hdnTradeId").val(parseInt($("#hdnTradeId").val()) + 1);
                 toast('Trade Added Successfully');
                 redirectWithTimeout("UpdateProfile.html");
             }
@@ -1042,6 +1132,7 @@ function editLicence(id) {
     localStorage.ueditLicenceFlag = "true"; // make the edit licence true
     showWait();
     var url = serviceUrl + "Account/GetUserLicenceTicketType/";
+    localStorage.selectedTicket = id;
     $.ajax({
         type: 'GET',
         url: url + id,
@@ -1114,6 +1205,7 @@ function editLicence(id) {
 function editPosition(id) {
     showWait();
     var url = serviceUrl + "Account/GetUserPositionHeld/";
+    localStorage.selectedPosition=id;
     $.ajax({
         type: 'GET',
         url: url + id,
@@ -1122,22 +1214,49 @@ function editPosition(id) {
             hideWait();
             if (response.IsSuccessful) {
                 $.mobile.pageContainer.pagecontainer("change", "#addeditPosition", { transition: "slide" });
+                /*                $("#hdnPositionId").val(response.Result.Id);
+                                getActivePositionHeld(response.Result.PositionHeldId);
+                                //getPositionHeldDetail(response.Result.PositionHeldId);
+                                $("#ddlPositionHeld").val(response.Result.PositionHeldId);
+                                $("#txtExpPosition").val(response.Result.Experience);
+                                $("#txtQualPosition").val(response.Result.QualificationNumber);
+                                $("#dvPosition").show();
+                                $("#dvPosition .container").show();
+                                $("#dvPosition .exp").show();
+                                if (response.Result.UserCertificationTypeId === 1) {
+                                    $("#expPosition").attr("checked", true);
+                                    $("#expPosition").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
+                                    $("#dvPosition .num").hide();
+                                } else {
+                                    if (response.Result.UserCertificationTypeId === 2) {
+                                        $("#qualPosition").attr("checked", true);
+                                        $("#qualPosition").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
+                                        $("#dvPosition .num").show();
+                                    } else {
+                                        $("#dvPosition .container").hide();
+                                        $("#dvPosition .num").show();
+                                    }
+                                }*/
+                $("#addPosBtn").text("Update"); // change the button text to edit
+                $("#delPosBtn").show(); // show the delete button
+                localStorage.upositionIDSaved = $("#hdnPositionId").val();
                 $("#hdnPositionId").val(response.Result.Id);
                 getActivePositionHeld(response.Result.PositionHeldId);
-                //getPositionHeldDetail(response.Result.PositionHeldId);
+                //getPositionHeldDetail(positionHoldList[count].PositionHeldId);
                 $("#ddlPositionHeld").val(response.Result.PositionHeldId);
                 $("#txtExpPosition").val(response.Result.Experience);
                 $("#txtQualPosition").val(response.Result.QualificationNumber);
                 $("#dvPosition").show();
                 $("#dvPosition .container").show();
                 $("#dvPosition .exp").show();
-                if (response.Result.UserCertificationTypeId === 1) {
-                    $("#expPosition").attr("checked", true);
+                $("#expPosition,#qualPosition").attr("checked", false).checkboxradio("refresh");
+                if (response.Result.UserCertificationTypeId == "1") {
+                    $("#expPosition").attr("checked", true).checkboxradio("refresh");
                     $("#expPosition").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
                     $("#dvPosition .num").hide();
                 } else {
-                    if (response.Result.UserCertificationTypeId === 2) {
-                        $("#qualPosition").attr("checked", true);
+                    if (response.Result.UserCertificationTypeId == "2") {
+                        $("#qualPosition").attr("checked", true).checkboxradio("refresh");
                         $("#qualPosition").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
                         $("#dvPosition .num").show();
                     } else {
@@ -1157,6 +1276,7 @@ function editPosition(id) {
 
 function editTrade(id) {
     showWait();
+    localStorage.selectedTradeID = id;
     var url = serviceUrl + "Account/GetUserTradeExp/";
     $.ajax({
         type: 'GET',
@@ -1166,6 +1286,33 @@ function editTrade(id) {
             hideWait();
             if (response.IsSuccessful) {
                 $.mobile.pageContainer.pagecontainer("change", "#addeditTrade", { transition: "slide" });
+                /*$("#hdnTradeId").val(response.Result.Id);
+                getActiveTradeExp(response.Result.TradeExperienceId);
+                getTradeExpDetail(response.Result.TradeExperienceId);
+                $("#ddlTradeExp").val(response.Result.TradeExperienceId);
+                $("#txtExpTrade").val(response.Result.Experience);
+                $("#txtQualTrade").val(response.Result.QualificationNumber);
+                $("#dvTrade").show();
+                $("#dvTrade .container").show();
+                $("#dvTrade .exp").show();
+                if (response.Result.UserCertificationTypeId == "1") {
+                    $("#expTrade").attr("checked", true);
+                    $("#expTrade").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
+                    $("#dvTrade .num").hide();
+
+                } else {
+                    if (response.Result.UserCertificationTypeId == "2") {
+                        $("#qualTrade").attr("checked", true);
+                        $("#qualTrade").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
+                        $("#dvTrade .num").show();
+                    } else {
+                        $("#dvTrade .container").hide();
+                        $("#dvTrade .num").show();
+                    }
+                }*/
+                $("#addTradeBtn").text("Update"); // change the button text to Edit
+                $("#delTradeBtn").show(); // show the delete trade button    
+                localStorage.utradeIDSaved = $("#hdnTradeId").val();
                 $("#hdnTradeId").val(response.Result.Id);
                 getActiveTradeExp(response.Result.TradeExperienceId);
                 getTradeExpDetail(response.Result.TradeExperienceId);
@@ -1175,14 +1322,17 @@ function editTrade(id) {
                 $("#dvTrade").show();
                 $("#dvTrade .container").show();
                 $("#dvTrade .exp").show();
-                if (response.Result.UserCertificationTypeId === 1) {
-                    $("#expTrade").attr("checked", true);
+                $("#expTrade,#qualTrade").attr("checked", false).checkboxradio("refresh");
+                if (response.Result.UserCertificationTypeId == "1") {
+                    console.warn("Experienced profile");
+                    $("#expTrade").attr("checked", true).checkboxradio("refresh");
                     $("#expTrade").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
                     $("#dvTrade .num").hide();
-
                 } else {
-                    if (response.Result.UserCertificationTypeId === 2) {
-                        $("#qualTrade").attr("checked", true);
+
+                    if (response.Result.UserCertificationTypeId == "2") {
+                        console.warn("Qualified profile");
+                        $("#qualTrade").attr("checked", true).checkboxradio("refresh");
                         $("#qualTrade").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
                         $("#dvTrade .num").show();
                     } else {
@@ -1190,6 +1340,7 @@ function editTrade(id) {
                         $("#dvTrade .num").show();
                     }
                 }
+
             }
         },
         error: function() {
@@ -1247,14 +1398,12 @@ function resetTheHiddenID(moduleName) {
             localStorage.ueditLicenceFlag = false;
         }
 
-    }
-    else if (moduleName == "positionsPage") {
+    } else if (moduleName == "positionsPage") {
         if (localStorage.ueditPositionFlag == "true") {
             $("#hdnPositionId").val(parseInt(localStorage.upositionIDSaved));
             localStorage.ueditPositionFlag = "false";
         }
-    }
-    else if (moduleName == "tradePage") {
+    } else if (moduleName == "tradePage") {
         if (localStorage.ueditTradeFlag == "true") {
             $("#hdnTradeId").val(parseInt(localStorage.utradeIDSaved));
             localStorage.ueditPositionFlag = "false";

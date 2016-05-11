@@ -586,7 +586,7 @@
                 <hr>
                 <ul id="tradeList" data-role="listview"></ul>
                 <center>
-                    <a href="#addeditTrade" class="ui-btn ui-btn-raised ui-mini clr-primary">
+                    <a href="#addeditTrade" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="makeEditFalse('ueditTradeFlag')">
                         Add New </a>
                 </center>
             </div>
@@ -693,7 +693,7 @@
         </div>
     </div>
     <div data-role="page" id="addeditTrade" data-theme="a" class="nd2-no-menu-swipe registration">
-        <div data-role="header" data-position="fixed">
+        <!--         <div data-role="header" data-position="fixed">
             <h1>
                 Add/Edit Trade
             </h1>
@@ -737,10 +737,61 @@
                     </div>
                 </div>
             </div>
+        </div> -->
+        <div data-role="header" data-position="fixed">
+            <h1>
+                Trade Experience
+            </h1>
+            <a href="#experiencePage" class="ui-btn ui-btn-left" onclick="resetTheHiddenID('tradePage')"><i class="zmdi zmdi-arrow-back zmd-fw">
+            </i></a>
+        </div>
+        <div data-role="content">
+            <br/>
+            <br/>
+            <br/>
+            <label>Trade Exp.</label>
+            <select id="ddlTradeExp">
+            </select>
+            <input type="hidden" id="ddlTradeExpText" value="" />
+            <input type="hidden" id="hdnTradeId" value="0" />
+            <div id="dvTrade" style="display: none; padding: 15px; border: 2px solid gray">
+                <div class="container">
+                    <label>
+                        Certification Type
+                    </label>
+                    <label>
+                        <input type="radio" name="TradeExpPosition" id="expTrade" value="1" /> Experienced
+                    </label>
+                    <label>
+                        <input type="radio" name="TradeExpPosition" id="qualTrade" value="2" /> Qualified
+                    </label>
+                </div>
+                <div class="num" style="display: none;">
+                    <label>
+                        Qualification Number
+                    </label>
+                    <input type="text" id="txtQualTrade" required class="tradeRequired" />
+                </div>
+                <div class="exp" style="display: none;">
+                    <label>
+                        How much experience do you have in this trade? (example:1y 6m)
+                    </label>
+                    <input type="text" id="txtExpTrade" required class="tradeRequired" />
+                </div>
+                <center>
+                    <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" id="addTradeBtn" onclick="SaveTrade()">
+                            Add</a>
+                    <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="deleteTrade()" style="left:5px;display: none;" id="delTradeBtn">Delete</a></center>
+            </div>
+            <!-- <label>Qualification No.</label>
+            <input type="text" id="tQualificationNo" />
+            <label>How much experience do you have in this trade?(example:1y 6m)</label>
+            <input type="text" id="tExperience"> 
+            <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="SaveTrade()">Add</a>-->
         </div>
     </div>
     <div data-role="page" id="addeditPosition" data-theme="a" class="nd2-no-menu-swipe registration">
-        <div data-role="header" data-position="fixed">
+        <!--         <div data-role="header" data-position="fixed">
             <h1>
                 Add/Edit Position
             </h1>
@@ -783,6 +834,54 @@
                     </div>
                     <a href="" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="SavePosition()">
                         Save </a>
+                </div>
+            </div>
+        </div> -->
+        <div data-role="header" data-position="fixed">
+            <h1>
+                Add/Edit Position
+            </h1>
+            <a href="#positionsPage" class="ui-btn ui-btn-left" onclick="resetTheHiddenID('positionsPage')"><i class="zmdi zmdi-arrow-back zmd-fw">
+            </i></a>
+        </div>
+        <div role="main">
+            <div data-role="content">
+                <br />
+                <br />
+                <label>
+                    Select Position Held
+                </label>
+                <select id="ddlPositionHeld">
+                </select>
+                <input type="hidden" id="ddlPositionHeldText" value="" />
+                <input type="hidden" id="hdnPositionId" value="0" />
+                <div id="dvPosition" style="display: none; padding: 15px; border: 2px solid gray">
+                    <div class="container">
+                        <label>
+                            Certification Type
+                        </label>
+                        <label>
+                            <input type="radio" name="CertifiedTypePosition" id="expPosition" value="1" /> Experienced
+                        </label>
+                        <label>
+                            <input type="radio" name="CertifiedTypePosition" id="qualPosition" value="2" /> Qualified
+                        </label>
+                    </div>
+                    <div class="num" style="display: none;">
+                        <label>
+                            Qualification Number
+                        </label>
+                        <input type="text" id="txtQualPosition" required class="positionRequired" />
+                    </div>
+                    <div class="exp" style="display: none;">
+                        <label>
+                            How much experience do you have in this position? (example:1y 6m)
+                        </label>
+                        <input type="text" id="txtExpPosition" required class="positionRequired" />
+                    </div>
+                    <center><a href="" class="ui-btn ui-btn-raised ui-mini clr-primary" id="addPosBtn" onclick=" SavePosition() ">
+                        Save </a>
+                        <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="deletePosition()" style="left:5px;display: none;" id="delPosBtn">Delete</a></center>
                 </div>
             </div>
         </div>

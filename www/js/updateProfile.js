@@ -484,7 +484,8 @@ $(function() {
         display: 'bottom',
         dateOrder: 'ddMMyy',
         dateFormat: 'dd/mm/yyyy',
-        mode: 'scroller'
+        mode: 'scroller',
+        maxDate: new Date(2050, 12, 31)
     });
 });
 

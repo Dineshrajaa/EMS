@@ -338,7 +338,8 @@ $(function () {
         display: 'bottom',
         dateOrder: 'ddMMyy',
         dateFormat: 'dd/mm/yyyy',
-        mode: 'scroller'
+        mode: 'scroller',
+        maxDate: new Date(2050, 12, 31)
         //        dateOrder: 'ddmmyyyy',
         //        dateFormat: 'dd/mm/yyyy'
     });
@@ -510,6 +511,7 @@ function openCameraOrGallery(sourceType) {
 
 function cameraSuccess(imageData) {
     $("#profilePicImg").attr("src", "data:image/jpeg;base64," + imageData);
+    $("#submitProfileBtn").show(); // after adding photo show the submit button
 }
 
 function cameraError(err) {

@@ -18,7 +18,7 @@ var input = document.getElementById("keyword");
 var autocomplete = new google.maps.places.Autocomplete(input, options);
 autocomplete.addListener('place_changed', fillInAddress);
 
-function blockIt(){
+function blockIt() {
     // To block the ui while showing panel
     $('#avatarPage').block({ message: null });
 }
@@ -59,7 +59,7 @@ var tradeExpId = 1;
 
 function validate() {
     isValid = true;
-    $(".required").each(function () {
+    $(".required").each(function() {
         var current = $(this);
         if (current.val() == "") {
             $(current).addClass("error");
@@ -81,7 +81,7 @@ function validate() {
 function validateRegisterFields(fieldClass, nextpageId) {
     // To validate the fields in register page
     isValid = true;
-    $("." + fieldClass).each(function () {
+    $("." + fieldClass).each(function() {
         var current = $(this);
         if (current.val() == "") {
             $(current).addClass("error");
@@ -167,7 +167,7 @@ function checkEmailExistance(nextpageId) {
         url: url,
         data: jsonObj,
         async: false,
-        success: function (result) {
+        success: function(result) {
             if (result.IsSuccessful) {
                 if (result.Result) {
                     toast('Email already registered');
@@ -179,15 +179,15 @@ function checkEmailExistance(nextpageId) {
                 toast('Network Error');
             }
         },
-        error: function () {
+        error: function() {
             toast('Network Error');
         }
     });
 }
 
-function restoreTheRegFields(){
+function restoreTheRegFields() {
     // To restore the details in the registration page
-    if(jsonObj!=null){
+    if (jsonObj != null) {
         // Profile is not complete yet
         $("#ddlTitle").val(jsonObj.titleId).change(); // change the title
         $("#txtFirstName").val(jsonObj.FirstName); // restore first name
@@ -203,12 +203,13 @@ function restoreTheRegFields(){
         $("#ddlGender").val(jsonObj.GenderId); // restore gender id
         $("#txtPin,#txtCPin").val(jsonObj.Password); // restore pin
         $("#administrative_area_level_1").val(jsonObj.State); // restore state
-        if(jsonObj.IsPaySlipSent)
-            $("#chkPaySlipMail").attr("checked",true).checkboxradio("refresh");
+        if (jsonObj.IsPaySlipSent)
+            $("#chkPaySlipMail").attr("checked", true).checkboxradio("refresh");
         else
-            $("#chkPaySlipMail").attr("checked",false).checkboxradio("refresh");
+            $("#chkPaySlipMail").attr("checked", false).checkboxradio("refresh");
     }
 }
+
 function register(nextpageId) {
     var url = serviceUrl + "Account/AddUser";
     var titleId = $("#ddlTitle").val();
@@ -245,14 +246,14 @@ function register(nextpageId) {
         default:
             break;
     }
-    jsonObj.titleId=titleId;
+    jsonObj.titleId = titleId;
     jsonObj.Title = title;
     jsonObj.FirstName = firstName;
     jsonObj.MiddleName = middleName;
     jsonObj.LastName = lastName;
     jsonObj.DateOfBirth = dob;
     jsonObj.Email = email;
-    jsonObj.StreetAddress= streetAddress;
+    jsonObj.StreetAddress = streetAddress;
 
     jsonObj.City = city;
     jsonObj.State = state;
@@ -297,7 +298,7 @@ function submitProfile() {
         type: "POST",
         url: url,
         data: jsonObj,
-        success: function (result) {
+        success: function(result) {
             if (result.IsSuccessful) {
                 navigatePage("#successfulRegPage");
                 //alert("Registration has been successfully done");
@@ -306,7 +307,7 @@ function submitProfile() {
                 toast("Network Error");
             }
         },
-        error: function () {
+        error: function() {
             console.log('Some error occured in registration, please try again');
         }
     });
@@ -314,7 +315,7 @@ function submitProfile() {
 
 function RegisterUser(nextpageId) {
 
-    $(".required").each(function () {
+    $(".required").each(function() {
         var cur = this;
         if ($(cur).hasClass("error")) {
             return false;
@@ -329,8 +330,8 @@ function RegisterUser(nextpageId) {
     //        return false;
     //    }
 }
-$(function () {
-    $("#txtDob").val("01/01/1990");
+$(function() {
+    // $("#txtDob").val("01/01/1990");
     $('#txtDob,#txtLicenceExpiry').mobiscroll().date({
         lang: 'en',
         theme: 'android-holo-light',
@@ -340,18 +341,18 @@ $(function () {
         dateFormat: 'dd/mm/yyyy',
         mode: 'scroller',
         maxDate: new Date(2050, 12, 31)
-        //        dateOrder: 'ddmmyyyy',
-        //        dateFormat: 'dd/mm/yyyy'
+            //        dateOrder: 'ddmmyyyy',
+            //        dateFormat: 'dd/mm/yyyy'
     });
 });
 
-$(document).on("ready", function () {
-    $(".required").on("change", function () {
+$(document).on("ready", function() {
+    $(".required").on("change", function() {
         var cur = this;
         $(cur).removeClass("error");
     });
 
-    $(document).on("click", "#btnAddLicence", function () {
+    $(document).on("click", "#btnAddLicence", function() {
         $("#txtExperience").val("");
         $("#txtNumberlLicence").val("");
         $("#hdnLicenceTypeId").val(licenceId++);
@@ -362,7 +363,7 @@ $(document).on("ready", function () {
         $("#qualLicence").prev().removeClass("ui-radio-on").addClass("ui-radio-off");
         $.mobile.pageContainer.pagecontainer("change", "#addeditLicence", { transition: "slide" });
     });
-    $(document).on("click", "#btnAddTrade", function () {
+    $(document).on("click", "#btnAddTrade", function() {
         $("#txtExpTrade").val("");
         $("#txtQualTrade").val("");
         $("#hdnTradeId").val(tradeExpId++);
@@ -374,7 +375,7 @@ $(document).on("ready", function () {
         //$("#ddlTradeExp").val("0");
         $.mobile.pageContainer.pagecontainer("change", "#addeditTrade", { transition: "slide" });
     });
-    $(document).on("click", "#btnAddPosition", function () {
+    $(document).on("click", "#btnAddPosition", function() {
         $("#txtExpPosition").val("");
         $("#txtQualPosition").val("");
         $("#hdnPositionId").val(positionId++);
@@ -386,22 +387,22 @@ $(document).on("ready", function () {
         $.mobile.pageContainer.pagecontainer("change", "#addeditPosition", { transition: "slide" });
     });
 
-    $(document).on("change", "#ddlLicence", function () {
+    $(document).on("change", "#ddlLicence", function() {
         var val = $(this).val();
         getLicenceTypDetail(val);
     });
 
-    $(document).on("change", "#ddlTradeExp", function () {
+    $(document).on("change", "#ddlTradeExp", function() {
         var val = $(this).val();
         getTradeExpDetail(val);
     });
 
-    $(document).on("change", "#ddlPositionHeld", function () {
+    $(document).on("change", "#ddlPositionHeld", function() {
         var val = $(this).val();
         getPositionHeldDetail(val);
     });
 
-    $(document).on("click", "#dvLicence .ui-radio", function () {
+    $(document).on("click", "#dvLicence .ui-radio", function() {
         $("#dvLicence .exp").show();
         $("#txtExperience").val("");
         $("#txtNumberlLicence").val("");
@@ -411,13 +412,15 @@ $(document).on("ready", function () {
             // $("#txtNumberlLicence,#txtLicenceExpiry").removeClass("licenceRequired").addClass("licenceRequired");
             // $("#txtExperience").removeClass("licenceRequired");
         } else {
+            var manipulatedExpiryDate = new Date().getDate() + "/" + (new Date().getMonth() + 1) + "/" + (new Date().getFullYear() + 1);
+            $("#txtLicenceExpiry").val(manipulatedExpiryDate); // fill the manipulated date
             $("#dvLicence .exp").show();
             $("#dvLicence .num").hide();
             // $("#txtNumberlLicence,#txtLicenceExpiry").removeClass("licenceRequired");
             // $("#txtExperience").addClass("licenceRequired");
         }
     });
-    $("input[name='LicencePosition']").on("click", function () {
+    $("input[name='LicencePosition']").on("click", function() {
         $("#dvLicence .exp").show();
         $("#txtExperience").val("");
         $("#txtNumberlLicence").val("");
@@ -431,7 +434,7 @@ $(document).on("ready", function () {
         }
 
     });
-    $("input[name='TradeExpPosition']").on("click", function () {
+    $("input[name='TradeExpPosition']").on("click", function() {
         $("#dvTrade .exp").show();
         $("#txtExpTrade").val("");
         $("#txtQualTrade").val("");
@@ -465,7 +468,7 @@ $(document).on("ready", function () {
     $("#dvPosition .num").hide();
     }
     });*/
-    $("input[name='CertifiedTypePosition']").on("click", function () {
+    $("input[name='CertifiedTypePosition']").on("click", function() {
         $("#dvPosition .exp").show();
         $("#txtExpPosition").val("");
         $("#txtQualPosition").val("");
@@ -525,7 +528,7 @@ function getActiveLicenceType(id) {
         type: 'GET',
         url: url,
         data: '',
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
                 $("#ddlLicence").html("");
@@ -542,7 +545,7 @@ function getActiveLicenceType(id) {
                 $("#ddlLicence").append(options);
             }
         },
-        error: function () {
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -559,7 +562,7 @@ function getLicenceTypDetail(id) {
         type: 'GET',
         url: url,
         data: obj,
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
                 var result = response.Result;
@@ -582,7 +585,7 @@ function getLicenceTypDetail(id) {
 
             }
         },
-        error: function () {
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -596,7 +599,7 @@ function getActiveTradeExp(id) {
         type: 'GET',
         url: url,
         data: '',
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
                 $("#ddlTradeExp").html("");
@@ -613,7 +616,7 @@ function getActiveTradeExp(id) {
                 $("#ddlTradeExp").append(options);
             }
         },
-        error: function () {
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -623,14 +626,14 @@ function getActiveTradeExp(id) {
 function getTradeExpDetail(id) {
     showWait();
     var obj = {};
-    obj.id = parseInt(id); ;
+    obj.id = parseInt(id);;
     //obj = JSON.stringify(obj);
     var url = serviceUrl + "Account/GetTradeExperienceById";
     $.ajax({
         type: 'GET',
         url: url,
         data: obj,
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
                 var result = response.Result;
@@ -647,7 +650,7 @@ function getTradeExpDetail(id) {
                 }
             }
         },
-        error: function () {
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -661,7 +664,7 @@ function getActivePositionHeld(id) {
         type: 'GET',
         url: url,
         data: '',
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
                 $("#ddlPositionHeld").html("");
@@ -678,7 +681,7 @@ function getActivePositionHeld(id) {
                 $("#ddlPositionHeld").append(options);
             }
         },
-        error: function () {
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -688,14 +691,14 @@ function getActivePositionHeld(id) {
 function getPositionHeldDetail(id) {
     showWait();
     var obj = {};
-    obj.id = parseInt(id); ;
+    obj.id = parseInt(id);;
     //obj = JSON.stringify(obj);
     var url = serviceUrl + "Account/GetPositionHeldById";
     $.ajax({
         type: 'GET',
         url: url,
         data: obj,
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
                 var result = response.Result;
@@ -712,7 +715,7 @@ function getPositionHeldDetail(id) {
                 }
             }
         },
-        error: function () {
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -780,7 +783,7 @@ function deleteTrade(id, el) {
 
 function SaveTrade() {
     var isValid = true;
-    $(".tradeRequired").each(function () {
+    $(".tradeRequired").each(function() {
         console.warn($(this));
         var current = $(this);
         if (current.val() == "" && current.is(":visible")) {
@@ -814,7 +817,7 @@ function SaveTrade() {
 
 function SavePosition() {
     var isValid = true;
-    $(".positionRequired").each(function () {
+    $(".positionRequired").each(function() {
         console.warn($(this));
         var current = $(this);
         if (current.val() == "" && current.is(":visible")) {
@@ -956,7 +959,7 @@ function listTrade() {
 
 function SaveLicence() {
     var isValid = true;
-    $(".licenceRequired").each(function () {
+    $(".licenceRequired").each(function() {
         console.warn($(this));
         var current = $(this);
         if (current.val() == "" && current.is(":visible")) {
@@ -1050,14 +1053,12 @@ function resetTheHiddenID(moduleName) {
             localStorage.editLicenceFlag = false;
         }
 
-    }
-    else if (moduleName == "positionsPage") {
+    } else if (moduleName == "positionsPage") {
         if (localStorage.editPositionFlag == "true") {
             $("#hdnPositionId").val(parseInt(localStorage.positionIDSaved));
             localStorage.editPositionFlag = "false";
         }
-    }
-    else if (moduleName == "tradePage") {
+    } else if (moduleName == "tradePage") {
         if (localStorage.editTradeFlag == "true") {
             $("#hdnTradeId").val(parseInt(localStorage.tradeIDSaved));
             localStorage.editPositionFlag = "false";
@@ -1073,7 +1074,7 @@ function makeEditFalse(flagname) {
     if (flagname == "editLicenceFlag") {
         localStorage.editLicenceFlag = "false";
         $("#txtNumberlLicence,#txtLicenceExpiry,#txtExperience").val(""); // clear input fields
-        // $("#txtLicenceExpiry").val(manipulatedExpiryDate); // fill the manipulated date
+        $("#txtLicenceExpiry").val(manipulatedExpiryDate); // fill the manipulated expirydate
         $("#delLicBtn").hide(); // hide the delete button
         $("#addLicenceBtn").text("Add"); // change the button text to add
         $("#ddlLicence").val("0").change(); // make the select value 0
@@ -1238,7 +1239,7 @@ function rebindGrids() {
             var Exp = (positionHoldList[i].Experience != null && positionHoldList[i].Experience != "null") ? positionHoldList[i].Experience : "";
             var qualNo = (positionHoldList[i].QualificationNumber != null && positionHoldList[i].QualificationNumber != "null") ? positionHoldList[i].QualificationNumber : "";
             positionHtml += '<tr><td>' + positionHoldList[i].Name + '</td><td>' + Exp + '</td><td>' + qualNo + '</td>' +
-            //'<td>' + positionheldslist[i].UserCertificationTypeId + '</td>' +
+                //'<td>' + positionheldslist[i].UserCertificationTypeId + '</td>' +
                 '<td><a onclick="editPosition(' + positionHoldList[i].Id + ')">Edit</a></td>' +
                 '<td><a onclick="deletePosition(' + positionHoldList[i].Id + ',this)">Delete</a></td>' +
                 '</tr>';
@@ -1253,7 +1254,7 @@ function rebindGrids() {
                 '<td>' + tradeExpList[j].Name + '</td>' +
                 '<td>' + exp + '</td>' +
                 '<td>' + no + '</td>' +
-            //'<td>' + tradeExpList[j].UserCertificationTypeId + '</td>' +
+                //'<td>' + tradeExpList[j].UserCertificationTypeId + '</td>' +
                 '<td><a onclick="editTrade(' + tradeExpList[j].Id + ')">Edit</a></td>' +
                 '<td><a onclick="deleteTrade(' + tradeExpList[j].Id + ',this)">Delete</a></td>' +
                 '</tr>';
@@ -1268,8 +1269,8 @@ function rebindGrids() {
                 '<td>' + licenceTicketList[k].Name + '</td>' +
                 '<td>' + exp + '</td>' +
                 '<td>' + no + '</td>' +
-            //'<td>' + licenceTicketList[k].LicenceExpiry + '</td>' +
-            // '<td>' + licenceTicketList[k].UserCertificationTypeId + '</td>' +
+                //'<td>' + licenceTicketList[k].LicenceExpiry + '</td>' +
+                // '<td>' + licenceTicketList[k].UserCertificationTypeId + '</td>' +
                 '<td><a onclick="editLicence(' + licenceTicketList[k].Id + ')">Edit</a></td>' +
                 '<td><a onclick="deleteLicence(' + licenceTicketList[k].Id + ',this)">Delete</a></td>' +
                 '</tr>';

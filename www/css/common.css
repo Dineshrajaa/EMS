@@ -288,3 +288,8 @@ div[data-role="content"] {
 .text-white {
     color: #ffffff !important;
 }
+
+
+.panelBtn{
+    left:25%;
+}

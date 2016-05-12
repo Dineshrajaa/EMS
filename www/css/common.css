@@ -289,7 +289,20 @@ div[data-role="content"] {
     color: #ffffff !important;
 }
 
+.panelBtn {
+    left: 25%;
+}
 
-.panelBtn{
-    left:25%;
+.ui-header {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+.messageAuthor {
+    float: right;
+    margin-top: -10px
+}
+
+.messageP{
+    padding-left: 2%;
 }

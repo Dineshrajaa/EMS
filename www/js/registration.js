@@ -806,7 +806,10 @@ function SaveTrade() {
             obj.UserCertificationTypeName = "Experienced"; // Experienced
         else if (obj.UserCertificationTypeId == "2")
             obj.UserCertificationTypeName = "Qualified"; // Qualified
-        else obj.UserCertificationTypeName = "Qualified"; // not experienced or qualified
+        else {
+            obj.UserCertificationTypeName = "Qualified";
+            obj.UserCertificationTypeId = 2;
+        } // not experienced or qualified
         //obj = JSON.stringify(obj);
         AddUserTradeExp(obj);
     } else {
@@ -840,7 +843,10 @@ function SavePosition() {
             obj.UserCertificationTypeName = "Experienced"; // Experienced
         else if (obj.UserCertificationTypeId == "2")
             obj.UserCertificationTypeName = "Qualified"; // Qualified
-        else obj.UserCertificationTypeName = "Qualified"; // not experienced or qualified
+        else {
+            obj.UserCertificationTypeName = "Qualified";
+            obj.UserCertificationTypeId = 2;
+        } // not experienced or qualified
         //obj = JSON.stringify(obj);
         AddUserPositionHeld(obj);
     } else {
@@ -980,6 +986,14 @@ function SaveLicence() {
         obj.LicenceExpiry = $("#txtLicenceExpiry").val();
         obj.LicenceType = $("#licenceTypeh").text(); // Licence type
         obj.UserCertificationTypeId = $("input[name=LicencePosition]:checked").val(); //radio button value;
+        if (obj.UserCertificationTypeId == "1")
+            obj.UserCertificationTypeName = "Experienced"; // Experienced
+        else if (obj.UserCertificationTypeId == "2")
+            obj.UserCertificationTypeName = "Qualified"; // Qualified
+        else {
+            obj.UserCertificationTypeName = "Qualified";
+            obj.UserCertificationTypeId = 2;
+        } 
         //obj = JSON.stringify(obj);
         AddUserLicenceTicketType(obj);
 

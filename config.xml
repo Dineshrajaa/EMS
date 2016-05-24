@@ -76,6 +76,8 @@
     <plugin name="cordova-plugin-camera" spec="~2.2.0" />
     <plugin name="cordova-plugin-dialogs" spec="~1.2.1" />
     <plugin name="de.appplant.cordova.plugin.local-notification" spec="~0.8.4" />
-	<!--<plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay" spec="1.2.0" source="pgb" /> -->
-	<plugin name="de.appplant.cordova.plugin.background-mode" spec="0.6.4" source="pgb" />
+    <plugin name="de.appplant.cordova.plugin.background-mode" source="pgb" spec="0.6.4" />
+    <plugin name="phonegap-plugin-push" spec="~1.6.3">
+        <variable name="SENDER_ID" value="739681536553" />
+    </plugin>
 </widget>

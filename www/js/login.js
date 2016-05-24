@@ -34,8 +34,42 @@ $(document).on('ready', function() {
             dologIn($("#txtUserName").val().trim(), $("#txtPassword").val().trim());
         }
     });
+    registerPush();
 
 });
+
+function registerPush() {
+    // To register the device for push notification
+    var push = PushNotification.init({
+        android: {
+            senderID: "739681536553"
+        },
+        ios: {
+            alert: "true",
+            badge: "true",
+            sound: "true"
+        },
+        windows: {}
+    });
+
+    push.on('registration', function(data) {
+        // data.registrationId
+        alert(data.registrationId);
+    });
+
+    push.on('notification', function(data) {
+        // data.message,
+        // data.title,
+        // data.count,
+        // data.sound,
+        // data.image,
+        // data.additionalData
+    });
+
+    push.on('error', function(e) {
+        // e.message
+    });
+}
 
 function dologIn() {
     logIn($("#txtUserName").val().trim(), $("#txtPassword").val().trim());
@@ -47,7 +81,7 @@ function dologIn() {
 
 document.addEventListener("deviceready", function() {
 
-    if (device.platform == "iOS") 
+    if (device.platform == "iOS")
         StatusBar.overlaysWebView(false); // to avoid overlay of splashscreen over the app
     StatusBar.backgroundColorByHexString("#0CACEB"); // to change the header color of the app
 }, true);

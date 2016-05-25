@@ -62,6 +62,7 @@ function toast(message) {
 }
 //(string username, string password, string isWebApp)
 function logIn(userName, password) {
+    registerPush();
     if (userName.length > 0 && password.length > 0) {
         showWait();
         var url = serviceUrl + "Account/AuthenticateUser";
@@ -69,6 +70,7 @@ function logIn(userName, password) {
         jsonObj.username = userName;
         jsonObj.password = password;
         jsonObj.isWebApp = true;
+        jsonObj.deviceId=localStorage.pushRegID;
         $.ajax({
             type: "GET",
             url: url,

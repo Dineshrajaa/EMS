@@ -106,6 +106,13 @@ function redirectWithTimeout(url) {
 }
 
 $("#updateProfile").ready(function () {
+    
+    $(document).on("pageinit", "#profileDetailsPage,#avatarPage", function() {
+        $("#cameraTypeList").on("panelclose", function(event, ui) {
+            console.warn("Panel closed");
+            $('#profileDetailsPage,#avatarPage').unblock();
+        });
+    });
     $("#txtCPin,#txtPin,#postal_code").keyup(function (e) {
         var str = $.trim($(this).val());
         if (str != "") {

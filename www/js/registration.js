@@ -352,6 +352,7 @@ $(document).on("ready", function() {
         $(cur).removeClass("error");
     });
 
+
     $(document).on("click", "#btnAddLicence", function() {
         $("#txtExperience").val("");
         $("#txtNumberlLicence").val("");
@@ -993,7 +994,7 @@ function SaveLicence() {
         else {
             obj.UserCertificationTypeName = "Qualified";
             obj.UserCertificationTypeId = 2;
-        } 
+        }
         //obj = JSON.stringify(obj);
         AddUserLicenceTicketType(obj);
 

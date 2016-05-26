@@ -1,14 +1,14 @@
 ﻿var serviceUrl = 'http://202.60.69.12/emsapi/api/';
 
-$(document).ajaxStart(function () {
+$(document).ajaxStart(function() {
     showWait();
 });
 
-$(document).ajaxComplete(function () {
+$(document).ajaxComplete(function() {
     hideWait();
 });
 
-$(document).ajaxError(function () {
+$(document).ajaxError(function() {
     hideWait();
 });
 
@@ -23,11 +23,11 @@ function showWait() {
     });
 }
 
-    $(".panelBtn").on("click",function(){
-        $('#profileDetailsPage,#avatarPage').unblock();
-    });
+$(".panelBtn").on("click", function() {
+    $('#profileDetailsPage,#avatarPage').unblock();
+});
 
-$(document).bind("mobileinit", function () {
+$(document).bind("mobileinit", function() {
     $.extend($.mobile, {
         defaultPageTransition: 'none'
     });
@@ -42,7 +42,7 @@ function hideWait() {
 }
 
 //Call Busy Indicator default when call ajax , and hide when ajax complerte
-$(document).ajaxStart(function () { showWait(); }).ajaxStop(function () { hideWait(); });
+$(document).ajaxStart(function() { showWait(); }).ajaxStop(function() { hideWait(); });
 
 function routing(pageName, jsArray, cssArray, fileclass, removeId, removeBodyId) {
     window.location.href = pageName;
@@ -53,6 +53,7 @@ function deleteLocalStorage(storageIdArray) {
         localStorage.removeItem(storageIdArray[i]);
     }
 }
+
 function toast(message) {
     new $.nd2Toast({
         message: message,
@@ -70,13 +71,13 @@ function logIn(userName, password) {
         jsonObj.username = userName;
         jsonObj.password = password;
         jsonObj.isWebApp = true;
-        jsonObj.deviceId=localStorage.pushRegID;
+        jsonObj.deviceId = localStorage.pushRegID;
         $.ajax({
             type: "GET",
             url: url,
             data: jsonObj,
             async: false,
-            success: function (result) {
+            success: function(result) {
                 hideWait();
                 if (result.IsSuccessful) {
                     var data = JSON.stringify(result.Result);
@@ -86,26 +87,24 @@ function logIn(userName, password) {
                     toast('Incorrect username or pin');
                 }
             },
-            error: function (result) {
+            error: function(result) {
                 hideWait();
                 toast("Some Error Occoured.");
                 // alert(JSON.parse(result.responseText).message);
             }
         });
-    }
-    else {
+    } else {
         if (userName.length === 0) {
             toast("Please enter Username");
             $("#txtUserName").focus();
-        }
-        else if (password.length === 0) {
+        } else if (password.length === 0) {
             toast("Please enter PIN");
             $("#txtPassword").focus();
         }
     }
 }
 
-Date.prototype.getFormattedTime = function () {
+Date.prototype.getFormattedTime = function() {
     var hours = this.getHours() == 0 ? "12" : this.getHours() > 12 ? this.getHours() - 12 : this.getHours();
     var minutes = (this.getMinutes() < 10 ? "0" : "") + this.getMinutes();
     var ampm = this.getHours() < 12 ? "AM" : "PM";
@@ -113,7 +112,7 @@ Date.prototype.getFormattedTime = function () {
     return formattedTime;
 };
 
-Date.prototype.getFormattedDateInddMMYY = function () {
+Date.prototype.getFormattedDateInddMMYY = function() {
 
     var mon = parseInt(parseInt(this.getMonth()) + 1) < 10 ? "0" + parseInt(parseInt(this.getMonth()) + 1) : parseInt(parseInt(this.getMonth()) + 1);
     var day = parseInt(this.getDate()) < 10 ? "0" + this.getDate() : this.getDate();
@@ -134,7 +133,7 @@ function redirect(url) {
     //setTimeout(function () { $.mobile.changePage(url, { transition: "slide" }); }, 1);
 }
 
-function navigatePage(url){
+function navigatePage(url) {
     // To navigate to the page
     $(":mobile-pagecontainer").pagecontainer("change", url);
 }
@@ -154,7 +153,7 @@ function GetAssignJob() {
         url: url,
         data: jsonObj,
         async: false,
-        success: function (result) {
+        success: function(result) {
             if (result.IsSuccessful) {
                 if (result.Result) {
                     var resultObj = result.Result;
@@ -171,7 +170,8 @@ function GetAssignJob() {
                 }
             }
 
-        }, error: function (err) {
+        },
+        error: function(err) {
             hideWait();
             toast("Network Error");
         }
@@ -192,10 +192,11 @@ function GetAllAssignedPost() {
         url: url,
         data: jsonObj,
         async: false,
-        success: function (result) {
+        success: function(result) {
             hideWait();
 
-        }, error: function (err) {
+        },
+        error: function(err) {
             hideWait();
             toast("Network Error");
         }
@@ -213,11 +214,13 @@ function GetPostDetailBy(postId) {
         url: url,
         data: jsonObj,
         async: false,
-        success: function (result) {
+        success: function(result) {
             hideWait();
-        }, error: function (err) {
+        },
+        error: function(err) {
             hideWait();
             toast("Network Error");
         }
     });
 }
+

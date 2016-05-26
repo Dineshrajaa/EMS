@@ -89,7 +89,7 @@ html .ui-page-theme-a .ui-btn.ui-checkbox-on.ui-checkbox-on:after
 
 .ui-input-text.ui-focus:after, .ui-input-search.ui-focus:after
 {
-    background-color: #0CACEB;
+    background-color: transparent;// #0CACEB;
     height: 2px;
 }
 

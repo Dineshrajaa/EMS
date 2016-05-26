@@ -33,15 +33,16 @@ function cameraSuccess(imageData) {
     // $("#profilePicImg").attr("src", "data:image/jpeg;base64," + imageData);
     var imageData = "data:image/jpeg;base64," + imageData;
     $(".profileCircle").css("background-image", "url(" + imageData + ")");
-    updateProfilePicture(); // now send the picture to sevice    
+    updateProfilePicture(imageData); // now send the picture to sevice    
 }
 
-function updateProfilePicture() {
+function updateProfilePicture(imageData) {
     // To update profile picture of the user
     var url = serviceUrl + "Account/UpdateProfilePicture";
     var jsonObj = {};
     jsonObj.userId = $("#hdnUserId").val();
-    jsonObj.pic = $("#profilePicImg").attr("src");
+    jsonObj.pic = imageData;
+    console.warn("jsonObj:"+JSON.stringify(jsonObj));
     showWait();
     $.ajax({
         type: "POST",
@@ -53,9 +54,11 @@ function updateProfilePicture() {
         success: function (result) {
             hideWait();
             toast("Profile Picture updated Successfully");
+            $('#profileDetailsPage').unblock();
         },
         error: function (error) {
             hideWait();
+            $('#profileDetailsPage').unblock();
         }
     });
 }

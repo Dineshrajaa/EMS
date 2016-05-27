@@ -28,8 +28,8 @@
                 <h1 class="wow fadeIn" data-wow-delay='0.4s'>
                     Status
                 </h1>
-                <a href="#leftpanel" class="ui-btn ui-btn-left menu"><i class="zmdi zmd-2x zmdi-menu"></i>
-                </a>
+                <a href="#leftpanel" class="ui-btn ui-btn-left menu"><i class="zmdi zmd-2x zmdi-menu">
+                </i></a>
             </div>
             <div role="main" class="ui-content wow fadeIn" data-inset="false">
                 <div class="nd2-card" style="padding: 5px; border-radius: 15px; text-align: center">
@@ -66,12 +66,12 @@
             <a href='#popupDialog' data-rel='popup' data-position-to='window' data-role='button' data-icon='external-link' data-transition='pop' data-inline='true'>Open popup dialog</a>-->
                 <div class="nd2-card jobSection" style="padding: 5px; border-radius: 15px; text-align: center">
                     <div class="ui-controlgroup-label" role="heading">
-                       <!-- <h4>
+                        <h4>
                             <b>Current Job</b></h4>
-                        <hr />-->
+                        <hr />
                     </div>
-                    <div class="ui-controlgroup-label">
-                       <!-- <table data-role="table" id="tblJobsList" data-mode="" class="ui-responsive table-stroke">
+                    <div id="currentJob" class="ui-controlgroup-label">
+                        <table data-role="table" id="tblJobsList" data-mode="" class="ui-responsive table-stroke">
                             <tbody>
                                 <tr>
                                     <td>
@@ -109,8 +109,7 @@
                                     </td>
                                 </tr>
                             </tbody>
-                        </table>-->
-                        <h5><b>There are no current jobs!</b></h5>
+                        </table>
                     </div>
                 </div>
                 <div style="padding: 5px; border-radius: 15px; text-align: center" class="jobSection">
@@ -149,8 +148,8 @@
                         <b>Do you wish to continue?</b>
                     </h4>
                     <a style="background: #db3535;" class="popupButton" data-theme="a" data-inline="true"
-                        data-role="button" href="#" data-corners="true" data-rel="back">Cancel</a> 
-						<a style="background: #3498db;"  class="popupButton" data-theme="a" data-inline="true" onclick="updateWorkStatus()"
+                        data-role="button" href="#" data-corners="true" data-rel="back">Cancel</a> <a style="background: #3498db;"
+                            class="popupButton" data-theme="a" data-inline="true" onclick="updateWorkStatus()"
                             data-role="button" href="#" data-corners="true">Continue</a>
                     <br />
                 </div>
@@ -178,23 +177,62 @@
 
             if (currentUserObj && currentUserObj != 'undefined') {
                 var currentUser = JSON.parse(currentUserObj);
+                var url = serviceUrl + "Account/GetUserStatus";
+                var obj = {};
+                obj.id = parseInt(currentUser.ID);
+                showWait();
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data: obj,
+                    async: false,
+                    success: function (result) {
+                        if (result.IsSuccessful) {
+                            if (result.Result == "1" || result.Result == 1) {
+                                $("#curStatus").html("Working");
+                                $("#curStatus").removeClass('available').removeClass('notAvailable').addClass('working');
+                                $("#rdAvail").attr("checked", false);
+                                $("#rdAvail").prev().removeClass("ui-radio-on");
+                                $("#rdNtAvail").attr("checked", false);
+                                $("#rdNtAvail").prev().removeClass("ui-radio-on");
+                            }
+                            if (result.Result == "2" || result.Result == 2) {
+                                $("#rdAvail").attr("checked", true);
+                                $("#rdAvail").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
+                                $("#curStatus").html("Available");
+                                $("#curStatus").removeClass('working').removeClass('notAvailable').addClass('available');
+                            }
+                            if (result.Result == "3" || result.Result == 3) {
+                                $("#rdNtAvail").attr("checked", true);
+                                $("#rdNtAvail").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
+                                $("#curStatus").html("Not Available");
+                                $("#curStatus").removeClass('working').removeClass('available').addClass('notAvailable');
+                            }
+                        }
+                        hideWait();
+                    },
+                    error: function (err) {
+                        hideWait();
+                        toast("Network Error");
+                    }
+                });
                 //alert(currentUser.JobStatusType);
-                if (currentUser.JobStatusType == "1" || currentUser.JobStatusType == 1) {
-                    $("#curStatus").html("Working");
-                    $("#curStatus").removeClass('available').removeClass('notAvailable').addClass('working');
-                }
-                if (currentUser.JobStatusType == "2" || currentUser.JobStatusType == 2) {
-                    $("#rdAvail").attr("checked", true);
-                    $("#rdAvail").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
-                    $("#curStatus").html("Available");
-                    $("#curStatus").removeClass('working').removeClass('notAvailable').addClass('available');
-                }
-                if (currentUser.JobStatusType == "3" || currentUser.JobStatusType == 3) {
-                    $("#rdNtAvail").attr("checked", true);
-                    $("#rdNtAvail").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
-                    $("#curStatus").html("Not Available");
-                    $("#curStatus").removeClass('working').removeClass('available').addClass('notAvailable');
-                }
+                //                if (currentUser.JobStatusType == "1" || currentUser.JobStatusType == 1) {
+                //                    $("#curStatus").html("Working");
+                //                    $("#curStatus").removeClass('available').removeClass('notAvailable').addClass('working');
+                //                }
+                //                if (currentUser.JobStatusType == "2" || currentUser.JobStatusType == 2) {
+                //                    $("#rdAvail").attr("checked", true);
+                //                    $("#rdAvail").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
+                //                    $("#curStatus").html("Available");
+                //                    $("#curStatus").removeClass('working').removeClass('notAvailable').addClass('available');
+                //                }
+                //                if (currentUser.JobStatusType == "3" || currentUser.JobStatusType == 3) {
+                //                    $("#rdNtAvail").attr("checked", true);
+                //                    $("#rdNtAvail").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
+                //                    $("#curStatus").html("Not Available");
+                //                    $("#curStatus").removeClass('working').removeClass('available').addClass('notAvailable');
+                //                }
             } else {
                 doLogout();
             }
@@ -220,6 +258,7 @@
                 //                }
             });
 
+            GetAssignJob();
         });
 
         function updateWorkStatus() {

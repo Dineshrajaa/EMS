@@ -163,11 +163,15 @@ function GetAssignJob() {
                     $("#spnProject").html(resultObj.Location);
                     $("#spnProjAddress").html(resultObj.LocationAdress);
                     $("#spnTrade").html(resultObj.TradeClassification);
-                    $("#spnStartDate").html(resultObj.StartDate);
+                    $("#spnStartDate").html(resultObj.StartDateStr);
                     $("#spnMessage").html(resultObj.Message);
                     $("#spnDesc").html(resultObj.Name);
                     $("#spnContract").html(resultObj.ContractType);
                 }
+            }
+            else {
+                $("#currentJob").html("");
+                $("#currentJob").append("<h4>There are no current jobs</h4>");
             }
 
         },

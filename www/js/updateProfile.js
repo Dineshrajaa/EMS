@@ -33,16 +33,15 @@ function cameraSuccess(imageData) {
     // $("#profilePicImg").attr("src", "data:image/jpeg;base64," + imageData);
     var imageData = "data:image/jpeg;base64," + imageData;
     $(".profileCircle").css("background-image", "url(" + imageData + ")");
-    updateProfilePicture(imageData); // now send the picture to sevice    
+    updateProfilePicture(); // now send the picture to sevice    
 }
 
-function updateProfilePicture(imageData) {
+function updateProfilePicture() {
     // To update profile picture of the user
     var url = serviceUrl + "Account/UpdateProfilePicture";
     var jsonObj = {};
     jsonObj.userId = $("#hdnUserId").val();
-    jsonObj.pic = imageData;
-    console.warn("jsonObj:"+JSON.stringify(jsonObj));
+    jsonObj.pic = $("#profilePicImg").attr("src");
     showWait();
     $.ajax({
         type: "POST",
@@ -51,14 +50,12 @@ function updateProfilePicture(imageData) {
         contentType: "application/json",
         dataType: "json",
         async: false,
-        success: function (result) {
+        success: function(result) {
             hideWait();
             toast("Profile Picture updated Successfully");
-            $('#profileDetailsPage').unblock();
         },
-        error: function (error) {
+        error: function(error) {
             hideWait();
-            $('#profileDetailsPage').unblock();
         }
     });
 }
@@ -68,28 +65,17 @@ function cameraError(err) {
 }
 
 function validate() {
-   
     isValid = true;
-    $(".required").each(function () {
+    $(".required").each(function() {
         var current = $(this);
         if (current.val() == "" && current.is(":visible")) {
             $(current).addClass("error");
-            if ((this.id === "txtPin" || this.id === "txtCPin") && $("#txtPin").val() == "" && $("#txtCPin").val() == "") {
-
-            }
-            else {
-                isValid = false;
-            }
+            isValid = false;
         } else {
             $(current).removeClass("error");
         }
     });
     if (isValid) {
-        if ($("#txtPin").val() != "" && $("#txtCPin").val() != "") {
-            if ($("#txtPin").val().trim() != $("#txtCPin").val().trim() || validatePassword($("#txtPin")) == false || validateConfirmPassword($("#txtCPin")) == false) {
-                return false;
-            }
-        }
         UpdateUser();
 
     } else {
@@ -100,97 +86,9 @@ function validate() {
 }
 
 function redirectWithTimeout(url) {
-    setTimeout(function () {
+    setTimeout(function() {
         window.location.href = url;
     }, 5000);
-}
-
-$("#updateProfile").ready(function () {
-    
-    $(document).on("pageinit", "#profileDetailsPage,#avatarPage", function() {
-        $("#cameraTypeList").on("panelclose", function(event, ui) {
-            console.warn("Panel closed");
-            $('#profileDetailsPage,#avatarPage').unblock();
-        });
-    });
-    $("#txtCPin,#txtPin,#postal_code").keyup(function (e) {
-        var str = $.trim($(this).val());
-        if (str != "") {
-            var regx = /^[0-9\s]+$/;
-            if (!regx.test(str)) {
-                str = str.replace(/[^0-9.\s]+/g, ''); // replace special characters with space
-                $(this).val(str);
-                toast("Only alphabets allowed !");
-            }
-        } else {
-            //empty value -- do something here
-            console.log("Only alphabets detected");
-        }
-    });
-});
-
-function validatePassword(el) {
-    if ($(el).val().length > 0) {
-        if ($(el).val().length < 4) {
-            $(el).addClass("error");
-            $("#spnError").html("Pin length should be equal to 4");
-            $(el).focus();
-            return false;
-        } else {
-            $(el).removeClass("error");
-            $("#spnError").html("");
-            return true;
-        }
-    } else {
-        $(el).addClass("error");
-        $("#spnError").html("Please enter Pin");
-        return false;
-    }
-}
-
-function validateConfirmPassword(el) {
-    if ($(el).val().length > 0) {
-        if ($(el).val().trim() != $("#txtPin").val().trim()) {
-            $(el).addClass("error");
-            $("#spnError").html("Pin and confirm pin does not match");
-            return false;
-        } else {
-            $(el).removeClass("error");
-            $("#spnError").html("");
-            return true;
-        }
-    } else {
-        $(el).addClass("error");
-        $("#spnError").html("Please enter confirm Pin");
-        return false;
-    }
-}
-
-function checkEmailExistance(nextpageId) {
-    var url = serviceUrl + "Account/IsUserWithSameEmailExist";
-    var jsonObj = {};
-    jsonObj.email = $("#txtEmail").val().trim();
-    $.ajax({
-        type: "GET",
-        url: url,
-        data: jsonObj,
-        async: false,
-        success: function (result) {
-            if (result.IsSuccessful) {
-                if (result.Result) {
-                    toast('Email already registered');
-                } else {
-                    register(nextpageId);
-                }
-
-            } else {
-                toast('Network Error');
-            }
-        },
-        error: function () {
-            toast('Network Error');
-        }
-    });
 }
 
 // google address
@@ -247,7 +145,7 @@ function blockIT() {
 }
 var trannieProfileObj = '';
 var currentUser = '';
-$(document).on("ready", function () {
+$(document).on("ready", function() {
     var currentUserObj = localStorage.getItem('userSession');
     if (currentUserObj && currentUserObj != 'undefined') {
         currentUser = JSON.parse(currentUserObj);
@@ -261,18 +159,18 @@ $(document).on("ready", function () {
     getActiveTradeExp(0);
     getActivePositionHeld(0);
 
-    $(document).on("change", "#ddlLicence", function () {
+    $(document).on("change", "#ddlLicence", function() {
         var val = $(this).val();
         getLicenceTypDetail(val);
     });
 
 
-    $(document).on("change", "#ddlTradeExp", function () {
+    $(document).on("change", "#ddlTradeExp", function() {
         var val = $(this).val();
         getTradeExpDetail(val);
     });
 
-    $(document).on("change", "#ddlPositionHeld", function () {
+    $(document).on("change", "#ddlPositionHeld", function() {
         var val = $(this).val();
         getPositionHeldDetail(val);
     });
@@ -306,24 +204,24 @@ $(document).on("ready", function () {
     //        $("#dvPosition .num").show();
     //    });
 
-    $(document).on("click", "#btnAddLicence", function () {
+    $(document).on("click", "#btnAddLicence", function() {
         $("#txtExperience").val("");
         $("#txtNumberlLicence").val("");
         //$("#ddlLicence option[value='0']").attr("selected", "selected");
         $.mobile.pageContainer.pagecontainer("change", "#addeditLicence", { transition: "slide" });
     });
-    $(document).on("click", "#btnAddTrade", function () {
+    $(document).on("click", "#btnAddTrade", function() {
         $("#txtExpTrade").val("");
         $("#txtQualTrade").val("");
         $.mobile.pageContainer.pagecontainer("change", "#addeditTrade", { transition: "slide" });
     });
-    $(document).on("click", "#btnAddPosition", function () {
+    $(document).on("click", "#btnAddPosition", function() {
         $("#txtExpPosition").val("");
         $("#txtQualPosition").val("");
         $.mobile.pageContainer.pagecontainer("change", "#addeditPosition", { transition: "slide" });
     });
 
-    $(document).on("click", "#dvLicence .ui-radio", function () {
+    $(document).on("click", "#dvLicence .ui-radio", function() {
         $("#dvLicence .exp").show();
         $("#txtExperience").val("");
         $("#txtNumberlLicence").val("");
@@ -334,7 +232,7 @@ $(document).on("ready", function () {
         }
     });
 
-    $(document).on("click", "#dvTrade .ui-radio", function () {
+    $(document).on("click", "#dvTrade .ui-radio", function() {
         $("#dvTrade .exp").show();
         $("#txtExpTrade").val("");
         $("#txtQualTrade").val("");
@@ -344,7 +242,7 @@ $(document).on("ready", function () {
             $("#dvTrade .num").hide();
         }
     });
-    $("input[name='TradeExpPosition']").on("click", function () {
+    $("input[name='TradeExpPosition']").on("click", function() {
         $("#dvTrade .exp").show();
         $("#txtExpTrade").val("");
         $("#txtQualTrade").val("");
@@ -356,7 +254,7 @@ $(document).on("ready", function () {
         }
 
     });
-    $("input[name='CertifiedTypePosition']").on("click", function () {
+    $("input[name='CertifiedTypePosition']").on("click", function() {
         $("#dvPosition .exp").show();
         $("#txtExpPosition").val("");
         $("#txtQualPosition").val("");
@@ -368,7 +266,7 @@ $(document).on("ready", function () {
         }
 
     });
-    $(document).on("click", "#dvPosition .ui-radio", function () {
+    $(document).on("click", "#dvPosition .ui-radio", function() {
         $("#dvPosition .exp").show();
         $("#txtExpPosition").val("");
         $("#txtQualPosition").val("");
@@ -392,7 +290,7 @@ function fetchProfileDetail(userId) {
         contentType: "application/json",
         dataType: "json",
         async: false,
-        success: function (result) {
+        success: function(result) {
             if (result && result.IsSuccessful) {
                 var employeeObj = result.Result;
                 $("#hdnUserId").val(employeeObj.ID);
@@ -445,12 +343,12 @@ function fetchProfileDetail(userId) {
                     default:
                         gender = "Male";
                         break;
-                }                
+                }
                 $("#ddlGender").prev().text(gender);
                 $("#lblGender").html(gender);
                 $("#street_number").val(employeeObj.StreetAddress);
                 $("#locality").val(employeeObj.City);
-                $("#lblAddr").html(employeeObj.StreetAddress + "<br/>" + employeeObj.City + "<br/>" + employeeObj.State + "<br/>" + employeeObj.Postcode);
+                $("#lblAddr").html(employeeObj.StreetAddress);
                 $("#lbllocality").html(employeeObj.City);
                 $("#postal_code").val(employeeObj.Postcode);
                 $("#lblpostal_code").html(employeeObj.Postcode);
@@ -471,7 +369,7 @@ function fetchProfileDetail(userId) {
 
             hideWait();
         },
-        error: function (result) {
+        error: function(result) {
             hideWait();
             toast('Network Error');
         }
@@ -480,9 +378,9 @@ function fetchProfileDetail(userId) {
 
 function doEdit() {
     /*
-    $(".editProfile").show();
+        $(".editProfile").show();
 
-    $(".viewProfile").hide();*/
+        $(".viewProfile").hide();*/
     navigatePage("#editProfilePage");
 }
 
@@ -523,6 +421,7 @@ function UpdateUser() {
     var secondaryContact = $("#txtContact2").val();
     var gender = $("#ddlGender").val();
     var state = $("#administrative_area_level_1").val();
+    var pin = $("#txtPin").val();
     var isPayslip = $("#chkPaySlipMail").is(":checked") ? true : false;
     var roleId = $("#hdnRoleId").val();
 
@@ -542,6 +441,7 @@ function UpdateUser() {
     trannieProfileObj.IsPaySlipSent = isPayslip;
     trannieProfileObj.GenderId = gender;
     trannieProfileObj.roleId = roleId;
+    trannieProfileObj.Password = pin;
 
     updateProfile(trannieProfileObj);
 }
@@ -553,7 +453,7 @@ function updateProfile(trannieProfileObj) {
         type: 'POST',
         url: url1,
         data: trannieProfileObj,
-        success: function (response) {
+        success: function(response) {
             hideWait();
 
             var currentUserObj = localStorage.getItem('userSession');
@@ -566,14 +466,50 @@ function updateProfile(trannieProfileObj) {
 
             redirectWithTimeout("UpdateProfile.html");
         },
-        error: function () {
+        error: function() {
             hideWait();
             toast('Network Error');
         }
     });
 }
 
-$(function () {
+function validateConfirmPassword(el) {
+    if ($(el).val().length > 0) {
+        if ($(el).val().trim() != $("#txtPin").val().trim()) {
+            $(el).addClass("error");
+            $("#spnError").html("Pin and confirm pin does not match");
+            return false;
+        } else {
+            $(el).removeClass("error");
+            $("#spnError").html("");
+            return true;
+        }
+    } else {
+        $(el).addClass("error");
+        $("#spnError").html("Please enter confirm Pin");
+        return false;
+    }
+}
+
+function validatePassword(el) {
+    if ($(el).val().length > 0) {
+        if ($(el).val().length < 4) {
+            $(el).addClass("error");
+            $("#spnError").html("Pin length should be equal to 4");
+            $(el).focus();
+            return false;
+        } else {
+            $(el).removeClass("error");
+            $("#spnError").html("");
+            return true;
+        }
+    } else {
+        $(el).addClass("error");
+        $("#spnError").html("Please enter Pin");
+        return false;
+    }
+}
+$(function() {
     var demo = "date";
     var theme = "android-holo-light";
     var mode = "scroller";
@@ -615,7 +551,7 @@ function getActiveLicenceType(id) {
         type: 'GET',
         url: url,
         data: '',
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
                 $("#ddlLicence").html("");
@@ -632,7 +568,7 @@ function getActiveLicenceType(id) {
                 $("#ddlLicence").append(options);
             }
         },
-        error: function () {
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -649,7 +585,7 @@ function getLicenceTypDetail(id) {
         type: 'GET',
         url: url,
         data: obj,
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
                 var result = response.Result;
@@ -668,7 +604,7 @@ function getLicenceTypDetail(id) {
 
             }
         },
-        error: function () {
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -682,7 +618,7 @@ function getActiveTradeExp(id) {
         type: 'GET',
         url: url,
         data: '',
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
                 $("#ddlTradeExp").html("");
@@ -699,7 +635,7 @@ function getActiveTradeExp(id) {
                 $("#ddlTradeExp").append(options);
             }
         },
-        error: function () {
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -709,14 +645,14 @@ function getActiveTradeExp(id) {
 function getTradeExpDetail(id) {
     showWait();
     var obj = {};
-    obj.id = parseInt(id); ;
+    obj.id = parseInt(id);;
     //obj = JSON.stringify(obj);
     var url = serviceUrl + "Account/GetTradeExperienceById";
     $.ajax({
         type: 'GET',
         url: url,
         data: obj,
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
                 var result = response.Result;
@@ -732,7 +668,7 @@ function getTradeExpDetail(id) {
                 }
             }
         },
-        error: function () {
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -746,7 +682,7 @@ function getActivePositionHeld(id) {
         type: 'GET',
         url: url,
         data: '',
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
                 $("#ddlPositionHeld").html("");
@@ -763,7 +699,7 @@ function getActivePositionHeld(id) {
                 $("#ddlPositionHeld").append(options);
             }
         },
-        error: function () {
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -773,14 +709,14 @@ function getActivePositionHeld(id) {
 function getPositionHeldDetail(id) {
     showWait();
     var obj = {};
-    obj.id = parseInt(id); ;
+    obj.id = parseInt(id);;
     //obj = JSON.stringify(obj);
     var url = serviceUrl + "Account/GetPositionHeldById";
     $.ajax({
         type: 'GET',
         url: url,
         data: obj,
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
                 var result = response.Result;
@@ -796,7 +732,7 @@ function getPositionHeldDetail(id) {
                 }
             }
         },
-        error: function () {
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -812,7 +748,7 @@ function GetEmployeeDetails(id) {
         type: 'GET',
         url: url,
         data: obj,
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
                 var result = response.Result;
@@ -829,19 +765,19 @@ function GetEmployeeDetails(id) {
                         var qualNo = (result.PositionHeldList[i].QualificationNumber != null && result.PositionHeldList[i].QualificationNumber != "null") ? result.PositionHeldList[i].QualificationNumber : "";
                         if (qualNo == "")
                             showQualifiedDetails = "display:none";
-                        positionsHtml += '<li class="bbblack" onclick="editPosition(' + result.PositionHeldList[i].Id + ')">';
+                        positionsHtml += '<li onclick="editPosition(' + result.PositionHeldList[i].Id + ')">';
                         positionsHtml += '<table data-role="table" data-mode="" class="ui-responsive table-stroke"><tbody>';
                         positionsHtml += '<tr><td>' + result.PositionHeldList[i].Name + '</td></tr>';
                         positionsHtml += '<tr><td>Certification Type</td><td>' + result.PositionHeldList[i].UserCertificationType + '</td></tr>';
                         positionsHtml += '<tr style="' + showQualifiedDetails + '"><td>Qualification No.</td><td>' + qualNo + '</td></tr>';
                         positionsHtml += '<tr><td>Experience</td><td>' + Exp + '</td></tr>';
                         positionsHtml += '</tbody>';
-                        positionsHtml += '</table></li>';
+                        positionsHtml += '</table></li><hr>';
                         /*positionHtml += '<tr><td>' + result.PositionHeldList[i].Name + '</td><td>' + Exp + '</td><td>' + qualNo + '</td>' +
-                        //'<td>' + positionheldslist[i].UserCertificationTypeId + '</td>' +
-                        '<td><a onclick="editPosition(' + result.PositionHeldList[i].Id + ')">Edit</a></td>' +
-                        '<td><a onclick="deletePosition(' + result.PositionHeldList[i].Id + ',this)">Delete</a></td>' +
-                        '</tr>';*/
+                            //'<td>' + positionheldslist[i].UserCertificationTypeId + '</td>' +
+                            '<td><a onclick="editPosition(' + result.PositionHeldList[i].Id + ')">Edit</a></td>' +
+                            '<td><a onclick="deletePosition(' + result.PositionHeldList[i].Id + ',this)">Delete</a></td>' +
+                            '</tr>';*/
 
                     }
                 }
@@ -852,22 +788,22 @@ function GetEmployeeDetails(id) {
                         var no = (tradeExpList[j].QualificationNumber != null && tradeExpList[j].QualificationNumber != "") ? tradeExpList[j].QualificationNumber : "";
                         if (no == "")
                             showQualifiedDetails = "display:none";
-                        tradeHtml += '<li class="bbblack" onclick="editTrade(' + tradeExpList[j].Id + ')">';
+                        tradeHtml += '<li onclick="editTrade(' + tradeExpList[j].Id + ')">';
                         tradeHtml += '<table data-role="table" data-mode="" class="ui-responsive table-stroke"><tbody>';
                         tradeHtml += '<tr><td>' + tradeExpList[j].Name + '</td></tr>';
                         tradeHtml += '<tr><td>Certification Type</td><td>' + tradeExpList[j].UserCertificationType + '</td></tr>';
                         tradeHtml += '<tr style="' + showQualifiedDetails + '"><td>Qualification No.</td><td>' + no + '</td></tr>';
                         tradeHtml += '<tr><td>Experience</td><td> ' + exp + '</td></tr>';
                         tradeHtml += '</tbody></table>';
-                        tradeHtml += '</li>';
+                        tradeHtml += '</li><hr>';
                         /*                        tradeHtml += '<tr>' +
-                        '<td>' + tradeExpList[j].Name + '</td>' +
-                        '<td>' + exp + '</td>' +
-                        '<td>' + no + '</td>' +
-                        //'<td>' + tradeExpList[j].UserCertificationTypeId + '</td>' +
-                        '<td><a onclick="editTrade(' + tradeExpList[j].Id + ')">Edit</a></td>' +
-                        '<td><a onclick="deleteTrade(' + tradeExpList[j].Id + ',this)">Delete</a></td>' +
-                        '</tr>';*/
+                                                    '<td>' + tradeExpList[j].Name + '</td>' +
+                                                    '<td>' + exp + '</td>' +
+                                                    '<td>' + no + '</td>' +
+                                                    //'<td>' + tradeExpList[j].UserCertificationTypeId + '</td>' +
+                                                    '<td><a onclick="editTrade(' + tradeExpList[j].Id + ')">Edit</a></td>' +
+                                                    '<td><a onclick="deleteTrade(' + tradeExpList[j].Id + ',this)">Delete</a></td>' +
+                                                    '</tr>';*/
 
                     }
                 }
@@ -882,7 +818,7 @@ function GetEmployeeDetails(id) {
                             expiryDate = ""; // clear the expiry date
                             showQualifiedDetails = "display:none"; // hide the qualification oriented things
                         }
-                        licenceHtml += '<li class="bbblack" onclick="editLicence(' + licencelist[k].Id + ')">';
+                        licenceHtml += '<li onclick="editLicence(' + licencelist[k].Id + ')">';
                         licenceHtml += '<table data-role="table" data-mode="" class="ui-responsive table-stroke"><tbody>';
                         licenceHtml += '<tr><td>' + licencelist[k].Name + '</td></tr>';
                         licenceHtml += '<tr><td>Licence Type </td><td>' + licencelist[k].LicenceType || "" + '</td></tr>';
@@ -890,16 +826,16 @@ function GetEmployeeDetails(id) {
                         licenceHtml += '<tr style="' + showQualifiedDetails + '"><td>Expiry</td><td>' + expiryDate + '</td></tr>';
                         licenceHtml += '<tr><td>Experience</td><td>' + exp + '</td></tr>';
                         licenceHtml += '</tbody></table>';
-                        licenceHtml += '</li>';
+                        licenceHtml += '</li><hr>';
                         /*                        licenceHtml += '<tr>' +
-                        '<td>' + licencelist[k].Name + '</td>' +
-                        '<td>' + exp + '</td>' +
-                        '<td>' + no + '</td>' +
-                        //'<td>' + licencelist[k].LicenceExpiry + '</td>' +
-                        // '<td>' + licencelist[k].UserCertificationTypeId + '</td>' +
-                        '<td><a onclick="editLicence(' + licencelist[k].Id + ')">Edit</a></td>' +
-                        '<td><a onclick="deleteLicence(' + licencelist[k].Id + ',this)">Delete</a></td>' +
-                        '</tr>';*/
+                                                    '<td>' + licencelist[k].Name + '</td>' +
+                                                    '<td>' + exp + '</td>' +
+                                                    '<td>' + no + '</td>' +
+                                                    //'<td>' + licencelist[k].LicenceExpiry + '</td>' +
+                                                    // '<td>' + licencelist[k].UserCertificationTypeId + '</td>' +
+                                                    '<td><a onclick="editLicence(' + licencelist[k].Id + ')">Edit</a></td>' +
+                                                    '<td><a onclick="deleteLicence(' + licencelist[k].Id + ',this)">Delete</a></td>' +
+                                                    '</tr>';*/
                     }
                 }
 
@@ -910,7 +846,7 @@ function GetEmployeeDetails(id) {
 
             }
         },
-        error: function () {
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -924,13 +860,13 @@ function deletePosition(id) {
         showWait();
         /*var obj = {};
         obj.id = parseInt(id);*/
-        var id = parseInt(localStorage.selectedPosition);
+        var id=parseInt(localStorage.selectedPosition);
         var url = serviceUrl + "Account/DeleteUserPositionHeld/";
         $.ajax({
             type: 'POST',
             url: url + id,
             data: {},
-            success: function (response) {
+            success: function(response) {
                 hideWait();
                 if (response.IsSuccessful) {
 
@@ -938,7 +874,7 @@ function deletePosition(id) {
                     triggerEmployeedetails();
                 }
             },
-            error: function () {
+            error: function() {
                 hideWait();
                 toast('Network Error');
             }
@@ -961,21 +897,21 @@ function deleteLicence(id) {
     if (r) {
         showWait();
         /* var obj = {};
-        obj.id = parseInt(id);*/
+         obj.id = parseInt(id);*/
         var id = parseInt(localStorage.selectedTicket);
         var url = serviceUrl + "Account/DeleteUserLicenceTicketType/";
         $.ajax({
             type: 'POST',
             url: url + id,
             data: {},
-            success: function (response) {
+            success: function(response) {
                 hideWait();
                 if (response.IsSuccessful) {
                     toast('Licence Ticket Type Deleted Successfully');
                     triggerEmployeedetails();
                 }
             },
-            error: function () {
+            error: function() {
                 hideWait();
                 toast('Network Error');
             }
@@ -996,7 +932,7 @@ function deleteTrade(id) {
             type: "POST",
             url: url + id,
             data: {},
-            success: function (response) {
+            success: function(response) {
                 hideWait();
                 if (response.IsSuccessful) {
 
@@ -1004,7 +940,7 @@ function deleteTrade(id) {
                     triggerEmployeedetails();
                 }
             },
-            error: function () {
+            error: function() {
                 hideWait();
                 toast('Network Error');
             }
@@ -1012,7 +948,7 @@ function deleteTrade(id) {
     }
 }
 
-$("input[name='LicencePosition']").on("click", function () {
+$("input[name='LicencePosition']").on("click", function() {
     $("#dvLicence .exp").show();
     $("#txtExperience").val("");
     $("#txtNumberlLicence").val("");
@@ -1029,17 +965,17 @@ $("input[name='LicencePosition']").on("click", function () {
 
 function SaveLicence() {
     /* var obj = {};
-    obj.Id = $("#hdnLicenceTypeId").val();
-    obj.LicenceTicketTypeId = $("#ddlLicence").val();
-    obj.UserId = currentUser.ID;
-    obj.Experience = $("#txtExperience").val();
-    obj.LicenceNumber = $("#txtNumberlLicence").val();
-    obj.LicenceExpiry = "";
-    obj.UserCertificationTypeId = $("input[name=LicencePosition]:checked").val(); //radio button value;
-    //obj = JSON.stringify(obj);
-    AddUserLicenceTicketType(obj);*/
+     obj.Id = $("#hdnLicenceTypeId").val();
+     obj.LicenceTicketTypeId = $("#ddlLicence").val();
+     obj.UserId = currentUser.ID;
+     obj.Experience = $("#txtExperience").val();
+     obj.LicenceNumber = $("#txtNumberlLicence").val();
+     obj.LicenceExpiry = "";
+     obj.UserCertificationTypeId = $("input[name=LicencePosition]:checked").val(); //radio button value;
+     //obj = JSON.stringify(obj);
+     AddUserLicenceTicketType(obj);*/
     var isValid = true;
-    $(".licenceRequired").each(function () {
+    $(".licenceRequired").each(function() {
         console.warn($(this));
         var current = $(this);
         if (current.val() == "" && current.is(":visible")) {
@@ -1053,7 +989,7 @@ function SaveLicence() {
         var obj = {};
         obj.Id = $("#hdnLicenceTypeId").val();
         obj.LicenceTicketTypeId = $("#ddlLicence").val();
-        //obj.UserId = currentUser.ID;
+        obj.UserId = currentUser.ID;
         obj.Name = $("#ddlLicenceText").val();
         obj.Experience = $("#txtExperience").val();
         obj.LicenceNumber = $("#txtNumberlLicence").val();
@@ -1069,7 +1005,6 @@ function SaveLicence() {
             obj.UserCertificationTypeName = "Qualified";
             obj.UserCertificationTypeId = 2;
         }
-        debugger;
         AddUserLicenceTicketType(obj);
 
     } else {
@@ -1080,16 +1015,16 @@ function SaveLicence() {
 
 function SaveTrade() {
     /*    var obj = {};
-    obj.Id = $("#hdnTradeId").val();
-    obj.TradeExperienceId = $("#ddlTradeExp").val();
-    obj.UserId = currentUser.ID;
-    obj.Experience = $("#txtExpTrade").val();
-    obj.QualificationNumber = $("#txtQualTrade").val();
-    obj.UserCertificationTypeId = $("input[name=TradeExpPosition]:checked").val(); //radio button value;
-    //obj = JSON.stringify(obj);
-    AddUserTradeExp(obj);*/
+        obj.Id = $("#hdnTradeId").val();
+        obj.TradeExperienceId = $("#ddlTradeExp").val();
+        obj.UserId = currentUser.ID;
+        obj.Experience = $("#txtExpTrade").val();
+        obj.QualificationNumber = $("#txtQualTrade").val();
+        obj.UserCertificationTypeId = $("input[name=TradeExpPosition]:checked").val(); //radio button value;
+        //obj = JSON.stringify(obj);
+        AddUserTradeExp(obj);*/
     var isValid = true;
-    $(".tradeRequired").each(function () {
+    $(".tradeRequired").each(function() {
         console.warn($(this));
         var current = $(this);
         if (current.val() == "" && current.is(":visible")) {
@@ -1103,7 +1038,7 @@ function SaveTrade() {
         var obj = {};
         obj.Id = $("#hdnTradeId").val();
         obj.TradeExperienceId = $("#ddlTradeExp").val();
-        //obj.UserId = currentUser.ID;
+        obj.UserId = currentUser.ID;
         obj.Name = $("#ddlTradeExpText").val();
         obj.Experience = $("#txtExpTrade").val();
         obj.QualificationNumber = $("#txtQualTrade").val();
@@ -1117,7 +1052,7 @@ function SaveTrade() {
             obj.UserCertificationTypeId = 2;
         } // not experienced or qualified
         //obj = JSON.stringify(obj);
-
+            
         AddUserTradeExp(obj);
     } else {
         return false;
@@ -1126,16 +1061,16 @@ function SaveTrade() {
 
 function SavePosition() {
     /*    var obj = {};
-    obj.Id = $("#hdnPositionId").val();
-    obj.PositionHeldId = $("#ddlPositionHeld").val();
-    obj.UserId = currentUser.ID;
-    obj.Experience = $("#txtExpPosition").val();
-    obj.QualificationNumber = $("#txtQualPosition").val();
-    obj.UserCertificationTypeId = $("input[name=CertifiedTypePosition]:checked").val(); //radio button value;
-    //obj = JSON.stringify(obj);
-    AddUserPositionHeld(obj);*/
+        obj.Id = $("#hdnPositionId").val();
+        obj.PositionHeldId = $("#ddlPositionHeld").val();
+        obj.UserId = currentUser.ID;
+        obj.Experience = $("#txtExpPosition").val();
+        obj.QualificationNumber = $("#txtQualPosition").val();
+        obj.UserCertificationTypeId = $("input[name=CertifiedTypePosition]:checked").val(); //radio button value;
+        //obj = JSON.stringify(obj);
+        AddUserPositionHeld(obj);*/
     var isValid = true;
-    $(".positionRequired").each(function () {
+    $(".positionRequired").each(function() {
         console.warn($(this));
         var current = $(this);
         if (current.val() == "" && current.is(":visible")) {
@@ -1149,7 +1084,7 @@ function SavePosition() {
         var obj = {};
         obj.Id = $("#hdnPositionId").val();
         obj.PositionHeldId = $("#ddlPositionHeld").val();
-        //obj.UserId = currentUser.ID;
+        obj.UserId = currentUser.ID;
         obj.Name = $("#ddlPositionHeldText").val();
         obj.Experience = $("#txtExpPosition").val();
         obj.QualificationNumber = $("#txtQualPosition").val();
@@ -1163,7 +1098,7 @@ function SavePosition() {
             obj.UserCertificationTypeId = 2;
         } // not experienced or qualified
         //obj = JSON.stringify(obj);\
-
+        
         AddUserPositionHeld(obj);
     } else {
         return false;
@@ -1178,7 +1113,7 @@ function AddUserPositionHeld(obj) {
         type: 'POST',
         url: url,
         data: obj,
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
 
@@ -1186,7 +1121,7 @@ function AddUserPositionHeld(obj) {
                 redirectWithTimeout("UpdateProfile.html");
             }
         },
-        error: function () {
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -1201,7 +1136,7 @@ function AddUserTradeExp(obj) {
         type: 'POST',
         url: url,
         data: obj,
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
                 if (localStorage.ueditTradeFlag == "true") {
@@ -1212,7 +1147,7 @@ function AddUserTradeExp(obj) {
                 redirectWithTimeout("UpdateProfile.html");
             }
         },
-        error: function () {
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -1227,7 +1162,7 @@ function AddUserLicenceTicketType(obj) {
         type: 'POST',
         url: url,
         data: obj,
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
                 if (localStorage.ueditLicenceFlag == "true") {
@@ -1239,7 +1174,7 @@ function AddUserLicenceTicketType(obj) {
 
             }
         },
-        error: function () {
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -1257,7 +1192,7 @@ function editLicence(id) {
         type: 'GET',
         url: url + id,
         data: {},
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
                 /*$.mobile.pageContainer.pagecontainer("change", "#addeditLicence", { transition: "slide" });
@@ -1271,18 +1206,18 @@ function editLicence(id) {
                 $("#dvLicence .container").show();
                 $("#dvLicence .exp").show();
                 if (response.Result.UserCertificationTypeId === 1) {
-                $("#expLicence").attr("checked", true);
-                $("#expLicence").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
-                $("#dvLicence .num").hide();
+                    $("#expLicence").attr("checked", true);
+                    $("#expLicence").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
+                    $("#dvLicence .num").hide();
                 } else {
-                if (response.Result.UserCertificationTypeId === 2) {
-                $("#qualLicence").attr("checked", true);
-                $("#qualLicence").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
-                $("#dvLicence .num").show();
-                } else {
-                $("#dvLicence .container").hide();
-                $("#dvLicence .num").show();
-                }
+                    if (response.Result.UserCertificationTypeId === 2) {
+                        $("#qualLicence").attr("checked", true);
+                        $("#qualLicence").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
+                        $("#dvLicence .num").show();
+                    } else {
+                        $("#dvLicence .container").hide();
+                        $("#dvLicence .num").show();
+                    }
                 }*/
                 $.mobile.pageContainer.pagecontainer("change", "#addeditLicence", { transition: "slide" });
                 $("#addLicenceBtn").text("Update");
@@ -1315,7 +1250,7 @@ function editLicence(id) {
                 }
             }
         },
-        error: function () {
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -1325,38 +1260,38 @@ function editLicence(id) {
 function editPosition(id) {
     showWait();
     var url = serviceUrl + "Account/GetUserPositionHeld/";
-    localStorage.selectedPosition = id;
+    localStorage.selectedPosition=id;
     $.ajax({
         type: 'GET',
         url: url + id,
         data: {},
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
                 $.mobile.pageContainer.pagecontainer("change", "#addeditPosition", { transition: "slide" });
                 /*                $("#hdnPositionId").val(response.Result.Id);
-                getActivePositionHeld(response.Result.PositionHeldId);
-                //getPositionHeldDetail(response.Result.PositionHeldId);
-                $("#ddlPositionHeld").val(response.Result.PositionHeldId);
-                $("#txtExpPosition").val(response.Result.Experience);
-                $("#txtQualPosition").val(response.Result.QualificationNumber);
-                $("#dvPosition").show();
-                $("#dvPosition .container").show();
-                $("#dvPosition .exp").show();
-                if (response.Result.UserCertificationTypeId === 1) {
-                $("#expPosition").attr("checked", true);
-                $("#expPosition").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
-                $("#dvPosition .num").hide();
-                } else {
-                if (response.Result.UserCertificationTypeId === 2) {
-                $("#qualPosition").attr("checked", true);
-                $("#qualPosition").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
-                $("#dvPosition .num").show();
-                } else {
-                $("#dvPosition .container").hide();
-                $("#dvPosition .num").show();
-                }
-                }*/
+                                getActivePositionHeld(response.Result.PositionHeldId);
+                                //getPositionHeldDetail(response.Result.PositionHeldId);
+                                $("#ddlPositionHeld").val(response.Result.PositionHeldId);
+                                $("#txtExpPosition").val(response.Result.Experience);
+                                $("#txtQualPosition").val(response.Result.QualificationNumber);
+                                $("#dvPosition").show();
+                                $("#dvPosition .container").show();
+                                $("#dvPosition .exp").show();
+                                if (response.Result.UserCertificationTypeId === 1) {
+                                    $("#expPosition").attr("checked", true);
+                                    $("#expPosition").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
+                                    $("#dvPosition .num").hide();
+                                } else {
+                                    if (response.Result.UserCertificationTypeId === 2) {
+                                        $("#qualPosition").attr("checked", true);
+                                        $("#qualPosition").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
+                                        $("#dvPosition .num").show();
+                                    } else {
+                                        $("#dvPosition .container").hide();
+                                        $("#dvPosition .num").show();
+                                    }
+                                }*/
                 $("#addPosBtn").text("Update"); // change the button text to edit
                 $("#delPosBtn").show(); // show the delete button
                 localStorage.upositionIDSaved = $("#hdnPositionId").val();
@@ -1387,7 +1322,7 @@ function editPosition(id) {
 
             }
         },
-        error: function () {
+        error: function() {
             hideWait();
             toast('Network Error');
         }
@@ -1402,7 +1337,7 @@ function editTrade(id) {
         type: 'GET',
         url: url + id,
         data: {},
-        success: function (response) {
+        success: function(response) {
             hideWait();
             if (response.IsSuccessful) {
                 $.mobile.pageContainer.pagecontainer("change", "#addeditTrade", { transition: "slide" });
@@ -1416,19 +1351,19 @@ function editTrade(id) {
                 $("#dvTrade .container").show();
                 $("#dvTrade .exp").show();
                 if (response.Result.UserCertificationTypeId == "1") {
-                $("#expTrade").attr("checked", true);
-                $("#expTrade").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
-                $("#dvTrade .num").hide();
+                    $("#expTrade").attr("checked", true);
+                    $("#expTrade").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
+                    $("#dvTrade .num").hide();
 
                 } else {
-                if (response.Result.UserCertificationTypeId == "2") {
-                $("#qualTrade").attr("checked", true);
-                $("#qualTrade").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
-                $("#dvTrade .num").show();
-                } else {
-                $("#dvTrade .container").hide();
-                $("#dvTrade .num").show();
-                }
+                    if (response.Result.UserCertificationTypeId == "2") {
+                        $("#qualTrade").attr("checked", true);
+                        $("#qualTrade").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
+                        $("#dvTrade .num").show();
+                    } else {
+                        $("#dvTrade .container").hide();
+                        $("#dvTrade .num").show();
+                    }
                 }*/
                 $("#addTradeBtn").text("Update"); // change the button text to Edit
                 $("#delTradeBtn").show(); // show the delete trade button    
@@ -1463,7 +1398,7 @@ function editTrade(id) {
 
             }
         },
-        error: function () {
+        error: function() {
             hideWait();
             toast('Network Error');
         }

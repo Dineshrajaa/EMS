@@ -31,11 +31,6 @@
             background-color: #ffffff; /*padding-top: 90px !important;*/
         }
         
-        .input-validation-error
-        {
-            border-bottom: 1px solid #a94442 !important;
-        }
-        
         .tooltip.bottom
         {
             font-size: 11px !important;
@@ -66,11 +61,6 @@
         .ui-header > .ui-btn
         {
             height: unset;
-        }
-        
-        .error
-        {
-            border: 2px solid red !important;
         }
         
         .ui-table th, .ui-table td
@@ -337,13 +327,13 @@
                 <label for="txtPin">
                     Pin No
                 </label>
-                <input type="tel" id="txtPin" name="txtPin"  maxlength="4" minlength="4"
-                    onblur=" validatePassword(this) " placeholder=""  valid-attr="Please enter pin" />
+                <input type="tel" id="txtPin" name="txtPin" maxlength="4" minlength="4" onblur=" validatePassword(this) "
+                    placeholder="" valid-attr="Please enter pin" />
                 <label for="txtPin">
                     Confirm Pin No
                 </label>
-                <input type="tel" id="txtCPin" name="txtCPin"  maxlength="4" onblur=" validateConfirmPassword(this) "
-                    minlength="4" placeholder=""  valid-attr="Please enter Confirm pin" />
+                <input type="tel" id="txtCPin" name="txtCPin" maxlength="4" onblur=" validateConfirmPassword(this) "
+                    minlength="4" placeholder="" valid-attr="Please enter Confirm pin" />
                 <label style="color: red" id="spnError">
                 </label>
             </div>

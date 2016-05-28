@@ -839,9 +839,9 @@ function GetEmployeeDetails(id) {
                     }
                 }
 
-                $("#licenceList").html(licenceHtml);
-                $("#tradeList").html(tradeHtml);
-                $("#positionList").html(positionsHtml);
+                $("#licenceList").html(licenceHtml).listview("refresh");
+                $("#tradeList").html(tradeHtml).listview("refresh");
+                $("#positionList").html(positionsHtml).listview("refresh");
 
 
             }
@@ -860,7 +860,7 @@ function deletePosition(id) {
         showWait();
         /*var obj = {};
         obj.id = parseInt(id);*/
-        var id=parseInt(localStorage.selectedPosition);
+        var id = parseInt(localStorage.selectedPosition);
         var url = serviceUrl + "Account/DeleteUserPositionHeld/";
         $.ajax({
             type: 'POST',
@@ -1052,7 +1052,7 @@ function SaveTrade() {
             obj.UserCertificationTypeId = 2;
         } // not experienced or qualified
         //obj = JSON.stringify(obj);
-            
+
         AddUserTradeExp(obj);
     } else {
         return false;
@@ -1098,13 +1098,18 @@ function SavePosition() {
             obj.UserCertificationTypeId = 2;
         } // not experienced or qualified
         //obj = JSON.stringify(obj);\
-        
+
         AddUserPositionHeld(obj);
     } else {
         return false;
     }
 }
 
+function getEmpDetails() {
+    // To group the list of Ticket etc
+   triggerEmployeedetails();
+    navigatePage("#listOfDetailsPage")
+}
 
 function AddUserPositionHeld(obj) {
     showWait();
@@ -1118,7 +1123,8 @@ function AddUserPositionHeld(obj) {
             if (response.IsSuccessful) {
 
                 toast('Position Added Successfully');
-                redirectWithTimeout("UpdateProfile.html");
+                getEmpDetails();
+                //redirectWithTimeout("UpdateProfile.html");
             }
         },
         error: function() {
@@ -1144,7 +1150,8 @@ function AddUserTradeExp(obj) {
                 } else
                     $("#hdnTradeId").val(parseInt($("#hdnTradeId").val()) + 1);
                 toast('Trade Added Successfully');
-                redirectWithTimeout("UpdateProfile.html");
+                getEmpDetails();
+                //redirectWithTimeout("UpdateProfile.html");
             }
         },
         error: function() {
@@ -1170,7 +1177,8 @@ function AddUserLicenceTicketType(obj) {
                 } else
                     $("#hdnLicenceTypeId").val(parseInt($("#hdnLicenceTypeId").val()) + 1);
                 toast('Licence Added Successfully');
-                redirectWithTimeout("UpdateProfile.html");
+                getEmpDetails();
+                // redirectWithTimeout("UpdateProfile.html");
 
             }
         },
@@ -1260,7 +1268,7 @@ function editLicence(id) {
 function editPosition(id) {
     showWait();
     var url = serviceUrl + "Account/GetUserPositionHeld/";
-    localStorage.selectedPosition=id;
+    localStorage.selectedPosition = id;
     $.ajax({
         type: 'GET',
         url: url + id,

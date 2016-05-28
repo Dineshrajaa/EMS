@@ -228,3 +228,9 @@ function GetPostDetailBy(postId) {
     });
 }
 
+$(document).on("pageinit","#profileDetailsPage,#avatarPage",function(){
+    $("#cameraTypeList").on("panelclose", function(event, ui) {
+        //remove the overlay
+        $("#profileDetailsPage,#avatarPage").unblock(); 
+    });
+});

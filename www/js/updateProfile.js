@@ -33,15 +33,16 @@ function cameraSuccess(imageData) {
     // $("#profilePicImg").attr("src", "data:image/jpeg;base64," + imageData);
     var imageData = "data:image/jpeg;base64," + imageData;
     $(".profileCircle").css("background-image", "url(" + imageData + ")");
-    updateProfilePicture(); // now send the picture to sevice    
+    updateProfilePicture(imageData); // now send the picture to sevice    
 }
 
-function updateProfilePicture() {
+function updateProfilePicture(imageData) {
     // To update profile picture of the user
     var url = serviceUrl + "Account/UpdateProfilePicture";
     var jsonObj = {};
     jsonObj.userId = $("#hdnUserId").val();
-    jsonObj.pic = $("#profilePicImg").attr("src");
+    jsonObj.pic = imageData;
+    console.warn(JSON.stringify(jsonObj));
     showWait();
     $.ajax({
         type: "POST",
@@ -52,10 +53,15 @@ function updateProfilePicture() {
         async: false,
         success: function(result) {
             hideWait();
-            toast("Profile Picture updated Successfully");
+            console.warn("result:"+result);
+            if (result.IsSuccessful) {
+                toast("Profile Picture updated Successfully");
+                $('#profileDetailsPage,#avatarPage').unblock();
+            }
         },
         error: function(error) {
             hideWait();
+            $('#profileDetailsPage,#avatarPage').unblock();
         }
     });
 }
@@ -348,7 +354,7 @@ function fetchProfileDetail(userId) {
                 $("#lblGender").html(gender);
                 $("#street_number").val(employeeObj.StreetAddress);
                 $("#locality").val(employeeObj.City);
-                $("#lblAddr").html(employeeObj.StreetAddress);
+                $("#lblAddr").html(employeeObj.StreetAddress + ", " + employeeObj.City + ", " + employeeObj.State + ", " + employeeObj.Postcode);
                 $("#lbllocality").html(employeeObj.City);
                 $("#postal_code").val(employeeObj.Postcode);
                 $("#lblpostal_code").html(employeeObj.Postcode);
@@ -1107,7 +1113,7 @@ function SavePosition() {
 
 function getEmpDetails() {
     // To group the list of Ticket etc
-   triggerEmployeedetails();
+    triggerEmployeedetails();
     navigatePage("#listOfDetailsPage")
 }
 

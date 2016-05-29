@@ -70,7 +70,7 @@ function logIn(userName, password) {
         var jsonObj = new Object();
         jsonObj.username = userName;
         jsonObj.password = password;
-        jsonObj.isWebApp = true;
+        jsonObj.isWebApp = false;
         jsonObj.deviceId = localStorage.pushRegID;
         $.ajax({
             type: "GET",

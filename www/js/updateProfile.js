@@ -1123,6 +1123,11 @@ function AddUserPositionHeld(obj) {
             if (response.IsSuccessful) {
 
                 toast('Position Added Successfully');
+                // Reset the fields
+                $("#ddlPositionHeld").val("0").change(); // make the select value 0
+                $("#txtQualPosition,#txtExpPosition").val("");
+                $(".num,.exp").hide();
+                $("input[name='CertifiedTypePosition']").removeAttr("checked").checkboxradio("refresh");
                 getEmpDetails();
                 //redirectWithTimeout("UpdateProfile.html");
             }
@@ -1150,6 +1155,11 @@ function AddUserTradeExp(obj) {
                 } else
                     $("#hdnTradeId").val(parseInt($("#hdnTradeId").val()) + 1);
                 toast('Trade Added Successfully');
+                // Reset the fields
+                $("#ddlTradeExp").val("0").change(); // make the select value 0
+                $("#txtQualTrade,#txtExpTrade").val("");
+                $(".num,.exp").hide();
+                $("input[name='TradeExpPosition']").removeAttr("checked").checkboxradio("refresh");
                 getEmpDetails();
                 //redirectWithTimeout("UpdateProfile.html");
             }
@@ -1177,6 +1187,11 @@ function AddUserLicenceTicketType(obj) {
                 } else
                     $("#hdnLicenceTypeId").val(parseInt($("#hdnLicenceTypeId").val()) + 1);
                 toast('Licence Added Successfully');
+                // Reset the fields
+                $("#ddlLicence").val("0").change(); // make the select value 0
+                $("#txtNumberlLicence,#txtLicenceExpiry,#txtExperience").val("");
+                $(".num,.exp").hide();
+                $("input[name='LicencePosition']").removeAttr("checked").checkboxradio("refresh");
                 getEmpDetails();
                 // redirectWithTimeout("UpdateProfile.html");
 

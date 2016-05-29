@@ -193,7 +193,7 @@ function restoreTheRegFields() {
         $("#txtFirstName").val(jsonObj.FirstName); // restore first name
         $("#txtMiddleName").val(jsonObj.MiddleName || ""); // restore middle name
         $("#txtLastName").val(jsonObj.LastName); // restore middle name
-        $("#txtDob").val(jsonObj.DateOfBirth); // restore DOB
+        $("#txtDob").val(jsonObj.DOB); // restore DOB
         $("#txtEmail").val(jsonObj.Email); // restore email
         $("#street_number").val(jsonObj.StreetAddress); // restore street address
         $("#locality").val(jsonObj.City); // restore location
@@ -251,7 +251,7 @@ function register(nextpageId) {
     jsonObj.FirstName = firstName;
     jsonObj.MiddleName = middleName;
     jsonObj.LastName = lastName;
-    jsonObj.DateOfBirth = dob;
+    jsonObj.DOB = dob;
     jsonObj.Email = email;
     jsonObj.StreetAddress = streetAddress;
 

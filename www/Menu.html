@@ -22,6 +22,10 @@
         font-size: 18px;
         padding: 5px;
     }
+
+    .menufont{
+        font-size: 20px;
+    }
 </style>
 <!-- panel left -->
 <div data-role="panel" id="leftpanel" data-display="overlay" data-position-fixed="true"
@@ -30,7 +34,7 @@
         <!-- <img class='profile-background' src="img/app-icon-75.png" alt="" />-->
         <div class="row dvMenuPage">
             <div class='col-xs-12 center-xs'>
-                <div class='box'>
+                <div class='box' style="background-color:#0CACEB">
                     <img class="profile-thumbnail" id="imgUserImage" src="img/avtar.png" alt="" />
                 </div>
                 <div class='box profile-text'>
@@ -42,19 +46,19 @@
     </div>
     <ul data-role="listview">
         <li><a class="menuLi" onclick=" redirect('Dashboard.html') " href="#"><i class="zmdi zmd-2x zmd-fw zmdi-home">
-        </i><span class="middle-md middle-sm middle-xs">&nbsp;Status</span></a></li>
+        </i><span class="middle-md middle-sm middle-xs menufont">&nbsp;Status</span></a></li>
         <li><a onclick="redirect('UpdateProfile.html')" href="#"><i class="zmdi zmd-2x zmd-fw zmdi-account-box">
-        </i><span class="middle-md middle-sm middle-xs">&nbsp;My Profile</span></a></li>
+        </i><span class="middle-md middle-sm middle-xs menufont">&nbsp;My Profile</span></a></li>
         <li style="display:none"><a onclick="redirect('NewsAndMessages.html')" href="#"><i class="zmdi zmd-2x zmd-fw zmdi-email">
-        </i><span class="middle-md middle-sm middle-xs">&nbsp;Post</span></a></li>
+        </i><span class="middle-md middle-sm middle-xs menufont">&nbsp;Post</span></a></li>
         <li><a onclick="redirect('messages.html')" href="#"><i class="zmdi zmd-2x zmd-fw zmdi-email">
-        </i><span class="middle-md middle-sm middle-xs">&nbsp;Message</span></a></li>
+        </i><span class="middle-md middle-sm middle-xs menufont">&nbsp;Message</span></a></li>
         <li style="display:none"><a onclick="redirect('Jobs.html')" href="#"><i class="zmdi zmd-2x zmd-fw zmdi-developer-board">
-        </i><span class="middle-md middle-sm middle-xs">&nbsp;Jobs</span></a></li>
+        </i><span class="middle-md middle-sm middle-xs menufont">&nbsp;Jobs</span></a></li>
         <li><a onclick="redirect('Setting.html')" href="#"><i class="zmdi zmd-2x zmd-fw zmdi-settings">
-        </i><span class="middle-md middle-sm middle-xs">&nbsp;Settings</span></a></li>
+        </i><span class="middle-md middle-sm middle-xs menufont">&nbsp;Settings</span></a></li>
         <li><a class="menuLi" onclick="doLogout();" href="#"><i class="zmdi zmd-2x zmd-fw zmdi-power-off">
-        </i><span class="middle-md middle-sm middle-xs">&nbsp;Logout</span></a></li>
+        </i><span class="middle-md middle-sm middle-xs menufont">&nbsp;Logout</span></a></li>
     </ul>
 </div>
 <!-- /panel left -->

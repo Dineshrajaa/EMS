@@ -39,12 +39,12 @@
                     <hr />
                     <div class="ui-controlgroup-label" role="heading">
                         <h4 style="color: #666666">
-                            <b>Status Change</b>
+                            <b>Change tomorrows work availability status to:</b>
                         </h4>
                     </div>
                     <div class="ui-controlgroup-controls" style="padding-left: 36%">
                         <label for="radio-choice-ab">
-                            Available
+                            Available to work
                             <input id="rdAvail" type="radio" value="2" name="rdChngeSts" class="rdio">
                         </label>
                         <label for="radio-choice-bb">
@@ -188,6 +188,8 @@
                     async: false,
                     success: function (result) {
                         if (result.IsSuccessful) {
+                            currentUser.JobStatusType = result.Result;
+                            localStorage.setItem('userSession', JSON.stringify(currentUser));
                             if (result.Result == "1" || result.Result == 1) {
                                 $("#curStatus").html("Working");
                                 $("#curStatus").removeClass('available').removeClass('notAvailable').addClass('working');
@@ -195,18 +197,24 @@
                                 $("#rdAvail").prev().removeClass("ui-radio-on");
                                 $("#rdNtAvail").attr("checked", false);
                                 $("#rdNtAvail").prev().removeClass("ui-radio-on");
+                                $(".jobSection").show();
+                                GetAssignJob();
                             }
                             if (result.Result == "2" || result.Result == 2) {
                                 $("#rdAvail").attr("checked", true);
                                 $("#rdAvail").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
                                 $("#curStatus").html("Available");
                                 $("#curStatus").removeClass('working').removeClass('notAvailable').addClass('available');
+                                $(".jobSection").show();
+                                $("#currentJob").html("");
+                                $("#currentJob").append("<h4>There are no current jobs</h4>");
                             }
                             if (result.Result == "3" || result.Result == 3) {
                                 $("#rdNtAvail").attr("checked", true);
                                 $("#rdNtAvail").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
                                 $("#curStatus").html("Not Available");
                                 $("#curStatus").removeClass('working').removeClass('available').addClass('notAvailable');
+                                $(".jobSection").hide();
                             }
                         }
                         hideWait();
@@ -258,7 +266,7 @@
                 //                }
             });
 
-            GetAssignJob();
+            
         });
 
         function updateWorkStatus() {
@@ -298,6 +306,8 @@
                                 $("#curStatus").html("Available");
                                 $("#curStatus").removeClass('working').removeClass('notAvailable').addClass('available');
                                 $(".jobSection").show();
+                                $("#currentJob").html("");
+                                $("#currentJob").append("<h4>There are no current jobs</h4>");
                             }
                             if (statusId == "3") {
                                 $("#curStatus").html("Not Available");

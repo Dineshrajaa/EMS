@@ -5,6 +5,10 @@
     color: #000000;
 }
 
+.ui-input-text input, .ui-input-search input {
+    background-color: #F5F5F5;
+}
+
 :invalid
 {
     box-shadow: none;

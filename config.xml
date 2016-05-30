@@ -42,6 +42,8 @@
         <icon height="58" src="res/icon/ios/icon-small@2x.png" width="58" />
         <icon height="50" src="res/icon/ios/icon-50.png" width="50" />
         <icon height="100" src="res/icon/ios/icon-50@2x.png" width="100" />
+        <icon height="512" src="resources/ios/icon/iTunesArtwork.png" width="512" />
+        <icon height="1024" src="resources/ios/icon/iTunesArtwork@2x.png" width="1024" />
     </platform>
     <platform name="android">
         <splash density="land-hdpi" src="res/screen/android/land-hdpi.png" />

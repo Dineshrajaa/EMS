@@ -72,6 +72,7 @@ function logIn(userName, password) {
         jsonObj.password = password;
         jsonObj.isWebApp = false;
         jsonObj.deviceId = localStorage.pushRegID;
+        jsonObj.deviceTypeId=device.platform=="Android"?2:1;
         $.ajax({
             type: "GET",
             url: url,

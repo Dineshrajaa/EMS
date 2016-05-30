@@ -63,7 +63,7 @@ function toast(message) {
 }
 //(string username, string password, string isWebApp)
 function logIn(userName, password) {
-    registerPush();
+    // registerPush();
     if (userName.length > 0 && password.length > 0) {
         showWait();
         var url = serviceUrl + "Account/AuthenticateUser";

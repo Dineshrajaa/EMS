@@ -71,8 +71,8 @@ function logIn(userName, password) {
         jsonObj.username = userName;
         jsonObj.password = password;
         jsonObj.isWebApp = false;
-        jsonObj.deviceId = localStorage.pushRegID||"abc";
-        jsonObj.deviceTypeId=device.platform=="Android"?2:1;
+        jsonObj.deviceId = "1234";//localStorage.pushRegID;
+        jsonObj.deviceTypeId = "2"; //device.platform=="Android"?2:1;
         $.ajax({
             type: "GET",
             url: url,
@@ -85,7 +85,17 @@ function logIn(userName, password) {
                     localStorage.setItem('userSession', data);
                     toast('Sign In Successful');
                 } else {
-                    toast('Incorrect username or pin');
+                    switch (result.MessageType) {
+                        case 10:
+                            $("#statusMsg").text("(Applicant login pending)");
+                            break;
+                        case 5:
+                            $("#statusMsg").text("(Applicant login declined)");
+                            break;
+                        default:
+                            $("#statusMsg").text("");
+                            toast('Incorrect username or pin');
+                    }
                 }
             },
             error: function(result) {

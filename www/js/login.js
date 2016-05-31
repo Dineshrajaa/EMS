@@ -20,7 +20,7 @@ function hideSignin() {
     //    $("body").css("background-image", "url('img/bgsmall1.JPG')");
     $(".btnSection").css("display", "inline-block");
 }
-$(document).on('ready', function() {
+$(document).on('ready', function () {
     var currentUserObj = localStorage.getItem('userSession');
     if (currentUserObj && currentUserObj != 'undefined') {
         redirect("Dashboard.html");
@@ -29,7 +29,7 @@ $(document).on('ready', function() {
         // deleteLocalStorage(["userSession"]);
     }
 
-    $('body').on('keypress', 'input', function(args) {
+    $('body').on('keypress', 'input', function (args) {
         if (args.keyCode == 13) {
             dologIn($("#txtUserName").val().trim(), $("#txtPassword").val().trim());
         }
@@ -52,13 +52,12 @@ function registerPush() {
         windows: {}
     });
 
-    push.on('registration', function(data) {
+    push.on('registration', function (data) {
         // data.registrationId
         localStorage.pushRegID = data.registrationId;
-
     });
 
-    push.on('notification', function(data) {
+    push.on('notification', function (data) {
         // data.message,
         // data.title,
         // data.count,
@@ -67,7 +66,7 @@ function registerPush() {
         // data.additionalData
     });
 
-    push.on('error', function(e) {
+    push.on('error', function (e) {
         // e.message
     });
 }
@@ -76,15 +75,14 @@ function dologIn() {
     logIn($("#txtUserName").val().trim(), $("#txtPassword").val().trim());
     var currentUserObj = localStorage.getItem('userSession');
     if (currentUserObj && currentUserObj != 'undefined') {
-        routing("Dashboard.html", ["js/trainerList.js"], [], "trainerList", "", "index");
+        routing("Dashboard.html");
     }
 }
 
-document.addEventListener("deviceready", function() {
-
-
-    if (device.platform == "iOS")
-        StatusBar.overlaysWebView(false); // to avoid overlay of splashscreen over the app
+document.addEventListener("deviceready", function () {
+    if (device.platform == "iOS") {
+        StatusBar.overlaysWebView(false); // to avoid overlay of splashscreen over the app 
+    }
     StatusBar.backgroundColorByHexString("#0CACEB"); // to change the header color of the app
-    // registerPush();
+    registerPush();
 }, true);

@@ -39,31 +39,27 @@ function cameraSuccess(imageData) {
 function updateProfilePicture(imageData) {
     // To update profile picture of the user
     var url = serviceUrl + "Account/UpdateProfilePicture";
-    var profileObj = {};
-    profileObj.userId = $("#hdnUserId").val();
-    profileObj.pic = imageData;
-    console.warn(JSON.stringify(profileObj));
+    var jsonObj = {};
+    jsonObj.userId = $("#hdnUserId").val();
+    jsonObj.pic = imageData;
+    console.warn(JSON.stringify(jsonObj));
     showWait();
     $.ajax({
         type: "POST",
         url: url,
-        //data: profileObj,
-        data: {
-            'userId': $("#hdnUserId").val(),
-            'pic': imageData
-        },
+        data: jsonObj,
         contentType: "application/json",
         dataType: "json",
+        async: false,
         success: function(result) {
             hideWait();
-            console.warn("result:" + result);
+            console.warn("result:"+result);
             if (result.IsSuccessful) {
                 toast("Profile Picture updated Successfully");
                 $('#profileDetailsPage,#avatarPage').unblock();
             }
         },
         error: function(error) {
-            console.warn("error:" + JSON.stringify(error));
             hideWait();
             $('#profileDetailsPage,#avatarPage').unblock();
         }

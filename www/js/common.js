@@ -71,7 +71,7 @@ function logIn(userName, password) {
         jsonObj.username = userName;
         jsonObj.password = password;
         jsonObj.isWebApp = false;
-        jsonObj.deviceId = localStorage.pushRegID;
+        jsonObj.deviceId = localStorage.pushRegID||"abc";
         jsonObj.deviceTypeId=device.platform=="Android"?2:1;
         $.ajax({
             type: "GET",

@@ -86,5 +86,5 @@ document.addEventListener("deviceready", function() {
     if (device.platform == "iOS")
         StatusBar.overlaysWebView(false); // to avoid overlay of splashscreen over the app
     StatusBar.backgroundColorByHexString("#0CACEB"); // to change the header color of the app
-    registerPush();
+    // registerPush();
 }, true);

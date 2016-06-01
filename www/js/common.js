@@ -71,8 +71,8 @@ function logIn(userName, password) {
         jsonObj.username = userName;
         jsonObj.password = password;
         jsonObj.isWebApp = false;
-        jsonObj.deviceId = "1234";//localStorage.pushRegID;
-        jsonObj.deviceTypeId = "2"; //device.platform=="Android"?2:1;
+        jsonObj.deviceId = localStorage.pushRegID || "";
+        jsonObj.deviceTypeId = device.platform == "Android" ? 2 : 1;
         $.ajax({
             type: "GET",
             url: url,
@@ -179,8 +179,7 @@ function GetAssignJob() {
                     $("#spnDesc").html(resultObj.Name);
                     $("#spnContract").html(resultObj.ContractType);
                 }
-            }
-            else {
+            } else {
                 $("#currentJob").html("");
                 $("#currentJob").append("<h4>There are no current jobs</h4>");
             }
@@ -239,9 +238,9 @@ function GetPostDetailBy(postId) {
     });
 }
 
-$(document).on("pageinit","#profileDetailsPage,#avatarPage",function(){
+$(document).on("pageinit", "#profileDetailsPage,#avatarPage", function() {
     $("#cameraTypeList").on("panelclose", function(event, ui) {
         //remove the overlay
-        $("#profileDetailsPage,#avatarPage").unblock(); 
+        $("#profileDetailsPage,#avatarPage").unblock();
     });
 });

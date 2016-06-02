@@ -54,6 +54,7 @@ function registerPush() {
 
     push.on('registration', function (data) {
         // data.registrationId
+        alert(data.registrationId);
         localStorage.pushRegID = data.registrationId;
     });
 
@@ -83,6 +84,7 @@ document.addEventListener("deviceready", function () {
     if (device.platform == "iOS") {
         StatusBar.overlaysWebView(false); // to avoid overlay of splashscreen over the app 
     }
-    StatusBar.backgroundColorByHexString("#0CACEB"); // to change the header color of the app
     registerPush();
+    StatusBar.backgroundColorByHexString("#0CACEB"); // to change the header color of the app
+    
 }, true);

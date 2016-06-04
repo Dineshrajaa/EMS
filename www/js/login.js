@@ -40,25 +40,26 @@ $(document).on('ready', function () {
 
 function registerPush() {
     // To register the device for push notification
+	try {
     var push = PushNotification.init({
-        android: {
-            senderID: "739681536553"
-        },
-        ios: {
-            alert: "true",
-            badge: "true",
-            sound: "true"
-        },
+        android: {senderID: "739681536553"},
+        ios: {alert: "true",badge: "true",sound: "true"},
         windows: {}
     });
+	}catch(error){
+		alert(error)
+	}
 
     push.on('registration', function (data) {
-        // data.registrationId
-        alert(data.registrationId);
+        //I can get registration id here
+        alert(JSON.stringify(data));
         localStorage.pushRegID = data.registrationId;
     });
 
     push.on('notification', function (data) {
+	    //this place doesn't work
+        alert("notification event");
+        alert(JSON.stringify(data));
         // data.message,
         // data.title,
         // data.count,
@@ -68,7 +69,7 @@ function registerPush() {
     });
 
     push.on('error', function (e) {
-        // e.message
+         console.log("push error:" + e.message);
     });
 }
 
@@ -84,7 +85,6 @@ document.addEventListener("deviceready", function () {
     if (device.platform == "iOS") {
         StatusBar.overlaysWebView(false); // to avoid overlay of splashscreen over the app 
     }
-    registerPush();
     StatusBar.backgroundColorByHexString("#0CACEB"); // to change the header color of the app
-    
+    registerPush();
 }, true);

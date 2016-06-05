@@ -114,7 +114,7 @@
                     </div>
                 </div>
                 <div style="padding: 5px; border-radius: 15px; text-align: center" class="jobSection">
-                    <a href="#" onclick=" redirect('Jobs.html') " class="ui-btn ui-btn-raised clr-primary">
+                    <a href="#" onclick=" redirect('Jobs.html') " class="ui-btn ui-btn-raised clr-primary" id="viewJobsBtn">
                         View Jobs</a>
                     <br />
                 </div>
@@ -209,6 +209,7 @@
                                 $(".jobSection").show();
                                 $("#currentJob").html("");
                                 $("#currentJob").append("<h4>There are no current jobs</h4>");
+                                $("#viewJobsBtn").hide();
                             }
                             if (result.Result == "3" || result.Result == 3) {
                                 $("#rdNtAvail").attr("checked", true);
@@ -216,6 +217,7 @@
                                 $("#curStatus").html("Not Available");
                                 $("#curStatus").removeClass('working').removeClass('available').addClass('notAvailable');
                                 $(".jobSection").hide();
+                                $("#viewJobsBtn").show();
                             }
                         }
                         hideWait();
@@ -250,7 +252,11 @@
                 //var cnfrm = confirm('Changing your status will notify management of your availability. Do you wish to continue?');
                 $('#popupDialog').popup("open");
                 selectedValue = this.value;
-
+                if(selectedValue=="2")
+                    $("#viewJobsBtn").hide();
+                else{
+                    $("#viewJobsBtn").show();
+                }
                 //                if (cnfrm != true) {
                 //                    this.checked = false;
                 //                    return false;
@@ -309,11 +315,13 @@
                                 $(".jobSection").show();
                                 $("#currentJob").html("");
                                 $("#currentJob").append("<h4>There are no current jobs</h4>");
+                                
                             }
                             if (statusId == "3") {
                                 $("#curStatus").html("Not Available");
                                 $("#curStatus").removeClass('working').removeClass('available').addClass('notAvailable');
                                 $(".jobSection").hide();
+                                
                             }
                             toast("Status Changed.");
                         }

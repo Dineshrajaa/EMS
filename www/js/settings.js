@@ -32,12 +32,13 @@ function saveLNPref() {
         toast("Please choose the frequency of notification");
         return;
     }
-    var n_format_time = timeToNowGMT($("#txtTime").val());
+    //var n_format_time = timeToNowGMT($("#txtTime").val());
     var now = new Date();
+    var time=$("#txtTime").val();
     var day = ("0" + now.getDate()).slice(-2);
     var month = ("0" + (now.getMonth() + 1)).slice(-2)
-    var dateSplit = now.getFullYear() + '-' + month + '-' + day + 'T' + n_format_time;
-    var notificationTime = new Date(dateSplit).toUTCString();
+    var dateSplit = now.getFullYear() + '-' + month + '-' + day + " " +time;//'T' + n_format_time;
+    var notificationTime = new Date((dateSplit).replace(/-/g, "/")).getTime();// new Date(dateSplit).toUTCString();
     console.warn($("#txtTime").val() + "" + notificationTime);
     var notiSetObj = {};
     notiSetObj.notificationTime = $("#txtTime").val();
@@ -64,6 +65,7 @@ function saveLNPref() {
     }, function() { console.warn("configured local notification") });
     cordova.plugins.notification.local.on("schedule", function(notification) {
         console.log("scheduled: " + notification.id);
+        toast("Saved settings");
     });
 }
 

@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="format-detection" content="telephone=no" />
@@ -13,8 +14,7 @@
     <script src="js/nativedroid2.js" type="text/javascript"></script>
     <script src="js/wow.min.js" type="text/javascript"></script>
     <script src="js/jquery.blockUI.js" type="text/javascript"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkG6xU4kRwb532NgIYs0WSyOSCX3yYn8E&libraries=places"
-        type="text/javascript"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkG6xU4kRwb532NgIYs0WSyOSCX3yYn8E&libraries=places" type="text/javascript"></script>
     <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="css/jquery.mobile.min.css" />
     <!--<link rel="stylesheet" href="css/waves.min.css" />-->
@@ -22,93 +22,85 @@
     <link rel="stylesheet" href="css/themeContainer.css" />
     <link rel="stylesheet" href="css/common.css" />
     <style>
-        .ui-input-text::after, .ui-input-search::after
-        {
-            width: 90% !important;
-        }
-        
-        .registration
-        {
-            background-color: #ffffff; /*padding-top: 90px !important;*/
-        }
-        
-        .tooltip.bottom
-        {
-            font-size: 11px !important;
-            margin-top: 0;
-            padding: 0;
-        }
-        
-        .tooltip-inner
-        {
-            border-radius: 4px;
-            color: red;
-            float: right;
-            padding: 0 17px 0 0;
-            text-align: center;
-        }
-        
-        .tooltip
-        {
-            width: 100%;
-            z-index: 1000;
-        }
-        
-        .ui-input-text input, .ui-input-search input
-        {
-            background-color: #ffffff;
-        }
-        
-        .tooltip.bottom .tooltip-arrow
-        {
-            display: none;
-        }
-        
-        .ui-header > .ui-btn
-        {
-            height: unset;
-        }
-        
-        .ui-table th, .ui-table td
-        {
-            vertical-align: middle;
-        }
-        
-        .table-stroke tbody th, .table-stroke tbody td
-        {
-            border-bottom: 0;
-        }
-        
-        #profileDetailsList.ui-listview > .ui-li-static
-        {
-            padding-top: 0;
-        }
-        
-        .btn-left-margin
-        {
-            margin-left: 10px;
-        }
-        
-        .ui-content hr, .ui-panel-inner hr
-        {
-            margin: 0em -0.5em !important;
-            padding: 0px !important;
-        }
-        
-        #registrationPanel
-        {
-            padding: 10px;
-            border-radius: 10px;
-            background-color: #ffffff;
-        }
-        
-        #registrationPanel label
-        {
-            margin-top: 5px;
-            font-weight: bold;
-        }
+    .ui-input-text::after,
+    .ui-input-search::after {
+        width: 90% !important;
+    }
+    
+    .registration {
+        background-color: #ffffff;
+        /*padding-top: 90px !important;*/
+    }
+    
+    .tooltip.bottom {
+        font-size: 11px !important;
+        margin-top: 0;
+        padding: 0;
+    }
+    
+    .tooltip-inner {
+        border-radius: 4px;
+        color: red;
+        float: right;
+        padding: 0 17px 0 0;
+        text-align: center;
+    }
+    
+    .tooltip {
+        width: 100%;
+        z-index: 1000;
+    }
+    
+    .ui-input-text input,
+    .ui-input-search input {
+        background-color: #ffffff;
+    }
+    
+    .tooltip.bottom .tooltip-arrow {
+        display: none;
+    }
+    
+    .ui-header > .ui-btn {
+        height: unset;
+    }
+    
+    .ui-table th,
+    .ui-table td {
+        vertical-align: middle;
+    }
+    
+    .table-stroke tbody th,
+    .table-stroke tbody td {
+        border-bottom: 0;
+    }
+    
+    #profileDetailsList.ui-listview > .ui-li-static {
+        padding-top: 0;
+    }
+    
+    .btn-left-margin {
+        margin-left: 10px;
+    }
+    
+    .ui-content hr,
+    .ui-panel-inner hr {
+        margin: 0em -0.5em !important;
+        padding: 0px !important;
+    }
+    
+    #registrationPanel {
+        padding: 10px;
+        border-radius: 10px;
+        background-color: #ffffff;
+    }
+    
+    #registrationPanel label {
+        margin-top: 5px;
+        font-weight: bold;
+    }
     </style>
 </head>
+
 <body>
     <!-- Profile options page start -->
     <div data-role="page" data-theme="a" class="nd2-no-menu-swipe registration" id="profileOptionsPage">
@@ -125,9 +117,10 @@
             <br />
             <br />
             <ul data-role="listview" data-inset="true" data-icon="true">
-                <li class="bbblack"><a href="#profileDetailsPage" class="ui-btn ui-btn-inline ui-btn-raised">
-                    <span><i class="clr-primary zmdi zmd-sm zmdi-account ui-pull-left"></i></span><span
-                        class="btn-left-margin">Personal Details</span></a></li>
+                <li class="bbblack">
+                    <a href="#profileDetailsPage" class="ui-btn ui-btn-inline ui-btn-raised">
+                        <span><i class="clr-primary zmdi zmd-sm zmdi-account ui-pull-left"></i></span><span class="btn-left-margin">Personal Details</span></a>
+                </li>
                 <li><a href="#listOfDetailsPage" class="ui-btn ui-btn-inline ui-btn-raised"><span><i
                     class="clr-primary zmdi zmd-sm zmdi-flower ui-pull-left"></i></span><span class="btn-left-margin">
                         Licences & Experience</span></a></li>
@@ -138,22 +131,18 @@
     </div>
     <!-- Profile options page end -->
     <div data-role="page" data-theme="a" class="nd2-no-menu-swipe registration" id="profileDetailsPage">
-        <div data-role="panel" id="cameraTypeList" class="ui-bottom-sheet ui-bottom-sheet-list"
-            data-animate="false" data-position='bottom' data-display="overlay" style="min-height: 30%">
+        <div data-role="panel" id="cameraTypeList" class="ui-bottom-sheet ui-bottom-sheet-list" data-animate="false" data-position='bottom' data-display="overlay" style="min-height: 30%">
             <div class='row around-xs'>
                 <div class='col-xs-auto'>
-                    <a href='#' class='panelBtn ui-bottom-sheet-link ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button'
-                        data-ajax='false' onclick="openCameraOrGallery('Camera.PictureSourceType.CAMERA')">
+                    <a href='#' class='panelBtn ui-bottom-sheet-link ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button' data-ajax='false' onclick="openCameraOrGallery('Camera.PictureSourceType.CAMERA')">
                         <i class='zmdi zmdi-camera-front zmd-2x'></i><strong>Take Photo</strong></a>
                 </div>
                 <div class='col-xs-auto'>
-                    <a href='#' class='panelBtn ui-bottom-sheet-link ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button'
-                        data-ajax='false' onclick="openCameraOrGallery('Camera.PictureSourceType.PHOTOLIBRARY')">
+                    <a href='#' class='panelBtn ui-bottom-sheet-link ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button' data-ajax='false' onclick="openCameraOrGallery('Camera.PictureSourceType.PHOTOLIBRARY')">
                         <i class='zmdi zmdi-file zmd-2x'></i><strong>Use Existing Photo</strong></a>
                 </div>
                 <div class='col-xs-auto'>
-                    <a href='#' class='panelBtn ui-bottom-sheet-link ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button'
-                        data-ajax='false'><i class='zmdi zmdi-close-circle zmd-2x'></i><strong>Cancel</strong></a>
+                    <a href='#' class='panelBtn ui-bottom-sheet-link ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button' data-ajax='false'><i class='zmdi zmdi-close-circle zmd-2x'></i><strong>Cancel</strong></a>
                 </div>
             </div>
         </div>
@@ -273,8 +262,7 @@
                 <label for="txtFirstName">
                     First Name
                 </label>
-                <input type="text" id="txtFirstName" name="txtFirstName" class="required" placeholder=""
-                    required="required" valid-attr="Please enter first name" />
+                <input type="text" id="txtFirstName" name="txtFirstName" class="required" placeholder="" required="required" valid-attr="Please enter first name" />
                 <label for="txtMiddleName">
                     Middle Name
                 </label>
@@ -282,13 +270,11 @@
                 <label for="txtLastName">
                     Last Name
                 </label>
-                <input type="text" id="txtLastName" name="txtLastName" class="required" placeholder=""
-                    required="required" valid-attr="Please enter last name" />
+                <input type="text" id="txtLastName" name="txtLastName" class="required" placeholder="" required="required" valid-attr="Please enter last name" />
                 <label for="txtDob">
                     Dob
                 </label>
-                <input type="text" id="txtDob" name="txtDob" class="required" placeholder="" required="required"
-                    valid-attr="Please enter dob" />
+                <input type="text" id="txtDob" name="txtDob" class="required" placeholder="" required="required" valid-attr="Please enter dob" />
                 <label for="ddlGender">
                     Gender
                 </label>
@@ -304,47 +290,38 @@
                 <label for="street_number">
                     Street Address
                 </label>
-                <input type="text" id="street_number" name="street_number" class="required" placeholder=""
-                    required="required" valid-attr="Please enter address" />
+                <input type="text" id="street_number" name="street_number" class="required" placeholder="" required="required" valid-attr="Please enter address" />
                 <label for="locality">
                     City/Suburb/Town*
                 </label>
-                <input type="text" id="locality" name="locality" class="required" placeholder=""
-                    required="required" valid-attr="Please enter city" />
+                <input type="text" id="locality" name="locality" class="required" placeholder="" required="required" valid-attr="Please enter city" />
                 <label for="administrative_area_level_1">
                     State
                 </label>
-                <input type="text" id="administrative_area_level_1" name="administrative_area_level_1"
-                    class="required" placeholder="" required="required" valid-attr="Please enter state" />
+                <input type="text" id="administrative_area_level_1" name="administrative_area_level_1" class="required" placeholder="" required="required" valid-attr="Please enter state" />
                 <label for="postal_code">
                     Postcode
                 </label>
-                <input type="text" id="postal_code" name="postal_code" class="required" placeholder=""
-                    required="required" valid-attr="Please enter Post code" />
+                <input type="text" id="postal_code" name="postal_code" class="required" placeholder="" required="required" valid-attr="Please enter Post code" />
                 <label for="txtContact1">
                     Primary Contact No
                 </label>
-                <input type="tel" id="txtContact1" name="txtContact1" class="required" placeholder=""
-                    required="required" valid-attr="Please enter mobile no" />
+                <input type="tel" id="txtContact1" name="txtContact1" class="required" placeholder="" required="required" valid-attr="Please enter mobile no" />
                 <label for="txtContact2">
                     Secondary Contact No
                 </label>
                 <input type="tel" id="txtContact2" name="txtContact2" class="" placeholder="" />
                 <label for="chkPaySlipMail">
-                    <input type="checkbox" id="chkPaySlipMail" name="chkPaySlipMail" class="" placeholder=""
-                        style="color: #696969;" />
-                    Would you like payslips sent to your email?
+                    <input type="checkbox" id="chkPaySlipMail" name="chkPaySlipMail" class="" placeholder="" style="color: #696969;" /> Would you like payslips sent to your email?
                 </label>
                 <label for="txtPin">
                     Pin No
                 </label>
-                <input type="tel" id="txtPin" name="txtPin" maxlength="4" minlength="4" onblur=" validatePassword(this) "
-                    placeholder="" valid-attr="Please enter pin" />
+                <input type="tel" id="txtPin" name="txtPin" maxlength="4" minlength="4" onblur=" validatePassword(this) " placeholder="" valid-attr="Please enter pin" />
                 <label for="txtPin">
                     Confirm Pin No
                 </label>
-                <input type="tel" id="txtCPin" name="txtCPin" maxlength="4" onblur=" validateConfirmPassword(this) "
-                    minlength="4" placeholder="" valid-attr="Please enter Confirm pin" />
+                <input type="tel" id="txtCPin" name="txtCPin" maxlength="4" onblur=" validateConfirmPassword(this) " minlength="4" placeholder="" valid-attr="Please enter Confirm pin" />
                 <label style="color: red" id="spnError">
                 </label>
             </div>
@@ -462,10 +439,10 @@
                 <br />
                 <br />
                 <form id="form_UpdateUser">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="box">
-                            <!--<ul data-role="listview" class="ul" style="display: none; z-index: 99999999; position: absolute;
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="box">
+                                <!--<ul data-role="listview" class="ul" style="display: none; z-index: 99999999; position: absolute;
                                             margin-left: 40%;" data-role="collapsible" data-mini="true" data-shadow="false"
                                                              data-inset="false" data-corners="false">
                             <li style="border: 1px solid gray;" onclick="capturePhoto();">Take Photo</li>
@@ -475,98 +452,89 @@
                             </li>
                         </ul>
                         <img src="" id="imgProfile" />-->
-                            <input type="hidden" id="hdnUserId" />
-                            <input type="hidden" id="hdnRoleId" />
-                            <br />
-                            <label>
-                                Title</label>
-                            <select class="ui-selectmenu-list" id="ddlTitle">
-                                <option value="1">Mr</option>
-                                <option value="2">Mrs</option>
-                                <option value="3">Miss</option>
-                                <option value="3">Ms</option>
-                            </select>
-                            <label for="txtFirstName">
-                                First Name
-                            </label>
-                            <input type="text" id="txtFirstName" name="txtFirstName" class="required" placeholder=""
-                                required="required" valid-attr="Please enter first name" />
-                            <label for="txtMiddleName">
-                                Middle Name
-                            </label>
-                            <input type="text" id="txtMiddleName" name="txtMiddleName" class="" placeholder="" />
-                            <label for="txtLastName">
-                                Last Name
-                            </label>
-                            <input type="text" id="txtLastName" name="txtLastName" class="required" placeholder=""
-                                required="required" valid-attr="Please enter last name" />
-                            <label for="txtDob">
-                                Dob
-                            </label>
-                            <input type="text" id="txtDob" name="txtDob" class="required" placeholder="required"
-                                required="required" valid-attr="Please enter dob" />
-                            <label for="ddlGender">
-                                Gender
-                            </label>
-                            <select id="ddlGender" required="required" valid_attr="Please select gender">
-                                <option value="1">Not Specified</option>
-                                <option value="2">Male</option>
-                                <option value="3">Female</option>
-                            </select>
-                            <!--<label for="txtUserName">
+                                <input type="hidden" id="hdnUserId" />
+                                <input type="hidden" id="hdnRoleId" />
+                                <br />
+                                <label>
+                                    Title</label>
+                                <select class="ui-selectmenu-list" id="ddlTitle">
+                                    <option value="1">Mr</option>
+                                    <option value="2">Mrs</option>
+                                    <option value="3">Miss</option>
+                                    <option value="3">Ms</option>
+                                </select>
+                                <label for="txtFirstName">
+                                    First Name
+                                </label>
+                                <input type="text" id="txtFirstName" name="txtFirstName" class="required" placeholder="" required="required" valid-attr="Please enter first name" />
+                                <label for="txtMiddleName">
+                                    Middle Name
+                                </label>
+                                <input type="text" id="txtMiddleName" name="txtMiddleName" class="" placeholder="" />
+                                <label for="txtLastName">
+                                    Last Name
+                                </label>
+                                <input type="text" id="txtLastName" name="txtLastName" class="required" placeholder="" required="required" valid-attr="Please enter last name" />
+                                <label for="txtDob">
+                                    Dob
+                                </label>
+                                <input type="text" id="txtDob" name="txtDob" class="required" placeholder="required" required="required" valid-attr="Please enter dob" />
+                                <label for="ddlGender">
+                                    Gender
+                                </label>
+                                <select id="ddlGender" required="required" valid_attr="Please select gender">
+                                    <option value="1">Not Specified</option>
+                                    <option value="2">Male</option>
+                                    <option value="3">Female</option>
+                                </select>
+                                <!--<label for="txtUserName">
                             Email
                         </label>
                         <input type="email" id="txtEmail" name="txtEmail" class="required" onblur="validateEmail(this) "
                                placeholder="" required="required" valid-attr="Please enter email" />-->
-                            <label for="keyword">
-                                Search Address
-                            </label>
-                            <input type="text" id="keyword" name="keyword" placeholder="" />
-                            <label for="street_number">
-                                Street Address
-                            </label>
-                            <input type="text" id="street_number" name="street_number" class="required" placeholder=""
-                                required="required" valid-attr="Please enter address" />
-                            <label for="locality">
-                                City/Suburb/Town*
-                            </label>
-                            <input type="text" id="locality" name="locality" class="required" placeholder=""
-                                required="required" valid-attr="Please enter city" />
-                            <label for="administrative_area_level_1">
-                                State
-                            </label>
-                            <input type="text" id="administrative_area_level_1" name="administrative_area_level_1"
-                                class="required" placeholder="" required="required" valid-attr="Please enter state" />
-                            <label for="postal_code">
-                                Postcode
-                            </label>
-                            <input type="text" id="postal_code" name="postal_code" class="required" placeholder=""
-                                required="required" valid-attr="Please enter Post code" />
-                            <label for="txtContact1">
-                                Primary Contact No
-                            </label>
-                            <input type="tel" id="txtContact1" name="txtContact1" class="required" placeholder=""
-                                required="required" valid-attr="Please enter mobile no" />
-                            <label for="txtContact2">
-                                Secondary Contact No
-                            </label>
-                            <input type="tel" id="txtContact2" name="txtContact2" class="" placeholder="" />
-                            <label for="chkPaySlipMail">
-                                <input type="checkbox" id="chkPaySlipMail" name="chkPaySlipMail" class="" placeholder="" />
-                                Would you like payslips sent to your email?
-                            </label>
-                            <label style="color: red" id="spnError">
-                            </label>
-                            <!--<a href="" onclick="next()"  class="ui-btn ui-btn-raised ui-mini clr-primary">
+                                <label for="keyword">
+                                    Search Address
+                                </label>
+                                <input type="text" id="keyword" name="keyword" placeholder="" />
+                                <label for="street_number">
+                                    Street Address
+                                </label>
+                                <input type="text" id="street_number" name="street_number" class="required" placeholder="" required="required" valid-attr="Please enter address" />
+                                <label for="locality">
+                                    City/Suburb/Town*
+                                </label>
+                                <input type="text" id="locality" name="locality" class="required" placeholder="" required="required" valid-attr="Please enter city" />
+                                <label for="administrative_area_level_1">
+                                    State
+                                </label>
+                                <input type="text" id="administrative_area_level_1" name="administrative_area_level_1" class="required" placeholder="" required="required" valid-attr="Please enter state" />
+                                <label for="postal_code">
+                                    Postcode
+                                </label>
+                                <input type="text" id="postal_code" name="postal_code" class="required" placeholder="" required="required" valid-attr="Please enter Post code" />
+                                <label for="txtContact1">
+                                    Primary Contact No
+                                </label>
+                                <input type="tel" id="txtContact1" name="txtContact1" class="required" placeholder="" required="required" valid-attr="Please enter mobile no" />
+                                <label for="txtContact2">
+                                    Secondary Contact No
+                                </label>
+                                <input type="tel" id="txtContact2" name="txtContact2" class="" placeholder="" />
+                                <label for="chkPaySlipMail">
+                                    <input type="checkbox" id="chkPaySlipMail" name="chkPaySlipMail" class="" placeholder="" /> Would you like payslips sent to your email?
+                                </label>
+                                <label style="color: red" id="spnError">
+                                </label>
+                                <!--<a href="" onclick="next()"  class="ui-btn ui-btn-raised ui-mini clr-primary">
                             Next
                         </a>-->
-                            <a href="" onclick="validate();" class="ui-btn ui-btn-raised ui-mini clr-primary">Update
+                                <a href="" onclick="validate();" class="ui-btn ui-btn-raised ui-mini clr-primary">Update
                             </a>
-                            <br />
-                            <br />
+                                <br />
+                                <br />
+                            </div>
                         </div>
                     </div>
-                </div>
                 </form>
             </div>
             <div data-role="nd2tab" data-tab="experience">
@@ -704,6 +672,16 @@
                 </center>
             </div>
         </div>
+        <script type="text/javascript">
+        $("#listOfDetailsPage").ready(function() {
+            var currentUserObj = localStorage.getItem('userSession');
+            if (currentUserObj && currentUserObj != 'undefined') {
+                currentUser = JSON.parse(currentUserObj);
+                fetchProfileDetail(currentUser.ID);
+                GetEmployeeDetails(currentUser.ID);
+            }
+        });
+        </script>
     </div>
     <!-- List of Tickets,Positions,Trade end -->
     <div data-role="page" id="addeditLicence" data-theme="a" class="nd2-no-menu-swipe registration">
@@ -767,12 +745,10 @@
                             Certification Type
                         </label>
                         <label>
-                            <input type="radio" name="LicencePosition" id="expLicence" value="1" />
-                            Experienced
+                            <input type="radio" name="LicencePosition" id="expLicence" value="1" /> Experienced
                         </label>
                         <label>
-                            <input type="radio" name="LicencePosition" id="qualLicence" value="2" />
-                            Qualified
+                            <input type="radio" name="LicencePosition" id="qualLicence" value="2" /> Qualified
                         </label>
                     </div>
                     <div class="num" style="display: none;">
@@ -870,12 +846,10 @@
                         Certification Type
                     </label>
                     <label>
-                        <input type="radio" name="TradeExpPosition" id="expTrade" value="1" />
-                        Experienced
+                        <input type="radio" name="TradeExpPosition" id="expTrade" value="1" /> Experienced
                     </label>
                     <label>
-                        <input type="radio" name="TradeExpPosition" id="qualTrade" value="2" />
-                        Qualified
+                        <input type="radio" name="TradeExpPosition" id="qualTrade" value="2" /> Qualified
                     </label>
                 </div>
                 <div class="num" style="display: none;">
@@ -975,12 +949,10 @@
                             Certification Type
                         </label>
                         <label>
-                            <input type="radio" name="CertifiedTypePosition" id="expPosition" value="1" />
-                            Experienced
+                            <input type="radio" name="CertifiedTypePosition" id="expPosition" value="1" /> Experienced
                         </label>
                         <label>
-                            <input type="radio" name="CertifiedTypePosition" id="qualPosition" value="2" />
-                            Qualified
+                            <input type="radio" name="CertifiedTypePosition" id="qualPosition" value="2" /> Qualified
                         </label>
                     </div>
                     <div class="num" style="display: none;">
@@ -1021,4 +993,5 @@
     <script src="js/updateProfile.js" type="text/javascript"></script>
     <script src="js/takePic.js" type="text/javascript"></script>
 </body>
+
 </html>

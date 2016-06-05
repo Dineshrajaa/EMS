@@ -34,11 +34,11 @@ function saveLNPref() {
     }
     //var n_format_time = timeToNowGMT($("#txtTime").val());
     var now = new Date();
-    var time=$("#txtTime").val();
+    var time = $("#txtTime").val();
     var day = ("0" + now.getDate()).slice(-2);
     var month = ("0" + (now.getMonth() + 1)).slice(-2)
-    var dateSplit = now.getFullYear() + '-' + month + '-' + day + " " +time;//'T' + n_format_time;
-    var notificationTime = new Date((dateSplit).replace(/-/g, "/")).getTime();// new Date(dateSplit).toUTCString();
+    var dateSplit = now.getFullYear() + '-' + month + '-' + day + " " + time; //'T' + n_format_time;
+    var notificationTime = new Date((dateSplit).replace(/-/g, "/")).getTime(); // new Date(dateSplit).toUTCString();
     console.warn($("#txtTime").val() + "" + notificationTime);
     var notiSetObj = {};
     notiSetObj.notificationTime = $("#txtTime").val();
@@ -46,21 +46,25 @@ function saveLNPref() {
     localStorage.savedLNPref = JSON.stringify(notiSetObj);
 
     //var sound = device.platform == 'Android' ? 'file://sound.mp3' : 'file://beep.caf';
-   /* var now = new Date().getTime(),
-        _5_sec_from_now = new Date(now + 5 * 1000);
-    cordova.plugins.notification.local.schedule({
-        id: 1,
-        title: 'Dowells',
-        text: 'Do you like to update your profile status?',
-        at: _5_sec_from_now,
-        every: $("#frequencySelect").val()
-    });*/
-
+    /* var now = new Date().getTime(),
+         _5_sec_from_now = new Date(now + 5 * 1000);
+     cordova.plugins.notification.local.schedule({
+         id: 1,
+         title: 'Dowells',
+         text: 'Do you like to update your profile status?',
+         at: _5_sec_from_now,
+         every: $("#frequencySelect").val()
+     });*/
+    cordova.plugins.notification.local.on("click", function(notification) {
+        if (device.platform == 'iOS') {
+            cordova.plugins.notification.badge.clear(); // clear the batch
+        }
+    });
     cordova.plugins.notification.local.schedule({
         title: 'Dowells',
         text: "Do you like to update your profile status?",
         every: $("#frequencySelect").val(),
-        at:new Date(notificationTime)
+        at: new Date(notificationTime)
 
     }, function() { console.warn("configured local notification") });
     cordova.plugins.notification.local.on("schedule", function(notification) {

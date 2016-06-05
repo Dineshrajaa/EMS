@@ -819,10 +819,13 @@ function GetEmployeeDetails(id) {
                         var exp = (licencelist[k].Experience != null && licencelist[k].Experience != "") ? licencelist[k].Experience : "";
                         var no = (licencelist[k].LicenceNumber != null && licencelist[k].LicenceNumber != "") ? licencelist[k].LicenceNumber : "";
                         var expiryDate = (licencelist[k].LicenceExpiry != null && licencelist[k].LicenceExpiry != "") ? licencelist[k].LicenceExpiry : "";
+                        
                         if (no == "") {
                             // No licence number
                             expiryDate = ""; // clear the expiry date
                             showQualifiedDetails = "display:none"; // hide the qualification oriented things
+                        }else{
+                            expiryDate=expiryDate.split("T")[0];
                         }
                         licenceHtml += '<li onclick="editLicence(' + licencelist[k].Id + ')">';
                         licenceHtml += '<table data-role="table" data-mode="" class="ui-responsive table-stroke"><tbody>';

@@ -292,7 +292,7 @@ function submitProfile() {
     jsonObj.UserLicenceTicketTypes = licenceTicketList;
     jsonObj.UserTradeExperiences = tradeExpList;
     jsonObj.UserPositionHelds = positionHoldList;
-    // jsonObj.ProfilePicture = jsonObj.profilePicture == "img/avtar.png" ? "" : jsonObj.profilePicture;
+    jsonObj.ProfilePicture = localStorage.ProfilePicture || "";
     console.log(jsonObj);
     $.ajax({
         type: "POST",
@@ -515,7 +515,7 @@ function openCameraOrGallery(sourceType) {
 
 function cameraSuccess(imageData) {
     $("#profilePicImg").attr("src", "data:image/jpeg;base64," + imageData);
-    jsonObj.ProfilePicture="data:image/jpeg;base64," + imageData;
+    localStorage.ProfilePicture="data:image/jpeg;base64," + imageData;
     $("#submitProfileBtn").show(); // after adding photo show the submit button
 }
 

@@ -81,4 +81,5 @@
     <plugin name="de.appplant.cordova.plugin.local-notification" spec="~0.8.4" />
     <plugin name="cordova-plugin-background-mode" spec="https://github.com/katzer/cordova-plugin-background-mode.git" />
     <plugin name="cordova-plugin-badge" spec="~0.7.2" />
+    <plugin name="cordova-plugin-file-transfer" spec="~1.5.1" />
 </widget>

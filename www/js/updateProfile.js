@@ -3,8 +3,8 @@
 function setOptions(srcType) {
     var options = {
         // Some common settings are 20, 50, and 100
-        quality: 50,
-        destinationType: Camera.DestinationType.DATA_URL,
+        quality: 20,
+        destinationType: Camera.DestinationType.FILE_URI,
         // In this app, dynamically set the picture source, Camera or photo gallery
         sourceType: srcType,
         allowEdit: true,
@@ -31,7 +31,7 @@ function openCameraOrGallery(sourceType) {
 
 function cameraSuccess(imageData) {
     // $("#profilePicImg").attr("src", "data:image/jpeg;base64," + imageData);
-    var imageData = "data:image/jpeg;base64," + imageData;
+    var imageData = imageData; // "data:image/jpeg;base64," + 
     $(".profileCircle").css("background-image", "url(" + imageData + ")");
     updateProfilePicture(imageData); // now send the picture to sevice    
 }
@@ -39,8 +39,27 @@ function cameraSuccess(imageData) {
 function updateProfilePicture(imageData) {
     // To update profile picture of the user
     var url = serviceUrl + "Account/UpdateProfilePicture";
-    var jsonObj = {};
+    var options = new FileUploadOptions();
+    options.fileKey = "file";
+    options.fileName = imageData.substr(imageData.lastIndexOf('/') + 1);
+    options.mimeType = "image/jpeg";
+    options.httpMethod="POST";
+    var params = new Object();
+    params.userId = $("#hdnUserId").val();
+    params.pic=imageData;
+    options.chunkedMode = false;
+    var ft = new FileTransfer();
+    ft.upload(imageData, url, function(r) {
+        console.log("Code = " + r.responseCode);
+        console.log("Response = " + r.response);
+        console.log("Sent = " + r.bytesSent);
+
+    }, function(error) {
+        alert(JSON.stringify(error));
+    }, options);
+    /*var jsonObj = {};
     jsonObj.userId = $("#hdnUserId").val();
+    alert(imageData);
     jsonObj.pic = imageData;
     console.warn(JSON.stringify(jsonObj));
     showWait();
@@ -50,7 +69,6 @@ function updateProfilePicture(imageData) {
         data: jsonObj,
         contentType: "application/json",
         dataType: "json",
-        async: false,
         success: function(result) {
             hideWait();
             console.warn("result:"+result);
@@ -63,7 +81,7 @@ function updateProfilePicture(imageData) {
             hideWait();
             $('#profileDetailsPage,#avatarPage').unblock();
         }
-    });
+    });*/
 }
 
 function cameraError(err) {
@@ -819,13 +837,13 @@ function GetEmployeeDetails(id) {
                         var exp = (licencelist[k].Experience != null && licencelist[k].Experience != "") ? licencelist[k].Experience : "";
                         var no = (licencelist[k].LicenceNumber != null && licencelist[k].LicenceNumber != "") ? licencelist[k].LicenceNumber : "";
                         var expiryDate = (licencelist[k].LicenceExpiry != null && licencelist[k].LicenceExpiry != "") ? licencelist[k].LicenceExpiry : "";
-                        
+
                         if (no == "") {
                             // No licence number
                             expiryDate = ""; // clear the expiry date
                             showQualifiedDetails = "display:none"; // hide the qualification oriented things
-                        }else{
-                            expiryDate=expiryDate.split("T")[0];
+                        } else {
+                            expiryDate = expiryDate.split("T")[0];
                         }
                         licenceHtml += '<li onclick="editLicence(' + licencelist[k].Id + ')">';
                         licenceHtml += '<table data-role="table" data-mode="" class="ui-responsive table-stroke"><tbody>';

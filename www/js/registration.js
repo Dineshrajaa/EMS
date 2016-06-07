@@ -1,5 +1,5 @@
 ﻿// google address
-
+var pictureUrl = ""; // to save the clicked/choosed picture url
 var options = {
     types: ['geocode'],
     componentRestrictions: { country: "au" }
@@ -266,7 +266,7 @@ function register(nextpageId) {
     jsonObj.UserLicenceTicketTypes = licenceTicketList;
     jsonObj.UserTradeExperiences = tradeExpList;
     jsonObj.UserPositionHelds = positionHoldList;
-    jsonObj.ProfilePicture = profilePicture == "img/avtar.png" ? "" : profilePicture;
+    // jsonObj.ProfilePicture = profilePicture == "img/avtar.png" ? "" : profilePicture;
     navigatePage(nextpageId);
     /*    $.ajax({
     type: "POST",
@@ -288,12 +288,34 @@ function register(nextpageId) {
 
 function submitProfile() {
     // To submit the profile completely
-    var url = serviceUrl + "Account/AddUser";
     jsonObj.UserLicenceTicketTypes = licenceTicketList;
     jsonObj.UserTradeExperiences = tradeExpList;
     jsonObj.UserPositionHelds = positionHoldList;
+    jsonObj.ProfilePicture=[];
+    var url = serviceUrl + "Account/AddUser";
+    var options = new FileUploadOptions();
+    options.fileKey = "file";
+    options.fileName = pictureUrl.substr(pictureUrl.lastIndexOf('/') + 1);
+    options.mimeType = "image/jpeg";
+    options.httpMethod = "POST";
+
+    options.chunkedMode = false;
+    options.params = jsonObj;
+    var ft = new FileTransfer();
+    ft.upload(pictureUrl, url, function(result) {
+        if (result.IsSuccessful) {
+            navigatePage("#successfulRegPage");
+            //alert("Registration has been successfully done");
+            // window.location.href = "index.html";
+        } else {
+            toast("Network Error");
+        }
+
+    }, function(error) {
+        alert(JSON.stringify(error));
+    }, options);
     // jsonObj.ProfilePicture = jsonObj.profilePicture == "img/avtar.png" ? "" : jsonObj.profilePicture;
-    console.log(jsonObj);
+    /*console.log(jsonObj);
     $.ajax({
         type: "POST",
         url: url,
@@ -310,7 +332,7 @@ function submitProfile() {
         error: function() {
             console.log('Some error occured in registration, please try again');
         }
-    });
+    });*/
 }
 
 function RegisterUser(nextpageId) {
@@ -488,7 +510,7 @@ function setOptions(srcType) {
     var options = {
         // Some common settings are 20, 50, and 100
         quality: 50,
-        destinationType: Camera.DestinationType.DATA_URL,
+        destinationType: Camera.DestinationType.FILE_URI,
         // In this app, dynamically set the picture source, Camera or photo gallery
         sourceType: srcType,
         allowEdit: true,
@@ -514,8 +536,9 @@ function openCameraOrGallery(sourceType) {
 }
 
 function cameraSuccess(imageData) {
-    $("#profilePicImg").attr("src", "data:image/jpeg;base64," + imageData);
-    jsonObj.ProfilePicture="data:image/jpeg;base64," + imageData;
+    $("#profilePicImg").attr("src",  imageData); //"data:image/jpeg;base64," +
+    //jsonObj.ProfilePicture="data:image/jpeg;base64," + imageData;
+    pictureUrl = imageData;
     $("#submitProfileBtn").show(); // after adding photo show the submit button
 }
 

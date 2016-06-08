@@ -228,7 +228,7 @@ function register(nextpageId) {
     var state = $("#administrative_area_level_1").val();
     var isPayslip = $("#chkPaySlipMail").is(":checked") ? true : false;
     var profilePicture = $("#profilePicImg").attr("src");
-    console.log(profilePicture);
+    //console.log(profilePicture);
     var title = "Mr";
     switch (titleId) {
         case "1":
@@ -281,7 +281,7 @@ function register(nextpageId) {
     }
     },
     error: function() {
-    console.log('Some error occured in registration, please try again');
+    //console.log('Some error occured in registration, please try again');
     }
     });*/
 }
@@ -301,6 +301,7 @@ function submitProfile() {
         success: function(result) {
             if (result.IsSuccessful) {
                 navigatePage("#successfulRegPage");
+                localStorage.ProfilePicture=""; // clear picture to avoid memory problems
                 //alert("Registration has been successfully done");
                 // window.location.href = "index.html";
             } else {
@@ -308,7 +309,7 @@ function submitProfile() {
             }
         },
         error: function() {
-            console.log('Some error occured in registration, please try again');
+            //console.log('Some error occured in registration, please try again');
         }
     });
 }
@@ -407,7 +408,7 @@ $(document).on("ready", function() {
         $("#dvLicence .exp").show();
         $("#txtExperience").val("");
         $("#txtNumberlLicence").val("");
-        if ($(this).children("input[name=LicencePosition]").val() == "2") {
+        if ($(this).children("input[name=LicencePosition]").val() == "1") {
             $("#dvLicence .num").show();
             $("#dvLicence .exp").hide();
             // $("#txtNumberlLicence,#txtLicenceExpiry").removeClass("licenceRequired").addClass("licenceRequired");
@@ -425,11 +426,11 @@ $(document).on("ready", function() {
         $("#dvLicence .exp").show();
         $("#txtExperience").val("");
         $("#txtNumberlLicence").val("");
-        console.warn($(this).val());
-        if ($(this).val() == "2") {
+        //console.warn($(this).val());
+        if ($(this).val() == "1") {
             $("#dvLicence .num").show();
             $("#dvLicence .exp").show();
-        } else if ($(this).val() == "1") {
+        } else if ($(this).val() == "2") {
             $("#dvLicence .exp").show();
             $("#dvLicence .num").hide();
         }
@@ -439,10 +440,10 @@ $(document).on("ready", function() {
         $("#dvTrade .exp").show();
         $("#txtExpTrade").val("");
         $("#txtQualTrade").val("");
-        console.warn($(this).val());
-        if ($(this).val() == "2") {
+        //console.warn($(this).val());
+        if ($(this).val() == "1") {
             $("#dvTrade .num").show();
-        } else if ($(this).val() == "1") {
+        } else if ($(this).val() == "2") {
             $("#dvTrade .num").hide();
         }
 
@@ -451,7 +452,7 @@ $(document).on("ready", function() {
     $("#dvTrade .exp").show();
     $("#txtExpTrade").val("");
     $("#txtQualTrade").val("");
-    console.log($(this).children("input[name=TradeExpPosition]").val());
+    //console.log($(this).children("input[name=TradeExpPosition]").val());
     if ($(this).children("input[name=TradeExpPosition]").val() === "2") {
     $("#dvTrade .num").show();
     } else {
@@ -473,10 +474,10 @@ $(document).on("ready", function() {
         $("#dvPosition .exp").show();
         $("#txtExpPosition").val("");
         $("#txtQualPosition").val("");
-        console.warn($(this).val());
-        if ($(this).val() == "2") {
+        //console.warn($(this).val());
+        if ($(this).val() == "1") {
             $("#dvPosition .num").show();
-        } else if ($(this).val() == "1") {
+        } else if ($(this).val() == "2") {
             $("#dvPosition .num").hide();
         }
 
@@ -509,7 +510,7 @@ function openCameraOrGallery(sourceType) {
     else if (sourceType == "Camera.PictureSourceType.PHOTOLIBRARY")
         sourceType = Camera.PictureSourceType.PHOTOLIBRARY;
     var cameraOptions = setOptions(sourceType);
-    console.warn("sourceType:" + sourceType + "cameraOptions:" + JSON.stringify(cameraOptions));
+    //console.warn("sourceType:" + sourceType + "cameraOptions:" + JSON.stringify(cameraOptions));
     navigator.camera.getPicture(cameraSuccess, cameraError, cameraOptions);
 }
 
@@ -520,7 +521,7 @@ function cameraSuccess(imageData) {
 }
 
 function cameraError(err) {
-    console.log("Camera error:" + err);
+    //console.log("Camera error:" + err);
 }
 
 function getActiveLicenceType(id) {
@@ -570,7 +571,7 @@ function getLicenceTypDetail(id) {
                 var result = response.Result;
                 $("#dvLicence").show();
                 $("#ddlLicenceText").val(result.Name);
-                console.warn(result.LicenceAbbr);
+                //console.warn(result.LicenceAbbr);
                 $("#licenceTypeh").text(result.LicenceAbbr);
                 if (result.IsQualifiedAllowed) {
                     $("#dvLicence .exp").show();
@@ -786,7 +787,7 @@ function deleteTrade(id, el) {
 function SaveTrade() {
     var isValid = true;
     $(".tradeRequired").each(function() {
-        console.warn($(this));
+        //console.warn($(this));
         var current = $(this);
         if (current.val() == "" && current.is(":visible")) {
             $(current).addClass("error");
@@ -804,13 +805,13 @@ function SaveTrade() {
         obj.Experience = $("#txtExpTrade").val();
         obj.QualificationNumber = $("#txtQualTrade").val();
         obj.UserCertificationTypeId = $("input[name=TradeExpPosition]:checked").val() || ""; //radio button value;
-        if (obj.UserCertificationTypeId == "1")
+        if (obj.UserCertificationTypeId == "2")
             obj.UserCertificationTypeName = "Experienced"; // Experienced
-        else if (obj.UserCertificationTypeId == "2")
+        else if (obj.UserCertificationTypeId == "1")
             obj.UserCertificationTypeName = "Qualified"; // Qualified
         else {
             obj.UserCertificationTypeName = "Qualified";
-            obj.UserCertificationTypeId = 2;
+            obj.UserCertificationTypeId = 1;
         } // not experienced or qualified
         //obj = JSON.stringify(obj);
         AddUserTradeExp(obj);
@@ -823,7 +824,7 @@ function SaveTrade() {
 function SavePosition() {
     var isValid = true;
     $(".positionRequired").each(function() {
-        console.warn($(this));
+        //console.warn($(this));
         var current = $(this);
         if (current.val() == "" && current.is(":visible")) {
             $(current).addClass("error");
@@ -841,13 +842,13 @@ function SavePosition() {
         obj.Experience = $("#txtExpPosition").val();
         obj.QualificationNumber = $("#txtQualPosition").val();
         obj.UserCertificationTypeId = $("input[name=CertifiedTypePosition]:checked").val(); //radio button value;
-        if (obj.UserCertificationTypeId == "1")
+        if (obj.UserCertificationTypeId == "2")
             obj.UserCertificationTypeName = "Experienced"; // Experienced
-        else if (obj.UserCertificationTypeId == "2")
+        else if (obj.UserCertificationTypeId == "1")
             obj.UserCertificationTypeName = "Qualified"; // Qualified
         else {
             obj.UserCertificationTypeName = "Qualified";
-            obj.UserCertificationTypeId = 2;
+            obj.UserCertificationTypeId = 1;
         } // not experienced or qualified
         //obj = JSON.stringify(obj);
         AddUserPositionHeld(obj);
@@ -968,7 +969,7 @@ function listTrade() {
 function SaveLicence() {
     var isValid = true;
     $(".licenceRequired").each(function() {
-        console.warn($(this));
+        //console.warn($(this));
         var current = $(this);
         if (current.val() == "" && current.is(":visible")) {
             $(current).addClass("error");
@@ -988,13 +989,13 @@ function SaveLicence() {
         obj.LicenceExpiry = $("#txtLicenceExpiry").val();
         obj.LicenceType = $("#licenceTypeh").text(); // Licence type
         obj.UserCertificationTypeId = $("input[name=LicencePosition]:checked").val(); //radio button value;
-        if (obj.UserCertificationTypeId == "1")
+        if (obj.UserCertificationTypeId == "2")
             obj.UserCertificationTypeName = "Experienced"; // Experienced
-        else if (obj.UserCertificationTypeId == "2")
+        else if (obj.UserCertificationTypeId == "1")
             obj.UserCertificationTypeName = "Qualified"; // Qualified
         else {
             obj.UserCertificationTypeName = "Qualified";
-            obj.UserCertificationTypeId = 2;
+            obj.UserCertificationTypeId = 1;
         }
         //obj = JSON.stringify(obj);
         AddUserLicenceTicketType(obj);
@@ -1145,12 +1146,12 @@ function editLicence(id) {
     $("#dvLicence .container").show();
     $("#dvLicence .exp").show();
     $("#expLicence,#qualLicence").attr("checked", false).checkboxradio("refresh"); // uncheck the previously selected values
-    if (licenceTicketList[count].UserCertificationTypeId == "1") {
+    if (licenceTicketList[count].UserCertificationTypeId == "2") {
         $("#expLicence").attr("checked", true).checkboxradio("refresh");
         $("#expLicence").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
         $("#dvLicence .num").hide();
     } else {
-        if (licenceTicketList[count].UserCertificationTypeId == "2") {
+        if (licenceTicketList[count].UserCertificationTypeId == "1") {
             $("#qualLicence").attr("checked", true).checkboxradio("refresh");
             $("#qualLicence").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
             $("#dvLicence .num").show();
@@ -1186,12 +1187,12 @@ function editPosition(id) {
     $("#dvPosition .container").show();
     $("#dvPosition .exp").show();
     $("#expPosition,#qualPosition").attr("checked", false).checkboxradio("refresh");
-    if (positionHoldList[count].UserCertificationTypeId == "1") {
+    if (positionHoldList[count].UserCertificationTypeId == "2") {
         $("#expPosition").attr("checked", true).checkboxradio("refresh");
         $("#expPosition").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
         $("#dvPosition .num").hide();
     } else {
-        if (positionHoldList[count].UserCertificationTypeId == "2") {
+        if (positionHoldList[count].UserCertificationTypeId == "1") {
             $("#qualPosition").attr("checked", true).checkboxradio("refresh");
             $("#qualPosition").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
             $("#dvPosition .num").show();
@@ -1226,15 +1227,15 @@ function editTrade(id) {
     $("#dvTrade .container").show();
     $("#dvTrade .exp").show();
     $("#expTrade,#qualTrade").attr("checked", false).checkboxradio("refresh");
-    if (tradeExpList[count].UserCertificationTypeId == "1") {
-        console.warn("Experienced profile");
+    if (tradeExpList[count].UserCertificationTypeId == "2") {
+        //console.warn("Experienced profile");
         $("#expTrade").attr("checked", true).checkboxradio("refresh");
         $("#expTrade").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
         $("#dvTrade .num").hide();
     } else {
 
-        if (tradeExpList[count].UserCertificationTypeId == "2") {
-            console.warn("Qualified profile");
+        if (tradeExpList[count].UserCertificationTypeId == "1") {
+            //console.warn("Qualified profile");
             $("#qualTrade").attr("checked", true).checkboxradio("refresh");
             $("#qualTrade").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
             $("#dvTrade .num").show();

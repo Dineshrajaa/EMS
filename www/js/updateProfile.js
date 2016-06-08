@@ -33,15 +33,16 @@ function cameraSuccess(imageData) {
     // $("#profilePicImg").attr("src", "data:image/jpeg;base64," + imageData);
     var imageData = "data:image/jpeg;base64," + imageData;
     $(".profileCircle").css("background-image", "url(" + imageData + ")");
-    updateProfilePicture(imageData); // now send the picture to sevice    
+    updateProfilePicture(); // now send the picture to sevice 
+    localStorage.ProfilePicture = imageData;
 }
 
-function updateProfilePicture(imageData) {
+function updateProfilePicture() {
     // To update profile picture of the user
     var url = serviceUrl + "Account/UpdateProfilePicture";
     var jsonObj = {};
     jsonObj.userId = $("#hdnUserId").val();
-    jsonObj.pic = imageData;
+    jsonObj.pic = localStorage.ProfilePicture || "";
     console.warn(JSON.stringify(jsonObj));
     showWait();
     $.ajax({
@@ -53,8 +54,10 @@ function updateProfilePicture(imageData) {
         async: false,
         success: function(result) {
             hideWait();
-            console.warn("result:"+result);
+            console.warn("result:" + result);
             if (result.IsSuccessful) {
+                localStorage.ProfilePicture = ""; // clear the profilepicture to avoid memory problems
+
                 toast("Profile Picture updated Successfully");
                 $('#profileDetailsPage,#avatarPage').unblock();
             }
@@ -819,13 +822,13 @@ function GetEmployeeDetails(id) {
                         var exp = (licencelist[k].Experience != null && licencelist[k].Experience != "") ? licencelist[k].Experience : "";
                         var no = (licencelist[k].LicenceNumber != null && licencelist[k].LicenceNumber != "") ? licencelist[k].LicenceNumber : "";
                         var expiryDate = (licencelist[k].LicenceExpiry != null && licencelist[k].LicenceExpiry != "") ? licencelist[k].LicenceExpiry : "";
-                        
+
                         if (no == "") {
                             // No licence number
                             expiryDate = ""; // clear the expiry date
                             showQualifiedDetails = "display:none"; // hide the qualification oriented things
-                        }else{
-                            expiryDate=expiryDate.split("T")[0];
+                        } else {
+                            expiryDate = expiryDate.split("T")[0];
                         }
                         licenceHtml += '<li onclick="editLicence(' + licencelist[k].Id + ')">';
                         licenceHtml += '<table data-role="table" data-mode="" class="ui-responsive table-stroke"><tbody>';

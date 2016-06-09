@@ -293,7 +293,7 @@ function submitProfile() {
     jsonObj.UserTradeExperiences = tradeExpList;
     jsonObj.UserPositionHelds = positionHoldList;
     jsonObj.ProfilePicture = localStorage.ProfilePicture || "";
-    console.log(jsonObj);
+    //console.log(jsonObj);
     $.ajax({
         type: "POST",
         url: url,

@@ -51,15 +51,12 @@ function registerPush() {
 	}
 
     push.on('registration', function (data) {
-        //I can get registration id here
-        alert(JSON.stringify(data));
+        //I can get registration id here        
         localStorage.pushRegID = data.registrationId;
     });
 
     push.on('notification', function (data) {
 	    //this place doesn't work
-        alert("notification event");
-        alert(JSON.stringify(data));
         // data.message,
         // data.title,
         // data.count,

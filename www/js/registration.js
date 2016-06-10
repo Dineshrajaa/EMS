@@ -266,7 +266,7 @@ function register(nextpageId) {
     jsonObj.UserLicenceTicketTypes = licenceTicketList;
     jsonObj.UserTradeExperiences = tradeExpList;
     jsonObj.UserPositionHelds = positionHoldList;
-    jsonObj.ProfilePicture = profilePicture == "img/avtar.png" ? "" : profilePicture;
+    jsonObj.ProfileImage = profilePicture == "img/avtar.png" ? "" : profilePicture;
     navigatePage(nextpageId);
     /*    $.ajax({
     type: "POST",
@@ -292,7 +292,7 @@ function submitProfile() {
     jsonObj.UserLicenceTicketTypes = licenceTicketList;
     jsonObj.UserTradeExperiences = tradeExpList;
     jsonObj.UserPositionHelds = positionHoldList;
-    jsonObj.ProfilePicture = localStorage.ProfilePicture || "";
+    jsonObj.ProfileImage = localStorage.ProfileImage || "";
     //console.log(jsonObj);
     $.ajax({
         type: "POST",
@@ -301,7 +301,7 @@ function submitProfile() {
         success: function(result) {
             if (result.IsSuccessful) {
                 navigatePage("#successfulRegPage");
-                localStorage.ProfilePicture=""; // clear picture to avoid memory problems
+                localStorage.ProfileImage=""; // clear picture to avoid memory problems
                 //alert("Registration has been successfully done");
                 // window.location.href = "index.html";
             } else {
@@ -516,7 +516,7 @@ function openCameraOrGallery(sourceType) {
 
 function cameraSuccess(imageData) {
     $("#profilePicImg").attr("src", "data:image/jpeg;base64," + imageData);
-    localStorage.ProfilePicture="data:image/jpeg;base64," + imageData;
+    localStorage.ProfileImage="data:image/jpeg;base64," + imageData;
     $("#submitProfileBtn").show(); // after adding photo show the submit button
 }
 

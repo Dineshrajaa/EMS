@@ -160,6 +160,7 @@ $(document).on("ready", function() {
         currentUser = JSON.parse(currentUserObj);
         fetchProfileDetail(currentUser.ID);
         GetEmployeeDetails(currentUser.ID);
+        fillProfilePicture();
     }
 
 

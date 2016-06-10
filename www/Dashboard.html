@@ -156,6 +156,11 @@
         </div>
     </div>
     <script src="js/common.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    $("#pgdashboard").ready(function() {
+        fillProfilePicture();
+    });
+    </script>
     <link href="css/mobiscroll.frame.css" rel="stylesheet" type="text/css" />
     <link href="css/mobiscroll.frame.android-holo.css" rel="stylesheet" type="text/css" />
     <link href="css/mobiscroll.scroller.css" rel="stylesheet" type="text/css" />
@@ -276,11 +281,10 @@
 
     function resetCheckBox() {
         // To change the checkbox is cancel has been clicked in popup
-        if ($("input[name=rdChngeSts]:checked").val() == "2"){
+        if ($("input[name=rdChngeSts]:checked").val() == "2") {
             $("#rdAvail").attr("checked", false).checkboxradio().checkboxradio("refresh");
             $("#rdNtAvail").attr("checked", true).checkboxradio().checkboxradio("refresh").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
-        }
-        else{
+        } else {
             $("#rdNtAvail").attr("checked", false).checkboxradio().checkboxradio("refresh");
             $("#rdAvail").attr("checked", true).checkboxradio().checkboxradio("refresh").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
         }

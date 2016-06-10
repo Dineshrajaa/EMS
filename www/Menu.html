@@ -1,36 +1,32 @@
 ﻿<style type="text/css">
-    .customMenu .nd2-sidepanel-profile
-    {
-        padding: 0;
-    }
-    
-    .customMenu .nd2-sidepanel-profile .profile-thumbnail
-    {
-        border: 3px solid #fff;
-        height: 100px;
-        margin: 0 0 0.6em;
-        position: relative;
-        top: 8px;
-        width: 100px;
-        z-index: 999999;
-    }
-    
-    .customMenu .proHead
-    {
-        background-color: #000000;
-        background-color: rgba(0, 0, 0, 0.6);
-        font-size: 18px;
-        padding: 5px;
-    }
+.customMenu .nd2-sidepanel-profile {
+    padding: 0;
+}
 
-    .menufont{
-        font-size: 15px;
-        vertical-align: top;
-    }
+.customMenu .nd2-sidepanel-profile .profile-thumbnail {
+    border: 3px solid #fff;
+    height: 100px;
+    margin: 0 0 0.6em;
+    position: relative;
+    top: 8px;
+    width: 100px;
+    z-index: 999999;
+}
+
+.customMenu .proHead {
+    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0.6);
+    font-size: 18px;
+    padding: 5px;
+}
+
+.menufont {
+    font-size: 15px;
+    vertical-align: top;
+}
 </style>
 <!-- panel left -->
-<div data-role="panel" id="leftpanel" data-display="overlay" data-position-fixed="true"
-    class="customMenu">
+<div data-role="panel" id="leftpanel" data-display="overlay" data-position-fixed="true" class="customMenu">
     <div class='nd2-sidepanel-profile wow fadeInDown'>
         <!-- <img class='profile-background' src="img/app-icon-75.png" alt="" />-->
         <div class="row dvMenuPage">
@@ -63,32 +59,37 @@
     </ul>
 </div>
 <!-- /panel left -->
+<script type="text/javascript" src="js/common.js"></script>
 <script type="text/javascript">
-    function redirect(url) {
-        showWait();
-        window.location.href = url;
-    }
-    var currentUserObj = localStorage.getItem('userSession');
+$(document).ready(function(){
+    console.warn("hi");
+    fillProfilePicture();
+});
+function redirect(url) {
+    showWait();
+    window.location.href = url;
+}
+var currentUserObj = localStorage.getItem('userSession');
 
-    if (currentUserObj && currentUserObj != 'undefined' && currentUserObj != null) {
-        currentUserObj = JSON.parse(currentUserObj);
-        if (currentUserObj.pp) {
-            if (jQuery.type(currentUserObj.pp) == "object") {
-                $("#imgUserImage").attr('src', serviceUrl + "image/" + currentUserObj.pp.guid);
-            }
-            else {
-                $("#imgUserImage").attr('src', serviceUrl + "image/" + JSON.parse(currentUserObj.pp).guid);
-            }
+if (currentUserObj && currentUserObj != 'undefined' && currentUserObj != null) {
+    currentUserObj = JSON.parse(currentUserObj);
+    var profileImage = currentUserObj.ProfilePicture || "img/avtar.png";
+    $("#imgUserImage").attr('src', profileImage);
+    if (currentUserObj.pp) {
+        if (jQuery.type(currentUserObj.pp) == "object") {
+            $("#imgUserImage").attr('src', serviceUrl + "image/" + currentUserObj.pp.guid);
+        } else {
+            $("#imgUserImage").attr('src', serviceUrl + "image/" + JSON.parse(currentUserObj.pp).guid);
         }
-        else {
-            $("#imgUserImage").attr('src', "img/avtar.png");
-        }
-
-        var name = currentUserObj.FirstName + " ";
-        name = (currentUserObj.LastName != null) ? name + " " + currentUserObj.LastName : name;
-        $("#spnUserName").html(name);
     } else {
-        //$(".menuLi").parent().hide();
-        //$(".menuLiLogin").parent().show();
+        $("#imgUserImage").attr('src', "img/avtar.png");
     }
+
+    var name = currentUserObj.FirstName + " ";
+    name = (currentUserObj.LastName != null) ? name + " " + currentUserObj.LastName : name;
+    $("#spnUserName").html(name);
+} else {
+    //$(".menuLi").parent().hide();
+    //$(".menuLiLogin").parent().show();
+}
 </script>

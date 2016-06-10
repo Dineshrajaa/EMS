@@ -82,6 +82,8 @@ function logIn(userName, password) {
                 hideWait();
                 if (result.IsSuccessful) {
                     var data = JSON.stringify(result.Result);
+                    console.warn(result.Result.ProfilePicture);
+                    // localStorage.profileImage=result.Result.ProfilePicture;
                     localStorage.setItem('userSession', data);
                     toast('Sign In Successful');
                 } else {
@@ -238,9 +240,29 @@ function GetPostDetailBy(postId) {
     });
 }
 
+function fillProfilePicture() {
+    // To fill the profile picture in the menu
+    console.warn("Fill profile picture");
+    var currentUserObj = localStorage.getItem('userSession');
+    if (currentUserObj && currentUserObj != 'undefined' && currentUserObj != null) {
+        currentUserObj = JSON.parse(currentUserObj);
+
+        var profileImage = currentUserObj.ProfilePicture || "img/avtar.png";
+        console.warn("profileImage:" + profileImage);
+        $("#imgUserImage").removeAttr('src').prop('src', profileImage);
+    }
+}
 $(document).on("pageinit", "#profileDetailsPage,#avatarPage", function() {
     $("#cameraTypeList").on("panelclose", function(event, ui) {
         //remove the overlay
         $("#profileDetailsPage,#avatarPage").unblock();
+    });
+});
+
+$(document).on("pageinit", "#pgdashboard,#updateProfile,#setting,#profileOptionsPage,#messagesPage", function() {
+    $("#leftpanel").on("panelopen", function(event, ui) {
+        //remove the overlay
+        console.warn("Opening panel");
+        fillProfilePicture();
     });
 });

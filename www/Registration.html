@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="format-detection" content="telephone=no" />
@@ -16,79 +17,70 @@
     <link rel="stylesheet" href="css/themeContainer.css" />
     <link rel="stylesheet" href="css/common.css" />
     <!--<link rel="stylesheet" href="css/waves.min.css" />-->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkG6xU4kRwb532NgIYs0WSyOSCX3yYn8E&libraries=places"
-        type="text/javascript"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkG6xU4kRwb532NgIYs0WSyOSCX3yYn8E&libraries=places" type="text/javascript"></script>
     <style>
-        .ui-input-text::after, .ui-input-search::after
-        {
-            width: 90% !important;
-        }
-        
-        .table-stroke tbody th, .table-stroke tbody td
-        {
-            border-bottom: 0;
-            padding-left: 10px;
-        }
-        
-        .registration
-        {
-            background-color: #ffffff;
-            padding-top: 90px !important;
-        }
-        
-        .tooltip.bottom
-        {
-            font-size: 11px !important;
-            margin-top: 0;
-            padding: 0;
-        }
-        
-        .tooltip-inner
-        {
-            background-color: transparent;
-            border-radius: 4px;
-            color: red;
-            float: right;
-            padding: 0 17px 0 0;
-            text-align: center;
-        }
-        
-        .tooltip
-        {
-            width: 100%;
-            z-index: 1000;
-        }
-        
-        .tooltip.bottom .tooltip-arrow
-        {
-            display: none;
-        }
-        
-        .ui-header > .ui-btn
-        {
-            height: unset;
-        }
-        
-        .requiredField
-        {
-            color: #FF0000;
-        }
-        
-        .customfixed
-        {
-            /*position: fixed;
+    .ui-input-text::after,
+    .ui-input-search::after {
+        width: 90% !important;
+    }
+    
+    .table-stroke tbody th,
+    .table-stroke tbody td {
+        border-bottom: 0;
+        padding-left: 10px;
+    }
+    
+    .registration {
+        background-color: #ffffff;
+        padding-top: 90px !important;
+    }
+    
+    .tooltip.bottom {
+        font-size: 11px !important;
+        margin-top: 0;
+        padding: 0;
+    }
+    
+    .tooltip-inner {
+        background-color: transparent;
+        border-radius: 4px;
+        color: red;
+        float: right;
+        padding: 0 17px 0 0;
+        text-align: center;
+    }
+    
+    .tooltip {
+        width: 100%;
+        z-index: 1000;
+    }
+    
+    .tooltip.bottom .tooltip-arrow {
+        display: none;
+    }
+    
+    .ui-header > .ui-btn {
+        height: unset;
+    }
+    
+    .requiredField {
+        color: #FF0000;
+    }
+    
+    .customfixed {
+        /*position: fixed;
         bottom: 0;
         left: 40%;
         margin-bottom: 0;
         z-index: 9999;*/
-        }
-        
-        .profileAvatar
-        {
-            width: 50%;
-        }
+    }
+    
+    .profileAvatar {
+        width: 50%;
+    }
     </style>
 </head>
+
 <body>
     <!-- User profile start -->
     <div data-role="page" id="updateProfile" data-theme="a" class="nd2-no-menu-swipe registration">
@@ -104,126 +96,113 @@
                 <br />
                 <br />
                 <form id="form_RegisterUser">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="box">
-                            <label>
-                                Title</label>
-                            <select class="ui-selectmenu-list" id="ddlTitle">
-                                <option value="1">Mr</option>
-                                <option value="2">Mrs</option>
-                                <option value="3">Miss</option>
-                                <option value="3">Ms</option>
-                            </select>
-                            <label for="txtFirstName">
-                                First Name<span class="requiredField">*</span>
-                            </label>
-                            <input type="text" id="txtFirstName" name="txtFirstName" class="required" placeholder=""
-                                required="required" valid-attr="Please enter first name" />
-                            <label for="txtMiddleName">
-                                Middle Name
-                            </label>
-                            <input type="text" id="txtMiddleName" name="txtMiddleName" class="" placeholder="" />
-                            <label for="txtLastName">
-                                Last Name<span class="requiredField">*</span>
-                            </label>
-                            <input type="text" id="txtLastName" name="txtLastName" class="required" placeholder=""
-                                required="required" valid-attr="Please enter last name" />
-                            <label for="txtDob">
-                                DOB<span class="requiredField">*</span>
-                            </label>
-                            <input type="text" id="txtDob" name="txtDob" class="required" required="required"
-                                valid-attr="Please enter dob" />
-                            <label for="ddlGender">
-                                Gender
-                            </label>
-                            <select id="ddlGender" required="required" valid-attr="Please select gender">
-                                <option value="1">Please Select</option>
-                                <option value="2">Male</option>
-                                <option value="3">Female</option>
-                            </select>
-                            <label for="txtUserName">
-                                Email<span class="requiredField">*</span>
-                            </label>
-                            <input type="email" id="txtEmail" name="txtEmail" class="required" onblur=" validateEmail(this) "
-                                placeholder="" required="required" valid-attr="Please enter email" />
-                            <label for="keyword">
-                                Search Address</label>
-                            <input type="text" id="keyword" name="keyword" placeholder="" />
-                            <label for="street_number">
-                                Street Address<span class="requiredField">*</span>
-                            </label>
-                            <input type="text" id="street_number" name="street_number" class="required" placeholder=""
-                                required="required" valid-attr="Please enter address" />
-                            <label for="locality">
-                                City/Suburb/Town<span class="requiredField">*</span>
-                            </label>
-                            <input type="text" id="locality" name="locality" class="required" placeholder=""
-                                required="required" valid-attr="Please enter city" />
-                            <label for="administrative_area_level_1">
-                                State<span class="requiredField">*</span>
-                            </label>
-                            <input type="text" id="administrative_area_level_1" name="administrative_area_level_1"
-                                class="required" placeholder="" required="required" valid-attr="Please enter state" />
-                            <label for="postal_code">
-                                Postcode<span class="requiredField">*</span>
-                            </label>
-                            <input type="number" id="postal_code" name="postal_code" class="required" placeholder=""
-                                required="required" maxlength="4" valid-attr="Please enter Post code" />
-                            <label for="txtContact1">
-                                Primary Contact No<span class="requiredField">*</span>
-                            </label>
-                            <input type="tel" id="txtContact1" name="txtContact1" class="required" placeholder=""
-                                required="required" valid-attr="Please enter mobile no" />
-                            <label for="txtContact2">
-                                Secondary Contact No
-                            </label>
-                            <input type="tel" id="txtContact2" name="txtContact2" class="" placeholder="" />
-                            <label for="chkPaySlipMail">
-                                <input type="checkbox" id="chkPaySlipMail" name="chkPaySlipMail" class="" placeholder="" />
-                                Would you like payslips sent to your email?
-                            </label>
-                            <label for="txtPin">
-                                Pin No<span class="requiredField">*</span>
-                            </label>
-                            <input type="tel" id="txtPin" name="txtPin" class="required" maxlength="4" minlength="4"
-                                onblur=" validatePassword(this) " placeholder="" required="required" valid-attr="Please enter pin" />
-                            <label for="txtPin">
-                                Confirm Pin No<span class="requiredField">*</span>
-                            </label>
-                            <input type="tel" id="txtCPin" name="txtCPin" class="required" maxlength="4" onblur=" validateConfirmPassword(this) "
-                                minlength="4" placeholder="" required="required" valid-attr="Please enter Confirm pin" />
-                            <label style="color: red" id="spnError">
-                            </label>
-                            <br />
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="box">
+                                <label>
+                                    Title</label>
+                                <select class="ui-selectmenu-list" id="ddlTitle">
+                                    <option value="1">Mr</option>
+                                    <option value="2">Mrs</option>
+                                    <option value="3">Miss</option>
+                                    <option value="3">Ms</option>
+                                </select>
+                                <label for="txtFirstName">
+                                    First Name<span class="requiredField">*</span>
+                                </label>
+                                <input type="text" id="txtFirstName" name="txtFirstName" class="required" placeholder="" required="required" valid-attr="Please enter first name" />
+                                <label for="txtMiddleName">
+                                    Middle Name
+                                </label>
+                                <input type="text" id="txtMiddleName" name="txtMiddleName" class="" placeholder="" />
+                                <label for="txtLastName">
+                                    Last Name<span class="requiredField">*</span>
+                                </label>
+                                <input type="text" id="txtLastName" name="txtLastName" class="required" placeholder="" required="required" valid-attr="Please enter last name" />
+                                <label for="txtDob">
+                                    DOB<span class="requiredField">*</span>
+                                </label>
+                                <input type="text" id="txtDob" name="txtDob" class="required" required="required" valid-attr="Please enter dob" />
+                                <label for="ddlGender">
+                                    Gender
+                                </label>
+                                <select id="ddlGender" required="required" valid-attr="Please select gender">
+                                    <option value="1">Please Select</option>
+                                    <option value="2">Male</option>
+                                    <option value="3">Female</option>
+                                </select>
+                                <label for="txtUserName">
+                                    Email<span class="requiredField">*</span>
+                                </label>
+                                <input type="email" id="txtEmail" name="txtEmail" class="required" onblur=" validateEmail(this) " placeholder="" required="required" valid-attr="Please enter email" />
+                                <label for="keyword">
+                                    Search Address</label>
+                                <input type="text" id="keyword" name="keyword" placeholder="" />
+                                <label for="street_number">
+                                    Street Address<span class="requiredField">*</span>
+                                </label>
+                                <input type="text" id="street_number" name="street_number" class="required" placeholder="" required="required" valid-attr="Please enter address" />
+                                <label for="locality">
+                                    City/Suburb/Town<span class="requiredField">*</span>
+                                </label>
+                                <input type="text" id="locality" name="locality" class="required" placeholder="" required="required" valid-attr="Please enter city" />
+                                <label for="administrative_area_level_1">
+                                    State<span class="requiredField">*</span>
+                                </label>
+                                <input type="text" id="administrative_area_level_1" name="administrative_area_level_1" class="required" placeholder="" required="required" valid-attr="Please enter state" />
+                                <label for="postal_code">
+                                    Postcode<span class="requiredField">*</span>
+                                </label>
+                                <input type="number" id="postal_code" name="postal_code" class="required" placeholder="" required="required" maxlength="4" valid-attr="Please enter Post code" />
+                                <label for="txtContact1">
+                                    Primary Contact No<span class="requiredField">*</span>
+                                </label>
+                                <input type="tel" id="txtContact1" name="txtContact1" class="required" placeholder="" required="required" valid-attr="Please enter mobile no" />
+                                <label for="txtContact2">
+                                    Secondary Contact No
+                                </label>
+                                <input type="tel" id="txtContact2" name="txtContact2" class="" placeholder="" />
+                                <label for="chkPaySlipMail">
+                                    <input type="checkbox" id="chkPaySlipMail" name="chkPaySlipMail" class="" placeholder="" /> Would you like payslips sent to your email?
+                                </label>
+                                <label for="txtPin">
+                                    Pin No<span class="requiredField">*</span>
+                                </label>
+                                <input type="tel" id="txtPin" name="txtPin" class="required" maxlength="4" minlength="4" onblur=" validatePassword(this) " placeholder="" required="required" valid-attr="Please enter pin" />
+                                <label for="txtPin">
+                                    Confirm Pin No<span class="requiredField">*</span>
+                                </label>
+                                <input type="tel" id="txtCPin" name="txtCPin" class="required" maxlength="4" onblur=" validateConfirmPassword(this) " minlength="4" placeholder="" required="required" valid-attr="Please enter Confirm pin" />
+                                <label style="color: red" id="spnError">
+                                </label>
+                                <br />
+                            </div>
                         </div>
                     </div>
-                </div>
-                <center>
-                <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="validateRegisterFields('required','#licencePage')"
-                    style="margin-bottom: 40px;">Continue</a>
-				</center>
-                <!-- "validateRegisterFields('required','#licencePage')" navigatePage('#licencePage')-->
+                    <center>
+                        <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="validateRegisterFields('required','#licencePage')" style="margin-bottom: 40px;">Continue</a>
+                    </center>
+                    <!-- "validateRegisterFields('required','#licencePage')" navigatePage('#licencePage')-->
                 </form>
             </div>
         </div>
         <script type="text/javascript">
-            $("#updateProfile").ready(function () {
-                $("#txtCPin,#txtPin,#postal_code").keyup(function (e) {
-                    var str = $.trim($(this).val());
-                    if (str != "") {
-                        var regx = /^[0-9\s]+$/;
-                        if (!regx.test(str)) {
-                            str = str.replace(/[^0-9.\s]+/g, ''); // replace special characters with space
-                            $(this).val(str);
-                            toast("Only alphabets allowed !");
-                        }
-                    } else {
-                        //empty value -- do something here
-                        console.log("Only alphabets detected");
+        $("#updateProfile").ready(function() {
+            $("#txtCPin,#txtPin,#postal_code").keyup(function(e) {
+                var str = $.trim($(this).val());
+                if (str != "") {
+                    var regx = /^[0-9\s]+$/;
+                    if (!regx.test(str)) {
+                        str = str.replace(/[^0-9.\s]+/g, ''); // replace special characters with space
+                        $(this).val(str);
+                        toast("Only alphabets allowed !");
                     }
-                });
+                } else {
+                    //empty value -- do something here
+                    console.log("Only alphabets detected");
+                }
             });
+        });
         </script>
     </div>
     <!-- User Profile end -->
@@ -308,22 +287,18 @@
             <h1>
                 Profile Photo</h1>
         </div>
-        <div data-role="panel" id="cameraTypeList" class="ui-bottom-sheet ui-bottom-sheet-list"
-            data-animate="false" data-position='bottom' data-display="overlay" style="min-height: 30%">
+        <div data-role="panel" id="cameraTypeList" class="ui-bottom-sheet ui-bottom-sheet-list" data-animate="false" data-position='bottom' data-display="overlay" style="min-height: 30%">
             <div class='row around-xs'>
                 <div class='col-xs-auto'>
-                    <a href='#' class='panelBtn ui-bottom-sheet-link ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button'
-                        data-ajax='false' onclick="openCameraOrGallery('Camera.PictureSourceType.CAMERA')">
+                    <a href='#' class='panelBtn ui-bottom-sheet-link ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button' data-ajax='false' onclick="openCameraOrGallery('Camera.PictureSourceType.CAMERA')">
                         <i class='zmdi zmdi-camera-front zmd-2x'></i><strong>Take Photo</strong></a>
                 </div>
                 <div class='col-xs-auto'>
-                    <a href='#' class='panelBtn ui-bottom-sheet-link ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button'
-                        data-ajax='false' onclick="openCameraOrGallery('Camera.PictureSourceType.PHOTOLIBRARY')">
+                    <a href='#' class='panelBtn ui-bottom-sheet-link ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button' data-ajax='false' onclick="openCameraOrGallery('Camera.PictureSourceType.PHOTOLIBRARY')">
                         <i class='zmdi zmdi-file zmd-2x'></i><strong>Use Existing Photo</strong></a>
                 </div>
                 <div class='col-xs-auto'>
-                    <a href='#' class='panelBtn ui-bottom-sheet-link ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button'
-                        data-ajax='false'><i class='zmdi zmdi-close-circle zmd-2x'></i><strong>Cancel</strong></a>
+                    <a href='#' class='panelBtn ui-bottom-sheet-link ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button' data-ajax='false'><i class='zmdi zmdi-close-circle zmd-2x'></i><strong>Cancel</strong></a>
                 </div>
             </div>
         </div>
@@ -391,12 +366,10 @@
                             Certification Type
                         </label>
                         <label>
-                            <input type="radio" name="LicencePosition" id="expLicence" value="2" />
-                            Experienced
+                            <input type="radio" name="LicencePosition" id="expLicence" value="2" /> Experienced
                         </label>
                         <label>
-                            <input type="radio" name="LicencePosition" id="qualLicence" value="1" />
-                            Qualified
+                            <input type="radio" name="LicencePosition" id="qualLicence" value="1" /> Qualified
                         </label>
                     </div>
                     <div class="num" style="display: none;">
@@ -427,9 +400,10 @@
             </div>
         </div>
         <script type="text/javascript">
-            $("#addeditLicence").ready(function () {
-                getActiveLicenceType(0); // fetch the list of licence types
-            });
+        $("#addeditLicence").ready(function() {
+            getActiveLicenceType(0); // fetch the list of licence types
+            fillProfilePicture();
+        });
         </script>
     </div>
     <!-- Add/edit licence page end -->
@@ -458,12 +432,10 @@
                         Certification Type
                     </label>
                     <label>
-                        <input type="radio" name="TradeExpPosition" id="expTrade" value="2" />
-                        Experienced
+                        <input type="radio" name="TradeExpPosition" id="expTrade" value="2" /> Experienced
                     </label>
                     <label>
-                        <input type="radio" name="TradeExpPosition" id="qualTrade" value="1" />
-                        Qualified
+                        <input type="radio" name="TradeExpPosition" id="qualTrade" value="1" /> Qualified
                     </label>
                 </div>
                 <div class="num" style="display: none;">
@@ -490,9 +462,10 @@
             <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="SaveTrade()">Add</a>-->
         </div>
         <script type="text/javascript">
-            $("#addeditTrade").ready(function () {
-                getActiveTradeExp(0);
-            });
+        $("#addeditTrade").ready(function() {
+            getActiveTradeExp(0);
+            fillProfilePicture();
+        });
         </script>
     </div>
     <!-- Trade experience end -->
@@ -522,12 +495,10 @@
                             Certification Type
                         </label>
                         <label>
-                            <input type="radio" name="CertifiedTypePosition" id="expPosition" value="2" />
-                            Experienced
+                            <input type="radio" name="CertifiedTypePosition" id="expPosition" value="2" /> Experienced
                         </label>
                         <label>
-                            <input type="radio" name="CertifiedTypePosition" id="qualPosition" value="1" />
-                            Qualified
+                            <input type="radio" name="CertifiedTypePosition" id="qualPosition" value="1" /> Qualified
                         </label>
                     </div>
                     <div class="num" style="display: none;">
@@ -549,9 +520,10 @@
             </div>
         </div>
         <script type="text/javascript">
-            $("#addeditPosition").ready(function () {
-                getActivePositionHeld(0);
-            });
+        $("#addeditPosition").ready(function() {
+            getActivePositionHeld(0);
+            fillProfilePicture();
+        });
         </script>
     </div>
     <!-- Position held add end -->
@@ -566,7 +538,8 @@
             <br />
             <br />
             <center>
-                <p style="font-size: 14px;">Your application has successfully been submitted. <br/>Please allow 24 hours for your application to be reviewed. Upon approval, you will be granted access to this app. You will be notified by email when this has taken place.
+                <p style="font-size: 14px;">Your application has successfully been submitted.
+                    <br/>Please allow 24 hours for your application to be reviewed. Upon approval, you will be granted access to this app. You will be notified by email when this has taken place.
                 </p>
                 <center>
                     <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary customfixed" onclick=" redirect('index.html') ">Continue</a>
@@ -594,5 +567,11 @@
     <script src="js/mobiscroll.android-holo-light.js" type="text/javascript"></script>
     <!--   Date Picker and Time picker files End-->
     <script src="js/registration.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    $("#successfulRegPage").ready(function() {
+        fillProfilePicture();
+    });
+    </script>
 </body>
+
 </html>

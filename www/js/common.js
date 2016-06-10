@@ -246,10 +246,16 @@ function fillProfilePicture() {
     var currentUserObj = localStorage.getItem('userSession');
     if (currentUserObj && currentUserObj != 'undefined' && currentUserObj != null) {
         currentUserObj = JSON.parse(currentUserObj);
-
-        var profileImage = currentUserObj.ProfilePicture || "img/avtar.png";
+        if(currentUserObj.ProfilePicture!=""){
+            if((currentUserObj.ProfilePicture).indexOf("data:image/jpeg;base64,")==-1)
+                currentUserObj.ProfilePicture="data:image/jpeg;base64,"+currentUserObj.ProfilePicture;
+        }
+        
+        var profileImage = currentUserObj.ProfilePicture == "" ? "img/avtar.png" : currentUserObj.ProfilePicture;
         console.warn("profileImage:" + profileImage);
-        $("#imgUserImage").removeAttr('src').prop('src', profileImage);
+
+        //document.getElementById("imgUserImage").src=profileImage;
+        $("#imgUserImage").attr("src", profileImage);
     }
 }
 $(document).on("pageinit", "#profileDetailsPage,#avatarPage", function() {
@@ -259,10 +265,3 @@ $(document).on("pageinit", "#profileDetailsPage,#avatarPage", function() {
     });
 });
 
-$(document).on("pageinit", "#pgdashboard,#updateProfile,#setting,#profileOptionsPage,#messagesPage", function() {
-    $("#leftpanel").on("panelopen", function(event, ui) {
-        //remove the overlay
-        console.warn("Opening panel");
-        fillProfilePicture();
-    });
-});

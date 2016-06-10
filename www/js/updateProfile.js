@@ -56,6 +56,7 @@ function updateProfilePicture() {
             hideWait();
             console.warn("result:" + result);
             if (result.IsSuccessful) {
+                $("#imgUserImage").attr('src', localStorage.ProfilePicture);
                 localStorage.ProfilePicture = ""; // clear the profilepicture to avoid memory problems
 
                 toast("Profile Picture updated Successfully");

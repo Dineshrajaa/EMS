@@ -32,7 +32,8 @@
         <div class="row dvMenuPage">
             <div class='col-xs-12 center-xs'>
                 <div class='box' style="background-color:#0CACEB">
-                    <img class="profile-thumbnail" id="imgUserImage" src="img/avtar.png" alt="" />
+                    <img class="profile-thumbnail" id="imgUserImage"  alt="" />
+                    <!-- src="img/avtar.png" -->
                 </div>
                 <div class='box profile-text'>
                     <strong id="spnUserName" class="proHead "><i class="zmdi zmdi-account-o yellow"></i>
@@ -73,8 +74,8 @@ var currentUserObj = localStorage.getItem('userSession');
 
 if (currentUserObj && currentUserObj != 'undefined' && currentUserObj != null) {
     currentUserObj = JSON.parse(currentUserObj);
-    var profileImage = currentUserObj.ProfilePicture || "img/avtar.png";
-    $("#imgUserImage").attr('src', profileImage);
+    //var profileImage = currentUserObj.ProfilePicture || "img/avtar.png";
+    //$("#imgUserImage").attr('src', profileImage);
     if (currentUserObj.pp) {
         if (jQuery.type(currentUserObj.pp) == "object") {
             $("#imgUserImage").attr('src', serviceUrl + "image/" + currentUserObj.pp.guid);
@@ -82,7 +83,7 @@ if (currentUserObj && currentUserObj != 'undefined' && currentUserObj != null) {
             $("#imgUserImage").attr('src', serviceUrl + "image/" + JSON.parse(currentUserObj.pp).guid);
         }
     } else {
-        $("#imgUserImage").attr('src', "img/avtar.png");
+        // $("#imgUserImage").attr('src', "img/avtar.png");
     }
 
     var name = currentUserObj.FirstName + " ";

@@ -61,8 +61,8 @@ function updateProfilePicture() {
                 var currentUserObj = localStorage.getItem('userSession');
                 if (currentUserObj && currentUserObj != 'undefined' && currentUserObj != null) {
                     currentUserObj = JSON.parse(currentUserObj);
-                    currentUserObj.ProfilePicture=localStorage.ProfilePicture;
-                    localStorage.userSession=JSON.stringify(currentUserObj);
+                    currentUserObj.ProfilePicture = localStorage.ProfilePicture;
+                    localStorage.userSession = JSON.stringify(currentUserObj);
                 }
                 localStorage.ProfilePicture = ""; // clear the profilepicture to avoid memory problems
 
@@ -331,6 +331,8 @@ function fetchProfileDetail(userId) {
                         titleId = 1;
                         break;
                 }
+                if ((employeeObj.ProfilePicture).indexOf("data:image/jpeg;base64,") == -1)
+                    employeeObj.ProfilePicture = "data:image/jpeg;base64," + employeeObj.ProfilePicture;
                 $(".profileCircle").css("background-image", "url(" + employeeObj.ProfilePicture + ")");
                 $("#ddlTitle").val(titleId);
                 $("#ddlTitle").prev().text(employeeObj.Title);

@@ -33,30 +33,37 @@ function cameraSuccess(imageData) {
     // $("#profilePicImg").attr("src", "data:image/jpeg;base64," + imageData);
     var imageData = "data:image/jpeg;base64," + imageData;
     $(".profileCircle").css("background-image", "url(" + imageData + ")");
-    updateProfilePicture(); // now send the picture to sevice 
     localStorage.ProfilePicture = imageData;
+    updateProfilePicture(); // now send the picture to sevice 
+
 }
 
 function updateProfilePicture() {
     // To update profile picture of the user
     var url = serviceUrl + "Account/UpdateProfilePicture";
-    var jsonObj = {};
-    jsonObj.userId = $("#hdnUserId").val();
-    jsonObj.pic = localStorage.ProfilePicture || "";
+    var jsonObj = new Object();
+    jsonObj.UserId = $("#hdnUserId").val();
+    jsonObj.ProfileImage = localStorage.ProfilePicture || "";
     console.warn(JSON.stringify(jsonObj));
     showWait();
     $.ajax({
         type: "POST",
         url: url,
         data: jsonObj,
-        contentType: "application/json",
-        dataType: "json",
-        async: false,
+        //contentType: "application/json",
+        //dataType: "json",
+        //async: false,
         success: function(result) {
             hideWait();
             console.warn("result:" + result);
             if (result.IsSuccessful) {
                 $("#imgUserImage").attr('src', localStorage.ProfilePicture);
+                var currentUserObj = localStorage.getItem('userSession');
+                if (currentUserObj && currentUserObj != 'undefined' && currentUserObj != null) {
+                    currentUserObj = JSON.parse(currentUserObj);
+                    currentUserObj.ProfilePicture=localStorage.ProfilePicture;
+                    localStorage.userSession=JSON.stringify(currentUserObj);
+                }
                 localStorage.ProfilePicture = ""; // clear the profilepicture to avoid memory problems
 
                 toast("Profile Picture updated Successfully");
@@ -324,6 +331,7 @@ function fetchProfileDetail(userId) {
                         titleId = 1;
                         break;
                 }
+                $(".profileCircle").css("background-image", "url(" + employeeObj.ProfilePicture + ")");
                 $("#ddlTitle").val(titleId);
                 $("#ddlTitle").prev().text(employeeObj.Title);
                 $("#txtFirstName").val(employeeObj.FirstName);
@@ -831,9 +839,9 @@ function printLicenceList(licencelist) {
             } else {
                 var ed = new Date(expiryDate);
                 console.warn(ed);
-                var date=ed.getDate()<10?"0"+ed.getDate():ed.getDate();
-                var month=(parseInt(ed.getMonth())+1);
-                var formattedMonth=month<10?"0"+month:month;
+                var date = ed.getDate() < 10 ? "0" + ed.getDate() : ed.getDate();
+                var month = (parseInt(ed.getMonth()) + 1);
+                var formattedMonth = month < 10 ? "0" + month : month;
                 expiryDate = date + "-" + formattedMonth + "-" + ed.getFullYear();
                 // expiryDate = expiryDate.split("T")[0];
             }

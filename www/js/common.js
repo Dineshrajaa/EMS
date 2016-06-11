@@ -137,6 +137,7 @@ Date.prototype.getFormattedDateInddMMYY = function() {
 function doLogout() {
     localStorage.removeItem('userSession');
     window.location.href = "index.html";
+    unsubscribePush();
 }
 
 function redirect(url) {
@@ -242,15 +243,14 @@ function GetPostDetailBy(postId) {
 
 function fillProfilePicture() {
     // To fill the profile picture in the menu
-    console.warn("Fill profile picture");
     var currentUserObj = localStorage.getItem('userSession');
     if (currentUserObj && currentUserObj != 'undefined' && currentUserObj != null) {
         currentUserObj = JSON.parse(currentUserObj);
-        if(currentUserObj.ProfilePicture!=""){
-            if((currentUserObj.ProfilePicture).indexOf("data:image/jpeg;base64,")==-1)
-                currentUserObj.ProfilePicture="data:image/jpeg;base64,"+currentUserObj.ProfilePicture;
+        if (currentUserObj.ProfilePicture != "") {
+            if ((currentUserObj.ProfilePicture).indexOf("data:image/jpeg;base64,") == -1)
+                currentUserObj.ProfilePicture = "data:image/jpeg;base64," + currentUserObj.ProfilePicture;
         }
-        
+
         var profileImage = currentUserObj.ProfilePicture == "" ? "img/avtar.png" : currentUserObj.ProfilePicture;
         console.warn("profileImage:" + profileImage);
 
@@ -265,3 +265,16 @@ $(document).on("pageinit", "#profileDetailsPage,#avatarPage", function() {
     });
 });
 
+
+function unsubscribePush() {
+    var push = PushNotification.init({
+        android: { senderID: "739681536553" },
+        ios: { alert: "true", badge: "true", sound: "true" },
+        windows: {}
+    });
+    push.unregister(function() {
+        console.log('successfully unsubscribed');
+    }, function() {
+        console.log('error');
+    });
+}

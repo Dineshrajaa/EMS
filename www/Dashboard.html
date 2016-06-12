@@ -220,7 +220,7 @@
                             $("#curStatus").html("Not Available");
                             $("#curStatus").removeClass('working').removeClass('available').addClass('notAvailable');
                             $(".jobSection").hide();
-                            $("#viewJobsBtn").show();
+                           // $("#viewJobsBtn").show(); // Need to uncomment in Version 2
                         }
                     }
                     hideWait();
@@ -258,7 +258,7 @@
             if (selectedValue == "2")
                 $("#viewJobsBtn").hide();
             else {
-                $("#viewJobsBtn").show();
+                // $("#viewJobsBtn").show(); // Need to show in version 2
             }
             //                if (cnfrm != true) {
             //                    this.checked = false;

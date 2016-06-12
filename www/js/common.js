@@ -278,3 +278,15 @@ function unsubscribePush() {
         console.log('error');
     });
 }
+
+
+function formatDate(dateToManipulate) {
+    // To format the date for showing licence expiry
+    var ed = new Date(dateToManipulate);
+    console.warn(ed);
+    var date = ed.getDate() < 10 ? "0" + ed.getDate() : ed.getDate();
+    var month = (parseInt(ed.getMonth()) + 1);
+    var formattedMonth = month < 10 ? "0" + month : month;
+    var expiryDate = date + "-" + formattedMonth + "-" + ed.getFullYear();
+    return expiryDate;
+}

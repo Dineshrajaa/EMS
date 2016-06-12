@@ -20,7 +20,7 @@ function hideSignin() {
     //    $("body").css("background-image", "url('img/bgsmall1.JPG')");
     $(".btnSection").css("display", "inline-block");
 }
-$(document).on('ready', function () {
+$(document).on('ready', function() {
     var currentUserObj = localStorage.getItem('userSession');
     if (currentUserObj && currentUserObj != 'undefined') {
         redirect("Dashboard.html");
@@ -29,7 +29,7 @@ $(document).on('ready', function () {
         // deleteLocalStorage(["userSession"]);
     }
 
-    $('body').on('keypress', 'input', function (args) {
+    $('body').on('keypress', 'input', function(args) {
         if (args.keyCode == 13) {
             dologIn($("#txtUserName").val().trim(), $("#txtPassword").val().trim());
         }
@@ -40,23 +40,23 @@ $(document).on('ready', function () {
 
 function registerPush() {
     // To register the device for push notification
-	try {
-    var push = PushNotification.init({
-        android: {senderID: "739681536553"},
-        ios: {alert: "true",badge: "true",sound: "true"},
-        windows: {}
-    });
-	}catch(error){
-		alert(error)
-	}
+    try {
+        var push = PushNotification.init({
+            android: { senderID: "739681536553" },
+            ios: { alert: "true", badge: "true", sound: "true" },
+            windows: {}
+        });
+    } catch (error) {
+        alert(error)
+    }
 
-    push.on('registration', function (data) {
+    push.on('registration', function(data) {
         //I can get registration id here        
         localStorage.pushRegID = data.registrationId;
     });
 
-    push.on('notification', function (data) {
-	    //this place doesn't work
+    push.on('notification', function(data) {
+        //this place doesn't work
         // data.message,
         // data.title,
         // data.count,
@@ -65,8 +65,8 @@ function registerPush() {
         // data.additionalData
     });
 
-    push.on('error', function (e) {
-         console.log("push error:" + e.message);
+    push.on('error', function(e) {
+        console.log("push error:" + e.message);
     });
 }
 
@@ -78,7 +78,7 @@ function dologIn() {
     }
 }
 
-document.addEventListener("deviceready", function () {
+document.addEventListener("deviceready", function() {
     if (device.platform == "iOS") {
         StatusBar.overlaysWebView(false); // to avoid overlay of splashscreen over the app 
     }

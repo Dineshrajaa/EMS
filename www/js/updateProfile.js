@@ -338,7 +338,7 @@ function fetchProfileDetail(userId) {
                 $("#ddlTitle").prev().text(employeeObj.Title);
                 $("#txtFirstName").val(employeeObj.FirstName);
                 $("#lblName").html(employeeObj.Title + " " + employeeObj.FirstName + "  " + employeeObj.LastName);
-
+				$("#lblEnmployeeNumber").html(employeeObj.EmployeeNumber);
                 $("#txtMiddleName").val(employeeObj.MiddleName);
                 $("#txtLastName").val(employeeObj.LastName);
                 $("#txtDob").val(new Date(employeeObj.DateOfBirth).getFormattedDateInddMMYY());
@@ -839,12 +839,13 @@ function printLicenceList(licencelist) {
                 expiryDate = ""; // clear the expiry date
                 showQualifiedDetails = "display:none"; // hide the qualification oriented things
             } else {
-                var ed = new Date(expiryDate);
+               /* var ed = new Date(expiryDate);
                 console.warn(ed);
                 var date = ed.getDate() < 10 ? "0" + ed.getDate() : ed.getDate();
                 var month = (parseInt(ed.getMonth()) + 1);
                 var formattedMonth = month < 10 ? "0" + month : month;
-                expiryDate = date + "-" + formattedMonth + "-" + ed.getFullYear();
+                expiryDate = date + "-" + formattedMonth + "-" + ed.getFullYear();*/
+                expiryDate=formatDate(expiryDate);
                 // expiryDate = expiryDate.split("T")[0];
             }
             licenceHtml += '<li onclick="editLicence(' + licencelist[k].Id + ')">';
@@ -1297,7 +1298,7 @@ function editLicence(id) {
                 $("#ddlLicence").val(response.Result.LicenceTicketTypeId).selectmenu("refresh").change();
                 $("#txtExperience").val(response.Result.Experience);
                 $("#txtNumberlLicence").val(response.Result.LicenceNumber);
-                $("#txtLicenceExpiry").val(response.Result.LicenceExpiry); // show licence expiry date
+                $("#txtLicenceExpiry").val(formatDate(response.Result.LicenceExpiry)); // show licence expiry date
                 $("#dvLicence").show();
                 $("#dvLicence .container").show();
                 $("#dvLicence .exp").show();

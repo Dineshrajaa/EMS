@@ -56,6 +56,7 @@ function registerPush() {
     });
 
     push.on('notification', function(data) {
+        console.warn("payload:"+JSON.stringify(data));
         //this place doesn't work
         // data.message,
         // data.title,

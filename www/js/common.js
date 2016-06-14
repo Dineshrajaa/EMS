@@ -296,7 +296,7 @@ function registerPush() {
     try {
         window.push = PushNotification.init({
             android: { senderID: "739681536553", forceShow: true },
-            ios: { alert: "true", badge: "true", sound: "true" },
+            ios: { alert: "true", badge: "true", sound: "true",clearBadge:"true" },
             windows: {}
         });
     } catch (error) {
@@ -311,6 +311,7 @@ function registerPush() {
     window.push.on('notification', function(data) {
         alert(data);
         console.warn("payload:" + JSON.stringify(data));
+        console.warn("additionalData:"+data.additionalData.payload.pageToOpen);
         //this place doesn't work
         // data.message,
         // data.title,

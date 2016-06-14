@@ -290,3 +290,44 @@ function formatDate(dateToManipulate) {
     var expiryDate = date + "-" + formattedMonth + "-" + ed.getFullYear();
     return expiryDate;
 }
+
+function registerPush() {
+    // To register the device for push notification
+    try {
+        window.push = PushNotification.init({
+            android: { senderID: "739681536553", forceShow: true },
+            ios: { alert: "true", badge: "true", sound: "true" },
+            windows: {}
+        });
+    } catch (error) {
+        alert(error)
+    }
+
+    window.push.on('registration', function(data) {
+        //I can get registration id here        
+        localStorage.pushRegID = data.registrationId;
+    });
+
+    window.push.on('notification', function(data) {
+        alert(data);
+        console.warn("payload:" + JSON.stringify(data));
+        //this place doesn't work
+        // data.message,
+        // data.title,
+        // data.count,
+        // data.sound,
+        // data.image,
+        // data.additionalData
+    });
+
+    window.push.on('error', function(e) {
+        console.log("push error:" + e.message);
+    });
+}
+document.addEventListener("deviceready", function() {
+    if (device.platform == "iOS") {
+        StatusBar.overlaysWebView(false); // to avoid overlay of splashscreen over the app 
+    }
+    StatusBar.backgroundColorByHexString("#0CACEB"); // to change the header color of the app
+    registerPush();
+}, true);

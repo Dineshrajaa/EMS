@@ -38,11 +38,11 @@ $(document).on('ready', function() {
 
 });
 
-function registerPush() {
+/*function registerPush() {
     // To register the device for push notification
     try {
-        var push = PushNotification.init({
-            android: { senderID: "739681536553" },
+         window.push = PushNotification.init({
+            android: { senderID: "739681536553",forceShow:true },
             ios: { alert: "true", badge: "true", sound: "true" },
             windows: {}
         });
@@ -50,12 +50,13 @@ function registerPush() {
         alert(error)
     }
 
-    push.on('registration', function(data) {
+    window.push.on('registration', function(data) {
         //I can get registration id here        
         localStorage.pushRegID = data.registrationId;
     });
 
-    push.on('notification', function(data) {
+    window.push.on('notification', function(data) {
+        alert(data);
         console.warn("payload:"+JSON.stringify(data));
         //this place doesn't work
         // data.message,
@@ -66,10 +67,10 @@ function registerPush() {
         // data.additionalData
     });
 
-    push.on('error', function(e) {
+    window.push.on('error', function(e) {
         console.log("push error:" + e.message);
     });
-}
+}*/
 
 function dologIn() {
     logIn($("#txtUserName").val().trim(), $("#txtPassword").val().trim());
@@ -79,10 +80,10 @@ function dologIn() {
     }
 }
 
-document.addEventListener("deviceready", function() {
+/*document.addEventListener("deviceready", function() {
     if (device.platform == "iOS") {
         StatusBar.overlaysWebView(false); // to avoid overlay of splashscreen over the app 
     }
     StatusBar.backgroundColorByHexString("#0CACEB"); // to change the header color of the app
     registerPush();
-}, true);
+}, true);*/

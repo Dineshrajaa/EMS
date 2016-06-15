@@ -296,7 +296,7 @@ function registerPush() {
     try {
         window.push = PushNotification.init({
             android: { senderID: "739681536553", forceShow: true },
-            ios: { alert: "true", badge: "true", sound: "true",clearBadge:"true" },
+            ios: { alert: "true", badge: "true", sound: "true", clearBadge: "true" },
             windows: {}
         });
     } catch (error) {
@@ -309,9 +309,26 @@ function registerPush() {
     });
 
     window.push.on('notification', function(data) {
-        alert(data);
-        console.warn("payload:" + JSON.stringify(data));
-        console.warn("additionalData:"+data.additionalData.payload.pageToOpen);
+        
+        
+        if(device.platform=="iOS"){
+            console.warn("payload:" + JSON.stringify(data));
+            window.push.getApplicationIconBadgeNumber(function(n) {
+                var notCount=n - 1;
+                window.push.setApplicationIconBadgeNumber(function() {
+                    console.log('success');
+                }, function() {
+                    console.log('error');
+                }, notCount);
+            }, function() {
+                console.log('error');
+            });
+        }
+        if (typeof data.additionalData.payload != undefined) {
+            console.warn("additionalData:" + data.additionalData.payload); 
+            if (data.additionalData.payload == "message")
+                window.location.href = "messages.html";
+        }
         //this place doesn't work
         // data.message,
         // data.title,

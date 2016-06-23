@@ -311,7 +311,7 @@ function registerPush() {
     window.push.on('notification', function(data) {
         
         
-        if(device.platform=="iOS"){
+        /*if(device.platform=="iOS"){
             console.warn("payload:" + JSON.stringify(data));
             window.push.getApplicationIconBadgeNumber(function(n) {
                 var notCount=n - 1;
@@ -323,7 +323,7 @@ function registerPush() {
             }, function() {
                 console.log('error');
             });
-        }
+        }*/
         if (typeof data.additionalData.payload != undefined) {
             console.warn("additionalData:" + data.additionalData.payload); 
             if (data.additionalData.payload == "message")

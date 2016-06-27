@@ -82,8 +82,6 @@ function logIn(userName, password) {
                 hideWait();
                 if (result.IsSuccessful) {
                     var data = JSON.stringify(result.Result);
-                    console.warn(result.Result.ProfilePicture);
-                    // localStorage.profileImage=result.Result.ProfilePicture;
                     localStorage.setItem('userSession', data);
                     toast('Sign In Successful');
                 } else {
@@ -309,8 +307,6 @@ function registerPush() {
     });
 
     window.push.on('notification', function(data) {
-        
-        
         /*if(device.platform=="iOS"){
             console.warn("payload:" + JSON.stringify(data));
             window.push.getApplicationIconBadgeNumber(function(n) {
@@ -326,8 +322,12 @@ function registerPush() {
         }*/
         if (typeof data.additionalData.payload != undefined) {
             console.warn("additionalData:" + data.additionalData.payload); 
-            if (data.additionalData.payload == "message")
-                window.location.href = "messages.html";
+            if (data.additionalData.payload == "message"){
+				window.location.href = "messages.html";
+			}
+			else{
+				window.location.href = "dashboard.html";
+			}                
         }
         //this place doesn't work
         // data.message,

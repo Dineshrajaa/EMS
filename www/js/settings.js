@@ -61,7 +61,7 @@ function saveLNPref() {
         }
     });
     cordova.plugins.notification.local.schedule({
-        title: 'Dowells',
+        // title: 'Dowells',
         text: "Please check that your work availability status is correct",
         every: $("#frequencySelect").val(),
         at: new Date(notificationTime)

@@ -1,4 +1,4 @@
-﻿var serviceUrl = 'http://202.60.69.12/emsapi/api/';
+var serviceUrl = 'http://202.60.69.12/emsapi/api/';
 
 $(document).ajaxStart(function() {
     showWait();
@@ -71,8 +71,9 @@ function logIn(userName, password) {
         jsonObj.username = userName;
         jsonObj.password = password;
         jsonObj.isWebApp = false;
-        jsonObj.deviceId = localStorage.pushRegID || "";
-        jsonObj.deviceTypeId = device.platform == "Android" ? 2 : 1;
+        jsonObj.deviceId = localStorage.pushRegID || "1234";
+        jsonObj.deviceTypeId = 1;
+       // jsonObj.deviceTypeId = device.platform == "Android" ? 2 : 1;
         $.ajax({
             type: "GET",
             url: url,
@@ -279,6 +280,7 @@ function unsubscribePush() {
     });
 }
 
+
 function formatDate(dateToManipulate) {
     // To format the date for showing licence expiry
     var ed = new Date(dateToManipulate);
@@ -302,51 +304,31 @@ function registerPush() {
         alert(error)
     }
 
-    window.push.on('registration', function(data) {
+   /* window.push.on('registration', function(data) {
         //I can get registration id here        
         localStorage.pushRegID = data.registrationId;
-    });
+    });*/
 
-    window.push.on('notification', function(data) {
-        /*if(device.platform=="iOS"){
-            console.warn("payload:" + JSON.stringify(data));
-            window.push.getApplicationIconBadgeNumber(function(n) {
-                var notCount=n - 1;
-                window.push.setApplicationIconBadgeNumber(function() {
-                    console.log('success');
-                }, function() {
-                    console.log('error');
-                }, notCount);
-            }, function() {
-                console.log('error');
-            });
-        }*/
+/*    window.push.on('notification', function (data) {
         if (typeof data.additionalData.payload != undefined) {
-            console.warn("additionalData:" + data.additionalData.payload); 
-            if (data.additionalData.payload == "message"){
-				window.location.href = "messages.html";
-			}
-			else{
-				window.location.href = "dashboard.html";
-			}                
+            console.warn("additionalData:" + data.additionalData.payload);
+            if (data.additionalData.payload == "message") {
+                window.location.href = "messages.html";
+            }
+            else {
+                window.location.href = "dashboard.html";
+            }
         }
-        //this place doesn't work
-        // data.message,
-        // data.title,
-        // data.count,
-        // data.sound,
-        // data.image,
-        // data.additionalData
-    });
+    });*/
 
-    window.push.on('error', function(e) {
-        console.log("push error:" + e.message);
-    });
+   // window.push.on('error', function(e) {
+    //    console.log("push error:" + e.message);
+    //});
 }
 document.addEventListener("deviceready", function() {
-    if (device.platform == "iOS") {
-        StatusBar.overlaysWebView(false); // to avoid overlay of splashscreen over the app 
-    }
-    StatusBar.backgroundColorByHexString("#0CACEB"); // to change the header color of the app
+    //if (device.platform == "iOS") {
+    //    StatusBar.overlaysWebView(false); // to avoid overlay of splashscreen over the app 
+    //}
+    //StatusBar.backgroundColorByHexString("#0CACEB"); // to change the header color of the app
     registerPush();
 }, true);

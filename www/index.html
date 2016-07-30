@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="format-detection" content="telephone=no" />
@@ -11,37 +12,59 @@
     <link href="css/jquery.mobile.min.css" rel="stylesheet" />
     <link href="css/common.css" rel="stylesheet" />
     <link href="css/themeContainer.css" rel="stylesheet" />
-    <link href="css/login.css" rel="stylesheet" type="text/css" />    
-</head>
-<body>
-    <div data-role="page" class="nd2-no-menu-swipe">
+    <link href="css/login.css" rel="stylesheet" type="text/css" /> </head>
+
+<body id="body">
+    <div id="divLogin" data-role="page" class="nd2-no-menu-swipe">
         <div data-role="content" class="ui-content wow fadeIn padding" data-inset="false">
             <form>
-            <div class="logo-login">
-            </div>
-            <div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <h3 class="text-white text-center">
-                        Sign In
-                    </h3>
-                    <input type="email" id="txtUserName" name="txtUserName" class="required" placeholder="Email Address"
-                        required="required" valid-attr="Please enter email address" autocomplete="false" />
-                    <input type="tel" name="txtPassword" id="txtPassword" value="" placeholder="PIN"
-                        required="required" maxlength="4" autocomplete="false">
-                    <div class="text-center">
-                        <a href="#" onclick="dologIn();" class="ui-btn ui-btn-raised clr-primary-login">Sign In</a><br />
-                        <!--<a href="#" onclick="redirect('ForgotPassword.html');" style="color:white !important">Forgot password?</a>-->
-                        <a href="#" onclick=" redirect('Registration.html'); " style="color: white !important">
-                            New Employee Registration</a><br/><br/>
-                        <span id="statusMsg" style="color: red;"></span>
+                <div class="logo-login"> </div>
+                <div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <h3 class="text-white text-center">
+                            Sign In
+                        </h3>
+                        <input type="email" id="txtUserName" name="txtUserName" class="required" placeholder="Email Address" required="required" valid-attr="Please enter email address" autocomplete="false" />
+                        <input type="tel" name="txtPassword" id="txtPassword" value="" placeholder="PIN" required="required" maxlength="4" autocomplete="false">
+                        <div class="text-center"> <a href="#" onclick="dologIn();" class="ui-btn ui-btn-raised clr-primary-login">Sign In</a>
+                            <br />
+                            <!--<a href="#" onclick="redirect('ForgotPassword.html');" style="color:white !important">Forgot password?</a>--><a href="#" onclick=" redirect('Registration.html'); " style="color: white !important">New Employee Registration</a>
+                            <br/>
+                            <br/> <span id="statusMsg" style="color: red;"></span> </div>
                     </div>
                 </div>
-            </div>
             </form>
         </div>
     </div>
+    <!-- Pending Message -->
+    <div id="divPending" class="nd2-no-menu-swipe">
+        <div data-role="content" class="ui-content wow fadeIn padding text-center" data-inset="false">
+            <div class="logo-status"> </div>
+            <div class="pending"><span>PENDING</span></div>
+            <br/>
+            <div class="col-xs-12 col-sm-12 col-md-12"><span>
+                Your application is still under review please check again soon.
+            </span></div>
+            <br/>
+            <br/> <a href="#" onclick="redirect('index.html')" class="ui-btn ui-btn-raised clr-primary-login">BACK</a> </div>
+    </div>
+    <!-- Decline Message -->
+    <div id="divDecline" class="nd2-no-menu-swipe">
+        <div data-role="content" class="ui-content wow fadeIn padding text-center" data-inset="false">
+            <div class="logo-status"> </div>
+            <div class="decline"><span>DECLINE</span></div>
+            <br/>
+            <div class="col-xs-12 col-sm-12 col-md-12"> <span>
+                Your application was unsuccessful. For further details contact Dowells office on 07-5549-2144.
+            </span></div>
+            <br/>
+            <br/> <a href="#" onclick="redirect('index.html')" class="ui-btn ui-btn-raised clr-primary-login">BACK</a>
+            <!--<input type="button" onclick="redirect('index.html')" value="BACK" class="ui-btn ui-btn-raised clr-primary-login"/>-->
+        </div>
+    </div>
     <script type="text/javascript" src="cordova.js"></script>
-    <script src="js/common.js?v=1.0" type="text/javascript"></script>
+    <script src="js/common_web.js?v=1.0" type="text/javascript"></script>
     <script src="js/login.js?v=1.0" type="text/javascript"></script>
 </body>
+
 </html>

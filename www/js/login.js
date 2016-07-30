@@ -1,11 +1,6 @@
-﻿function showTrainerList() {
-    // routing("TrainerList.html", ["js/trainerList.js"], [], "trainerList", "", "index");
-}
-
 function showSignin() {
     $(".signIn").css("display", "block");
     $(".windowBlck h3").html("Sign In");
-    // $("body").css({ backgroundImage: "url('img/splash.JPG')" });
     $(".btnSection").css("display", "none");
 }
 
@@ -20,24 +15,35 @@ function hideSignin() {
     //    $("body").css("background-image", "url('img/bgsmall1.JPG')");
     $(".btnSection").css("display", "inline-block");
 }
-$(document).on('ready', function() {
+$(document).on('ready', function () {
     var currentUserObj = localStorage.getItem('userSession');
     if (currentUserObj && currentUserObj != 'undefined') {
         redirect("Dashboard.html");
-    } else {
-        //delete session object
-        // deleteLocalStorage(["userSession"]);
     }
-
-    $('body').on('keypress', 'input', function(args) {
+    $('body').addClass('ui-overlay-a');
+    $("#divLogin").show();
+    $("#divPending").hide();
+    $("#divDecline").hide();
+    if ($("#statusMsg").hasClass("(pending)")) {
+        $("#divPending").show();
+        $("#divDecline").hide();
+        $("#divLogin").hide();
+        $('body').css('background-color', '#ffffff !important');
+        $('#body').removeClass('ui-overlay-a');
+    }
+    else if ($("#statusMsg").hasClass("(declined)")) {
+        $("#divDecline").show();
+        $("#divLogin").hide();
+        $("#divPending").hide();
+        $('body').css('background-color', '#ffffff !important');
+        $('#body').removeClass('ui-overlay-a');
+    }
+    $('body').on('keypress', 'input', function (args) {
         if (args.keyCode == 13) {
             dologIn($("#txtUserName").val().trim(), $("#txtPassword").val().trim());
         }
     });
-
-
 });
-
 /*function registerPush() {
     // To register the device for push notification
     try {
@@ -71,15 +77,27 @@ $(document).on('ready', function() {
         console.log("push error:" + e.message);
     });
 }*/
-
 function dologIn() {
     logIn($("#txtUserName").val().trim(), $("#txtPassword").val().trim());
     var currentUserObj = localStorage.getItem('userSession');
     if (currentUserObj && currentUserObj != 'undefined') {
         routing("Dashboard.html");
     }
+    if ($("#statusMsg").hasClass("(pending)")) {
+        $("#divPending").show();
+        $("#divDecline").hide();
+        $("#divLogin").hide();
+        $('body').css('background-color', '#ffffff !important');
+        $('#body').removeClass('ui-overlay-a');
+    }
+    else if ($("#statusMsg").hasClass("(declined)")) {
+        $("#divDecline").show();
+        $("#divLogin").hide();
+        $("#divPending").hide();
+        $('body').css('background-color', '#ffffff !important');
+        $('#body').removeClass('ui-overlay-a');
+    }
 }
-
 /*document.addEventListener("deviceready", function() {
     if (device.platform == "iOS") {
         StatusBar.overlaysWebView(false); // to avoid overlay of splashscreen over the app 

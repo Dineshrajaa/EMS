@@ -1110,8 +1110,6 @@ textarea.ui-input-text.ui-textinput-autogrow
     border: 0px solid #ffffff;
 }
 
-
-
 .ui-flipswitch
 {
     border-width: 0px;
@@ -1143,7 +1141,7 @@ textarea.ui-input-text.ui-textinput-autogrow
 
 .ui-flipswitch .ui-btn.ui-flipswitch-on
 {
-    background-color: rgba(255,255,255,0.5);
+    background-color: #ffffff;
 }
 
 .ui-page-theme-a .ui-slider-track .ui-btn-active, html .ui-bar-a .ui-slider-track .ui-btn-active, html .ui-body-a .ui-slider-track .ui-btn-active, html body .ui-group-theme-a .ui-slider-track .ui-btn-active, html body div.ui-slider-track.ui-body-a .ui-btn-active

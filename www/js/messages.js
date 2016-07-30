@@ -6,11 +6,11 @@ function getUserMessages() {
     var jsonObj = new Object();
     jsonObj.userId = currentUser.ID;
     $.ajax({
-        type: "GET",
-        url: url,
-        data: jsonObj,
-        async: false,
-        success: function (result) {
+        type: "GET"
+        , url: url
+        , data: jsonObj
+        , async: false
+        , success: function (result) {
             var messageHtml = "";
             if (result.IsSuccessful) {
                 if (result.Result.length > 0) {
@@ -26,9 +26,12 @@ function getUserMessages() {
                     }
                     $("#messageList").html(messageHtml).trigger("create");
                 }
+                else {
+                    toast("No Message Found.");
+                }
             }
-        },
-        error: function (err) {
+        }
+        , error: function (err) {
             hideWait();
             toast("Network Error");
         }

@@ -89,7 +89,7 @@ html .ui-page-theme-a .ui-btn.ui-checkbox-on.ui-checkbox-on:after
 
 .ui-input-text.ui-focus:after, .ui-input-search.ui-focus:after
 {
-    background-color: transparent;// #0CACEB;
+    background-color: transparent;/*#0CACEB*/
     height: 2px;
 }
 
@@ -98,10 +98,27 @@ textarea.ui-input-text.ui-textinput-autogrow.ui-focus
     border-bottom: 2px solid #0CACEB;
 }
 
+.ui-flipswitch {
+    background-color: #FF0000 !important;
+    -ms-border-radius: 50px;
+    border-radius: 50px;
+    color: #ffffff;
+}
+
+.ui-flipswitch-on {
+    background: #ffffff;
+}
+
+.ui-flipswitch-off {
+    color: #ffffff;
+}
+
 .ui-page-theme-a .ui-flipswitch-active, html .ui-bar-a .ui-flipswitch-active, html .ui-body-a .ui-flipswitch-active, html body .ui-group-theme-a .ui-flipswitch-active, html body .ui-flipswitch.ui-bar-a.ui-flipswitch-active
 {
     color: #ffffff !important;
-    background-color: #0CACEB !important;
+    background-color: #4CD864 !important;
+     -ms-border-radius: 50px;
+    border-radius: 50px;
 }
 
 .ui-page-theme-a .ui-slider-track .ui-btn-active, html .ui-bar-a .ui-slider-track .ui-btn-active, html .ui-body-a .ui-slider-track .ui-btn-active, html body .ui-group-theme-a .ui-slider-track .ui-btn-active, html body div.ui-slider-track.ui-body-a .ui-btn-active, .ui-slider-track .ui-btn.ui-slider-handle

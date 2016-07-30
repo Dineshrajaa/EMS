@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -22,82 +22,82 @@
     <link rel="stylesheet" href="css/themeContainer.css" />
     <link rel="stylesheet" href="css/common.css" />
     <style>
-    .ui-input-text::after,
-    .ui-input-search::after {
-        width: 90% !important;
-    }
-    
-    .registration {
-        background-color: #ffffff;
-        /*padding-top: 90px !important;*/
-    }
-    
-    .tooltip.bottom {
-        font-size: 11px !important;
-        margin-top: 0;
-        padding: 0;
-    }
-    
-    .tooltip-inner {
-        border-radius: 4px;
-        color: red;
-        float: right;
-        padding: 0 17px 0 0;
-        text-align: center;
-    }
-    
-    .tooltip {
-        width: 100%;
-        z-index: 1000;
-    }
-    
-    .ui-input-text input,
-    .ui-input-search input {
-        background-color: #ffffff;
-    }
-    
-    .tooltip.bottom .tooltip-arrow {
-        display: none;
-    }
-    
-    .ui-header > .ui-btn {
-        height: unset;
-    }
-    
-    .ui-table th,
-    .ui-table td {
-        vertical-align: middle;
-    }
-    
-    .table-stroke tbody th,
-    .table-stroke tbody td {
-        border-bottom: 0;
-    }
-    
-    #profileDetailsList.ui-listview > .ui-li-static {
-        padding-top: 0;
-    }
-    
-    .btn-left-margin {
-        margin-left: 10px;
-    }
-    
-    .ui-content hr,
-    .ui-panel-inner hr {
-        margin: 0em -0.5em !important;
-        padding: 0px !important;
-    }
-    
-    #registrationPanel {
-        padding: 10px;
-        border-radius: 10px;
-        background-color: #ffffff;
-    }
-    
-    #registrationPanel label {
-        margin-top: 5px;
-        font-weight: bold;
-    }
+        .ui-input-text::after,
+        .ui-input-search::after {
+            width: 90% !important;
+        }
+        
+        .registration {
+            background-color: #ffffff;
+            /*padding-top: 90px !important;*/
+        }
+        
+        .tooltip.bottom {
+            font-size: 11px !important;
+            margin-top: 0;
+            padding: 0;
+        }
+        
+        .tooltip-inner {
+            border-radius: 4px;
+            color: red;
+            float: right;
+            padding: 0 17px 0 0;
+            text-align: center;
+        }
+        
+        .tooltip {
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .ui-input-text input,
+        .ui-input-search input {
+            background-color: #ffffff;
+        }
+        
+        .tooltip.bottom .tooltip-arrow {
+            display: none;
+        }
+        
+        .ui-header > .ui-btn {
+            height: unset;
+        }
+        
+        .ui-table th,
+        .ui-table td {
+            vertical-align: middle;
+        }
+        
+        .table-stroke tbody th,
+        .table-stroke tbody td {
+            border-bottom: 0;
+        }
+        
+        #profileDetailsList.ui-listview > .ui-li-static {
+            padding-top: 0;
+        }
+        
+        .btn-left-margin {
+            margin-left: 10px;
+        }
+        
+        .ui-content hr,
+        .ui-panel-inner hr {
+            margin: 0em -0.5em !important;
+            padding: 0px !important;
+        }
+        
+        #registrationPanel {
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #ffffff;
+        }
+        
+        #registrationPanel label {
+            margin-top: 5px;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -108,51 +108,41 @@
         <div data-role="header" data-position="fixed">
             <h1>
                 My Profile
-            </h1>
-            <a href="#leftpanel" class="ui-btn ui-btn-left"><i class="zmdi zmd-1x zmdi-menu"></i>
-            </a>
-        </div>
+            </h1> <a href="#leftpanel" class="ui-btn ui-btn-left"><i class="zmdi zmd-1x zmdi-menu"></i>
+            </a> </div>
         <div data-role="content">
             <br />
             <br />
             <br />
             <ul data-role="listview" data-inset="true" data-icon="true">
                 <li class="bbblack">
-                    <a href="#profileDetailsPage" class="ui-btn ui-btn-inline ui-btn-raised">
-                        <span><i class="clr-primary zmdi zmd-sm zmdi-account ui-pull-left"></i></span><span class="btn-left-margin">Personal Details</span></a>
+                    <a href="#profileDetailsPage" class="ui-btn ui-btn-inline ui-btn-raised"> <span><i class="clr-primary zmdi zmd-sm zmdi-account ui-pull-left"></i></span><span class="btn-left-margin">Personal Details</span></a>
                 </li>
                 <li><a href="#listOfDetailsPage" class="ui-btn ui-btn-inline ui-btn-raised"><span><i
                     class="clr-primary zmdi zmd-sm zmdi-flower ui-pull-left"></i></span><span class="btn-left-margin">
                         Licences & Experience</span></a></li>
             </ul>
             <!-- <a href="#" class="ui-btn ui-btn-inline ui-btn-raised" style="width:85%"><span><i class="clr-primary zmdi zmdi-account ui-pull-left"></i></span>Personal Details</a>
-                <a href="#" class="ui-btn ui-btn-inline ui-btn-raised" style="width:85%"><span><i class="clr-primary zmdi zmdi-flower ui-pull-left"></i></span>Licences & Experience</a> -->
-        </div>
+                <a href="#" class="ui-btn ui-btn-inline ui-btn-raised" style="width:85%"><span><i class="clr-primary zmdi zmdi-flower ui-pull-left"></i></span>Licences & Experience</a> --></div>
     </div>
     <!-- Profile options page end -->
     <div data-role="page" data-theme="a" class="nd2-no-menu-swipe registration" id="profileDetailsPage">
         <div data-role="panel" id="cameraTypeList" class="ui-bottom-sheet ui-bottom-sheet-list" data-animate="false" data-position='bottom' data-display="overlay" style="min-height: 30%">
             <div class='row around-xs'>
                 <div class='col-xs-auto'>
-                    <a href='#' class='panelBtn ui-bottom-sheet-link ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button' data-ajax='false' onclick="openCameraOrGallery('Camera.PictureSourceType.CAMERA')">
-                        <i class='zmdi zmdi-camera-front zmd-2x'></i><strong>Take Photo</strong></a>
+                    <a href='#' class='panelBtn ui-bottom-sheet-link ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button' data-ajax='false' onclick="openCameraOrGallery('Camera.PictureSourceType.CAMERA')"> <i class='zmdi zmdi-camera-front zmd-2x'></i><strong>Take Photo</strong></a>
                 </div>
                 <div class='col-xs-auto'>
-                    <a href='#' class='panelBtn ui-bottom-sheet-link ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button' data-ajax='false' onclick="openCameraOrGallery('Camera.PictureSourceType.PHOTOLIBRARY')">
-                        <i class='zmdi zmdi-file zmd-2x'></i><strong>Use Existing Photo</strong></a>
+                    <a href='#' class='panelBtn ui-bottom-sheet-link ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button' data-ajax='false' onclick="openCameraOrGallery('Camera.PictureSourceType.PHOTOLIBRARY')"> <i class='zmdi zmdi-file zmd-2x'></i><strong>Use Existing Photo</strong></a>
                 </div>
-                <div class='col-xs-auto'>
-                    <a href='#' class='panelBtn ui-bottom-sheet-link ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button' data-ajax='false'><i class='zmdi zmdi-close-circle zmd-2x'></i><strong>Cancel</strong></a>
-                </div>
+                <div class='col-xs-auto'> <a href='#' class='panelBtn ui-bottom-sheet-link ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button' data-ajax='false'><i class='zmdi zmdi-close-circle zmd-2x'></i><strong>Cancel</strong></a> </div>
             </div>
         </div>
         <div data-role="header" data-position="fixed">
             <h1>
                 Personal Details
-            </h1>
-            <a href="#profileOptionsPage" class="ui-btn ui-btn-left"><i class="zmdi zmdi-arrow-back zmd-fw">
-            </i></a>
-        </div>
+            </h1> <a href="#profileOptionsPage" class="ui-btn ui-btn-left"><i class="zmdi zmdi-arrow-back zmd-fw">
+            </i></a> </div>
         <div data-role="content">
             <br />
             <br />
@@ -162,80 +152,59 @@
                     <!--   <div class="profileCircle">
                         <a href="#cameraTypeList" onclick="blockIT()"><img id="profilePicImg" src="img/avtar.png" style="width:30%"></a>
                     </div> -->
-                    <div class="profileCircle" style="background-image: url('img/avtar.png')" onclick="blockIT()">
-                    </div>
+                    <div class="profileCircle" style="background-image: url('img/avtar.png')" onclick="blockIT()"> </div>
                 </center>
                 <br />
                 <ul data-role="listview" id="profileDetailsList" style="padding: 10px; border-radius: 10px;">
                     <li style="padding-top: 10px;">
                         <h1>
                             Employee Number</h1>
-                        <p id="lblEnmployeeNumber">
-                        </p>
-                        <hr />
-                    </li>
-					<li>
+                        <p id="lblEnmployeeNumber"> </p>
+                        <hr /> </li>
+                    <li>
                         <h1>
                             Full Name</h1>
-                        <p id="lblName">
-                        </p>
-                        <hr />
-                    </li>
+                        <p id="lblName"> </p>
+                        <hr /> </li>
                     <li>
                         <h1>
                             DOB</h1>
-                        <p id="lblDob">
-                        </p>
-                        <hr />
-                    </li>
+                        <p id="lblDob"> </p>
+                        <hr /> </li>
                     <li>
                         <h1>
                             Gender</h1>
-                        <p id="lblGender">
-                        </p>
-                        <hr />
-                    </li>
+                        <p id="lblGender"> </p>
+                        <hr /> </li>
                     <li>
                         <h1>
                             Primary Contact</h1>
-                        <p id="lblContact1">
-                        </p>
-                        <hr />
-                    </li>
+                        <p id="lblContact1"> </p>
+                        <hr /> </li>
                     <li>
                         <h1>
                             Secondary Contact</h1>
-                        <p id="lblContact2">
-                        </p>
-                        <hr />
-                    </li>
+                        <p id="lblContact2"> </p>
+                        <hr /> </li>
                     <li>
                         <h1>
                             Address</h1>
-                        <p id="lblAddr">
-                        </p>
-                        <hr />
-                    </li>
+                        <p id="lblAddr"> </p>
+                        <hr /> </li>
                     <li>
                         <h1>
                             Email Address</h1>
-                        <p id="lblEmail">
-                        </p>
-                        <hr />
-                    </li>
-                    <li>
+                        <p id="lblEmail"> </p>
+                        <hr /> </li>
+                    <li style="display:none;">
                         <h1>
                             Electronic Payslips</h1>
-                        <p id="lblElePayslips">
-                        </p>
-                        <hr />
-                    </li>
+                        <p id="lblElePayslips"> </p>
+                        <hr /> </li>
                 </ul>
-                <center>
-                    <a href="#" onclick="doEdit()" class="ui-btn ui-btn-raised ui-mini clr-primary" style="width: 100%;
+                <center> <a href="#" onclick="doEdit()" class="ui-btn ui-btn-raised ui-mini clr-primary" style="width: 100%;
                         padding: 0px; margin-top: -5px;bottom:5px;"><span style="height: 30px; line-height: 30px;">EDIT
-                            PROFILE</span> </a>
-                </center>
+                            PROFILE</span> </a> </center>
             </div>
         </div>
     </div>
@@ -244,10 +213,8 @@
         <div data-role="header" data-position="fixed">
             <h1>
                 Personal Details
-            </h1>
-            <a href="#profileOptionsPage" class="ui-btn ui-btn-left"><i class="zmdi zmdi-arrow-back zmd-fw">
-            </i></a>
-        </div>
+            </h1> <a href="#profileOptionsPage" class="ui-btn ui-btn-left"><i class="zmdi zmdi-arrow-back zmd-fw">
+            </i></a> </div>
         <div data-role="content">
             <br />
             <br />
@@ -256,92 +223,57 @@
             <input type="hidden" id="hdnRoleId" />
             <br />
             <div id="registrationPanel">
-                <label>
-                    Title</label>
-                <label style="display: none;">
-                </label>
+                <label> Title</label>
+                <label style="display: none;"> </label>
                 <select class="ui-selectmenu-list" id="ddlTitle">
                     <option value="1">Mr</option>
                     <option value="2">Mrs</option>
                     <option value="3">Miss</option>
                     <option value="3">Ms</option>
                 </select>
-                <label for="txtFirstName">
-                    First Name
-                </label>
+                <label for="txtFirstName"> First Name </label>
                 <input type="text" id="txtFirstName" name="txtFirstName" class="required" placeholder="" required="required" valid-attr="Please enter first name" />
-                <label for="txtMiddleName">
-                    Middle Name
-                </label>
+                <label for="txtMiddleName"> Middle Name </label>
                 <input type="text" id="txtMiddleName" name="txtMiddleName" class="" placeholder="" />
-                <label for="txtLastName">
-                    Last Name
-                </label>
+                <label for="txtLastName"> Last Name </label>
                 <input type="text" id="txtLastName" name="txtLastName" class="required" placeholder="" required="required" valid-attr="Please enter last name" />
-                <label for="txtDob">
-                    Dob
-                </label>
+                <label for="txtDob"> Dob </label>
                 <input type="text" id="txtDob" name="txtDob" class="required" placeholder="" required="required" valid-attr="Please enter dob" />
-                <label for="ddlGender">
-                    Gender
-                </label>
+                <label for="ddlGender"> Gender </label>
                 <select id="ddlGender" required="required" valid_attr="Please select gender">
                     <option value="1">Not Specified</option>
                     <option value="2">Male</option>
                     <option value="3">Female</option>
                 </select>
-                <label for="keyword">
-                    Search Address
-                </label>
+                <label for="keyword"> Search Address </label>
                 <input type="text" id="keyword" name="keyword" placeholder="" />
-                <label for="street_number">
-                    Street Address
-                </label>
+                <label for="street_number"> Street Address </label>
                 <input type="text" id="street_number" name="street_number" class="required" placeholder="" required="required" valid-attr="Please enter address" />
-                <label for="locality">
-                    City/Suburb/Town*
-                </label>
+                <label for="locality"> City/Suburb/Town* </label>
                 <input type="text" id="locality" name="locality" class="required" placeholder="" required="required" valid-attr="Please enter city" />
-                <label for="administrative_area_level_1">
-                    State
-                </label>
+                <label for="administrative_area_level_1"> State </label>
                 <input type="text" id="administrative_area_level_1" name="administrative_area_level_1" class="required" placeholder="" required="required" valid-attr="Please enter state" />
-                <label for="postal_code">
-                    Postcode
-                </label>
+                <label for="postal_code"> Postcode </label>
                 <input type="text" id="postal_code" name="postal_code" class="required" placeholder="" required="required" valid-attr="Please enter Post code" />
-                <label for="txtContact1">
-                    Primary Contact No
-                </label>
+                <label for="txtContact1"> Primary Contact No </label>
                 <input type="tel" id="txtContact1" name="txtContact1" class="required" placeholder="" required="required" valid-attr="Please enter mobile no" />
-                <label for="txtContact2">
-                    Secondary Contact No
-                </label>
+                <label for="txtContact2"> Secondary Contact No </label>
                 <input type="tel" id="txtContact2" name="txtContact2" class="" placeholder="" />
-                <label for="chkPaySlipMail">
-                    <input type="checkbox" id="chkPaySlipMail" name="chkPaySlipMail" class="" placeholder="" style="color: #696969;" /> Would you like payslips sent to your email?
-                </label>
-                <label for="txtPin">
-                    Pin No
-                </label>
+                <label for="chkPaySlipMail" style="display:none;">
+                    <input type="checkbox" id="chkPaySlipMail" name="chkPaySlipMail" class="" placeholder="" style="color: #696969;display:none;" /> Would you like payslips sent to your email? </label>
+                <label for="txtPin"> Pin No </label>
                 <input type="tel" id="txtPin" name="txtPin" maxlength="4" minlength="4" onblur=" validatePassword(this) " placeholder="" valid-attr="Please enter pin" />
-                <label for="txtPin">
-                    Confirm Pin No
-                </label>
+                <label for="txtPin"> Confirm Pin No </label>
                 <input type="tel" id="txtCPin" name="txtCPin" maxlength="4" onblur=" validateConfirmPassword(this) " minlength="4" placeholder="" valid-attr="Please enter Confirm pin" />
-                <label style="color: red" id="spnError">
-                </label>
+                <label style="color: red" id="spnError"> </label>
             </div>
             <!--<a href="" onclick="next()"  class="ui-btn ui-btn-raised ui-mini clr-primary">
                             Next
                         </a>-->
-            <center>
-                <a href="#" onclick="validate();" class="ui-btn ui-btn-raised ui-mini clr-primary" style="width: 100%; padding: 0px; margin-top: 10px;"><span style="height: 30px; line-height: 30px;">
-                        Update</span> </a>
-            </center>
+            <center> <a href="#" onclick="validate();" class="ui-btn ui-btn-raised ui-mini clr-primary" style="width: 100%; padding: 0px; margin-top: 10px;"><span style="height: 30px; line-height: 30px;">
+                        Update</span> </a> </center>
             <br />
-            <br />
-        </div>
+            <br /> </div>
     </div>
     <!-- Edit profile page end -->
     <div data-role="page" id="updateProfile" data-theme="a" class="nd2-no-menu-swipe registration">
@@ -349,8 +281,7 @@
         <div data-role="header" data-position="fixed">
             <h1>
                 My Profile
-            </h1>
-            <a href="#leftpanel" class="ui-btn ui-btn-left"><i class="zmdi zmd-2x zmdi-menu"></i>
+            </h1> <a href="#leftpanel" class="ui-btn ui-btn-left"><i class="zmdi zmd-2x zmdi-menu"></i>
             </a>
             <ul data-role="nd2tabs" data-swipe="true" class="editProfile" style="display: none">
                 <li data-tab="profile" data-tab-active="true">Update</li>
@@ -366,76 +297,47 @@
                                 <tr>
                                     <th>
                                         <h3>
-                                            Profile Detail</h3>
-                                    </th>
+                                            Profile Detail</h3> </th>
                                     <th>
-                                        <input type="button" value="edit" onclick="doEdit()" />
-                                    </th>
+                                        <input type="button" value="edit" onclick="doEdit()" /> </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>
-                                        Name :
-                                    </td>
-                                    <td id="lblName">
-                                    </td>
+                                    <td> Name : </td>
+                                    <td id="lblName"> </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        DOB :
-                                    </td>
-                                    <td id="lblDob">
-                                    </td>
+                                    <td> DOB : </td>
+                                    <td id="lblDob"> </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Gender :
-                                    </td>
-                                    <td id="lblGender">
-                                    </td>
+                                    <td> Gender : </td>
+                                    <td id="lblGender"> </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Primary Contact :
-                                    </td>
-                                    <td id="lblContact1">
-                                    </td>
+                                    <td> Primary Contact : </td>
+                                    <td id="lblContact1"> </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Secondary Contact :
-                                    </td>
-                                    <td id="lblContact2">
-                                    </td>
+                                    <td> Secondary Contact : </td>
+                                    <td id="lblContact2"> </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Address :
-                                    </td>
-                                    <td id="lblAddr">
-                                    </td>
+                                    <td> Address : </td>
+                                    <td id="lblAddr"> </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Locality :
-                                    </td>
-                                    <td id="lbllocality">
-                                    </td>
+                                    <td> Locality : </td>
+                                    <td id="lbllocality"> </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Postal Code :
-                                    </td>
-                                    <td id="lblpostal_code">
-                                    </td>
+                                    <td> Postal Code : </td>
+                                    <td id="lblpostal_code"> </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        State :
-                                    </td>
-                                    <td id="lbladministrative_area_level_1">
-                                    </td>
+                                    <td> State : </td>
+                                    <td id="lbladministrative_area_level_1"> </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -462,33 +364,22 @@
                                 <input type="hidden" id="hdnUserId" />
                                 <input type="hidden" id="hdnRoleId" />
                                 <br />
-                                <label>
-                                    Title</label>
+                                <label> Title</label>
                                 <select class="ui-selectmenu-list" id="ddlTitle">
                                     <option value="1">Mr</option>
                                     <option value="2">Mrs</option>
                                     <option value="3">Miss</option>
                                     <option value="3">Ms</option>
                                 </select>
-                                <label for="txtFirstName">
-                                    First Name
-                                </label>
+                                <label for="txtFirstName"> First Name </label>
                                 <input type="text" id="txtFirstName" name="txtFirstName" class="required" placeholder="" required="required" valid-attr="Please enter first name" />
-                                <label for="txtMiddleName">
-                                    Middle Name
-                                </label>
+                                <label for="txtMiddleName"> Middle Name </label>
                                 <input type="text" id="txtMiddleName" name="txtMiddleName" class="" placeholder="" />
-                                <label for="txtLastName">
-                                    Last Name
-                                </label>
+                                <label for="txtLastName"> Last Name </label>
                                 <input type="text" id="txtLastName" name="txtLastName" class="required" placeholder="" required="required" valid-attr="Please enter last name" />
-                                <label for="txtDob">
-                                    Dob
-                                </label>
+                                <label for="txtDob"> Dob </label>
                                 <input type="text" id="txtDob" name="txtDob" class="required" placeholder="required" required="required" valid-attr="Please enter dob" />
-                                <label for="ddlGender">
-                                    Gender
-                                </label>
+                                <label for="ddlGender"> Gender </label>
                                 <select id="ddlGender" required="required" valid_attr="Please select gender">
                                     <option value="1">Not Specified</option>
                                     <option value="2">Male</option>
@@ -499,47 +390,29 @@
                         </label>
                         <input type="email" id="txtEmail" name="txtEmail" class="required" onblur="validateEmail(this) "
                                placeholder="" required="required" valid-attr="Please enter email" />-->
-                                <label for="keyword">
-                                    Search Address
-                                </label>
+                                <label for="keyword"> Search Address </label>
                                 <input type="text" id="keyword" name="keyword" placeholder="" />
-                                <label for="street_number">
-                                    Street Address
-                                </label>
+                                <label for="street_number"> Street Address </label>
                                 <input type="text" id="street_number" name="street_number" class="required" placeholder="" required="required" valid-attr="Please enter address" />
-                                <label for="locality">
-                                    City/Suburb/Town*
-                                </label>
+                                <label for="locality"> City/Suburb/Town* </label>
                                 <input type="text" id="locality" name="locality" class="required" placeholder="" required="required" valid-attr="Please enter city" />
-                                <label for="administrative_area_level_1">
-                                    State
-                                </label>
+                                <label for="administrative_area_level_1"> State </label>
                                 <input type="text" id="administrative_area_level_1" name="administrative_area_level_1" class="required" placeholder="" required="required" valid-attr="Please enter state" />
-                                <label for="postal_code">
-                                    Postcode
-                                </label>
+                                <label for="postal_code"> Postcode </label>
                                 <input type="text" id="postal_code" name="postal_code" class="required" placeholder="" required="required" valid-attr="Please enter Post code" />
-                                <label for="txtContact1">
-                                    Primary Contact No
-                                </label>
+                                <label for="txtContact1"> Primary Contact No </label>
                                 <input type="tel" id="txtContact1" name="txtContact1" class="required" placeholder="" required="required" valid-attr="Please enter mobile no" />
-                                <label for="txtContact2">
-                                    Secondary Contact No
-                                </label>
+                                <label for="txtContact2"> Secondary Contact No </label>
                                 <input type="tel" id="txtContact2" name="txtContact2" class="" placeholder="" />
-                                <label for="chkPaySlipMail">
-                                    <input type="checkbox" id="chkPaySlipMail" name="chkPaySlipMail" class="" placeholder="" /> Would you like payslips sent to your email?
-                                </label>
-                                <label style="color: red" id="spnError">
-                                </label>
+                                <label for="chkPaySlipMail" style="display:none;">
+                                    <input type="checkbox" id="chkPaySlipMail" name="chkPaySlipMail" class="" placeholder="" style="display:none;" /> Would you like payslips sent to your email? </label>
+                                <label style="color: red" id="spnError"> </label>
                                 <!--<a href="" onclick="next()"  class="ui-btn ui-btn-raised ui-mini clr-primary">
                             Next
-                        </a>-->
-                                <a href="" onclick="validate();" class="ui-btn ui-btn-raised ui-mini clr-primary">Update
+                        </a>--><a href="" onclick="validate();" class="ui-btn ui-btn-raised ui-mini clr-primary">Update
                             </a>
                                 <br />
-                                <br />
-                            </div>
+                                <br /> </div>
                         </div>
                     </div>
                 </form>
@@ -549,81 +422,45 @@
                 <br />
                 <br />
                 <br />
-                <label>
-                    Licence
-                </label>
-                <a id="btnAddLicence" style="float: right">Add </a>
+                <label> Licence </label> <a id="btnAddLicence" style="float: right">Add </a>
                 <table data-role="table" id="tblLicenceList" data-mode="" class="ui-responsive table-stroke">
                     <thead>
                         <tr>
-                            <th>
-                                Name
-                            </th>
-                            <th>
-                                Exp
-                            </th>
-                            <th>
-                                Lic No
-                            </th>
-                            <th colspan="2">
-                                Action
-                            </th>
+                            <th> Name </th>
+                            <th> Exp </th>
+                            <th> Lic No </th>
+                            <th colspan="2"> Action </th>
                         </tr>
                     </thead>
-                    <tbody>
-                    </tbody>
+                    <tbody> </tbody>
                 </table>
                 <br />
                 <br />
-                <label>
-                    Trade Exp.
-                </label>
-                <a id="btnAddTrade" style="float: right">Add </a>
+                <label> Trade Exp. </label> <a id="btnAddTrade" style="float: right">Add </a>
                 <table data-role="table" id="tblTradeExpList" data-mode="" class="ui-responsive table-stroke">
                     <thead>
                         <tr>
-                            <th>
-                                Name
-                            </th>
-                            <th>
-                                Exp
-                            </th>
-                            <th>
-                                Qual No
-                            </th>
-                            <th colspan="2">
-                                Action
-                            </th>
+                            <th> Name </th>
+                            <th> Exp </th>
+                            <th> Qual No </th>
+                            <th colspan="2"> Action </th>
                         </tr>
                     </thead>
-                    <tbody>
-                    </tbody>
+                    <tbody> </tbody>
                 </table>
                 <br />
                 <br />
-                <label>
-                    Position Held
-                </label>
-                <a id="btnAddPosition" style="float: right">Add </a>
+                <label> Position Held </label> <a id="btnAddPosition" style="float: right">Add </a>
                 <table data-role="table" id="tblPositionList" data-mode="" class="ui-responsive table-stroke">
                     <thead>
                         <tr>
-                            <th>
-                                Name
-                            </th>
-                            <th>
-                                Exp
-                            </th>
-                            <th>
-                                Qual No
-                            </th>
-                            <th colspan="2">
-                                Action
-                            </th>
+                            <th> Name </th>
+                            <th> Exp </th>
+                            <th> Qual No </th>
+                            <th colspan="2"> Action </th>
                         </tr>
                     </thead>
-                    <tbody>
-                    </tbody>
+                    <tbody> </tbody>
                 </table>
             </div>
         </div>
@@ -632,62 +469,48 @@
     <div data-role="page" id="listOfDetailsPage" data-theme="a" class="nd2-no-menu-swipe registration">
         <div data-role="header" data-position="fixed">
             <h1>
-                Licences & Experience</h1>
-            <a href="#profileOptionsPage" class="ui-btn ui-btn-left"><i class="zmdi zmdi-arrow-back zmd-fw">
-            </i></a>
-        </div>
+                Licences & Experience</h1> <a href="#profileOptionsPage" class="ui-btn ui-btn-left"><i class="zmdi zmdi-arrow-back zmd-fw">
+            </i></a> </div>
         <div data-role="content">
             <br />
             <br />
             <div id="licenceBlock" class="nd2-card">
                 <center>
                     <h4>
-                        Licences & Tickets</h4>
-                </center>
+                        Licences & Tickets</h4> </center>
                 <hr>
-                <ul id="licenceList" data-role="listview">
-                </ul>
-                <center>
-                    <a href="#addeditLicence" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="makeEditFalse('editLicenceFlag')">
-                        Add New </a>
-                </center>
+                <ul id="licenceList" data-role="listview"> </ul>
+                <center> <a href="#addeditLicence" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="makeEditFalse('editLicenceFlag')">
+                        Add New </a> </center>
             </div>
             <div id="tradeBlock" class="nd2-card">
                 <center>
                     <h4>
-                        Trade Experience</h4>
-                </center>
+                        Trade Experience</h4> </center>
                 <hr>
-                <ul id="tradeList" data-role="listview">
-                </ul>
-                <center>
-                    <a href="#addeditTrade" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="makeEditFalse('ueditTradeFlag')">
-                        Add New </a>
-                </center>
+                <ul id="tradeList" data-role="listview"> </ul>
+                <center> <a href="#addeditTrade" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="makeEditFalse('ueditTradeFlag')">
+                        Add New </a> </center>
             </div>
             <div id="positionsBlock" class="nd2-card">
                 <center>
                     <h4>
-                        Positions held</h4>
-                </center>
+                        Positions held</h4> </center>
                 <hr>
-                <ul id="positionList" data-role="listview">
-                </ul>
-                <center>
-                    <a href="#addeditPosition" class="ui-btn ui-btn-raised ui-mini clr-primary">Add New
-                    </a>
-                </center>
+                <ul id="positionList" data-role="listview"> </ul>
+                <center> <a href="#addeditPosition" class="ui-btn ui-btn-raised ui-mini clr-primary">Add New
+                    </a> </center>
             </div>
         </div>
         <script type="text/javascript">
-        $("#listOfDetailsPage").ready(function() {
-            /*var currentUserObj = localStorage.getItem('userSession');
-            if (currentUserObj && currentUserObj != 'undefined') {
-                currentUser = JSON.parse(currentUserObj);
-                fetchProfileDetail(currentUser.ID);
-                GetEmployeeDetails(currentUser.ID);
-            }*/
-        });
+            $("#listOfDetailsPage").ready(function () {
+                /*var currentUserObj = localStorage.getItem('userSession');
+                if (currentUserObj && currentUserObj != 'undefined') {
+                    currentUser = JSON.parse(currentUserObj);
+                    fetchProfileDetail(currentUser.ID);
+                    GetEmployeeDetails(currentUser.ID);
+                }*/
+            });
         </script>
     </div>
     <!-- List of Tickets,Positions,Trade end -->
@@ -696,8 +519,7 @@
             <h1>
                 Add/Edit Licence
             </h1>
-            <a href="#listOfDetailsPage" class="ui-btn ui-btn-left" onclick="resetTheHiddenID('licencePage')">
-                <i class="zmdi zmdi-arrow-back zmd-fw"></i></a>
+            <a href="#listOfDetailsPage" class="ui-btn ui-btn-left" onclick="resetTheHiddenID('licencePage')"> <i class="zmdi zmdi-arrow-back zmd-fw"></i></a>
         </div>
         <div role="main">
             <div data-role="content">
@@ -738,47 +560,29 @@
                     <a href="" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="SaveLicence()">
                         Save </a>
                 </div> -->
-                <label>
-                    Licence / Ticket
-                </label>
-                <select id="ddlLicence">
-                </select>
+                <label> Licence / Ticket </label>
+                <select id="ddlLicence"> </select>
                 <input type="hidden" id="ddlLicenceText" value="" />
                 <input type="hidden" id="hdnLicenceTypeId" value="0" />
                 <div id="dvLicence" style="display: none; padding: 5px" class="nd2-card">
                     <!-- padding: 15px; border: 2px solid gray -->
                     <div class="container" style="display: none;">
+                        <label> Certification Type </label>
                         <label>
-                            Certification Type
-                        </label>
+                            <input type="radio" name="LicencePosition" id="expLicence" value="1" /> Experienced </label>
                         <label>
-                            <input type="radio" name="LicencePosition" id="expLicence" value="1" /> Experienced
-                        </label>
-                        <label>
-                            <input type="radio" name="LicencePosition" id="qualLicence" value="2" /> Qualified
-                        </label>
+                            <input type="radio" name="LicencePosition" id="qualLicence" value="2" /> Qualified </label>
                     </div>
                     <div class="num" style="display: none;">
-                        <label style="margin-bottom: 5px;">
-                            Licence Type: <span id="licenceTypeh"></span>
-                        </label>
-                        <label>
-                            Licence Number
-                        </label>
+                        <label style="margin-bottom: 5px;"> Licence Type: <span id="licenceTypeh"></span> </label>
+                        <label> Licence Number </label>
                         <input type="text" id="txtNumberlLicence" required class="licenceRequired" />
-                        <label>
-                            Licence Expiry</label>
-                        <input type="text" id="txtLicenceExpiry" required class="licenceRequired" />
-                    </div>
+                        <label> Licence Expiry</label>
+                        <input type="text" id="txtLicenceExpiry" required class="licenceRequired" /> </div>
                     <div class="exp" style="display: none;">
-                        <label>
-                            How much experience do you have with this licence/ticket? (example:1y6m)
-                        </label>
-                        <input type="text" id="txtExperience" required class="licenceRequired" />
-                    </div>
-                    <center>
-                        <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick=" SaveLicence()" id="addLicenceBtn">Add</a> <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="deleteLicence()" style="left: 5px; display: none;" id="delLicBtn">Delete</a>
-                    </center>
+                        <label> How much experience do you have with this licence/ticket? (example:1y6m) </label>
+                        <input type="text" id="txtExperience" required class="licenceRequired" /> </div>
+                    <center> <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick=" SaveLicence()" id="addLicenceBtn">Add</a> <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="deleteLicence()" style="left: 5px; display: none;" id="delLicBtn">Delete</a> </center>
                 </div>
             </div>
         </div>
@@ -833,46 +637,32 @@
             <h1>
                 Trade Experience
             </h1>
-            <a href="#listOfDetailsPage" class="ui-btn ui-btn-left" onclick="resetTheHiddenID('tradePage')">
-                <i class="zmdi zmdi-arrow-back zmd-fw"></i></a>
+            <a href="#listOfDetailsPage" class="ui-btn ui-btn-left" onclick="resetTheHiddenID('tradePage')"> <i class="zmdi zmdi-arrow-back zmd-fw"></i></a>
         </div>
         <div data-role="content">
             <br />
             <br />
             <br />
-            <label>
-                Trade Exp.</label>
-            <select id="ddlTradeExp">
-            </select>
+            <label> Trade Exp.</label>
+            <select id="ddlTradeExp"> </select>
             <input type="hidden" id="ddlTradeExpText" value="" />
             <input type="hidden" id="hdnTradeId" value="0" />
             <div id="dvTrade" style="display: none; padding: 5px" class="nd2-card">
                 <!-- padding: 15px; border: 2px solid gray -->
                 <div class="container">
+                    <label> Certification Type </label>
                     <label>
-                        Certification Type
-                    </label>
+                        <input type="radio" name="TradeExpPosition" id="expTrade" value="1" /> Experienced </label>
                     <label>
-                        <input type="radio" name="TradeExpPosition" id="expTrade" value="1" /> Experienced
-                    </label>
-                    <label>
-                        <input type="radio" name="TradeExpPosition" id="qualTrade" value="2" /> Qualified
-                    </label>
+                        <input type="radio" name="TradeExpPosition" id="qualTrade" value="2" /> Qualified </label>
                 </div>
                 <div class="num" style="display: none;">
-                    <label>
-                        Qualification Number
-                    </label>
-                    <input type="text" id="txtQualTrade" required class="tradeRequired" />
-                </div>
+                    <label> Qualification Number </label>
+                    <input type="text" id="txtQualTrade" required class="tradeRequired" /> </div>
                 <div class="exp" style="display: none;">
-                    <label>
-                        How much experience do you have in this trade? (example:1y 6m)
-                    </label>
-                    <input type="text" id="txtExpTrade" required class="tradeRequired" />
-                </div>
-                <center>
-                    <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" id="addTradeBtn" onclick="SaveTrade()">
+                    <label> How much experience do you have in this trade? (example:1y 6m) </label>
+                    <input type="text" id="txtExpTrade" required class="tradeRequired" /> </div>
+                <center> <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" id="addTradeBtn" onclick="SaveTrade()">
                         Add</a> <a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="deleteTrade()" style="left: 5px; display: none;" id="delTradeBtn">Delete</a></center>
             </div>
             <!-- <label>Qualification No.</label>
@@ -933,8 +723,7 @@
             <h1>
                 Add/Edit Position
             </h1>
-            <a href="#listOfDetailsPage" class="ui-btn ui-btn-left" onclick="resetTheHiddenID('positionsPage')">
-                <i class="zmdi zmdi-arrow-back zmd-fw"></i></a>
+            <a href="#listOfDetailsPage" class="ui-btn ui-btn-left" onclick="resetTheHiddenID('positionsPage')"> <i class="zmdi zmdi-arrow-back zmd-fw"></i></a>
         </div>
         <div role="main">
             <div data-role="content">
@@ -942,40 +731,26 @@
                 <br />
                 <br />
                 <br />
-                <label>
-                    Select Position Held
-                </label>
-                <select id="ddlPositionHeld">
-                </select>
+                <label> Select Position Held </label>
+                <select id="ddlPositionHeld"> </select>
                 <input type="hidden" id="ddlPositionHeldText" value="" />
                 <input type="hidden" id="hdnPositionId" value="0" />
                 <div id="dvPosition" style="display: none; padding: 5px" class="nd2-card">
                     <!-- padding: 15px; border: 2px solid gray -->
                     <div class="container">
+                        <label> Certification Type </label>
                         <label>
-                            Certification Type
-                        </label>
+                            <input type="radio" name="CertifiedTypePosition" id="expPosition" value="1" /> Experienced </label>
                         <label>
-                            <input type="radio" name="CertifiedTypePosition" id="expPosition" value="1" /> Experienced
-                        </label>
-                        <label>
-                            <input type="radio" name="CertifiedTypePosition" id="qualPosition" value="2" /> Qualified
-                        </label>
+                            <input type="radio" name="CertifiedTypePosition" id="qualPosition" value="2" /> Qualified </label>
                     </div>
                     <div class="num" style="display: none;">
-                        <label>
-                            Qualification Number
-                        </label>
-                        <input type="text" id="txtQualPosition" required class="positionRequired" />
-                    </div>
+                        <label> Qualification Number </label>
+                        <input type="text" id="txtQualPosition" required class="positionRequired" /> </div>
                     <div class="exp" style="display: none;">
-                        <label>
-                            How much experience do you have in this position? (example:1y 6m)
-                        </label>
-                        <input type="text" id="txtExpPosition" required class="positionRequired" />
-                    </div>
-                    <center>
-                        <a href="" class="ui-btn ui-btn-raised ui-mini clr-primary" id="addPosBtn" onclick=" SavePosition() ">
+                        <label> How much experience do you have in this position? (example:1y 6m) </label>
+                        <input type="text" id="txtExpPosition" required class="positionRequired" /> </div>
+                    <center> <a href="" class="ui-btn ui-btn-raised ui-mini clr-primary" id="addPosBtn" onclick=" SavePosition() ">
                             Save </a><a href="#" class="ui-btn ui-btn-raised ui-mini clr-primary" onclick="deletePosition()" style="left: 5px; display: none;" id="delPosBtn">Delete</a></center>
                 </div>
             </div>

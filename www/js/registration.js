@@ -74,12 +74,12 @@ function validate() {
     } else {
         return false;
     }
-    //validatePassword($("#txtPin"));
-    //validateConfirmPassword($("#txtCPin"));
 }
 
 function validateRegisterFields(fieldClass, nextpageId) {
     // To validate the fields in register page
+    validatePassword($("#txtPin"));
+    validateConfirmPassword($("#txtCPin"));
     isValid = true;
     $("." + fieldClass).each(function() {
         var current = $(this);
@@ -91,7 +91,6 @@ function validateRegisterFields(fieldClass, nextpageId) {
         }
     });
     if (isValid) {
-
         if (nextpageId !== "lastpage")
             RegisterUser(nextpageId);
         //navigatePage(nextpageId);
@@ -268,22 +267,6 @@ function register(nextpageId) {
     jsonObj.UserPositionHelds = positionHoldList;
     jsonObj.ProfileImage = profilePicture == "img/avtar.png" ? "" : profilePicture;
     navigatePage(nextpageId);
-    /*    $.ajax({
-    type: "POST",
-    url: url,
-    data: jsonObj,
-    success: function(result) {
-    if (result.IsSuccessful) {
-    alert("Registration has successfully done");
-    // window.location.href = "index.html";
-    } else {
-    toast("Network Error");
-    }
-    },
-    error: function() {
-    //console.log('Some error occured in registration, please try again');
-    }
-    });*/
 }
 
 function submitProfile() {
@@ -293,7 +276,6 @@ function submitProfile() {
     jsonObj.UserTradeExperiences = tradeExpList;
     jsonObj.UserPositionHelds = positionHoldList;
     jsonObj.ProfileImage = localStorage.ProfileImage || "";
-    //console.log(jsonObj);
     $.ajax({
         type: "POST",
         url: url,
@@ -302,8 +284,6 @@ function submitProfile() {
             if (result.IsSuccessful) {
                 navigatePage("#successfulRegPage");
                 localStorage.ProfileImage=""; // clear picture to avoid memory problems
-                //alert("Registration has been successfully done");
-                // window.location.href = "index.html";
             } else {
                 toast("Network Error");
             }
@@ -315,24 +295,16 @@ function submitProfile() {
 }
 
 function RegisterUser(nextpageId) {
-
     $(".required").each(function() {
         var cur = this;
         if ($(cur).hasClass("error")) {
             return false;
         }
-
     });
     checkEmailExistance(nextpageId);
-    //    if ($("#form_RegisterUser").valid()) {
-    //        checkEmailExistance();
-    //    }
-    //    else {
-    //        return false;
-    //    }
 }
+
 $(function() {
-    // $("#txtDob").val("01/01/1990");
     $('#txtDob,#txtLicenceExpiry').mobiscroll().date({
         lang: 'en',
         theme: 'android-holo-light',
@@ -434,8 +406,8 @@ $(document).on("ready", function() {
             $("#dvLicence .exp").show();
             $("#dvLicence .num").hide();
         }
-
     });
+
     $("input[name='TradeExpPosition']").on("click", function() {
         $("#dvTrade .exp").show();
         $("#txtExpTrade").val("");
@@ -448,28 +420,7 @@ $(document).on("ready", function() {
         }
 
     });
-    /*    $(document).on("click", "#dvTrade .ui-radio", function() {
-    $("#dvTrade .exp").show();
-    $("#txtExpTrade").val("");
-    $("#txtQualTrade").val("");
-    //console.log($(this).children("input[name=TradeExpPosition]").val());
-    if ($(this).children("input[name=TradeExpPosition]").val() === "2") {
-    $("#dvTrade .num").show();
-    } else {
-    $("#dvTrade .num").hide();
-    }
-    });
 
-    $(document).on("click", "#dvPosition .ui-radio", function() {
-    $("#dvPosition .exp").show();
-    $("#txtExpPosition").val("");
-    $("#txtQualPosition").val("");
-    if ($(this).children("input[name=CertifiedTypePosition]").val() === "2") {
-    $("#dvPosition .num").show();
-    } else {
-    $("#dvPosition .num").hide();
-    }
-    });*/
     $("input[name='CertifiedTypePosition']").on("click", function() {
         $("#dvPosition .exp").show();
         $("#txtExpPosition").val("");
@@ -480,9 +431,7 @@ $(document).on("ready", function() {
         } else if ($(this).val() == "2") {
             $("#dvPosition .num").hide();
         }
-
     });
-
 });
 
 function setOptions(srcType) {
@@ -584,8 +533,6 @@ function getLicenceTypDetail(id) {
                     $("#dvLicence .num").hide();
                     // $("#txtNumberlLicence,#txtLicenceExpiry,#txtExperience").removeClass("licenceRequired");
                 }
-
-
             }
         },
         error: function() {
@@ -775,19 +722,16 @@ function deleteTrade(id, el) {
                 tradeExpList.splice(tradeExpList.indexOf(tradeExpList[i]), 1);
             }
         }
-        toast('Trade Exp Deleted Successfully');
+        toast('Trade Experience Deleted');
         listTrade(); // recreate the list of trade after delete
         // rebindGrids();
         hideWait();
     }
 }
 
-
-
 function SaveTrade() {
     var isValid = true;
     $(".tradeRequired").each(function() {
-        //console.warn($(this));
         var current = $(this);
         if (current.val() == "" && current.is(":visible")) {
             $(current).addClass("error");
@@ -800,7 +744,6 @@ function SaveTrade() {
         var obj = {};
         obj.Id = $("#hdnTradeId").val();
         obj.TradeExperienceId = $("#ddlTradeExp").val();
-        //obj.UserId = currentUser.ID;
         obj.Name = $("#ddlTradeExpText").val();
         obj.Experience = $("#txtExpTrade").val();
         obj.QualificationNumber = $("#txtQualTrade").val();
@@ -818,7 +761,6 @@ function SaveTrade() {
     } else {
         return false;
     }
-
 }
 
 function SavePosition() {
@@ -874,7 +816,6 @@ function AddUserPositionHeld(obj) {
     listPositions();
     hideWait();
     $("input[type='text']").val("");
-
 }
 
 function listPositions() {
@@ -895,13 +836,6 @@ function listPositions() {
             positionsHtml += '<tr><td>Experience</td><td>' + Exp + '</td></tr>';
             positionsHtml += '</tbody>';
             positionsHtml += '</table></li><hr>';
-            /*positionsHtml += '<li onclick="editPosition(' + i + ')">' +
-            '<p>' + positionHoldList[i].Name +
-            '<br/>Cert Type: ' + positionHoldList[i].UserCertificationTypeName + '<br/>' +
-            '<br/>QualificationNumber: ' + qualNo + '<br/>' +
-            '<br/>Experience: ' + Exp +
-            '</p></li><hr>';*/
-
         }
         $("#addPositionsPara").hide();
         $("#positionsList").html(positionsHtml).listview().listview("refresh");
@@ -909,9 +843,7 @@ function listPositions() {
     if (positionHoldList.length == 0)
         $("#addPositionsPara").show(); // show the add position text
     $.mobile.pageContainer.pagecontainer("change", "#positionsPage", { transition: "slide" });
-
 }
-
 
 function AddUserTradeExp(obj) {
     showWait();
@@ -949,13 +881,6 @@ function listTrade() {
             tradeHtml += '<tr><td>Experience</td><td> ' + exp + '</td></tr>';
             tradeHtml += '</tbody></table>';
             tradeHtml += '</li><hr>';
-            /*       tradeHtml += '<li onclick="editTrade(' + j + ')">' +
-            '<p>' + tradeExpList[j].Name + 
-            '<br/>Cert Type: ' + tradeExpList[j].UserCertificationTypeName +
-            '<br/>QualificationNumber: ' + no + 
-            '<br/>Experience: ' + exp + '</p>' +                
-            '</li><hr>';*/
-
         }
         $("#addTradePara").hide();
         $("#tradeList").html(tradeHtml).listview().listview("refresh");
@@ -1047,13 +972,6 @@ function listTickets() {
             licenceHtml += '<tr><td>Experience</td><td>' + exp + '</td></tr>';
             licenceHtml += '</tbody></table>';
             licenceHtml += '</li><hr>';
-            /*licenceHtml += '<li onclick="editLicence(' + i + ')">' +
-            '<p>' + licenceTicketList[i].Name + 
-            '<br/>' + licenceTicketList[i].LicenceType +
-            '<br/>Licence No.: ' + no +
-            '<br/>Expiry: ' + expiryDate +
-            '<br/>Experience: ' + exp + '</p>' +                
-            '</li><hr>';*/
         }
         $("#tblLicenceList").html(licenceHtml).listview().listview("refresh");
     }

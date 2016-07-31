@@ -25,7 +25,7 @@ function openCameraOrGallery(sourceType) {
     else if (sourceType == "Camera.PictureSourceType.PHOTOLIBRARY")
         sourceType = Camera.PictureSourceType.PHOTOLIBRARY;
     var cameraOptions = setOptions(sourceType);
-    console.warn("sourceType:" + sourceType + "cameraOptions:" + JSON.stringify(cameraOptions));
+    //console.warn("sourceType:" + sourceType + "cameraOptions:" + JSON.stringify(cameraOptions));
     navigator.camera.getPicture(cameraSuccess, cameraError, cameraOptions);
 }
 
@@ -44,7 +44,7 @@ function updateProfilePicture() {
     var jsonObj = new Object();
     jsonObj.UserId = $("#hdnUserId").val();
     jsonObj.ProfileImage = localStorage.ProfilePicture || "";
-    console.warn(JSON.stringify(jsonObj));
+    //console.warn(JSON.stringify(jsonObj));
     showWait();
     $.ajax({
         type: "POST",
@@ -55,7 +55,7 @@ function updateProfilePicture() {
         //async: false,
         success: function(result) {
             hideWait();
-            console.warn("result:" + result);
+            //console.warn("result:" + result);
             if (result.IsSuccessful) {
                 $("#imgUserImage").attr('src', localStorage.ProfilePicture);
                 var currentUserObj = localStorage.getItem('userSession');
@@ -78,7 +78,7 @@ function updateProfilePicture() {
 }
 
 function cameraError(err) {
-    console.log("Camera error:" + err);
+    //console.log("Camera error:" + err);
 }
 
 function validate() {
@@ -239,18 +239,18 @@ $(document).on("ready", function() {
         $.mobile.pageContainer.pagecontainer("change", "#addeditPosition", { transition: "slide" });
     });
 
-    $(document).on("click", "#dvLicence .ui-radio", function() {
+    /*$(document).on("click", "#dvLicence .ui-radio", function() {
         $("#dvLicence .exp").show();
         $("#txtExperience").val("");
         $("#txtNumberlLicence").val("");
-        if ($(this).children("input[name=LicencePosition]").val() === "2") {
+        if ($(this).children("input[name=LicencePosition]").val() == "2") {
             $("#dvLicence .num").show();
         } else {
             $("#dvLicence .num").hide();
         }
-    });
+    });*/
 
-    $(document).on("click", "#dvTrade .ui-radio", function() {
+    /*$(document).on("click", "#dvTrade .ui-radio", function() {
         $("#dvTrade .exp").show();
         $("#txtExpTrade").val("");
         $("#txtQualTrade").val("");
@@ -259,12 +259,12 @@ $(document).on("ready", function() {
         } else {
             $("#dvTrade .num").hide();
         }
-    });
+    });*/
     $("input[name='TradeExpPosition']").on("click", function() {
         $("#dvTrade .exp").show();
         $("#txtExpTrade").val("");
         $("#txtQualTrade").val("");
-        console.warn($(this).val());
+        //console.warn($(this).val());
         if ($(this).val() == "2") {
             $("#dvTrade .num").show();
         } else if ($(this).val() == "1") {
@@ -276,7 +276,7 @@ $(document).on("ready", function() {
         $("#dvPosition .exp").show();
         $("#txtExpPosition").val("");
         $("#txtQualPosition").val("");
-        console.warn($(this).val());
+        //console.warn($(this).val());
         if ($(this).val() == "2") {
             $("#dvPosition .num").show();
         } else if ($(this).val() == "1") {
@@ -284,7 +284,7 @@ $(document).on("ready", function() {
         }
 
     });
-    $(document).on("click", "#dvPosition .ui-radio", function() {
+    /*$(document).on("click", "#dvPosition .ui-radio", function() {
         $("#dvPosition .exp").show();
         $("#txtExpPosition").val("");
         $("#txtQualPosition").val("");
@@ -293,7 +293,7 @@ $(document).on("ready", function() {
         } else {
             $("#dvPosition .num").hide();
         }
-    });
+    });*/
 });
 
 function fetchProfileDetail(userId) {
@@ -338,10 +338,21 @@ function fetchProfileDetail(userId) {
                 $("#ddlTitle").prev().text(employeeObj.Title);
                 $("#txtFirstName").val(employeeObj.FirstName);
                 $("#lblName").html(employeeObj.Title + " " + employeeObj.FirstName + "  " + employeeObj.LastName);
-				$("#lblEnmployeeNumber").html(employeeObj.EmployeeNumber);
+                $("#lblEnmployeeNumber").html(employeeObj.EmployeeNumber);
                 $("#txtMiddleName").val(employeeObj.MiddleName);
                 $("#txtLastName").val(employeeObj.LastName);
                 $("#txtDob").val(new Date(employeeObj.DateOfBirth).getFormattedDateInddMMYY());
+                // $("#txtDob").val(formatDate(employeeObj.DateOfBirth));
+               /* $("#txtDob").mobiscroll().date({
+                    lang: 'en',
+                    theme: 'android-holo-light',
+                    display: 'bubble',
+                    display: 'bottom',
+                    dateOrder: 'ddMMyy',
+                    dateFormat: 'dd/mm/yyyy',
+                    mode: 'scroller',
+                    maxDate: new Date(2050, 12, 31)
+                }).setVal(employeeObj.DateOfBirth, true);*/
                 $("#lblDob").html(new Date(employeeObj.DateOfBirth).getFormattedDateInddMMYY());
                 if (employeeObj.IsPaySlipSent)
                     $("#lblElePayslips").text("Yes");
@@ -481,6 +492,7 @@ function updateProfile(trannieProfileObj) {
 
             var currentUser = JSON.parse(currentUserObj);
             trannieProfileObj.JobStatusType = currentUser.JobStatusType;
+            trannieProfileObj.ProfilePicture=currentUser.ProfilePicture;
             var data = JSON.stringify(trannieProfileObj);
             localStorage.setItem('userSession', data);
             toast('Profile Update Sucessfully');
@@ -839,13 +851,14 @@ function printLicenceList(licencelist) {
                 expiryDate = ""; // clear the expiry date
                 showQualifiedDetails = "display:none"; // hide the qualification oriented things
             } else {
-               /* var ed = new Date(expiryDate);
-                console.warn(ed);
-                var date = ed.getDate() < 10 ? "0" + ed.getDate() : ed.getDate();
-                var month = (parseInt(ed.getMonth()) + 1);
-                var formattedMonth = month < 10 ? "0" + month : month;
-                expiryDate = date + "-" + formattedMonth + "-" + ed.getFullYear();*/
-                expiryDate=formatDate(expiryDate);
+                /* var ed = new Date(expiryDate);
+                 console.warn(ed);
+                 var date = ed.getDate() < 10 ? "0" + ed.getDate() : ed.getDate();
+                 var month = (parseInt(ed.getMonth()) + 1);
+                 var formattedMonth = month < 10 ? "0" + month : month;
+                 expiryDate = date + "-" + formattedMonth + "-" + ed.getFullYear();*/
+
+                expiryDate = expiryDate!=''?formatDate(expiryDate):'';
                 // expiryDate = expiryDate.split("T")[0];
             }
             licenceHtml += '<li onclick="editLicence(' + licencelist[k].Id + ')">';
@@ -888,7 +901,7 @@ function GetEmployeeDetails(id) {
                 var tradeExpList = result.TradeExpList;
                 var licencelist = result.LicenceTicketTypeList;
 
-                console.warn(result.PositionHeldList.length);
+                //console.warn(result.PositionHeldList.length);
                 printPositionList(positionheldslist, tradeExpList, licencelist);
             }
         },
@@ -901,11 +914,40 @@ function GetEmployeeDetails(id) {
 
 
 function deletePosition(id) {
-    var r = confirm('Are you sure');
-    if (r) {
+    // var r = confirm('Are you sure');
+    navigator.notification.confirm(
+        'Are you sure you want to delete this Position?', // message
+        function(buttonIndex) {
+            if (buttonIndex == 1) {
+                showWait();
+
+                var id = parseInt(localStorage.selectedPosition);
+                var url = serviceUrl + "Account/DeleteUserPositionHeld/";
+                $.ajax({
+                    type: 'POST',
+                    url: url + id,
+                    data: {},
+                    success: function(response) {
+                        hideWait();
+                        if (response.IsSuccessful) {
+
+                            toast('Position Deleted Successfully');
+                            triggerEmployeedetails();
+                        }
+                    },
+                    error: function() {
+                        hideWait();
+                        toast('Network Error');
+                    }
+                });
+            }
+        }, // callback to invoke with index of button pressed
+        'Dowells', // title
+        ['Delete', 'Cancel'] // buttonLabels
+    );
+    /*if (r) {
         showWait();
-        /*var obj = {};
-        obj.id = parseInt(id);*/
+
         var id = parseInt(localStorage.selectedPosition);
         var url = serviceUrl + "Account/DeleteUserPositionHeld/";
         $.ajax({
@@ -925,7 +967,7 @@ function deletePosition(id) {
                 toast('Network Error');
             }
         });
-    }
+    }*/
 }
 
 function triggerEmployeedetails() {
@@ -939,11 +981,37 @@ function triggerEmployeedetails() {
 
 
 function deleteLicence(id) {
-    var r = confirm('Are you sure');
-    if (r) {
+    // var r = confirm('Are you sure');
+    navigator.notification.confirm(
+        'Are you sure you want to delete this Licence?', // message
+        function(buttonIndex) {
+            if (buttonIndex == 1) {
+                showWait();
+                var id = parseInt(localStorage.selectedTicket);
+                var url = serviceUrl + "Account/DeleteUserLicenceTicketType/";
+                $.ajax({
+                    type: 'POST',
+                    url: url + id,
+                    data: {},
+                    success: function(response) {
+                        hideWait();
+                        if (response.IsSuccessful) {
+                            toast('Licence Ticket Type Deleted Successfully');
+                            triggerEmployeedetails();
+                        }
+                    },
+                    error: function() {
+                        hideWait();
+                        toast('Network Error');
+                    }
+                });
+            }
+        }, // callback to invoke with index of button pressed
+        'Dowells', // title
+        ['Delete', 'Cancel'] // buttonLabels
+    );
+    /*if (r) {
         showWait();
-        /* var obj = {};
-         obj.id = parseInt(id);*/
         var id = parseInt(localStorage.selectedTicket);
         var url = serviceUrl + "Account/DeleteUserLicenceTicketType/";
         $.ajax({
@@ -962,16 +1030,45 @@ function deleteLicence(id) {
                 toast('Network Error');
             }
         });
-    }
+    }*/
 
 }
 
 function deleteTrade(id) {
-    var r = confirm('Are you sure');
-    if (r) {
+    // var r = confirm('Are you sure');
+    navigator.notification.confirm(
+        'Are you sure you want to delete this Trade?', // message
+        function(buttonIndex) {
+            if (buttonIndex == 1) {
+                showWait();
+
+                var id = parseInt(localStorage.selectedTradeID);
+                var url = serviceUrl + "Account/DeleteUserTradeExp/";
+                $.ajax({
+                    type: "POST",
+                    url: url + id,
+                    data: {},
+                    success: function(response) {
+                        hideWait();
+                        if (response.IsSuccessful) {
+
+                            toast('Trade Exp Deleted Successfully');
+                            triggerEmployeedetails();
+                        }
+                    },
+                    error: function() {
+                        hideWait();
+                        toast('Network Error');
+                    }
+                });
+            }
+        }, // callback to invoke with index of button pressed
+        'Dowells', // title
+        ['Delete', 'Cancel'] // buttonLabels
+    );
+    /*if (r) {
         showWait();
-        /*var obj = {};
-        obj.id = parseInt(id);*/
+        
         var id = parseInt(localStorage.selectedTradeID);
         var url = serviceUrl + "Account/DeleteUserTradeExp/";
         $.ajax({
@@ -991,13 +1088,13 @@ function deleteTrade(id) {
                 toast('Network Error');
             }
         });
-    }
+    }*/
 }
 
 $("input[name='LicencePosition']").on("click", function() {
     $("#dvLicence .exp").show();
-    $("#txtExperience").val("");
-    $("#txtNumberlLicence").val("");
+    // $("#txtExperience").val("");
+    // $("#txtNumberlLicence").val("");
     console.warn($(this).val());
     if ($(this).val() == "2") {
         $("#dvLicence .num").show();
@@ -1039,13 +1136,13 @@ function SaveLicence() {
         obj.Name = $("#ddlLicenceText").val();
         obj.Experience = $("#txtExperience").val();
         obj.LicenceNumber = $("#txtNumberlLicence").val();
-        obj.LicenceExpiry = $("#txtLicenceExpiry").val();
+        obj.LicenceExpiry = convertUIDateToDb(($("#txtLicenceExpiry").mobiscroll('getVal')));
         obj.LicenceType = $("#licenceTypeh").text(); // Licence type
         obj.UserCertificationTypeId = $("input[name=LicencePosition]:checked").val(); //radio button value;
         //obj = JSON.stringify(obj);
-        if (obj.UserCertificationTypeId == "1")
+        if (obj.UserCertificationTypeId == "2")
             obj.UserCertificationTypeName = "Experienced"; // Experienced
-        else if (obj.UserCertificationTypeId == "2")
+        else if (obj.UserCertificationTypeId == "1")
             obj.UserCertificationTypeName = "Qualified"; // Qualified
         else {
             obj.UserCertificationTypeName = "Qualified";
@@ -1089,9 +1186,9 @@ function SaveTrade() {
         obj.Experience = $("#txtExpTrade").val();
         obj.QualificationNumber = $("#txtQualTrade").val();
         obj.UserCertificationTypeId = $("input[name=TradeExpPosition]:checked").val() || ""; //radio button value;
-        if (obj.UserCertificationTypeId == "1")
+        if (obj.UserCertificationTypeId == "2")
             obj.UserCertificationTypeName = "Experienced"; // Experienced
-        else if (obj.UserCertificationTypeId == "2")
+        else if (obj.UserCertificationTypeId == "1")
             obj.UserCertificationTypeName = "Qualified"; // Qualified
         else {
             obj.UserCertificationTypeName = "Qualified";
@@ -1135,9 +1232,9 @@ function SavePosition() {
         obj.Experience = $("#txtExpPosition").val();
         obj.QualificationNumber = $("#txtQualPosition").val();
         obj.UserCertificationTypeId = $("input[name=CertifiedTypePosition]:checked").val(); //radio button value;
-        if (obj.UserCertificationTypeId == "1")
+        if (obj.UserCertificationTypeId == "2")
             obj.UserCertificationTypeName = "Experienced"; // Experienced
-        else if (obj.UserCertificationTypeId == "2")
+        else if (obj.UserCertificationTypeId == "1")
             obj.UserCertificationTypeName = "Qualified"; // Qualified
         else {
             obj.UserCertificationTypeName = "Qualified";
@@ -1168,7 +1265,7 @@ function AddUserPositionHeld(obj) {
             hideWait();
             if (response.IsSuccessful) {
 
-                toast('Position Added Successfully');
+                toast('Position Updated Successfully');
                 // Reset the fields
                 $("#ddlPositionHeld").val("0").change(); // make the select value 0
                 $("#txtQualPosition,#txtExpPosition").val("");
@@ -1200,7 +1297,7 @@ function AddUserTradeExp(obj) {
                     $("#hdnTradeId").val(parseInt(localStorage.utradeIDSaved) + 1);
                 } else
                     $("#hdnTradeId").val(parseInt($("#hdnTradeId").val()) + 1);
-                toast('Trade Added Successfully');
+                toast('Trade Updated Successfully');
                 // Reset the fields
                 $("#ddlTradeExp").val("0").change(); // make the select value 0
                 $("#txtQualTrade,#txtExpTrade").val("");
@@ -1232,7 +1329,7 @@ function AddUserLicenceTicketType(obj) {
                     $("#hdnLicenceTypeId").val(parseInt(localStorage.ulicenceIDSaved) + 1);
                 } else
                     $("#hdnLicenceTypeId").val(parseInt($("#hdnLicenceTypeId").val()) + 1);
-                toast('Licence Added Successfully');
+                toast('Licence Updated Successfully');
                 // Reset the fields
                 $("#ddlLicence").val("0").change(); // make the select value 0
                 $("#txtNumberlLicence,#txtLicenceExpiry,#txtExperience").val("");
@@ -1303,12 +1400,12 @@ function editLicence(id) {
                 $("#dvLicence .container").show();
                 $("#dvLicence .exp").show();
                 $("#expLicence,#qualLicence").attr("checked", false).checkboxradio().checkboxradio("refresh"); // uncheck the previously selected values
-                if (response.Result.LicenceTicketTypeId == "1") {
+                if (response.Result.UserCertificationTypeId == "2") {
                     $("#expLicence").attr("checked", true).checkboxradio().checkboxradio("refresh");
                     $("#expLicence").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
                     $("#dvLicence .num").hide();
                 } else {
-                    if (response.Result.LicenceTicketTypeId == "2") {
+                    if (response.Result.UserCertificationTypeId == "1") {
                         $("#qualLicence").attr("checked", true).checkboxradio().checkboxradio("refresh");
                         $("#qualLicence").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
                         $("#dvLicence .num").show();
@@ -1374,12 +1471,12 @@ function editPosition(id) {
                 $("#dvPosition .container").show();
                 $("#dvPosition .exp").show();
                 $("#expPosition,#qualPosition").attr("checked", false).checkboxradio().checkboxradio("refresh");
-                if (response.Result.UserCertificationTypeId == "1") {
+                if (response.Result.UserCertificationTypeId == "2") {
                     $("#expPosition").attr("checked", true).checkboxradio().checkboxradio("refresh");
                     $("#expPosition").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
                     $("#dvPosition .num").hide();
                 } else {
-                    if (response.Result.UserCertificationTypeId == "2") {
+                    if (response.Result.UserCertificationTypeId == "1") {
                         $("#qualPosition").attr("checked", true).checkboxradio().checkboxradio("refresh");
                         $("#qualPosition").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
                         $("#dvPosition .num").show();
@@ -1448,14 +1545,14 @@ function editTrade(id) {
                 $("#dvTrade .exp").show();
                 $("#expTrade,#qualTrade").attr("checked", false).checkboxradio().checkboxradio("refresh");
                 if (response.Result.UserCertificationTypeId == "1") {
-                    console.warn("Experienced profile");
+                    //console.warn("Experienced profile");
                     $("#expTrade").attr("checked", true).checkboxradio().checkboxradio("refresh");
                     $("#expTrade").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
                     $("#dvTrade .num").hide();
                 } else {
 
                     if (response.Result.UserCertificationTypeId == "2") {
-                        console.warn("Qualified profile");
+                        //console.warn("Qualified profile");
                         $("#qualTrade").attr("checked", true).checkboxradio().checkboxradio("refresh");
                         $("#qualTrade").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
                         $("#dvTrade .num").show();

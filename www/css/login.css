@@ -60,9 +60,9 @@ body {
     width: 90%;
 }
 
-.btnSection .col-xs-offset-3 {
-    margin-left: 13%;
-}
+    .btnSection .col-xs-offset-3 {
+        margin-left: 13%;
+    }
 
 .padding {
     padding-top: 60px;
@@ -135,19 +135,19 @@ body {
     margin-top: 15%;
 }
 
-.windowBlck h3 {
-    text-align: center;
-    color: white;
-    font-weight: 100;
-    margin-top: -15px !important;
-}
+    .windowBlck h3 {
+        text-align: center;
+        color: white;
+        font-weight: 100;
+        margin-top: -15px !important;
+    }
 
-.windowBlck i {
-    color: white;
-    font-size: 22px;
-    position: relative;
-    top: 0.5em;
-}
+    .windowBlck i {
+        color: white;
+        font-size: 22px;
+        position: relative;
+        top: 0.5em;
+    }
 
 .ui-body-a,
 .ui-page-theme-a .ui-body-inherit,
@@ -165,9 +165,9 @@ html .ui-panel-page-container-a {
     margin-top: 20px;
 }
 
-.divskip a {
-    color: white !important;
-}
+    .divskip a {
+        color: white !important;
+    }
 
 .ui-overlay-a,
 .ui-page-theme-a,

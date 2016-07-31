@@ -268,8 +268,9 @@
                     , data: obj
                     , async: false
                     , success: function (result) {
+                        $("#currentJob").hide();
                         if (result.IsSuccessful) {
-                            if (result.Result) {
+                            if (result.Result.IsAccepted == null) {
                                 var resultObj = result.Result;
                                 //$("#spnCompany").html(resultObj.BusinessName);
                                 //$("#spnJobNumber").html(resultObj.Number);
@@ -282,6 +283,7 @@
                                 $("#spnDesc").html(resultObj.Name);
                                 $("#spnContract").html(resultObj.ContractType);
                                 $("#hdnUserJobHistoryId").val(resultObj.UserSchedulingID);
+                                $("#currentJob").show();
                                 if (resultObj.IsAccepted == null) {
                                     $(".statusButton").show();
                                     $("#curStatus").html('PENDING JOB');

@@ -17,7 +17,7 @@ function timeToNowGMT(value) {
     if (hours >= 24) hours = hours - 24;
     var sHours = hours.toString();
     var sMinutes = minutes.toString();
-    console.warn("hours:" + hours + "minutes:" + minutes + "sHours:" + sHours + "sMinutes:" + sMinutes);
+    //console.warn("hours:" + hours + "minutes:" + minutes + "sHours:" + sHours + "sMinutes:" + sMinutes);
     if (hours < 10) sHours = "0" + sHours;
     if (minutes < 10) sMinutes = "0" + sMinutes;
     return (sHours + ":" + sMinutes + ":00");
@@ -39,7 +39,7 @@ function saveLNPref() {
     var month = ("0" + (now.getMonth() + 1)).slice(-2)
     var dateSplit = now.getFullYear() + '-' + month + '-' + day + " " + time; //'T' + n_format_time;
     var notificationTime = new Date((dateSplit).replace(/-/g, "/")).getTime(); // new Date(dateSplit).toUTCString();
-    console.warn($("#txtTime").val() + "" + notificationTime);
+    //console.warn($("#txtTime").val() + "" + notificationTime);
     var notiSetObj = {};
     notiSetObj.notificationTime = $("#txtTime").val();
     notiSetObj.frequency = $("#frequencySelect").val();
@@ -66,9 +66,10 @@ function saveLNPref() {
         every: $("#frequencySelect").val(),
         at: new Date(notificationTime)
 
-    }, function() { console.warn("configured local notification") });
+    }, function () { //console.warn("configured local notification") 
+    });
     cordova.plugins.notification.local.on("schedule", function(notification) {
-        console.log("scheduled: " + notification.id);
+        //console.log("scheduled: " + notification.id);
         toast("Saved settings");
     });
 }

@@ -66,10 +66,8 @@
     overflow: hidden;
     position: relative;
     /* Forces IE to respect overflow hidden while animating */
-    
     border-radius: 1px;
     /* Fixes Firefox rendering issues */
-    
     border-top: 1px solid transparent;
     border-bottom: 1px solid transparent;
 }
@@ -99,18 +97,18 @@
     -moz-transition: opacity .2s ease-out;
     transition: opacity .2s ease-out;
 }
-/* Valid entry */
+    /* Valid entry */
 
-.dw-li.dw-v,
-.dw-li.dw-fv {
-    opacity: 1;
-    filter: Alpha(Opacity=100);
-}
-/* Hidden entry */
+    .dw-li.dw-v,
+    .dw-li.dw-fv {
+        opacity: 1;
+        filter: Alpha(Opacity=100);
+    }
+    /* Hidden entry */
 
-.dw-li.dw-h {
-    visibility: hidden;
-}
+    .dw-li.dw-h {
+        visibility: hidden;
+    }
 
 .dw-i {
     position: relative;
@@ -200,13 +198,13 @@
     overflow: hidden;
 }
 
-.dw-ml .dw-li .dw-i {
-    width: 100%;
-    height: auto;
-    display: inline-block;
-    vertical-align: middle;
-    white-space: normal;
-}
+    .dw-ml .dw-li .dw-i {
+        width: 100%;
+        height: auto;
+        display: inline-block;
+        vertical-align: middle;
+        white-space: normal;
+    }
 /* Multiple selection */
 
 .dwwms .dw-li {

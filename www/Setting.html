@@ -14,14 +14,12 @@
     <link rel="stylesheet" href="css/common.css" />
     <script type="text/javascript" src="cordova.js"></script>
     <style>
-        .setting
-        {
+        .setting {
             background-color: #ffffff !important;
             padding-top: 10px !important;
         }
-        
-        .ui-input-text::after, .ui-input-search::after
-        {
+
+        .ui-input-text::after, .ui-input-search::after {
             width: 90% !important;
         }
     </style>
@@ -33,56 +31,51 @@
             <h1>
                 Setting
             </h1>
-            <a href="#leftpanel" class="ui-btn ui-btn-left"><i class="zmdi zmd-1x zmdi-menu"></i>
+            <a href="#leftpanel" class="ui-btn ui-btn-left">
+                <i class="zmdi zmd-1x zmdi-menu"></i>
             </a>
         </div>
         <div role="main" class="ui-content wow fadeIn setting" data-inset="false" data-wow-delay="0.2s">
-            <!-- <form id="form_UpdateUser">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="box">
-                        <br />
-                        <label for="txtFirstName">
-                            Do not disturb me untill
-                        </label>
-                        <input type="text" id="txtDate" name="txtDate" placeholder="Date" />
-                        <input type="text" id="txtTime" name="txtTime" placeholder="Time" />
-                    </div>
-                    <a href="" onclick="setTime();" class="ui-btn ui-btn-raised ui-mini clr-primary">Submit
-                    </a>
-                </div>
-            </div>
-            </form> -->
             <div class="nd2-card">
                 <div class="ui-grid-a">
                     <div class="ui-block-a">
                         <strong>
                             <label for="statusCheck" style="margin-top: 14px; margin-left: 5px">
-                                Status Reminder</label></strong></div>
+                                Status Reminder
+                            </label>
+                        </strong>
+                    </div>
                     <div class="ui-block-b">
                         <input type="checkbox" id="statusCheck" data-role="flipswitch" style="float: right !important;">
                     </div>
                 </div>
-            </div>
-            <div class="nd2-card" id="statusBlock" style="display: none;">
-                <b>
-                    <label>
-                        Remind me to update my status:</label></b>
-                <label>
-                    Time of Day</label>
-                <input type="text" id="txtTime">
-                <label>
-                    Frequency</label>
-                <select id="frequencySelect">
-                    <option value="0">PLEASE SELECT</option>
-                    <option value="day">Daily</option>
-                    <option value="week">Weekly</option>
-                </select>
-                <input type="button" value="Save" onclick="saveLNPref()">
+                <div id="statusBlock" class="ui-grid-a" style="display: none;">
+                    <div>
+                        <b>
+                            <p style="padding-left:2px;">
+                                Remind me to update my status:
+                            </p>
+                        </b>
+                        <p>
+                            Time of Day
+                        </p>
+                        <input type="text" id="txtTime" />
+                        <p>
+                            Frequency
+                        </p>
+                        <select id="frequencySelect">
+                            <option value="0">PLEASE SELECT</option>
+                            <option value="day">Daily</option>
+                            <option value="week">Weekly</option>
+                        </select>
+                        <center>
+                        <a href="#"  onclick="saveLNPref()" class="ui-btn ui-btn-raised clr-primary">
+                        Save</a></center>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
     <script src="js/common.js" type="text/javascript"></script>
     <script src="js/settings.js" type="text/javascript"></script>
     <!--   Date Picker and Time picker files Start-->

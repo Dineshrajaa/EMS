@@ -343,11 +343,11 @@ div[data-role="content"] {
 }
 
 
-/* iOS specific fix, don't use it on Android devices */
+    /* iOS specific fix, don't use it on Android devices */
 
-.scrollable > * {
-    -webkit-transform: translateZ(0);
-}
+    .scrollable > * {
+        -webkit-transform: translateZ(0);
+    }
 
 .available {
     color: #1aae88;

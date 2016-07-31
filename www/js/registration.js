@@ -91,6 +91,12 @@ function validateRegisterFields(fieldClass, nextpageId) {
         }
     });
     if (isValid) {
+        if($("#txtPin").val()!=$("#txtCPin").val()){
+            $("#spnError").html("Pin and confirm pin does not match");
+            return;
+        }else{
+            $("#spnError").html("");
+        }
         if (nextpageId !== "lastpage")
             RegisterUser(nextpageId);
         //navigatePage(nextpageId);
@@ -912,6 +918,7 @@ function SaveLicence() {
         obj.Experience = $("#txtExperience").val();
         obj.LicenceNumber = $("#txtNumberlLicence").val();
         obj.LicenceExpiry = $("#txtLicenceExpiry").val();
+        obj.ExpiryDate=formatDate($("#txtLicenceExpiry").mobiscroll('getVal'), '/');
         obj.LicenceType = $("#licenceTypeh").text(); // Licence type
         obj.UserCertificationTypeId = $("input[name=LicencePosition]:checked").val(); //radio button value;
         if (obj.UserCertificationTypeId == "2")

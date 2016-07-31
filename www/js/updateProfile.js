@@ -262,24 +262,24 @@ $(document).on("ready", function() {
     });*/
     $("input[name='TradeExpPosition']").on("click", function() {
         $("#dvTrade .exp").show();
-        $("#txtExpTrade").val("");
-        $("#txtQualTrade").val("");
+        // $("#txtExpTrade").val("");
+        // $("#txtQualTrade").val("");
         //console.warn($(this).val());
-        if ($(this).val() == "2") {
+        if ($(this).val() == "1") {
             $("#dvTrade .num").show();
-        } else if ($(this).val() == "1") {
+        } else if ($(this).val() == "2") {
             $("#dvTrade .num").hide();
         }
 
     });
     $("input[name='CertifiedTypePosition']").on("click", function() {
         $("#dvPosition .exp").show();
-        $("#txtExpPosition").val("");
-        $("#txtQualPosition").val("");
+        // $("#txtExpPosition").val("");
+        // $("#txtQualPosition").val("");
         //console.warn($(this).val());
-        if ($(this).val() == "2") {
+        if ($(this).val() == "1") {
             $("#dvPosition .num").show();
-        } else if ($(this).val() == "1") {
+        } else if ($(this).val() == "2") {
             $("#dvPosition .num").hide();
         }
 

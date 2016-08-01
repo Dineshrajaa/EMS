@@ -407,6 +407,7 @@
                  $("#declineDialog").bind({
                 popupafterclose: function (event, ui) {
                     localStorage.declineJob='true';
+                    localStorage.declineReason=$("#declineReason").val();
                     $("#availabilityDialog").popup("open");
                 }
             });
@@ -434,12 +435,13 @@
             var jsonObj = new Object();
             jsonObj.userJobHistoryId = $("#hdnUserJobHistoryId").val();
             jsonObj.isAccepted = status;
-            if (status == true || status == "true") {
+            jsonObj.declinedReason=localStorage.declineReason||"";
+            /*if (status == true || status == "true") {
                 jsonObj.declinedReason = $("#declineReason").val();
             }
             else {
                 jsonObj.declinedReason = '';
-            }
+            }*/
             jsonObj.statusId = statusId||currentUser.JobStatusType;
             $.ajax({
                 type: "GET"
@@ -598,6 +600,7 @@
             });
         }
         localStorage.finishJob=localStorage.declineJob = false;
+        localStorage.declineReason="";
 
     </script>
 </body>

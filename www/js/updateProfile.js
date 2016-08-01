@@ -172,10 +172,10 @@ $(document).on("ready", function() {
     }
 
 
-
-    getActiveLicenceType(0);
+    getActiveLTP(); // Fetch Documents
+    /*getActiveLicenceType(0);
     getActiveTradeExp(0);
-    getActivePositionHeld(0);
+    getActivePositionHeld(0);*/
 
     $(document).on("change", "#ddlLicence", function() {
         var val = $(this).val();
@@ -341,9 +341,9 @@ function fetchProfileDetail(userId) {
                 $("#lblEnmployeeNumber").html(employeeObj.EmployeeNumber);
                 $("#txtMiddleName").val(employeeObj.MiddleName);
                 $("#txtLastName").val(employeeObj.LastName);
-                $("#txtDob").val(new Date(employeeObj.DateOfBirth).getFormattedDateInddMMYY());
+                // $("#txtDob").val(new Date(employeeObj.DateOfBirth).getFormattedDateInddMMYY());
                 // $("#txtDob").val(formatDate(employeeObj.DateOfBirth));
-               /* $("#txtDob").mobiscroll().date({
+                $("#txtDob").mobiscroll().date({
                     lang: 'en',
                     theme: 'android-holo-light',
                     display: 'bubble',
@@ -352,7 +352,18 @@ function fetchProfileDetail(userId) {
                     dateFormat: 'dd/mm/yyyy',
                     mode: 'scroller',
                     maxDate: new Date(2050, 12, 31)
-                }).setVal(employeeObj.DateOfBirth, true);*/
+                });
+                $("#txtDob").mobiscroll('setValue', new Date(employeeObj.DateOfBirth), true);
+                /*$("#txtDob").mobiscroll().date({
+                    lang: 'en',
+                    theme: 'android-holo-light',
+                    display: 'bubble',
+                    display: 'bottom',
+                    dateOrder: 'ddMMyy',
+                    dateFormat: 'dd/mm/yyyy',
+                    mode: 'scroller',
+                    maxDate: new Date(2050, 12, 31)
+                }).setVal(new Date(employeeObj.DateOfBirth), true);*/
                 $("#lblDob").html(new Date(employeeObj.DateOfBirth).getFormattedDateInddMMYY());
                 if (employeeObj.IsPaySlipSent)
                     $("#lblElePayslips").text("Yes");
@@ -464,6 +475,7 @@ function UpdateUser() {
     trannieProfileObj.MiddleName = middleName;
     trannieProfileObj.LastName = lastName;
     trannieProfileObj.DateOfBirth = dob;
+    trannieProfileObj.DOB = dob;
     trannieProfileObj.StreetAddress = streetAddress;
     trannieProfileObj.City = city;
     trannieProfileObj.State = state;
@@ -492,7 +504,7 @@ function updateProfile(trannieProfileObj) {
 
             var currentUser = JSON.parse(currentUserObj);
             trannieProfileObj.JobStatusType = currentUser.JobStatusType;
-            trannieProfileObj.ProfilePicture=currentUser.ProfilePicture;
+            trannieProfileObj.ProfilePicture = currentUser.ProfilePicture;
             var data = JSON.stringify(trannieProfileObj);
             localStorage.setItem('userSession', data);
             toast('Profile Update Sucessfully');
@@ -635,6 +647,68 @@ function getLicenceTypDetail(id) {
                 }
 
 
+            }
+        },
+        error: function() {
+            hideWait();
+            toast('Network Error');
+        }
+    });
+}
+
+function getActiveLTP() {
+    // Method to get all the active Licence,Trade,Positions
+    showWait();
+    var url = serviceUrl + "Account/GetCertifications";
+    $.ajax({
+        type: 'GET',
+        url: url,
+        data: '',
+        success: function(response) {
+            hideWait();
+            console.warn("response:" + JSON.stringify(response));
+            if (response.IsSuccessful) {
+                var res = response.Result;
+                $("#ddlLicence,#ddlPositionHeld,#ddlTradeExp").html("");
+                if (res.LicenceTickets) {
+                    var result = res.LicenceTickets;
+                    var ticketOptions='<option value="0" selected>Please Select</option>';
+                    for (var i = 0; i < result.length; i++) {
+                        ticketOptions += '<option value=' + result[i].ID + '>' + result[i].Name + '</option>';
+
+                    }
+                    $("#ddlLicence").append(ticketOptions);
+                }
+                if (res.PositionHelds) {
+                    var result = res.PositionHelds;
+                    var positionOptions='<option value="0" selected>Please Select</option>';
+                    for (var i = 0; i < result.length; i++) {
+                        positionOptions += '<option value=' + result[i].ID + '>' + result[i].Name + '</option>';
+
+                    }
+                    $("#ddlPositionHeld").append(positionOptions);
+                }
+                if (res.TradeExperiences) {
+                    var result = res.TradeExperiences;
+                    var tradeOptions='<option value="0" selected>Please Select</option>';
+                    for (var i = 0; i < result.length; i++) {
+                        tradeOptions += '<option value=' + result[i].ID + '>' + result[i].Name + '</option>';
+
+                    }
+                    $("#ddlTradeExp").append(tradeOptions);
+                }
+                /*$("#ddlTradeExp").html("");
+                var options = '<option value="0">SELECT TRADE</option>';
+                var result = response.Result;
+                for (var i = 0; i < result.length; i++) {
+                    if (result[i].ID === id) {
+                        options += '<option value=' + result[i].ID + ' selected="selected">' + result[i].Name + '</option>';
+                        $("#ddlTradeExp").prev().text(result[i].Name);
+                    } else {
+                        options += '<option value=' + result[i].ID + '>' + result[i].Name + '</option>';
+                    }
+                }
+                $("#ddlTradeExp").append(options);*/
             }
         },
         error: function() {
@@ -858,7 +932,7 @@ function printLicenceList(licencelist) {
                  var formattedMonth = month < 10 ? "0" + month : month;
                  expiryDate = date + "-" + formattedMonth + "-" + ed.getFullYear();*/
 
-                expiryDate = expiryDate!=''?formatDate(expiryDate):'';
+                expiryDate = expiryDate != '' ? formatDate(expiryDate) : '';
                 // expiryDate = expiryDate.split("T")[0];
             }
             licenceHtml += '<li onclick="editLicence(' + licencelist[k].Id + ')">';
@@ -1096,10 +1170,10 @@ $("input[name='LicencePosition']").on("click", function() {
     // $("#txtExperience").val("");
     // $("#txtNumberlLicence").val("");
     console.warn($(this).val());
-    if ($(this).val() == "2") {
+    if ($(this).val() == "1") {
         $("#dvLicence .num").show();
         $("#dvLicence .exp").show();
-    } else if ($(this).val() == "1") {
+    } else if ($(this).val() == "2") {
         $("#dvLicence .exp").show();
         $("#dvLicence .num").hide();
     }
@@ -1137,6 +1211,7 @@ function SaveLicence() {
         obj.Experience = $("#txtExperience").val();
         obj.LicenceNumber = $("#txtNumberlLicence").val();
         obj.LicenceExpiry = convertUIDateToDb(($("#txtLicenceExpiry").mobiscroll('getVal')));
+        obj.ExpiryDate = formatDate($("#txtLicenceExpiry").mobiscroll('getVal'), '/');
         obj.LicenceType = $("#licenceTypeh").text(); // Licence type
         obj.UserCertificationTypeId = $("input[name=LicencePosition]:checked").val(); //radio button value;
         //obj = JSON.stringify(obj);

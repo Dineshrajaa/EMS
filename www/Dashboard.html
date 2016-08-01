@@ -15,71 +15,70 @@
     <link rel="stylesheet" href="css/themeContainer.css" />
     <link rel="stylesheet" href="css/common.css" />
     <style type="text/css">
-        .ui-input-text::after,
-        .ui-input-search::after {
-            width: 80% !important;
-        }
-        
-        .table-stroke tbody td {
-            border-bottom: 0px;
-        }
-        
-        .pending {
-            background-color: #8AD3F4;
-            color: black;
-            font-size: 19px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            margin-left: -21px;
-            margin-right: -21px;
-        }
-        
-        .notAvailable {
-            background-color: #FF7B7C;
-            color: black;
-            font-size: 19px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            margin-left: -21px;
-            margin-right: -21px;
-        }
-        
-        .working {
-            background-color: #A6E8AA;
-            color: black;
-            font-size: 19px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            margin-left: -21px;
-            margin-right: -21px;
-        }
-        
-        .available {
-            background-color: #FFFFBB;
-            color: black;
-            font-size: 19px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            margin-left: -21px;
-            margin-right: -21px;
-        }
-        
-        p {
-            text-align: center;
-        }
-        .ui-flipswitch 
-        {
-            border-radius: 14px !important;
-            
-        }
-        .flip-text-on
-        {
-            color:#4CD864
-}
-         .flip-text-off
-        {
-            color:#FF0000
-}
+    .ui-input-text::after,
+    .ui-input-search::after {
+        width: 80% !important;
+    }
+    
+    .table-stroke tbody td {
+        border-bottom: 0px;
+    }
+    
+    .pending {
+        background-color: #8AD3F4;
+        color: black;
+        font-size: 19px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-left: -21px;
+        margin-right: -21px;
+    }
+    
+    .notAvailable {
+        background-color: #FF7B7C;
+        color: black;
+        font-size: 19px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-left: -21px;
+        margin-right: -21px;
+    }
+    
+    .working {
+        background-color: #A6E8AA;
+        color: black;
+        font-size: 19px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-left: -21px;
+        margin-right: -21px;
+    }
+    
+    .available {
+        background-color: #FFFFBB;
+        color: black;
+        font-size: 19px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-left: -21px;
+        margin-right: -21px;
+    }
+    
+    p {
+        text-align: center;
+    }
+    
+    .ui-flipswitch {
+        border-radius: 14px !important;
+    }
+    
+    .flip-text-on {
+        color: #4CD864
+    }
+    
+    .flip-text-off {
+        color: #FF0000
+    }
     </style>
 </head>
 
@@ -177,11 +176,8 @@
                         <option value="off"></option>
                         <option value="on"></option>
                     </select>
-                       <br/>
-                     <span id="flip_yes" style='display:none;' class="flip-text-on">YES</span>
-                    <span id="flip_no" class="flip-text-off">NO</span>
-                   
-                    <br /> <a style="background: #f2f2f2;" class="popupButton" data-theme="a" data-inline="true" data-role="button" href="#" data-corners="true" data-rel="back">Cancel</a> <a style="background: #3498db;" class="popupButton" data-theme="a" data-inline="true" onclick="setAvailability()" data-role="button" href="#" data-corners="true">Submit</a>
+                    <br/> <span id="flip_yes" style='display:none;' class="flip-text-on">YES</span> <span id="flip_no" class="flip-text-off">NO</span>
+                    <br /> <a style="background: #f2f2f2; color:#000 !important" class="popupButton" data-theme="a" data-inline="true" data-role="button" href="#" data-corners="true" data-rel="back" onclick="cancelInduction()">Cancel</a> <a style="background: #3498db;" class="popupButton" data-theme="a" data-inline="true" onclick="setAvailability()" data-role="button" href="#" data-corners="true">Submit</a>
                     <br /> </div>
             </div>
             <!-- Availability Dialog-->
@@ -195,9 +191,7 @@
                         <option value="3"></option>
                         <option value="2"></option>
                     </select>
-                    <br/>
-                     <span id="flip_a" style='display:none;' class="flip-text-on">AVAILABLE</span>
-                    <span id="flip_na" class="flip-text-off">NOT AVAILABLE</span>
+                    <br/> <span id="flip_a" style='display:none;' class="flip-text-on">AVAILABLE</span> <span id="flip_na" class="flip-text-off">NOT AVAILABLE</span>
                     <br /> <a class="popupButton ui-btn ui-btn-raised clr-primary" data-theme="a" data-inline="true" onclick="updateWorkStatus()" data-role="button" href="#" data-corners="true">OK</a>
                     <br /> </div>
             </div>
@@ -205,9 +199,9 @@
     </div>
     <script src="js/common.js" type="text/javascript"></script>
     <script type="text/javascript">
-        $("#pgdashboard").ready(function () {
-            fillProfilePicture();
-        });
+    $("#pgdashboard").ready(function() {
+        fillProfilePicture();
+    });
     </script>
     <link href="css/mobiscroll.frame.css" rel="stylesheet" type="text/css" />
     <link href="css/mobiscroll.frame.android-holo.css" rel="stylesheet" type="text/css" />
@@ -223,363 +217,346 @@
     <script src="js/mobiscroll.android-holo-light.js" type="text/javascript"></script>
     <!--   Date Picker and Time picker files End-->
     <script type="text/javascript">
-        var selectedValue = 0;
-        $(document).on("ready", function () {
-            $( ".statusSwitch" ).bind( "change", function(event, ui) {
-              var selectedStatus = $("#flipAvailability").val();
-               
-                if(selectedStatus == '2'){
-                    $("#flip_a").show();
-                        $("#flip_na").hide();
-                    
-                }
-                else{
-                    $("#flip_na").show();
-                        $("#flip_a").hide();
-                }
-            });
-             $( ".inductionSwitch" ).bind( "change", function(event, ui) {
-              var selectedStatus = $("#flipInduction").val();
-               
-                if(selectedStatus == 'on'){
-                    $("#flip_yes").show();
-                        $("#flip_no").hide();
-                    
-                }
-                else{
-                    $("#flip_no").show();
-                        $("#flip_yes").hide();
-                }
-            });
-            
-            var currentUserObj = localStorage.getItem('userSession');
-            $("#divStatusChange").hide();
-            $(".finishJob").hide();
-            $("#currentJob").hide();
-            if (currentUserObj && currentUserObj != 'undefined') {
-                var currentUser = JSON.parse(currentUserObj);
-                var url = serviceUrl + "Account/GetUserPendingJob";
-                var obj = {};
-                obj.userId = parseInt(currentUser.ID);
-                showWait();
-                $.ajax({
-                    type: "GET"
-                    , url: url
-                    , data: obj
-                    , async: false
-                    , success: function (result) {
-                        $("#currentJob").hide();
-                        if (result.IsSuccessful) {
-                            if (result.Result.IsAccepted == null) {
-                                var resultObj = result.Result;
-                                //$("#spnCompany").html(resultObj.BusinessName);
-                                //$("#spnJobNumber").html(resultObj.Number);
-                                $("#spnClient").html(resultObj.ClientName);
-                                $("#spnProject").html(resultObj.ProjectName);
-                                $("#spnProjAddress").html(resultObj.ProjectAddress);
-                                //$("#spnTrade").html(resultObj.TradeClassification);
-                                $("#spnStartDate").html(resultObj.StartDate);
-                                $("#spnMessage").html(resultObj.Message);
-                                $("#spnDesc").html(resultObj.Name);
-                                $("#spnContract").html(resultObj.ContractType);
-                                $("#hdnUserJobHistoryId").val(resultObj.UserSchedulingID);
-                                $("#currentJob").show();
-                                if (resultObj.IsAccepted == null) {
-                                    $(".statusButton").show();
-                                    $("#curStatus").html('PENDING JOB');
-                                    $("#curStatus").parent().addClass('pending');
-                                }
-                                else {
-                                    if (resultObj.IsAccepted == false) {
-                                        getStatus();
-                                        //$("#curStatus").html('AVAILABLE');
-                                        //$("#curStatus").parent().addClass('available');
-                                        //$(".checkToNA").show();
-                                        //$(".checkAvailable").hide();
-                                        //$("#divStatusChange").show();
-                                    }
-                                    else {
-                                        $(".statusButton").hide();
-                                        $("#curStatus").html('Working');
-                                        $("#curStatus").parent().addClass('working');
-                                        $(".finishJob").show();
-                                    }
+    var selectedValue = 0;
+    $(document).on("ready", function() {
+        $(".statusSwitch").bind("change", function(event, ui) {
+            var selectedStatus = $("#flipAvailability").val();
+            if (selectedStatus == '2') {
+                $("#flip_a").show();
+                $("#flip_na").hide();
+            } else {
+                $("#flip_na").show();
+                $("#flip_a").hide();
+            }
+        });
+        $(".inductionSwitch").bind("change", function(event, ui) {
+            var selectedStatus = $("#flipInduction").val();
+            if (selectedStatus == 'on') {
+                $("#flip_yes").show();
+                $("#flip_no").hide();
+            } else {
+                $("#flip_no").show();
+                $("#flip_yes").hide();
+            }
+        });
+        var currentUserObj = localStorage.getItem('userSession');
+        $("#divStatusChange").hide();
+        $(".finishJob").hide();
+        $("#currentJob").hide();
+        if (currentUserObj && currentUserObj != 'undefined') {
+            var currentUser = JSON.parse(currentUserObj);
+            var url = serviceUrl + "Account/GetUserPendingJob";
+            var obj = {};
+            obj.userId = parseInt(currentUser.ID);
+            showWait();
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: obj,
+                async: false,
+                success: function(result) {
+                    $("#currentJob").hide();
+                    if (result.IsSuccessful) {
+                        debugger
+                        var resultObj = result.Result;
+                        if (resultObj) {
+                            if (resultObj.IsDeleted == true) {
+                                getStatus();
+                            } else if (resultObj.IsAccepted == null) {
+                                showJobDetails(resultObjresultObj);
+                                $(".statusButton").show();
+                                $("#curStatus").html('PENDING JOB');
+                                $("#curStatus").parent().addClass('pending');
+                            } else if (result.Result.IsAccepted == true) {
+                                $(".statusButton").hide();
+                                $("#curStatus").html('WORKING');
+                                $("#curStatus").parent().addClass('working');
+                                $(".finishJob").show();
+                                showJobDetails(resultObj);
+                            } else {
+                                if (resultObj.IsAccepted == false) {
+                                    getStatus();
+                                } else {
+                                    $(".statusButton").hide();
+                                    $("#curStatus").html('WORKING');
+                                    $("#curStatus").parent().addClass('working');
+                                    $(".finishJob").show();
                                 }
                             }
                         }
-                        else {
-                            //$("#currentJob").html("");
-                            //$("#currentJob").append("<h4>There are no current jobs</h4>");
-                            $("#divStatusChange").show();
-                            $("#curStatus").html('AVAILABLE');
-                            $("#curStatus").parent().addClass('working');
-                            $(".checkToNA").show();
-                            $(".checkAvailable").hide();
-                        }
-                        hideWait();
+                    } else {
+                        $("#divStatusChange").show();
+                        $("#curStatus").html('AVAILABLE');
+                        $("#curStatus").parent().addClass('working');
+                        $(".checkToNA").show();
+                        $(".checkAvailable").hide();
                     }
-                    , error: function (err) {
-                        hideWait();
-                        toast("Network Error");
-                    }
-                });
-                //            var url = serviceUrl + "Account/GetUserStatus";
-                //            var obj = {};
-                //            obj.id = parseInt(currentUser.ID);
-                //            showWait();
-                //            $.ajax({
-                //                type: "GET",
-                //                url: url,
-                //                data: obj,
-                //                async: false,
-                //                success: function(result) {
-                //                    if (result.IsSuccessful) {
-                //                        currentUser.JobStatusType = result.Result;
-                //                        localStorage.setItem('userSession', JSON.stringify(currentUser));
-                //                        if (result.Result == "1" || result.Result == 1) {
-                //                            $("#curStatus").html("Working");
-                //                            $("#curStatus").removeClass('available').removeClass('notAvailable').addClass('working');
-                //                            $("#rdAvail").attr("checked", false);
-                //                            $("#rdAvail").prev().removeClass("ui-radio-on");
-                //                            $("#rdNtAvail").attr("checked", false);
-                //                            $("#rdNtAvail").prev().removeClass("ui-radio-on");
-                //                            $(".jobSection").show();
-                //                            GetAssignJob();
-                //                        }
-                //                        if (result.Result == "2" || result.Result == 2) {
-                //                            $("#rdAvail").attr("checked", true);
-                //                            $("#rdAvail").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
-                //                            $("#curStatus").html("Available");
-                //                            $("#curStatus").removeClass('working').removeClass('notAvailable').addClass('available');
-                //                            $(".jobSection").show();
-                //                            $("#currentJob").html("");
-                //                            $("#currentJob").append("<h4>There are no current jobs</h4>");
-                //                            $("#viewJobsBtn").hide();
-                //                        }
-                //                        if (result.Result == "3" || result.Result == 3) {
-                //                            $("#rdNtAvail").attr("checked", true);
-                //                            $("#rdNtAvail").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
-                //                            $("#curStatus").html("Not Available");
-                //                            $("#curStatus").removeClass('working').removeClass('available').addClass('notAvailable');
-                //                            $(".jobSection").hide();
-                //                           // $("#viewJobsBtn").show(); // Need to uncomment in Version 2
-                //                        }
-                //                    }
-                //                    hideWait();
-                //                },
-                //                error: function(err) {
-                //                    hideWait();
-                //                    toast("Network Error");
-                //                }
-                //            });
-                //alert(currentUser.JobStatusType);
-                //                if (currentUser.JobStatusType == "1" || currentUser.JobStatusType == 1) {
-                //                    $("#curStatus").html("Working");
-                //                    $("#curStatus").removeClass('available').removeClass('notAvailable').addClass('working');
-                //                }
-                //                if (currentUser.JobStatusType == "2" || currentUser.JobStatusType == 2) {
-                //                    $("#rdAvail").attr("checked", true);
-                //                    $("#rdAvail").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
-                //                    $("#curStatus").html("Available");
-                //                    $("#curStatus").removeClass('working').removeClass('notAvailable').addClass('available');
-                //                }
-                //                if (currentUser.JobStatusType == "3" || currentUser.JobStatusType == 3) {
-                //                    $("#rdNtAvail").attr("checked", true);
-                //                    $("#rdNtAvail").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
-                //                    $("#curStatus").html("Not Available");
-                //                    $("#curStatus").removeClass('working').removeClass('available').addClass('notAvailable');
-                //                }
-            }
-            else {
-                doLogout();
-            }
-            $('.rdio').click(function () {
-                $('#popupDialog').popup("open");
-                selectedValue = this.value;
-                if (selectedValue == "2") $("#viewJobsBtn").hide();
-                else {
-                    // $("#viewJobsBtn").show(); // Need to show in version 2
+                    hideWait();
+                },
+                error: function(err) {
+                    hideWait();
+                    toast("Network Error");
                 }
             });
+        } else {
+            doLogout();
+        }
+        $('.rdio').click(function() {
+            $('#popupDialog').popup("open");
+            selectedValue = this.value;
+            if (selectedValue == "2") $("#viewJobsBtn").hide();
+            else {
+                // $("#viewJobsBtn").show(); // Need to show in version 2
+            }
         });
+    });
 
-        function getStatus() {
-            var currentUserObj = localStorage.getItem('userSession');
-            var currentUser = JSON.parse(currentUserObj);
-            var url = serviceUrl + "Account/GetUserStatus";
-            var obj = {};
-            obj.id = parseInt(currentUser.ID);
-            showWait();
-            $.ajax({
-                type: "GET"
-                , url: url
-                , data: obj
-                , async: false
-                , success: function (result) {
-                    if (result.IsSuccessful) {
-                        if (result.Result == "2") {
-                            //$("#curStatus").html("Available");
-                            //$("#curStatus").removeClass('working').removeClass('notAvailable').addClass('available');
-                            //$(".jobSection").show();
-                            //$("#currentJob").html("");
-                            //$("#currentJob").append("<h4>There are no current jobs</h4>");
-                            $("#curStatus").html('AVAILABLE');
-                            $("#curStatus").parent().removeClass('working').removeClass('notAvailable').addClass('available');
-                            $(".checkToNA").show();
-                            $(".checkAvailable").hide();
-                            $("#divStatusChange").show();
-                        }
-                        if (result.Result == "3") {
-                            //$("#curStatus").html("Not Available");
-                            //$("#curStatus").removeClass('working').removeClass('available').addClass('notAvailable');
-                            //$(".jobSection").hide();
-                            $("#curStatus").html('NOT AVAILABLE');
-                            $("#curStatus").parent().removeClass('working').removeClass('available').addClass('notAvailable');
-                            $(".checkToNA").hide();
-                            $(".checkAvailable").show();
-                            $("#divStatusChange").show();
-                        }
+    function showJobDetails(resultObj) {
+        //$("#spnCompany").html(resultObj.BusinessName);
+        //$("#spnJobNumber").html(resultObj.Number);
+        $("#spnClient").html(resultObj.ClientName);
+        $("#spnProject").html(resultObj.ProjectName);
+        $("#spnProjAddress").html(resultObj.ProjectAddress);
+        //$("#spnTrade").html(resultObj.TradeClassification);
+        $("#spnStartDate").html(resultObj.StartDate);
+        $("#spnMessage").html(resultObj.Message);
+        $("#spnDesc").html(resultObj.Name);
+        $("#spnContract").html(resultObj.ContractType);
+        $("#hdnUserJobHistoryId").val(resultObj.UserSchedulingID);
+        $("#currentJob").show();
+    }
+
+    function getStatus() {
+        var currentUserObj = localStorage.getItem('userSession');
+        var currentUser = JSON.parse(currentUserObj);
+        var url = serviceUrl + "Account/GetUserStatus";
+        var obj = {};
+        obj.id = parseInt(currentUser.ID);
+        showWait();
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: obj,
+            async: false,
+            success: function(result) {
+                debugger
+                if (result.IsSuccessful) {
+                    if (result.Result == "1") {
+                        $(".statusButton").hide();
+                        $("#curStatus").html('WORKING');
+                        $("#curStatus").parent().addClass('working');
+                        $(".finishJob").show();
                     }
-                    hideWait();
-                }
-                , error: function (err) {
-                    hideWait();
-                    toast("Network Error");
-                }
-            });
-        }
-
-        function confirmDecline() {
-            $('#declineDialog').popup("open");
-            $('#declineReason').focus();
-            $("#declineReason").removeClass('error');
-        }
-
-        function declineJob() {
-            if ($("#declineReason").val() == '') {
-                $("#declineReason").addClass('error');
-            }
-            else {
-                $("#declineDialog").popup('close');
-                AcceptDeclineJobScheduling(false);
-            }
-        }
-
-        function changeStatus() {
-            $("#availabilityDialog").popup("open");
-        }
-        //$("#currentJob").html("");
-        //$("#currentJob").append("<h4>There are no current jobs</h4>");
-        $("#divStatusChange").show();
-        $("#curStatus").html('AVAILABLE');
-        $("#curStatus").parent().addClass('working');
-        $(".checkToNA").show();
-        $(".checkAvailable").hide();
-
-        function AcceptDeclineJobScheduling(status) {
-            showWait();
-            var currentUserObj = localStorage.getItem('userSession');
-            var currentUser = JSON.parse(currentUserObj);
-            var url = serviceUrl + "Account/AcceptDeclineJobScheduling";
-            var jsonObj = new Object();
-            if (status == true || status == "true") {
-                jsonObj.declinedReason = $("#declineReason").val();
-            }
-            else {
-                jsonObj.declinedReason = '';
-            }
-            jsonObj.isAccepted = status;
-            jsonObj.userJobHistoryId = $("#hdnUserJobHistoryId").val();
-            $.ajax({
-                type: "GET"
-                , url: url
-                , data: jsonObj
-                , async: false
-                , success: function (result) {
-                    if (result.IsSuccessful) {
-                        if (result.Result) {
-                            toast("Status Changed.");
-                            $(".statusButton").hide();
-                            $("#curStatus").html('Working');
-                            $("#curStatus").parent().addClass('working');
-                            $(".finishJob").show();
-                        }
+                    if (result.Result == "3") {
+                        $("#curStatus").html('NOT AVAILABLE');
+                        $("#curStatus").parent().removeClass('working').removeClass('available').addClass('notAvailable');
+                        $(".checkToNA").hide();
+                        $(".checkAvailable").show();
+                        $("#divStatusChange").show();
+                        $("#currentJob").hide();
+                    } else {
+                        $("#curStatus").html('AVAILABLE');
+                        $("#curStatus").parent().removeClass('working').removeClass('notAvailable').addClass('available');
+                        $(".checkToNA").show();
+                        $(".checkAvailable").hide();
+                        $("#divStatusChange").show();
+                        $("#currentJob").hide();
                     }
                 }
-                , error: function (err) {
-                    hideWait();
-                    toast("Network Error");
-                }
-            });
-        }
-
-        function checkInduction() {
-            $("#inductionDialog").popup('show');
-        }
-
-        function setAvailability() {
-            $("#inductionDialog").popup('hide');
-            $("#inductionDialog").bind({
-                popupafterclose: function (event, ui) {
-                    $("#availabilityDialog").popup("open");
-                }
-            });
-        }
-
-        function resetCheckBox() {
-            // To change the checkbox is cancel has been clicked in popup
-            if ($("input[name=rdChngeSts]:checked").val() == "2") {
-                $("#rdAvail").attr("checked", false).checkboxradio().checkboxradio("refresh");
-                $("#rdNtAvail").attr("checked", true).checkboxradio().checkboxradio("refresh").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
+                hideWait();
+            },
+            error: function(err) {
+                hideWait();
+                toast("Network Error");
             }
-            else {
-                $("#rdNtAvail").attr("checked", false).checkboxradio().checkboxradio("refresh");
-                $("#rdAvail").attr("checked", true).checkboxradio().checkboxradio("refresh").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
-            }
-        }
+        });
+    }
 
-        function updateWorkStatus() {
-            $("#availabilityDialog").popup("close");
-            var currentUserObj = localStorage.getItem('userSession');
-            if (currentUserObj && currentUserObj != 'undefined') {
-                var currentUser = JSON.parse(currentUserObj);
-                selectedValue = $("#flipAvailability").val();
-                if (currentUser.JobStatusType != selectedValue) {
-                    currentUser.JobStatusType = selectedValue;
-                    localStorage.setItem('userSession', JSON.stringify(currentUser));
+    function confirmDecline() {
+        $('#declineDialog').popup("open");
+        $('#declineReason').focus();
+        $("#declineReason").removeClass('error');
+    }
+
+    function declineJob() {
+        if ($("#declineReason").val() == '') {
+            $("#declineReason").addClass('error');
+        } else {
+            $("#declineDialog").popup('close');
+            AcceptDeclineJobScheduling(false);
+        }
+    }
+
+    function changeStatus() {
+        $("#availabilityDialog").popup("open");
+    }
+    //$("#currentJob").html("");
+    //$("#currentJob").append("<h4>There are no current jobs</h4>");
+    $("#divStatusChange").show();
+    $("#curStatus").html('AVAILABLE');
+    $("#curStatus").parent().addClass('working');
+    $(".checkToNA").show();
+    $(".checkAvailable").hide();
+
+    function AcceptDeclineJobScheduling(status) {
+        debugger
+        showWait();
+        var currentUserObj = localStorage.getItem('userSession');
+        var currentUser = JSON.parse(currentUserObj);
+        var url = serviceUrl + "Account/AcceptDeclineJobScheduling";
+        var jsonObj = new Object();
+        if (status == true || status == "true") {
+            jsonObj.declinedReason = $("#declineReason").val();
+        } else {
+            jsonObj.declinedReason = '';
+        }
+        jsonObj.isAccepted = status;
+        jsonObj.userJobHistoryId = $("#hdnUserJobHistoryId").val();
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: jsonObj,
+            async: false,
+            success: function(result) {
+                if (result.IsSuccessful) {
+                    if (result.Result) {
+                        if (status == true || status == "true") {
+                            toast("Job Accepted.");
+                        } else {
+                            toast("Job Rejected.");
+                        }
+                        $(".statusButton").hide();
+                        $("#curStatus").html('Working');
+                        $("#curStatus").parent().addClass('working');
+                        $(".finishJob").show();
+                    }
+                }
+            },
+            error: function(err) {
+                hideWait();
+                toast("Network Error");
+            }
+        });
+    }
+
+    function checkInduction() {
+        $("#inductionDialog").popup('open');
+    }
+
+    function cancelInduction() {
+        $("#inductionDialog").popup('close');
+        $("#inductionDialog").bind({
+            popupafterclose: function(event, ui) {
+                // Just have to close popup
+            }
+        });
+    }
+
+    function setAvailability() {
+        $("#inductionDialog").popup('close');
+        if ($("#flipInduction").val() == "on") {
+            localStorage.isInducted = true;
+        } else
+            localStorage.isInducted = false;
+        $("#inductionDialog").bind({
+            popupafterclose: function(event, ui) {
+                localStorage.finishJob = true;
+                $("#availabilityDialog").popup("open");
+            }
+        });
+    }
+
+    function resetCheckBox() {
+        // To change the checkbox is cancel has been clicked in popup
+        if ($("input[name=rdChngeSts]:checked").val() == "2") {
+            $("#rdAvail").attr("checked", false).checkboxradio().checkboxradio("refresh");
+            $("#rdNtAvail").attr("checked", true).checkboxradio().checkboxradio("refresh").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
+        } else {
+            $("#rdNtAvail").attr("checked", false).checkboxradio().checkboxradio("refresh");
+            $("#rdAvail").attr("checked", true).checkboxradio().checkboxradio("refresh").prev().removeClass("ui-radio-off").addClass("ui-radio-on");
+        }
+    }
+
+    function updateWorkStatus() {
+        var currentUserObj = localStorage.getItem('userSession');
+        if (currentUserObj && currentUserObj != 'undefined') {
+            var currentUser = JSON.parse(currentUserObj);
+            selectedValue = $("#flipAvailability").val();
+            if (currentUser.JobStatusType != selectedValue) {
+                currentUser.JobStatusType = selectedValue;
+                localStorage.setItem('userSession', JSON.stringify(currentUser));
+                if (localStorage.finishJob == 'true') {
+                    var status = selectedValue == 3 ? true : false;
+                    FinishJob($("#hdnUserJobHistoryId").val(), localStorage.isInducted, status);
+                } else
                     UpdateStatus(selectedValue);
-                }
             }
         }
-
-        function UpdateStatus(statusId) {
-            showWait();
-            var currentUserObj = localStorage.getItem('userSession');
-            var currentUser = JSON.parse(currentUserObj);
-            var url = serviceUrl + "Account/UpdateUserJobStatus";
-            var jsonObj = new Object();
-            jsonObj.userId = currentUser.ID;
-            jsonObj.statusId = statusId;
-            //jsonObj.updatedByUserId = currentUser.ID;
-            $.ajax({
-                type: "GET"
-                , url: url
-                , data: jsonObj
-                , async: false
-                , success: function (result) {
-                    if (result.IsSuccessful) {
-                        if (result.Result) {
-                            toast("Status Changed.");
-                            getStatus();
-                        }
+        $("#availabilityDialog").popup("close");
+    }
+    // For updating Status
+    function UpdateStatus(statusId) {
+        showWait();
+        var currentUserObj = localStorage.getItem('userSession');
+        var currentUser = JSON.parse(currentUserObj);
+        var url = serviceUrl + "Account/UpdateUserJobStatus";
+        var jsonObj = new Object();
+        jsonObj.userId = currentUser.ID;
+        jsonObj.statusId = statusId;
+        //jsonObj.updatedByUserId = currentUser.ID;
+        debugger
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: jsonObj,
+            async: false,
+            success: function(result) {
+                if (result.IsSuccessful) {
+                    if (result.Result) {
+                        toast("Status Changed.");
+                        getStatus();
                     }
                 }
-                , error: function (err) {
-                    hideWait();
-                    toast("Network Error");
+            },
+            error: function(err) {
+                hideWait();
+                toast("Network Error");
+            }
+        });
+    }
+    //For Finishing job
+    function FinishJob(jobHistoryId, isInducted, isAvailable) {
+        showWait();
+        var currentUserObj = localStorage.getItem('userSession');
+        var currentUser = JSON.parse(currentUserObj);
+        var url = serviceUrl + "Account/MarkFinishJob";
+        var jsonObj = new Object();
+        jsonObj.userJobHistoryId = jobHistoryId;
+        jsonObj.markAvailable = isAvailable;
+        jsonObj.isInducted = isInducted;
+        debugger
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: jsonObj,
+            async: false,
+            success: function(result) {
+                if (result.IsSuccessful) {
+                    if (result.Result) {
+                        localStorage.isInducted=false;
+                        localStorage.finishJob=false;
+                        toast("Finished Job.");
+                        getStatus();
+                    }
                 }
-            });
-        }
+            },
+            error: function(err) {
+                hideWait();
+                toast("Network Error");
+            }
+        });
+    }
+    localStorage.finishJob=false;
     </script>
 </body>
 

@@ -25,7 +25,7 @@
         }
         
         .pending {
-            background-color: #8AD3F4;
+            background-color: #8AD3F4 !important;
             color: black;
             font-size: 19px;
             padding-top: 10px;
@@ -35,7 +35,7 @@
         }
         
         .notAvailable {
-            background-color: #FF7B7C;
+            background-color: #FF7B7C !important;
             color: black;
             font-size: 19px;
             padding-top: 10px;
@@ -45,7 +45,7 @@
         }
         
         .working {
-            background-color: #A6E8AA;
+            background-color: #A6E8AA !important;
             color: black;
             font-size: 19px;
             padding-top: 10px;
@@ -55,7 +55,7 @@
         }
         
         .available {
-            background-color: #FFFFBB;
+            background-color: #FFFFBB !important;
             color: black;
             font-size: 19px;
             padding-top: 10px;
@@ -268,15 +268,14 @@
                                     getStatus();
                                 }
                                 else if (resultObj.IsAccepted == null) {
+                                    debugger;
                                     showJobDetails(resultObj);
                                     $(".statusButton").show();
-                                    $("#curStatus").html('PENDING JOB');
-                                    $("#curStatus").parent().addClass('pending');
+                                    $("#curStatus").html('PENDING JOB');                                    $("#curStatus").parent().removeClass('notAvailable').removeClass('available').removeClass('working').addClass('pending');
                                 }
                                 else if (result.Result.IsAccepted == true) {
                                     $(".statusButton,#divStatusChange").hide();
-                                    $("#curStatus").html('WORKING');
-                                    $("#curStatus").parent().addClass('working');
+                                    $("#curStatus").html('WORKING');                                    $("#curStatus").parent().removeClass('notAvailable').removeClass('available').removeClass('pending').addClass('working');
                                     $("#currentJob,.finishJob").show();
                                     showJobDetails(resultObj);
                                 }
@@ -287,7 +286,7 @@
                                     else {
                                         $(".statusButton,#divStatusChange").hide();
                                         $("#curStatus").html('WORKING');
-                                        $("#curStatus").parent().addClass('working');
+                                        $("#curStatus").parent().removeClass('notAvailable').removeClass('available').removeClass('pending').addClass('working');
                                         $("#currentJob,.finishJob").show();
                                     }
                                 }
@@ -295,8 +294,7 @@
                         }
                         else {
                             $("#divStatusChange").show();
-                            $("#curStatus").html('AVAILABLE');
-                            $("#curStatus").parent().addClass('working');
+                            $("#curStatus").html('AVAILABLE');                            $("#curStatus").parent().removeClass('notAvailable').removeClass('working').removeClass('pending').addClass('available');
                             $(".checkToNA").show();
                             $(".checkAvailable").hide();
                         }
@@ -354,13 +352,11 @@
                     if (result.IsSuccessful) {
                         if (result.Result == "1") {
                             $(".statusButton,#divStatusChange").hide();
-                            $("#curStatus").html('WORKING');
-                            $("#curStatus").parent().addClass('working');
+                            $("#curStatus").html('WORKING');                            $("#curStatus").parent().removeClass('notAvailable').removeClass('available').removeClass('pending').addClass('working');
                             $("#currentJob,.finishJob").show();
                         }
                         if (result.Result == "3") {
-                            $("#curStatus").html('NOT AVAILABLE');
-                            $("#curStatus").parent().removeClass('working').removeClass('available').addClass('notAvailable');
+                            $("#curStatus").html('NOT AVAILABLE');                            $("#curStatus").parent().removeClass('working').removeClass('available').removeClass('pending').addClass('notAvailable');
                             $(".checkToNA").hide();
                             $(".checkAvailable").show();
                             $("#divStatusChange").show();
@@ -368,7 +364,7 @@
                         }
                         else {
                             $("#curStatus").html('AVAILABLE');
-                            $("#curStatus").parent().removeClass('working').removeClass('notAvailable').addClass('available');
+                            $("#curStatus").parent().removeClass('working').removeClass('notAvailable').removeClass('pending').addClass('available');
                             $(".checkToNA").show();
                             $(".checkAvailable").hide();
                             $("#divStatusChange").show();
@@ -421,8 +417,7 @@
         //$("#currentJob").html("");
         //$("#currentJob").append("<h4>There are no current jobs</h4>");
         $("#divStatusChange").show();
-        $("#curStatus").html('AVAILABLE');
-        $("#curStatus").parent().addClass('working');
+        $("#curStatus").html('AVAILABLE');        $("#curStatus").parent().removeClass('working').removeClass('notAvailable').removeClass('pending').addClass('available');
         $(".checkToNA").show();
         $(".checkAvailable").hide();
         $("#currentJob,.finishJob").hide();
@@ -462,8 +457,8 @@
                             if(jsonObj.isAccepted)
                                 {
                             $(".statusButton,#divStatusChange").hide();
-                            $("#curStatus").html('Working');
-                            $("#curStatus").parent().addClass('working');
+                            $("#curStatus").html('WORKING');
+                            $("#curStatus").parent().removeClass('available').removeClass('notAvailable').removeClass('pending').addClass('working');
                             $("#currentJob,.finishJob").show();
                                 }
                             else{
@@ -527,7 +522,7 @@
                     currentUser.JobStatusType = selectedValue;
                     localStorage.setItem('userSession', JSON.stringify(currentUser));
                     if (localStorage.finishJob == 'true') {
-                        var status = selectedValue == 3 ? true : false;
+                        var status = selectedValue == 2 ? true : false;
                         FinishJob($("#hdnUserJobHistoryId").val(), localStorage.isInducted, status);
                     }else if(localStorage.declineJob=='true'){
                         AcceptDeclineJobScheduling(false, selectedValue);

@@ -83,4 +83,31 @@ function restoreLNPref() {
         $("#txtTime").val(savedLNPref.notificationTime);
         $("#frequencySelect").val(savedLNPref.frequency).selectmenu().selectmenu("refresh");
     }
+    checkTestRole();
 }
+
+function checkTestRole(){
+    var currentUserObj = JSON.parse(localStorage.getItem('userSession'));
+    if (currentUserObj && currentUserObj != 'undefined') {
+        if(currentUserObj.Roles=="testadmin"){
+            $("#serviceChangerBlock").show();
+            if(serviceUrl == 'http://202.60.69.12/emsapi/api/'){
+                $("#serviceChanger").attr("checked", true).flipswitch().flipswitch("refresh");
+                $("#serviceType").html("<b>Development</b>")
+            }else if(serviceUrl == 'http://52.62.179.135/emsapi/api/'){
+                $("#serviceChanger").attr("checked", false).flipswitch().flipswitch("refresh");
+                $("#serviceType").html("<b>Production</b>")
+            }
+        }
+    } 
+}
+$("#serviceChanger").change(function() {
+    if ($(this).is(":checked")) {
+        localStorage.serviceUrl = 'http://202.60.69.12/emsapi/api/';
+        serviceUrl = 'http://202.60.69.12/emsapi/api/';
+    } else {
+        localStorage.serviceUrl = 'http://52.62.179.135/emsapi/api/';
+        serviceUrl = 'http://52.62.179.135/emsapi/api/';
+    }
+    checkTestRole();
+});

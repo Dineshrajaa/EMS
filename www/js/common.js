@@ -1,4 +1,7 @@
-var serviceUrl = 'http://52.62.179.135/emsapi/api/';
+// var serviceUrl = 'http://52.62.179.135/emsapi/api/'; // Production
+// var serviceUrl = 'http://202.60.69.12/emsapi/api/'; // Dev
+localStorage.serviceUrl=localStorage.serviceUrl||'http://52.62.179.135/emsapi/api/';
+var serviceUrl=localStorage.serviceUrl; 
 $(document).ajaxStart(function() {
     showWait();
 });

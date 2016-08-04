@@ -1,6 +1,7 @@
 // var serviceUrl = 'http://52.62.179.135/emsapi/api/'; // Production
 // var serviceUrl = 'http://202.60.69.12/emsapi/api/'; // Dev
-localStorage.serviceUrl=localStorage.serviceUrl||'http://52.62.179.135/emsapi/api/';
+localStorage.serviceUrl=localStorage.serviceUrl||'http://52.62.179.135/emsapi/api/'; // Production
+// localStorage.serviceUrl=localStorage.serviceUrl||'http://202.60.69.12/emsapi/api/'; //dev 
 var serviceUrl=localStorage.serviceUrl; 
 $(document).ajaxStart(function() {
     showWait();
@@ -130,6 +131,7 @@ Date.prototype.getFormattedDateInddMMYY = function() {
 
 function doLogout() {
     localStorage.removeItem('userSession');
+    localStorage.removeItem('serviceUrl');
     window.location.href = "index.html";
     unsubscribePush();
 }
@@ -232,7 +234,7 @@ function fillProfilePicture() {
     var currentUserObj = localStorage.getItem('userSession');
     if (currentUserObj && currentUserObj != 'undefined' && currentUserObj != null) {
         currentUserObj = JSON.parse(currentUserObj);
-        if (currentUserObj.ProfilePicture != "") {
+        if (currentUserObj.ProfilePicture != ""&&currentUserObj.ProfilePicture !=null) {
             if ((currentUserObj.ProfilePicture).indexOf("data:image/jpeg;base64,") == -1) currentUserObj.ProfilePicture = "data:image/jpeg;base64," + currentUserObj.ProfilePicture;
         }
         var profileImage = currentUserObj.ProfilePicture == "" ? "img/avtar.png" : currentUserObj.ProfilePicture;

@@ -89,7 +89,8 @@ function restoreLNPref() {
 function checkTestRole(){
     var currentUserObj = JSON.parse(localStorage.getItem('userSession'));
     if (currentUserObj && currentUserObj != 'undefined') {
-        if(currentUserObj.Roles=="testadmin"){
+        alert(currentUserObj.RoleId);
+        if(currentUserObj.RoleId=="5"){
             $("#serviceChangerBlock").show();
             if(serviceUrl == 'http://202.60.69.12/emsapi/api/'){
                 $("#serviceChanger").attr("checked", true).flipswitch().flipswitch("refresh");

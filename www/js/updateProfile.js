@@ -331,8 +331,10 @@ function fetchProfileDetail(userId) {
                         titleId = 1;
                         break;
                 }
-                if ((employeeObj.ProfilePicture).indexOf("data:image/jpeg;base64,") == -1)
-                    employeeObj.ProfilePicture = "data:image/jpeg;base64," + employeeObj.ProfilePicture;
+                if (employeeObj.ProfilePicture != null) {
+                    if ((employeeObj.ProfilePicture).indexOf("data:image/jpeg;base64,") == -1)
+                        employeeObj.ProfilePicture = "data:image/jpeg;base64," + employeeObj.ProfilePicture;
+                }
                 $(".profileCircle").css("background-image", "url(" + employeeObj.ProfilePicture + ")");
                 $("#ddlTitle").val(titleId);
                 $("#ddlTitle").prev().text(employeeObj.Title);
@@ -672,7 +674,7 @@ function getActiveLTP() {
                 $("#ddlLicence,#ddlPositionHeld,#ddlTradeExp").html("");
                 if (res.LicenceTickets) {
                     var result = res.LicenceTickets;
-                    var ticketOptions='<option value="0" selected>Please Select</option>';
+                    var ticketOptions = '<option value="0" selected>Please Select</option>';
                     for (var i = 0; i < result.length; i++) {
                         ticketOptions += '<option value=' + result[i].ID + '>' + result[i].Name + '</option>';
 
@@ -681,7 +683,7 @@ function getActiveLTP() {
                 }
                 if (res.PositionHelds) {
                     var result = res.PositionHelds;
-                    var positionOptions='<option value="0" selected>Please Select</option>';
+                    var positionOptions = '<option value="0" selected>Please Select</option>';
                     for (var i = 0; i < result.length; i++) {
                         positionOptions += '<option value=' + result[i].ID + '>' + result[i].Name + '</option>';
 
@@ -690,7 +692,7 @@ function getActiveLTP() {
                 }
                 if (res.TradeExperiences) {
                     var result = res.TradeExperiences;
-                    var tradeOptions='<option value="0" selected>Please Select</option>';
+                    var tradeOptions = '<option value="0" selected>Please Select</option>';
                     for (var i = 0; i < result.length; i++) {
                         tradeOptions += '<option value=' + result[i].ID + '>' + result[i].Name + '</option>';
 

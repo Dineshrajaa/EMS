@@ -66,7 +66,7 @@ function saveLNPref() {
         every: $("#frequencySelect").val(),
         at: new Date(notificationTime)
 
-    }, function () { //console.warn("configured local notification") 
+    }, function() { //console.warn("configured local notification") 
     });
     cordova.plugins.notification.local.on("schedule", function(notification) {
         //console.log("scheduled: " + notification.id);
@@ -86,26 +86,33 @@ function restoreLNPref() {
     checkTestRole();
 }
 
-function checkTestRole(){
+function checkTestRole() {
     var currentUserObj = JSON.parse(localStorage.getItem('userSession'));
     if (currentUserObj && currentUserObj != 'undefined') {
-        alert(currentUserObj.RoleId);
-        if(currentUserObj.RoleId=="5"){
+        if (currentUserObj.RoleId == "5") {
             $("#serviceChangerBlock").show();
-            if(serviceUrl == 'http://202.60.69.12/emsapi/api/'){
+            if (serviceUrl == 'http://202.60.69.12/emsapi/api/') {
                 $("#serviceChanger").attr("checked", true).flipswitch().flipswitch("refresh");
                 $("#serviceType").html("<b>Development</b>")
-            }else if(serviceUrl == 'http://52.62.179.135/emsapi/api/'){
+            } else if (serviceUrl == 'http://52.62.179.135/emsapi/api/') {
                 $("#serviceChanger").attr("checked", false).flipswitch().flipswitch("refresh");
                 $("#serviceType").html("<b>Production</b>")
             }
         }
-    } 
+    }
 }
 $("#serviceChanger").change(function() {
+    var message = "Do you want to change to Development server?You will be logged out and settings will be saved."
     if ($(this).is(":checked")) {
-        localStorage.serviceUrl = 'http://202.60.69.12/emsapi/api/';
-        serviceUrl = 'http://202.60.69.12/emsapi/api/';
+        navigator.notification.confirm(message, function(buttonIndex) {
+            if (buttonIndex == 1) {
+                localStorage.serviceUrl = 'http://202.60.69.12/emsapi/api/';
+                serviceUrl = 'http://202.60.69.12/emsapi/api/';
+                localStorage.removeItem('userSession');
+                window.location.href = "index.html";
+            }
+        });
+
     } else {
         localStorage.serviceUrl = 'http://52.62.179.135/emsapi/api/';
         serviceUrl = 'http://52.62.179.135/emsapi/api/';

@@ -268,7 +268,7 @@
                                     getStatus();
                                 }
                                 else if (resultObj.IsAccepted == null) {
-                                    debugger;
+                                    //debugger;
                                     showJobDetails(resultObj);
                                     $(".statusButton").show();
                                     $("#curStatus").html('PENDING JOB');                                    $("#curStatus").parent().removeClass('notAvailable').removeClass('available').removeClass('working').addClass('pending');
@@ -446,7 +446,8 @@
                 , success: function (result) {
                     if (result.IsSuccessful) {
                         if (result.Result) {
-                            getStatus();
+                            $("#currentJob,.finishJob,.statusButton").hide();
+                            //getStatus();
                             if (status == true || status == "true") {
                                 toast("Job Accepted.");
                             }

@@ -1664,6 +1664,7 @@ function makeEditFalse(flagname) {
         $("#dvLicence").hide();
         $("#dvLicence .num").hide();
         $("#dvLicence .exp").hide();
+        navigatePage("#addeditLicence");
     } else if (flagname == "editTradeFlag") {
         localStorage.ueditTradeFlag = "false";
         $("#txtQualTrade,#txtExpTrade").val("");
@@ -1674,6 +1675,7 @@ function makeEditFalse(flagname) {
         $("#dvTrade").hide();
         $("#dvTrade .num").hide();
         $("#dvTrade .exp").hide();
+        navigatePage("#addeditTrade");
     } else if (flagname == "editPositionFlag") {
         localStorage.ueditPositionFlag = "false";
         $("#txtQualPosition,#txtExpPosition").val("");
@@ -1684,6 +1686,7 @@ function makeEditFalse(flagname) {
         $("#dvPosition").hide();
         $("#dvPosition .num").hide();
         $("#dvPosition .exp").hide();
+        navigatePage("#addeditPosition");
     }
 }
 

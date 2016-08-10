@@ -291,8 +291,8 @@ function formatDateAndTime(dateToManipulate){
     var date = ed.getDate() < 10 ? "0" + ed.getDate() : ed.getDate();
     var month = (parseInt(ed.getMonth()) + 1);
     var formattedMonth = month < 10 ? "0" + month : month;
-    var time=parseInt(ed.getHours())+1;
-    var minutes=parseInt(ed.getMinutes())+1;
+    var time=parseInt(ed.getHours());
+    var minutes=parseInt(ed.getMinutes());
     var formatedDate=date+'/'+formattedMonth+'/'+ed.getFullYear()+' '+time+':'+minutes;
     return formatedDate;
 }

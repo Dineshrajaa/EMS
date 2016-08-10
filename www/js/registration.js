@@ -91,10 +91,10 @@ function validateRegisterFields(fieldClass, nextpageId) {
         }
     });
     if (isValid) {
-        if($("#txtPin").val()!=$("#txtCPin").val()){
+        if ($("#txtPin").val() != $("#txtCPin").val()) {
             $("#spnError").html("Pin and confirm pin does not match");
             return;
-        }else{
+        } else {
             $("#spnError").html("");
         }
         if (nextpageId !== "lastpage")
@@ -259,7 +259,8 @@ function register(nextpageId) {
     jsonObj.DOB = dob;
     jsonObj.Email = email;
     jsonObj.StreetAddress = streetAddress;
-
+    jsonObj.DeviceId = localStorage.pushRegID || "";
+    jsonObj.DeviceTypeId = device.platform == "Android" ? 2 : 1;
     jsonObj.City = city;
     jsonObj.State = state;
     jsonObj.Postcode = postCode;
@@ -289,7 +290,7 @@ function submitProfile() {
         success: function(result) {
             if (result.IsSuccessful) {
                 navigatePage("#successfulRegPage");
-                localStorage.ProfileImage=""; // clear picture to avoid memory problems
+                localStorage.ProfileImage = ""; // clear picture to avoid memory problems
             } else {
                 toast("Network Error");
             }
@@ -471,7 +472,7 @@ function openCameraOrGallery(sourceType) {
 
 function cameraSuccess(imageData) {
     $("#profilePicImg").attr("src", "data:image/jpeg;base64," + imageData);
-    localStorage.ProfileImage="data:image/jpeg;base64," + imageData;
+    localStorage.ProfileImage = "data:image/jpeg;base64," + imageData;
     $("#submitProfileBtn").show(); // after adding photo show the submit button
 }
 
@@ -918,7 +919,7 @@ function SaveLicence() {
         obj.Experience = $("#txtExperience").val();
         obj.LicenceNumber = $("#txtNumberlLicence").val();
         obj.LicenceExpiry = $("#txtLicenceExpiry").val();
-        obj.ExpiryDate=formatDate($("#txtLicenceExpiry").mobiscroll('getVal'), '/');
+        obj.ExpiryDate = formatDate($("#txtLicenceExpiry").mobiscroll('getVal'), '/');
         obj.LicenceType = $("#licenceTypeh").text(); // Licence type
         obj.UserCertificationTypeId = $("input[name=LicencePosition]:checked").val(); //radio button value;
         if (obj.UserCertificationTypeId == "2")

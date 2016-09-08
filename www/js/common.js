@@ -337,9 +337,11 @@ function registerPush() {
         if (typeof data.additionalData.payload != undefined) {
             //console.warn("additionalData:" + data.additionalData.payload);
             if (data.additionalData.payload == "message") {
-                window.location.href = "messages.html";
+                // window.location.href = "messages.html";
+                navigatePage('message.html');
             } else {
-                window.location.href = "dashboard.html";
+                // window.location.href = "dashboard.html";
+                navigatePage('dashboard.html');
             }
         }
         //this place doesn't work

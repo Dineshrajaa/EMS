@@ -91,10 +91,10 @@ function checkTestRole() {
     if (currentUserObj && currentUserObj != 'undefined') {
         if (currentUserObj.RoleId == "5") {
             $("#serviceChangerBlock").show();
-            if (serviceUrl == 'http://202.60.69.12/emsapi/api/') {
+            if (serviceUrl == 'http://52.63.234.33/EMSAPI/api/') {
                 $("#serviceChanger").attr("checked", true).flipswitch().flipswitch("refresh");
                 $("#serviceType").html("<b>Development</b>")
-            } else if (serviceUrl == 'http://52.62.179.135/emsapi/api/') {
+            } else if (serviceUrl == 'http://52.62.179.135/EMSAPI/api/') {
                 $("#serviceChanger").attr("checked", false).flipswitch().flipswitch("refresh");
                 $("#serviceType").html("<b>Production</b>")
             }

@@ -106,8 +106,8 @@ $("#serviceChanger").change(function() {
     if ($(this).is(":checked")) {
         navigator.notification.confirm(message, function(buttonIndex) {
             if (buttonIndex == 1) {
-                localStorage.serviceUrl = 'http://202.60.69.12/emsapi/api/';
-                serviceUrl = 'http://202.60.69.12/emsapi/api/';
+                localStorage.serviceUrl = 'http://52.63.234.33/EMSAPI/api/';
+                serviceUrl = 'http://52.63.234.33/EMSAPI/api/';
                 localStorage.removeItem('userSession');
                 window.location.href = "index.html";
             }

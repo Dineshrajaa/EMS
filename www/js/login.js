@@ -62,8 +62,8 @@ $(document).on('ready', function () {
     });
 
     window.push.on('notification', function(data) {
-        //alert(data);
-        //console.warn("payload:"+JSON.stringify(data));
+        alert(data);
+        console.warn("payload:"+JSON.stringify(data));
         //this place doesn't work
         // data.message,
         // data.title,

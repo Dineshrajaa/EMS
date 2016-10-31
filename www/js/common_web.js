@@ -1,4 +1,4 @@
-var serviceUrl = 'http://202.60.69.12/emsapi/api/';
+var serviceUrl = 'http://52.63.234.33/emsapi/api/';
 $(document).ajaxStart(function () {
     showWait();
 });
@@ -302,7 +302,7 @@ function registerPush() {
     }
 }
 document.addEventListener("deviceready", function () {
-    registerPush();
+   // registerPush();
 }, true);
 
 function jAlert(message) {

@@ -873,7 +873,7 @@ eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 	Brush.prototype	= new SyntaxHighlighter.Highlighter();
 	Brush.aliases	= ['css'];
 
-	SyntaxHighlighter.brushes.CSS = Brush;
+	SyntaxHighlighter.brushes.css = Brush;
 
 	// CommonJS
 	typeof(exports) != 'undefined' ? exports.Brush = Brush : null;

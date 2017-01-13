@@ -5,25 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="format-detection" content="telephone=no" />
     <title>Dashboard | EMS</title>
-    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="cordova.min.js"></script>
     <script src="js/jquery.min.js" type="text/javascript"></script>
     <script src="js/jquery-ui.min.js" type="text/javascript"></script>
     <script src="js/jquery.mobile.min.js" type="text/javascript"></script>
-    <script src="js/nativedroid2.js" type="text/javascript"></script>
+    <script src="js/nativedroid2.min.js" type="text/javascript"></script>
     <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="css/jquery.mobile.min.css" />
-    <link rel="stylesheet" href="css/themeContainer.css" />
-    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/themeContainer.min.css" />
+    <link rel="stylesheet" href="css/common.min.css" />
     <style type="text/css">
         .ui-input-text::after,
         .ui-input-search::after {
             width: 80% !important;
         }
-        
+
         .table-stroke tbody td {
             border-bottom: 0px;
+            border-bottom: 0px;
         }
-        
+
         .pending {
             background-color: #8AD3F4 !important;
             color: black;
@@ -33,7 +34,7 @@
             margin-left: -21px;
             margin-right: -21px;
         }
-        
+
         .notAvailable {
             background-color: #FF7B7C !important;
             color: black;
@@ -43,7 +44,7 @@
             margin-left: -21px;
             margin-right: -21px;
         }
-        
+
         .working {
             background-color: #A6E8AA !important;
             color: black;
@@ -53,7 +54,7 @@
             margin-left: -21px;
             margin-right: -21px;
         }
-        
+
         .available {
             background-color: #FFFFBB !important;
             color: black;
@@ -63,21 +64,21 @@
             margin-left: -21px;
             margin-right: -21px;
         }
-        
+
         p {
             text-align: center;
         }
-        
+
         .ui-flipswitch {
             border-radius: 14px !important;
         }
-        
+
         .flip-text-on {
-            color: #4CD864
+            color: #4CD864;
         }
-        
+
         .flip-text-off {
-            color: #FF0000
+            color: #FF0000;
         }
     </style>
 </head>
@@ -89,8 +90,11 @@
             <div data-role="header" data-position="fixed">
                 <h1 class="wow fadeIn" data-wow-delay='0.4s'>
                     Status
-                </h1> <a href="#leftpanel" class="ui-btn ui-btn-left menu"><i class="zmdi zmd-1x zmdi-menu">
-                </i></a> </div>
+                </h1> <a href="#leftpanel" class="ui-btn ui-btn-left menu">
+                    <i class="zmdi zmd-1x zmdi-menu">
+                    </i>
+                </a>
+            </div>
             <div role="main" class="ui-content wow fadeIn" data-inset="false">
                 <div class="logo-status"> </div>
                 <div class="jobSection" style="padding: 5px; border-radius: 15px; text-align: center">
@@ -116,7 +120,7 @@
                                     <td id="spnProjAddress"> </td>
                                 </tr>
                                 <tr>
-                                    <td> Start Date & Time: </td>
+                                    <td> Start Date &amp; Time: </td>
                                     <td id="spnStartDate"> </td>
                                 </tr>
                                 <tr>
@@ -129,13 +133,19 @@
                 </div>
                 <div class="clearfix"> </div>
                 <div style="padding: 5px; -ms-border-radius: 15px; border-radius: 15px; padding-top: 10px;
-                    text-align: center; display: none" class="jobSection statusButton"> <a href="#" class="ui-btn ui-btn-raised clr-primary" style="color: #000000 !important;
+                    text-align: center; display: none" class="jobSection statusButton">
+                    <a href="#" class="ui-btn ui-btn-raised clr-primary" style="color: #000000 !important;
                         background: #FF7B7C !important;" id="btnReject" onclick="confirmDecline();">Decline</a> <a href="#" class="ui-btn ui-btn-raised clr-primary" style="color: #000000 !important;
                         background: #A6E8AA !important;" id="btnAccept" onclick="AcceptDeclineJobScheduling(true)">
-                        Accept</a>
-                    <input type="hidden" id="hdnUserJobHistoryId" /> </div>
-                <div style="padding: 5px; border-radius: 15px; text-align: center; display: none;" class="finishJob"> <a href="#" class="ui-btn ui-btn-raised clr-primary" id="btnApplyLeave" style="display: none;">
-                        APPLY LEAVE</a> <a href="#" class="ui-btn ui-btn-raised clr-primary" id="btnFinishJob" onclick="checkInduction()">FINISH</a> </div>
+                        Accept
+                    </a>
+                    <input type="hidden" id="hdnUserJobHistoryId" />
+                </div>
+                <div style="padding: 5px; border-radius: 15px; text-align: center; display: none;" class="finishJob">
+                    <a href="#" class="ui-btn ui-btn-raised clr-primary" id="btnApplyLeave" style="display: none;">
+                        APPLY LEAVE
+                    </a> <a href="#" class="ui-btn ui-btn-raised clr-primary" id="btnFinishJob" onclick="checkInduction()">FINISH</a>
+                </div>
                 <div id="divStatusChange" class="jobSection">
                     <div class="ui-controlgroup-label" role="heading">
                         <h4 style="text-align: center;">
@@ -149,8 +159,11 @@
                     <div role="main" class="ui-content wow fadeIn checkAvailable">
                         <p> Change your status to available to receive jobs.</p>
                     </div>
-                    <div style="padding: 5px; -ms-border-radius: 15px; border-radius: 15px; text-align: center;"> <a href="#" class="ui-btn ui-btn-raised clr-primary" id="btnChangeStatus" onclick="changeStatus()">
-                            CHANGE STATUS</a> </div>
+                    <div style="padding: 5px; -ms-border-radius: 15px; border-radius: 15px; text-align: center;">
+                        <a href="#" class="ui-btn ui-btn-raised clr-primary" id="btnChangeStatus" onclick="changeStatus()">
+                            CHANGE STATUS
+                        </a>
+                    </div>
                 </div>
             </div>
             <!-- Decline Dialog-->
@@ -158,46 +171,52 @@
                 <div role="main" class="ui-content wow fadeIn" data-inset="false" style="padding-bottom: 20px !important;
                     text-align: center;">
                     <h4 class="ui-title" style="padding-top: 15px; color: #FF7B7C" role="heading">
-                        <b>Decline</b></h4> <span style="padding-top: 15px;">What is the reason for declining this job?</span>
+                        <b>Decline</b>
+                    </h4> <span style="padding-top: 15px;">What is the reason for declining this job?</span>
                     <br />
                     <textarea maxlength="500" rows="15" class="ui-input-text ui-shadow-inset ui-body-inherit ui-corner-all" placeholder="Provide reason." id="declineReason" style="-moz-resize: none !important;
                         -ms-resize: none !important; -o-resize: none !important; resize: none !important;
                         overflow: hidden; border: 0.25px solid black;"></textarea> <a style="background: #F2F2F2 !important; color: #000000 !important" class="popupButton ui-btn ui-btn-raised clr-primary" data-theme="a" data-inline="true" data-role="button" href="#" data-corners="true" data-rel="back">Cancel</a> <a style="background: #3498db;" class="popupButton ui-btn ui-btn-raised clr-primary" data-theme="a" data-inline="true" onclick="declineJob()" data-role="button" href="#" data-corners="true">Submit</a>
-                    <br /> </div>
+                    <br />
+                </div>
             </div>
             <!-- Induction Dialog-->
             <div data-role="popup" id="inductionDialog" style="border-radius: 10px; max-width: 300px;" data-dismissible="true" data-overlay-theme="a" data-theme="a" data-position-to="origin">
                 <div role="main" class="ui-content wow fadeIn" data-inset="false" style="padding-bottom: 20px !important;
                     text-align: center;">
                     <h4 class="ui-title" style="padding-top: 15px;" role="heading">
-                        <b>Induction</b></h4> <span style="padding-top: 15px;">Were you inducted at this site?</span>
+                        <b>Induction</b>
+                    </h4> <span style="padding-top: 15px;">Were you inducted at this site?</span>
                     <br />
                     <select class="inductionSwitch" name="flip2" id="flipInduction" data-role="flipswitch">
                         <option value="off"></option>
                         <option value="on"></option>
                     </select>
-                    <br/> <span id="flip_yes" style='display:none;' class="flip-text-on">YES</span> <span id="flip_no" class="flip-text-off">NO</span>
+                    <br /> <span id="flip_yes" style='display:none;' class="flip-text-on">YES</span> <span id="flip_no" class="flip-text-off">NO</span>
                     <br /> <a style="background: #f2f2f2; color:#000 !important" class="popupButton" data-theme="a" data-inline="true" data-role="button" href="#" data-corners="true" data-rel="back" onclick="cancelInduction()">Cancel</a> <a style="background: #3498db;" class="popupButton" data-theme="a" data-inline="true" onclick="setAvailability()" data-role="button" href="#" data-corners="true">Submit</a>
-                    <br /> </div>
+                    <br />
+                </div>
             </div>
             <!-- Availability Dialog-->
             <div data-role="popup" id="availabilityDialog" style="border-radius: 10px; max-width: 300px;" data-dismissible="true" data-overlay-theme="a" data-theme="a" data-position-to="origin">
                 <div role="main" class="ui-content wow fadeIn" data-inset="false" style="padding-bottom: 20px !important;
                     text-align: center;">
                     <h4 class="ui-title" style="padding-top: 15px;" role="heading">
-                        <b>Update Availability Status</b></h4> <span style="padding-top: 15px;">Updating your status will notify office staff of your availablity to work.</span>
+                        <b>Update Availability Status</b>
+                    </h4> <span style="padding-top: 15px;">Updating your status will notify office staff of your availablity to work.</span>
                     <br />
                     <select class='statusSwitch' name="flipAvailability" id="flipAvailability" data-role="flipswitch">
                         <option value="3"></option>
                         <option value="2"></option>
                     </select>
-                    <br/> <span id="flip_a" style='display:none;' class="flip-text-on">AVAILABLE TO WORK</span> <span id="flip_na" class="flip-text-off">NOT AVAILABLE</span>
+                    <br /> <span id="flip_a" style='display:none;' class="flip-text-on">AVAILABLE TO WORK</span> <span id="flip_na" class="flip-text-off">NOT AVAILABLE</span>
                     <br /> <a class="popupButton ui-btn ui-btn-raised clr-primary" data-theme="a" data-inline="true" onclick="updateWorkStatus()" data-role="button" href="#" data-corners="true">OK</a>
-                    <br /> </div>
+                    <br />
+                </div>
             </div>
         </div>
     </div>
-    <script src="js/common.js" type="text/javascript"></script>
+    <script src="js/common.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         $("#pgdashboard").ready(function () {
             fillProfilePicture();
@@ -208,13 +227,13 @@
     <link href="css/mobiscroll.scroller.css" rel="stylesheet" type="text/css" />
     <link href="css/mobiscroll.android-holo-light.css" rel="stylesheet" type="text/css" />
     <!--   Date Picker and Time picker files Start-->
-    <script src="js/mobiscroll.core.js" type="text/javascript"></script>
-    <script src="js/mobiscroll.frame.js" type="text/javascript"></script>
-    <script src="js/mobiscroll.scroller.js" type="text/javascript"></script>
-    <script src="js/mobiscroll.util.datetime.js" type="text/javascript"></script>
-    <script src="js/mobiscroll.datetimebase.js" type="text/javascript"></script>
-    <script src="js/mobiscroll.datetime.js" type="text/javascript"></script>
-    <script src="js/mobiscroll.android-holo-light.js" type="text/javascript"></script>
+    <script src="js/mobiscroll.core.min.js" type="text/javascript"></script>
+    <script src="js/mobiscroll.frame.min.js" type="text/javascript"></script>
+    <script src="js/mobiscroll.scroller.min.js" type="text/javascript"></script>
+    <script src="js/mobiscroll.util.datetime.min.js" type="text/javascript"></script>
+    <script src="js/mobiscroll.datetimebase.min.js" type="text/javascript"></script>
+    <script src="js/mobiscroll.datetime.min.js" type="text/javascript"></script>
+    <script src="js/mobiscroll.android-holo-light.min.js" type="text/javascript"></script>
     <!--   Date Picker and Time picker files End-->
     <script type="text/javascript">
         var selectedValue = 0;
@@ -241,7 +260,7 @@
                     $("#flip_yes").hide();
                 }
             });
-            
+
             var currentUserObj = localStorage.getItem('userSession');
             $("#divStatusChange").hide();
             $(".finishJob").hide();
@@ -252,7 +271,6 @@
                 var obj = {};
                 obj.userId = parseInt(currentUser.ID);
                 showWait();
-                
                 $.ajax({
                     type: "GET"
                     , url: url
@@ -261,21 +279,21 @@
                     , success: function (result) {
                         $("#currentJob").hide();
                         if (result.IsSuccessful) {
-                            
+
                             var resultObj = result.Result;
                             if (resultObj) {
                                 if (resultObj.IsDeleted == true) {
-                                    getStatus();
+                                     getStatus();
                                 }
                                 else if (resultObj.IsAccepted == null) {
                                     //debugger;
                                     showJobDetails(resultObj);
                                     $(".statusButton").show();
-                                    $("#curStatus").html('PENDING JOB');                                    $("#curStatus").parent().removeClass('notAvailable').removeClass('available').removeClass('working').addClass('pending');
+                                    $("#curStatus").html('PENDING JOB'); $("#curStatus").parent().removeClass('notAvailable').removeClass('available').removeClass('working').addClass('pending');
                                 }
                                 else if (result.Result.IsAccepted == true) {
                                     $(".statusButton,#divStatusChange").hide();
-                                    $("#curStatus").html('WORKING');                                    $("#curStatus").parent().removeClass('notAvailable').removeClass('available').removeClass('pending').addClass('working');
+                                    $("#curStatus").html('WORKING'); $("#curStatus").parent().removeClass('notAvailable').removeClass('available').removeClass('pending').addClass('working');
                                     $("#currentJob,.finishJob").show();
                                     showJobDetails(resultObj);
                                 }
@@ -294,7 +312,7 @@
                         }
                         else {
                             $("#divStatusChange").show();
-                            $("#curStatus").html('AVAILABLE');                            $("#curStatus").parent().removeClass('notAvailable').removeClass('working').removeClass('pending').addClass('available');
+                            $("#curStatus").html('AVAILABLE'); $("#curStatus").parent().removeClass('notAvailable').removeClass('working').removeClass('pending').addClass('available');
                             $(".checkToNA").show();
                             $(".checkAvailable").hide();
                         }
@@ -327,6 +345,7 @@
             $("#spnProjAddress").html(resultObj.ProjectAddress);
             //$("#spnTrade").html(resultObj.TradeClassification);
             $("#spnStartDate").html(resultObj.JobStartDate);
+            //$("#spnFinishDate").html(resultObj.JobFinishDate);
             $("#spnMessage").html(resultObj.Message);
             $("#spnDesc").html(resultObj.Name);
             $("#spnContract").html(resultObj.ContractType);
@@ -334,51 +353,7 @@
             $("#currentJob").show();
         }
 
-        function getStatus() {
-            var currentUserObj = localStorage.getItem('userSession');
-            var currentUser = JSON.parse(currentUserObj);
-            var url = serviceUrl + "Account/GetUserStatus";
-            var obj = {};
-            obj.id = parseInt(currentUser.ID);
-            showWait();
-           
-            $.ajax({
-                type: "GET"
-                , url: url
-                , data: obj
-                , async: false
-                , success: function (result) {
-                    
-                    if (result.IsSuccessful) {
-                        if (result.Result == "1") {
-                            $(".statusButton,#divStatusChange").hide();
-                            $("#curStatus").html('WORKING');                            $("#curStatus").parent().removeClass('notAvailable').removeClass('available').removeClass('pending').addClass('working');
-                            $("#currentJob,.finishJob").show();
-                        }
-                        if (result.Result == "3") {
-                            $("#curStatus").html('NOT AVAILABLE');                            $("#curStatus").parent().removeClass('working').removeClass('available').removeClass('pending').addClass('notAvailable');
-                            $(".checkToNA").hide();
-                            $(".checkAvailable").show();
-                            $("#divStatusChange").show();
-                            $("#currentJob,.finishJob").hide();
-                        }
-                        else {
-                            $("#curStatus").html('AVAILABLE');
-                            $("#curStatus").parent().removeClass('working').removeClass('notAvailable').removeClass('pending').addClass('available');
-                            $(".checkToNA").show();
-                            $(".checkAvailable").hide();
-                            $("#divStatusChange").show();
-                            $("#currentJob,.finishJob").hide();
-                        }
-                    }
-                    hideWait();
-                }
-                , error: function (err) {
-                    hideWait();
-                    toast("Network Error");
-                }
-            });
-        }
+        //getStatus();
 
         function confirmDecline() {
             $('#declineDialog').popup("open");
@@ -399,14 +374,14 @@
                 else if($('#curStatus').html() =="NOT AVAILABLE"){
                     statusId = 3;
                 }*/
-                
-                 $("#declineDialog").bind({
-                popupafterclose: function (event, ui) {
-                    localStorage.declineJob='true';
-                    localStorage.declineReason=$("#declineReason").val();
-                    $("#availabilityDialog").popup("open");
-                }
-            });
+
+                $("#declineDialog").bind({
+                    popupafterclose: function (event, ui) {
+                        localStorage.declineJob = 'true';
+                        localStorage.declineReason = $("#declineReason").val();
+                        $("#availabilityDialog").popup("open");
+                    }
+                });
                 // AcceptDeclineJobScheduling(false, statusId);
             }
         }
@@ -417,7 +392,7 @@
         //$("#currentJob").html("");
         //$("#currentJob").append("<h4>There are no current jobs</h4>");
         $("#divStatusChange").show();
-        $("#curStatus").html('AVAILABLE');        $("#curStatus").parent().removeClass('working').removeClass('notAvailable').removeClass('pending').addClass('available');
+        $("#curStatus").html('AVAILABLE'); $("#curStatus").parent().removeClass('working').removeClass('notAvailable').removeClass('pending').addClass('available');
         $(".checkToNA").show();
         $(".checkAvailable").hide();
         $("#currentJob,.finishJob").hide();
@@ -430,14 +405,14 @@
             var jsonObj = new Object();
             jsonObj.userJobHistoryId = $("#hdnUserJobHistoryId").val();
             jsonObj.isAccepted = status;
-            jsonObj.declinedReason=localStorage.declineReason||"";
+            jsonObj.declinedReason = localStorage.declineReason || "";
             /*if (status == true || status == "true") {
                 jsonObj.declinedReason = $("#declineReason").val();
             }
             else {
                 jsonObj.declinedReason = '';
             }*/
-            jsonObj.statusId = statusId||currentUser.JobStatusType;
+            jsonObj.statusId = statusId || currentUser.JobStatusType;
             $.ajax({
                 type: "GET"
                 , url: url
@@ -454,15 +429,14 @@
                             else {
                                 toast("Job Rejected.");
                             }
-                            localStorage.finishJob=localStorage.declineJob = false;
-                            if(jsonObj.isAccepted)
-                                {
-                            $(".statusButton,#divStatusChange").hide();
-                            $("#curStatus").html('WORKING');
-                            $("#curStatus").parent().removeClass('available').removeClass('notAvailable').removeClass('pending').addClass('working');
-                            $("#currentJob,.finishJob").show();
-                                }
-                            else{
+                            localStorage.finishJob = localStorage.declineJob = false;
+                            if (jsonObj.isAccepted) {
+                                $(".statusButton,#divStatusChange").hide();
+                                $("#curStatus").html('WORKING');
+                                $("#curStatus").parent().removeClass('available').removeClass('notAvailable').removeClass('pending').addClass('working');
+                                $("#currentJob,.finishJob").show();
+                            }
+                            else {
                                 getStatus();
                             }
                         }
@@ -520,15 +494,15 @@
                 var currentUser = JSON.parse(currentUserObj);
                 selectedValue = parseInt($("#flipAvailability").val());
                 //if (currentUser.JobStatusType != selectedValue) {
-                    currentUser.JobStatusType = selectedValue;
-                    localStorage.setItem('userSession', JSON.stringify(currentUser));
-                    if (localStorage.finishJob == 'true') {
-                        var status = selectedValue == 2 ? true : false;
-                        FinishJob($("#hdnUserJobHistoryId").val(), localStorage.isInducted, status);
-                    }else if(localStorage.declineJob=='true'){
-                        AcceptDeclineJobScheduling(false, selectedValue);
-                    }
-                    else UpdateStatus(selectedValue);
+                currentUser.JobStatusType = selectedValue;
+                localStorage.setItem('userSession', JSON.stringify(currentUser));
+                if (localStorage.finishJob == 'true') {
+                    var status = selectedValue == 2 ? true : false;
+                    FinishJob($("#hdnUserJobHistoryId").val(), localStorage.isInducted, status);
+                } else if (localStorage.declineJob == 'true') {
+                    AcceptDeclineJobScheduling(false, selectedValue);
+                }
+                else UpdateStatus(selectedValue);
                 //}
             }
             $("#availabilityDialog").popup("close");
@@ -543,7 +517,7 @@
             jsonObj.userId = currentUser.ID;
             jsonObj.statusId = statusId;
             //jsonObj.updatedByUserId = currentUser.ID;
-            
+
             $.ajax({
                 type: "GET"
                 , url: url
@@ -573,7 +547,7 @@
             jsonObj.userJobHistoryId = jobHistoryId;
             jsonObj.markAvailable = isAvailable;
             jsonObj.isInducted = isInducted;
-            jsonObj.statusId=currentUser.JobStatusType;
+            jsonObj.statusId = currentUser.JobStatusType;
             $.ajax({
                 type: "GET"
                 , url: url
@@ -595,10 +569,8 @@
                 }
             });
         }
-        localStorage.finishJob=localStorage.declineJob = false;
-        localStorage.declineReason="";
-
+        localStorage.finishJob = localStorage.declineJob = false;
+        localStorage.declineReason = "";
     </script>
 </body>
-
 </html>

@@ -94,15 +94,15 @@ function checkTestRole() {
             if (serviceUrl == 'http://52.63.234.33/EMSAPI/api/') {
                 $("#serviceChanger").attr("checked", true).flipswitch().flipswitch("refresh");
                 $("#serviceType").html("<b>Development</b>")
-            } else if (serviceUrl == 'http://192.168.0.2/EMSAPI/API/') {
+            } else if (serviceUrl == 'http://52.63.234.33/EMSAPI/api/') {
                 $("#serviceChanger").attr("checked", false).flipswitch().flipswitch("refresh");
-                $("#serviceType").html("<b>Local</b>")
+                $("#serviceType").html("<b>Production</b>")
             }
         }
     }
 }
 $("#serviceChanger").change(function() {
-    var message = "Do you want to change to Development server? You will be logged out and settings will be saved."
+    var message = "Do you want to change to Development server?You will be logged out and settings will be saved."
     if ($(this).is(":checked")) {
         navigator.notification.confirm(message, function(buttonIndex) {
             if (buttonIndex == 1) {
@@ -114,8 +114,8 @@ $("#serviceChanger").change(function() {
         });
 
     } else {
-        localStorage.serviceUrl = 'http://192.168.0.2/EMSAPI/API/';
-        serviceUrl = 'http://192.168.0.2/EMSAPI/API/';
+        localStorage.serviceUrl = 'http://52.63.234.33/EMSAPI/api/';
+        serviceUrl = 'http://52.63.234.33/EMSAPI/api/';
     }
     checkTestRole();
 });

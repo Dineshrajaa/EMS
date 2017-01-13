@@ -95,7 +95,7 @@ under the License.
         module.exports.define = define;
     }
 
-    // file: lib/cordova.js
+    // file: lib/cordova.min.js
     define("cordova", function (require, exports, module) {
 
 
@@ -214,7 +214,7 @@ under the License.
                     }
                     else {
                         setTimeout(function () {
-                            // Fire deviceready on listeners that were registered before cordova.js was loaded.
+                            // Fire deviceready on listeners that were registered before cordova.min.js was loaded.
                             if (type == 'deviceready') {
                                 document.dispatchEvent(evt);
                             }
@@ -1337,7 +1337,7 @@ under the License.
         function findCordovaPath() {
             var path = null;
             var scripts = document.getElementsByTagName('script');
-            var term = 'cordova.js';
+            var term = 'cordova.min.js';
             for (var n = scripts.length - 1; n > -1; n--) {
                 var src = scripts[n].src;
                 if (src.indexOf(term) == (src.length - term.length)) {
@@ -1354,7 +1354,7 @@ under the License.
         exports.load = function (callback) {
             var pathPrefix = findCordovaPath();
             if (pathPrefix === null) {
-                console.log('Could not find cordova.js script tag. Plugin loading may fail.');
+                console.log('Could not find cordova.min.js script tag. Plugin loading may fail.');
                 pathPrefix = '';
             }
             injectPluginScript(pathPrefix, callback);

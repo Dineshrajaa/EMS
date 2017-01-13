@@ -1,4 +1,4 @@
-﻿var isValid = true;
+var isValid = true;
 
 function setOptions(srcType) {
     var options = {

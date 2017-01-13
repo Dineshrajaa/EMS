@@ -1,4 +1,4 @@
-// localStorage.serviceUrl=localStorage.serviceUrl||'http://192.168.0.2/EMSAPI/API/'; // Local
+localStorage.serviceUrl=localStorage.serviceUrl||'http://52.63.234.33/EMSAPI/api/'; // Production
 localStorage.serviceUrl=localStorage.serviceUrl||'http://52.63.234.33/EMSAPI/api/'; //dev 
 var serviceUrl=localStorage.serviceUrl; 
 $(document).ajaxStart(function() {
@@ -30,6 +30,23 @@ $(document).bind("mobileinit", function() {
     $.mobile.defaultPageTransition = 'none';
     $.mobile.defaultDialogTransition = 'none';
 });
+
+document.addEventListener("resume", onResume, false);
+
+function onResume() {
+    // Handle the resume event
+for(var i = 0; i  < 100 ; i++){
+console.log('Wait');    
+}   
+
+if(localStorage.getItem('userSession')){
+    redirect('Dashboard.html');    
+} else {
+    window.location.href = "index.html";
+}
+    
+
+}
 
 function hideWait() {
     $.mobile.loading("hide");
@@ -298,6 +315,7 @@ function formatDateAndTime(dateToManipulate){
 function registerPush() {
     // To register the device for push notification
     try {
+		
         window.push = PushNotification.init({
             android: {
                 senderID: "739681536553",
@@ -312,43 +330,39 @@ function registerPush() {
             windows: {}
         });
     } catch (error) {
-        alert(error)
+        jAlert(error)
     }
     window.push.on('registration', function(data) {
         //I can get registration id here        
         localStorage.pushRegID = data.registrationId;
     });
     window.push.on('notification', function(data) {
-        /*if(device.platform=="iOS"){
-            console.warn("payload:" + JSON.stringify(data));
-            window.push.getApplicationIconBadgeNumber(function(n) {
-                var notCount=n - 1;
-                window.push.setApplicationIconBadgeNumber(function() {
-                    console.log('success');
-                }, function() {
-                    console.log('error');
-                }, notCount);
-            }, function() {
-                console.log('error');
-            });
-        }*/
-        if (typeof data.additionalData.payload != undefined) {
-            //console.warn("additionalData:" + data.additionalData.payload);
-            if (data.additionalData.payload == "message") {
-                // window.location.href = "messages.html";
-                navigatePage('message.html');
-            } else {
-                // window.location.href = "dashboard.html";
-                navigatePage('dashboard.html');
-            }
-        }
-        //this place doesn't work
-        // data.message,
-        // data.title,
-        // data.count,
-        // data.sound,
-        // data.image,
-        // data.additionalData
+               
+        // if(data.additionalData.payload){        
+          
+        //   if(data.additionalData.payload === "message"){
+        //     navigatePage('message.html');           
+           
+        //   } else {           
+        //     navigatePage('dashboard.html');  
+        //   }         
+
+        // } else {
+        //     jAlert('Inconvience Regreted');
+        // }
+       
+		
+        // if (typeof data.additionalData.payload != undefined) {
+        //     //console.warn("additionalData:" + data.additionalData.payload);
+        //     if (data.additionalData.payload == "message") {
+        //         // window.location.href = "messages.html";
+        //         navigatePage('message.html');
+        //     } else {
+        //         // window.location.href = "dashboard.html";
+        //         navigatePage('dashboard.html');
+        //     }
+        // }
+       
     });
     window.push.on('error', function(e) {
         console.log("push error:" + e.message);
@@ -370,3 +384,52 @@ function jAlert(message) {
     iframe.parentNode.removeChild(iframe);
     iframe = null;
 }
+
+
+function getStatus() {
+        //alert('in Get Status');
+           //alert('In Get Status');
+            var currentUserObj = localStorage.getItem('userSession');
+            var currentUser = JSON.parse(currentUserObj);
+            var url = serviceUrl + "Account/GetUserStatus";
+            var obj = {};
+            obj.id = parseInt(currentUser.ID);
+            showWait();
+
+            $.ajax({
+                type: "GET"
+                , url: url
+                , data: obj
+                , async: false
+                , success: function (result) {
+
+                    if (result.IsSuccessful) {
+                        if (result.Result == "1") {
+                            $(".statusButton,#divStatusChange").hide();
+                            $("#curStatus").html('WORKING'); $("#curStatus").parent().removeClass('notAvailable').removeClass('available').removeClass('pending').addClass('working');
+                            $("#currentJob,.finishJob").show();
+                        }
+                        if (result.Result == "3") {
+                            $("#curStatus").html('NOT AVAILABLE'); $("#curStatus").parent().removeClass('working').removeClass('available').removeClass('pending').addClass('notAvailable');
+                            $(".checkToNA").hide();
+                            $(".checkAvailable").show();
+                            $("#divStatusChange").show();
+                            $("#currentJob,.finishJob").hide();
+                        }
+                        else {
+                            $("#curStatus").html('AVAILABLE');
+                            $("#curStatus").parent().removeClass('working').removeClass('notAvailable').removeClass('pending').addClass('available');
+                            $(".checkToNA").show();
+                            $(".checkAvailable").hide();
+                            $("#divStatusChange").show();
+                            $("#currentJob,.finishJob").hide();
+                        }
+                    }
+                    hideWait();
+                }
+                , error: function (err) {
+                    hideWait();
+                    toast("Network Error");
+                }
+            });
+        }

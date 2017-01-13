@@ -1,25 +1,25 @@
-﻿<style type="text/css">
+<style type="text/css">
     .customMenu .nd2-sidepanel-profile {
         padding: 0;
     }
-
-        .customMenu .nd2-sidepanel-profile .profile-thumbnail {
-            border: 3px solid #fff;
-            height: 100px;
-            margin: 0 0 0.6em;
-            position: relative;
-            top: 8px;
-            width: 100px;
-            z-index: 999999;
-        }
-
+    
+    .customMenu .nd2-sidepanel-profile .profile-thumbnail {
+        border: 3px solid #fff;
+        height: 100px;
+        margin: 0 0 0.6em;
+        position: relative;
+        top: 8px;
+        width: 100px;
+        z-index: 999999;
+    }
+    
     .customMenu .proHead {
         background-color: #000000;
         background-color: rgba(0, 0, 0, 0.6);
         font-size: 18px;
         padding: 5px;
     }
-
+    
     .menufont {
         font-size: 15px;
         vertical-align: top;
@@ -31,75 +31,58 @@
         <!-- <img class='profile-background' src="img/app-icon-75.png" alt="" />-->
         <div class="row dvMenuPage">
             <div class='col-xs-12 center-xs'>
-                <div class='box' style="background-color:#0CACEB">
-                    <img class="profile-thumbnail" id="imgUserImage" alt="" />
+                <div class='box' style="background-color:#0CACEB"> <img class="profile-thumbnail" id="imgUserImage" alt="" />
                     <!-- src="img/avtar.png" -->
                 </div>
-                <div class='box profile-text'>
-                    <strong id="spnUserName" class="proHead ">
+                <div class='box profile-text'> <strong id="spnUserName" class="proHead ">
                         <i class="zmdi zmdi-account-o yellow"></i>
-                    </strong>
-                </div>
+                    </strong> </div>
             </div>
         </div>
     </div>
     <ul data-role="listview">
         <li>
-            <a class="menuLi" onclick=" redirect('Dashboard.html') " href="#">
-                <i class="zmdi zmd-sm zmd-fw zmdi-home">
-                </i><span class="middle-md middle-sm middle-xs menufont">&nbsp;Status</span>
-            </a>
+            <a class="menuLi" onclick=" redirect('Dashboard.html') " href="#"> <i class="zmdi zmd-sm zmd-fw zmdi-home">
+                </i><span class="middle-md middle-sm middle-xs menufont">&nbsp;Status</span> </a>
         </li>
         <li>
-            <a onclick="redirect('UpdateProfile.html')" href="#">
-                <i class="zmdi zmd-sm zmd-fw zmdi-account-box">
-                </i><span class="middle-md middle-sm middle-xs menufont">&nbsp;My Profile</span>
-            </a>
+            <a onclick="redirect('UpdateProfile.html')" href="#"> <i class="zmdi zmd-sm zmd-fw zmdi-account-box">
+                </i><span class="middle-md middle-sm middle-xs menufont">&nbsp;My Profile</span> </a>
         </li>
         <li style="display:none">
-            <a onclick="redirect('NewsAndMessages.html')" href="#">
-                <i class="zmdi zmd-sm zmd-fw zmdi-email">
-                </i><span class="middle-md middle-sm middle-xs menufont">&nbsp;Post</span>
-            </a>
+            <a onclick="redirect('NewsAndMessages.html')" href="#"> <i class="zmdi zmd-sm zmd-fw zmdi-email">
+                </i><span class="middle-md middle-sm middle-xs menufont">&nbsp;Post</span> </a>
         </li>
         <li>
-            <a onclick="redirect('messages.html')" href="#">
-                <i class="zmdi zmd-sm zmd-fw zmdi-email">
-                </i><span class="middle-md middle-sm middle-xs menufont">&nbsp;Messages</span>
-            </a>
+            <a onclick="redirect('messages.html')" href="#"> <i class="zmdi zmd-sm zmd-fw zmdi-email">
+                </i><span class="middle-md middle-sm middle-xs menufont">&nbsp;Messages</span> </a>
         </li>
         <li style="display:none">
-            <a onclick="redirect('Jobs.html')" href="#">
-                <i class="zmdi zmd-sm zmd-fw zmdi-developer-board">
-                </i><span class="middle-md middle-sm middle-xs menufont">&nbsp;Jobs</span>
-            </a>
+            <a onclick="redirect('Jobs.html')" href="#"> <i class="zmdi zmd-sm zmd-fw zmdi-developer-board">
+                </i><span class="middle-md middle-sm middle-xs menufont">&nbsp;Jobs</span> </a>
         </li>
         <li>
-            <a onclick="redirect('Setting.html')" href="#">
-                <i class="zmdi zmd-sm zmd-fw zmdi-settings">
-                </i><span class="middle-md middle-sm middle-xs menufont">&nbsp;Settings</span>
-            </a>
+            <a onclick="redirect('Setting.html')" href="#"> <i class="zmdi zmd-sm zmd-fw zmdi-settings">
+                </i><span class="middle-md middle-sm middle-xs menufont">&nbsp;Settings</span> </a>
         </li>
         <li>
-            <a class="menuLi" onclick="doLogout();" href="#">
-                <i class="zmdi zmd-sm zmd-fw zmdi-power-off">
-                </i><span class="middle-md middle-sm middle-xs menufont">&nbsp;Logout</span>
-            </a>
+            <a class="menuLi" onclick="doLogout();" href="#"> <i class="zmdi zmd-sm zmd-fw zmdi-power-off">
+                </i><span class="middle-md middle-sm middle-xs menufont">&nbsp;Logout</span> </a>
         </li>
     </ul>
 </div>
 <!-- /panel left -->
-<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/common.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         fillProfilePicture();
     });
+
     function redirect(url) {
         showWait();
         window.location.href = url;
     }
     var currentUserObj = localStorage.getItem('userSession');
-
     if (currentUserObj && currentUserObj != 'undefined' && currentUserObj != null) {
         currentUserObj = JSON.parse(currentUserObj);
         //var profileImage = currentUserObj.ProfilePicture || "img/avtar.png";
@@ -107,17 +90,19 @@
         if (currentUserObj.pp) {
             if (jQuery.type(currentUserObj.pp) == "object") {
                 $("#imgUserImage").attr('src', serviceUrl + "image/" + currentUserObj.pp.guid);
-            } else {
+            }
+            else {
                 $("#imgUserImage").attr('src', serviceUrl + "image/" + JSON.parse(currentUserObj.pp).guid);
             }
-        } else {
+        }
+        else {
             // $("#imgUserImage").attr('src', "img/avtar.png");
         }
-
         var name = currentUserObj.FirstName + " ";
         name = (currentUserObj.LastName != null) ? name + " " + currentUserObj.LastName : name;
         $("#spnUserName").html(name);
-    } else {
+    }
+    else {
         //$(".menuLi").parent().hide();
         //$(".menuLiLogin").parent().show();
     }

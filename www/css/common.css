@@ -343,11 +343,11 @@ div[data-role="content"] {
 }
 
 
-    /* iOS specific fix, don't use it on Android devices */
+/* iOS specific fix, don't use it on Android devices */
 
-    .scrollable > * {
-        -webkit-transform: translateZ(0);
-    }
+.scrollable > * {
+    -webkit-transform: translateZ(0);
+}
 
 .available {
     color: #1aae88;
@@ -445,4 +445,11 @@ div[data-role="content"] {
 .dowells-btn {
     background-color: #0569A3;
     color: #FFFFFF;
+}
+
+.disableButton {
+    pointer-events: none;
+    cursor: default;
+    color: #6D6D91 !important;
+    background-color: #EDEDED !important;
 }

@@ -64,6 +64,9 @@
             margin-left: -21px;
             margin-right: -21px;
         }
+        .dashboard-disabled{
+            background-color:#eee;
+        }
 
         p {
             text-align: center;
@@ -144,7 +147,7 @@
                 <div style="padding: 5px; border-radius: 15px; text-align: center; display: none;" class="finishJob">
                     <a href="#" class="ui-btn ui-btn-raised clr-primary" id="btnApplyLeave" style="display: none;">
                         APPLY LEAVE
-                    </a> <a href="#" class="ui-btn ui-btn-raised clr-primary" id="btnFinishJob" onclick="checkInduction()">FINISH</a>
+                    </a> <a href="#" class="ui-btn ui-btn-raised clr-primary" id="btnFinishJob" onclick="checkInduction()" >FINISH JOB</a>
                 </div>
                 <div id="divStatusChange" class="jobSection">
                     <div class="ui-controlgroup-label" role="heading">
@@ -345,12 +348,15 @@
             $("#spnProjAddress").html(resultObj.ProjectAddress);
             //$("#spnTrade").html(resultObj.TradeClassification);
             $("#spnStartDate").html(resultObj.JobStartDate);
+			  //console.log(resultObj.JobStartDate);
             //$("#spnFinishDate").html(resultObj.JobFinishDate);
             $("#spnMessage").html(resultObj.Message);
             $("#spnDesc").html(resultObj.Name);
             $("#spnContract").html(resultObj.ContractType);
             $("#hdnUserJobHistoryId").val(resultObj.UserSchedulingID);
             $("#currentJob").show();
+            disableFinishButton();
+
         }
 
         //getStatus();
@@ -449,8 +455,46 @@
             });
         }
 
-        function checkInduction() {
-            $("#inductionDialog").popup('open');
+
+        function formatInJSDate(data){
+                split = data.split('/');
+                var format = split[1]+"/"+split[0]+"/"+split[2];                
+                return format;
+        }
+
+        function disableFinishButton(){
+            //console.log('called Disable Function');
+            var dateString = document.getElementById("spnStartDate").innerText;
+             var dateObject = dateString.split(" ");
+              var dateLength = dateObject.length;
+                dateObject[0] = formatInJSDate(dateObject[0]);
+                 var formattedDate="";
+                    for(var i = 0 ; i < dateLength-1;i++){
+                        formattedDate=formattedDate+dateObject[i]+" ";
+                  }
+                   formattedDate+=dateObject[dateLength-1];
+                dateString = formattedDate;
+                var timeInMillseconds = Date.parse(dateString);
+                var dCurrent = new Date();
+                var newTime = dCurrent.getTime();
+                console.log(newTime-timeInMillseconds);
+                console.log(new Date(newTime));
+                 console.log(new Date(timeInMillseconds));
+                if(newTime<timeInMillseconds){
+                    //return true;
+                    console.log('Finish Date Has Not arrived');
+                    $('#btnFinishJob').addClass('disableButton');
+                   
+                } else {   
+                    console.log('Now Finish The Job');                   
+                     $('#btnFinishJob').removeClass('disableButton');
+                }
+        }
+
+
+        function checkInduction() {					
+			$("#inductionDialog").popup('open');
+			
         }
 
         function cancelInduction() {

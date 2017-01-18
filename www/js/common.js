@@ -1,5 +1,5 @@
-localStorage.serviceUrl=localStorage.serviceUrl||'http://52.63.234.33/EMSAPI/api/'; // Production
-localStorage.serviceUrl=localStorage.serviceUrl||'http://52.63.234.33/EMSAPI/api/'; //dev 
+localStorage.serviceUrl=localStorage.serviceUrl||'http://52.62.179.135/EMSAPI/api/'; // Production
+localStorage.serviceUrl=localStorage.serviceUrl||'http://52.62.179.135/EMSAPI/api/'; //dev 
 var serviceUrl=localStorage.serviceUrl; 
 $(document).ajaxStart(function() {
     showWait();

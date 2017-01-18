@@ -91,10 +91,10 @@ function checkTestRole() {
     if (currentUserObj && currentUserObj != 'undefined') {
         if (currentUserObj.RoleId == "5") {
             $("#serviceChangerBlock").show();
-            if (serviceUrl == 'http://52.63.234.33/EMSAPI/api/') {
+            if (serviceUrl == 'http://52.62.179.135/EMSAPI/api/') {
                 $("#serviceChanger").attr("checked", true).flipswitch().flipswitch("refresh");
                 $("#serviceType").html("<b>Development</b>")
-            } else if (serviceUrl == 'http://52.63.234.33/EMSAPI/api/') {
+            } else if (serviceUrl == 'http://52.62.179.135/EMSAPI/api/') {
                 $("#serviceChanger").attr("checked", false).flipswitch().flipswitch("refresh");
                 $("#serviceType").html("<b>Production</b>")
             }
@@ -106,16 +106,16 @@ $("#serviceChanger").change(function() {
     if ($(this).is(":checked")) {
         navigator.notification.confirm(message, function(buttonIndex) {
             if (buttonIndex == 1) {
-                localStorage.serviceUrl = 'http://52.63.234.33/EMSAPI/api/';
-                serviceUrl = 'http://52.63.234.33/EMSAPI/api/';
+                localStorage.serviceUrl = 'http://52.62.179.135/EMSAPI/api/';
+                serviceUrl = 'http://52.62.179.135/EMSAPI/api/';
                 localStorage.removeItem('userSession');
                 window.location.href = "index.html";
             }
         });
 
     } else {
-        localStorage.serviceUrl = 'http://52.63.234.33/EMSAPI/api/';
-        serviceUrl = 'http://52.63.234.33/EMSAPI/api/';
+        localStorage.serviceUrl = 'http://52.62.179.135/EMSAPI/api/';
+        serviceUrl = 'http://52.62.179.135/EMSAPI/api/';
     }
     checkTestRole();
 });

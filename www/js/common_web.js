@@ -1,4 +1,4 @@
-var serviceUrl = 'http://52.63.234.33/emsapi/api/';
+var serviceUrl = 'http://52.62.179.135/EMSAPI/api/';
 $(document).ajaxStart(function () {
     showWait();
 });
